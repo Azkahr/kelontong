@@ -59,11 +59,7 @@
             id="sidenav-main"
         >
             <div class="sidenav-header">
-                <a
-                    class="navbar-brand text-center"
-                    href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
-                    target="_blank"
-                >
+                <a class="navbar-brand text-center" href="/">
                     <img
                         src="assets/img/snack-booth.png"
                         class="navbar-brand-img h-100"
