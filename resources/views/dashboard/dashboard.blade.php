@@ -48,7 +48,7 @@
             <!-- Sidenav Content-->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="pages/dashboard.html">
+                        <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
                             >
@@ -70,17 +70,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
-                            >
+                        <a href="nav-link" href="">    
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <img src="assets/img/log-out.svg" alt="">
                             </div>
-                            <form action="/logout" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-white border-0">
-                                    <span class="nav-link-text ms-1">Logout</span>
-                                </button>
-                            </form>
+                            <form action="/logout" method="post">@csrf<button type="submit" style="border: none; background-color:transparent"><span class="nav-link-text ms-1">Logout</span></button></form>
                         </a>
                     </li>
                 </ul>
