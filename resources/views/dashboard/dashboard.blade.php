@@ -133,14 +133,10 @@
                         </div>
                         <ul class="navbar-nav justify-content-end">
                             <li class="nav-item d-flex align-items-center">
-                                <a
-                                    href="javascript:;"
-                                    class="nav-link text-white font-weight-bold px-0"
-                                >
-                                    <i class="fa fa-user me-sm-1"></i>
-                                    <span class="d-sm-inline d-none"
-                                        >Sign In</span
-                                    >
+                                    <form action="/logout" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary border-0">Logout</button>
+                                    </form>
                                 </a>
                             </li>
                         </ul>
