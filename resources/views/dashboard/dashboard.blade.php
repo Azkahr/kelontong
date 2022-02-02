@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('tambah-produk') ? 'active' : '' }}" href="pages/dashboard.html">
+                        <a class="nav-link {{ Request::is('create') ? 'active' : '' }}" href="/create">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
                             >
@@ -70,13 +70,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/dashboard.html">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
                             >
                                 <img src="assets/img/log-out.svg" alt="">
                             </div>
-                            <span class="nav-link-text ms-1">Logout</span>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-white border-0">
+                                    <span class="nav-link-text ms-1">Logout</span>
+                                </button>
+                            </form>
                         </a>
                     </li>
                 </ul>
