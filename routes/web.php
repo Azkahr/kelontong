@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
 
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,9 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', function(){
     return view('dashboard.dashboard',[
-        "title" => "Dashboard"
+        "title" => "Dashboard",
+        "posts" => Post::latest()->get()
     ]);
 })->middleware('auth');
+
+Route::resource('/dashboard/posts', DashboardController::class)->middleware('auth');
