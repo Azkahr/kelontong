@@ -43,13 +43,18 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
             'product_name' => 'required|min:3',
             'qty' => 'required|digits_between:1,9999999',
-            'desc' => 'required|min:3',
+            'desc' => 'required',
             'category_id' => 'required',
             'image' => 'image|file|max:1024'
         ]);
+
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
         
         $validatedData['user_id'] = auth()->user()->id;
         

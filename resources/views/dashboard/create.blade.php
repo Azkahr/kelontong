@@ -7,7 +7,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <form action="/dashboard/create" method="post" enctype="multipart/form">
+            <form action="/dashboard/create" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Nama Product</label>
@@ -55,7 +55,7 @@
     
                 <div class="mb-3">
                     <label for="image" class="form-label mt-4">Foto Produk</label>
-                    <input type="file" id="image" enctype="multipart/form-data" class="form-control @error('image') is-invalid @enderror" multiple>
+                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" multiple>
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
