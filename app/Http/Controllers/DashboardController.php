@@ -29,7 +29,7 @@ class DashboardController extends Controller
     public function create()
     {
         return view('dashboard.create', [
-            "title" => "Tambah Product",
+            'title' => 'Tambah Product',
             'categories' => Category::all()
         ]);
     }
