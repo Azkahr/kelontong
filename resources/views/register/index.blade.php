@@ -8,15 +8,6 @@
             <form action="/register" method="post">
             @csrf
             <div class="form-floating">
-                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Username" autofocus value="{{ old('username') }}" autocomplete="off">
-                <label for="username">Username</label>
-                @error('username')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="form-floating">
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter full name" value="{{ old('name') }}" autocomplete="off">
                 <label for="name">Name</label>
                 @error('name')

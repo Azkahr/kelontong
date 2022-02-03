@@ -19,7 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-
+        @livewireStyles
         <link rel="icon" type="image/png" href="{{ URL::asset('assets/img/favicon.png') }} " />
         <link href="{{ URL::asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
         <link id="pagestyle" href="{{ URL::asset('assets/css/argon-dashboard.css') }}" rel="stylesheet"/>
@@ -101,6 +101,7 @@
         <script src="assets/js/argon-dashboard.min.js?v=2.0.0"></script>
         <script>
             feather.replace()
-        </script>           
+        </script>
+        @livewireScripts           
     </body>
 </html>
