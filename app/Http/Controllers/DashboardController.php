@@ -29,8 +29,8 @@ class DashboardController extends Controller
     public function create()
     {
         return view('dashboard.create', [
-            "title" => "Create",
-            "categories" => Category::all()
+            'title' => 'Tambah Product',
+            'categories' => Category::all()
         ]);
     }
 
@@ -42,13 +42,15 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
-            "title" => "required|max:255",
-            "slug" => "required|unique:posts",
-            "body" => "required",
-            "category_id" => "required"
+            'title' => 'required|min:3',
+            'qty' => 'required|digits_between:1,9999999',
+            'desc' => 'required|min:3',
+            'category_id' => 'required',
+            'image' => 'image|file|max:1024'
         ]);
+        
+        $validatedData['user_id'] = auth()->user()->id;
         
         Post::create($validatedData);
 

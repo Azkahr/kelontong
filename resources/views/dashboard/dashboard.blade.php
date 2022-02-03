@@ -113,4 +113,21 @@
         </div>
     </div>
 </div>
+
+<div class="d-flex justify-content-center" style="margin-top:100px">
+    <table class="table-fixed w-full">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="border px-4 py-2"><input type="checkbox"></th>
+                <th class="border px-4 py-2">Id</th>
+                <th class="border px-4 py-2">Nama Product</th>
+                <th class="border px-4 py-2">Qty</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
 @endsection

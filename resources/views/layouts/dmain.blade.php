@@ -6,6 +6,9 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        {{-- trix --}}
+        <link rel="stylesheet" type="text/css" href="/assets/css/trix.css">
+        <script type="text/javascript" src="/assets/js/trix.js"></script>
         <link
             rel="apple-touch-icon"
             sizes="76x76"
