@@ -1,8 +1,7 @@
-@extends('layouts.main')
-
-@section('container')
+@extends('layouts/dmain')
+@section('content')
     <div class="col-lg-6">
-        <form action="/dashboard/posts" method="post" enctype="multipart/form">
+        <form action="/dashboard/create" method="post" enctype="multipart/form">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

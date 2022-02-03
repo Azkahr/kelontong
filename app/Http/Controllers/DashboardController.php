@@ -15,8 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index', [
-            "title" => "My posts",
+        return view('dashboard.dashboard',[
+            "title" => "Dashboard",
+            "posts" => Post::latest()->get()
         ]);
     }
 
@@ -27,7 +28,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create', [
+        return view('dashboard.create', [
             "title" => "Create",
             "categories" => Category::all()
         ]);
@@ -41,16 +42,17 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             "title" => "required|max:255",
             "slug" => "required|unique:posts",
             "body" => "required",
             "category_id" => "required"
         ]);
-
+        
         Post::create($validatedData);
 
-        return redirect()->with('success', 'New post has been added');
+        return redirect('/dashboard/create')->with('success', 'New post has been added');
     }
 
     /**
