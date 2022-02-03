@@ -10,9 +10,9 @@
             <form action="/dashboard/create" method="post" enctype="multipart/form">
                 @csrf
                 <div class="mb-3">
-                    <label for="title" class="form-label">Nama Product</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
-                    @error('title')
+                    <label for="product_name" class="form-label">Nama Product</label>
+                    <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror">
+                    @error('product_name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -17,7 +17,8 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
-            "posts" => Post::latest()->get()
+            "products" => Product::latest()->get() 
+            // Product::where('user_id', auth()->user()->id)->get()
         ]);
     }
 
@@ -43,7 +44,7 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|min:3',
+            'product_name' => 'required|min:3',
             'qty' => 'required|digits_between:1,9999999',
             'desc' => 'required|min:3',
             'category_id' => 'required',
@@ -52,7 +53,7 @@ class DashboardController extends Controller
         
         $validatedData['user_id'] = auth()->user()->id;
         
-        Post::create($validatedData);
+        Product::create($validatedData);
 
         return redirect('/dashboard/create')->with('success', 'New post has been added');
     }
@@ -63,7 +64,7 @@ class DashboardController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Product $product)
     {
         //
     }
@@ -71,10 +72,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Product $product)
     {
         //
     }
@@ -83,10 +84,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -94,10 +95,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Product $product)
     {
         //
     }

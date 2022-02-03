@@ -118,15 +118,19 @@
     <table class="table-fixed w-full">
         <thead>
             <tr class="bg-gray-100">
-                <th class="border px-4 py-2"><input type="checkbox"></th>
-                <th class="border px-4 py-2">Id</th>
                 <th class="border px-4 py-2">Nama Product</th>
+                <th class="border px-4 py-2">Desc</th>
                 <th class="border px-4 py-2">Qty</th>
             </tr>
         </thead>
-
         <tbody>
-
+            @foreach ($products as $product)
+                <tr>
+                    <td><h1>TEST</h1>{{ $product->product_name }}</td>
+                    <td>{{ $product->desc }}</td>
+                    <td>{{ $product->qty }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
