@@ -126,9 +126,9 @@
         <tbody>
             @foreach ($products as $product)
                 <tr>
-                    <td><h1>TEST</h1>{{ $product->product_name }}</td>
-                    <td>{{ $product->desc }}</td>
-                    <td>{{ $product->qty }}</td>
+                    <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                    <td class="border px-4 py-2">{{ $product->desc }}</td>
+                    <td class="border px-4 py-2">{{ $product->qty }}</td>
                 </tr>
             @endforeach
         </tbody>
