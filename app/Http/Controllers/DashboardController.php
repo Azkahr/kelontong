@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         return view('dashboard.posts.index', [
-            "title" => "create"
+            "title" => "My posts",
         ]);
     }
 
@@ -41,7 +41,16 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        dd('berhasil');
+        $validatedData = $request->validate([
+            "title" => "required|max:255",
+            "slug" => "required|unique:posts",
+            "body" => "required",
+            "category_id" => "required"
+        ]);
+
+        Post::create($validatedData);
+
+        return redirect()->with('success', 'New post has been added');
     }
 
     /**

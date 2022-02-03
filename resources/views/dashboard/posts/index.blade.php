@@ -6,5 +6,9 @@
         <a href="/dashboard/posts/create">Create New Posts</a>
     </div>
 
-    
+    @if (Session::get('success'))
+        <div class="alert alert-success col-lg-8" role="alert">
+            {{ Session::get('success') }}
+        </div>
+    @endif
 @endsection
