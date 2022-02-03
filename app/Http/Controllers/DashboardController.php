@@ -14,8 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index', [
-            "title" => "create"
+        return view('dashboard.dashboard',[
+            "title" => "Dashboard",
+            "posts" => Post::latest()->get()
         ]);
     }
 
@@ -26,7 +27,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create', [
+        return view('dashboard.create', [
             "title" => "Create"
         ]);
     }
