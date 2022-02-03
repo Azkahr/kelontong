@@ -34,4 +34,5 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::middleware('auth', 'verified')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/create', [DashboardController::class, 'create'])->name('createP');
+    Route::post('/dashboard/create', [DashboardController::class, 'store']);
 });

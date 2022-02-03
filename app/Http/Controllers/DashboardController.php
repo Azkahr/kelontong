@@ -29,7 +29,8 @@ class DashboardController extends Controller
     public function create()
     {
         return view('dashboard.create', [
-            "title" => "Create"
+            "title" => "Tambah Product",
+            'categories' => Category::all()
         ]);
     }
 
@@ -41,7 +42,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        dd('berhasil');
+        dd($request);
     }
 
     /**
