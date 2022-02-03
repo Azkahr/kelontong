@@ -115,9 +115,9 @@
 </div>
 
 <div class="d-flex justify-content-center" style="margin-top:100px">
-    <table class="table-fixed w-full">
+    <table class="table-striped table-sm">
         <thead>
-            <tr class="bg-gray-100">
+            <tr>
                 <th class="border px-4 py-2">Nama Product</th>
                 <th class="border px-4 py-2">Desc</th>
                 <th class="border px-4 py-2">Qty</th>

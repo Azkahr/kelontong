@@ -17,8 +17,8 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
-            "products" => Product::latest()->get() 
-            // Product::where('user_id', auth()->user()->id)->get()
+            "products" => Product::where('user_id', auth()->user()->id)->get()
+
         ]);
     }
 
