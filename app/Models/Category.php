@@ -11,7 +11,7 @@ class Category extends Model
     
     protected $guarded = ['id'];
 
-    public function posts(){
-        return $this->hasMany(Post::class);
+    public function product(){
+        return $this->hasMany(User::class);
     }
 }

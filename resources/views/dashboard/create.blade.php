@@ -5,17 +5,32 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Nama Product</label>
-                <input type="text" name="title" id="title" class="form-control">
+                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+                @error('title')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="qty" class="form-label">Stok Product</label>
-                <input type="number" name="qty" id="qty" class="form-control">
+                <input type="number" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror">
+                @error('qty')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="desc" class="form-label mt-4">Deksripsi Produk</label>
-                <textarea rows="10" cols="73" name="desc" id="desc" class="form-control"></textarea>
+                <textarea rows="10" cols="73" name="desc" id="desc" class="form-control @error('desc') is-invalid @enderror"></textarea>
+                @error('desc')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div class="mb-3">
@@ -33,7 +48,12 @@
 
             <div class="mb-3">
                 <label for="image" class="form-label mt-4">Foto Produk</label>
-                <input type="file" id="image" enctype="multipart/form-data">
+                <input type="file" id="image" enctype="multipart/form-data" class="form-control @error('image') is-invalid @enderror" multiple>
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Posting Produk</button>

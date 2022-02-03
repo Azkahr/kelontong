@@ -42,7 +42,13 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $credentials = $request->validate([
+            'title' => 'required|min:3',
+            'desc' => 'required|min:3',
+            'qty' => 'required|digits_between:1,9999999',
+            'image' => 'image'
+        ]);
+        return "tervalidasi";
     }
 
     /**
