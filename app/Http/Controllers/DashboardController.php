@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class DashboardController extends Controller
 {
@@ -40,7 +41,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        
+        dd('berhasil');
     }
 
     /**
