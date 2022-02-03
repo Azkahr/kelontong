@@ -119,6 +119,7 @@
         <thead>
             <tr>
                 <th class="border px-4 py-2">Nama Product</th>
+                <th class="border px-4 py-2">Category</th>
                 <th class="border px-4 py-2">Desc</th>
                 <th class="border px-4 py-2">Qty</th>
             </tr>
@@ -127,6 +128,7 @@
             @foreach ($products as $product)
                 <tr>
                     <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                    <td class="border px-4 py-2">{{ $product->category->name }}</td>
                     <td class="border px-4 py-2">{{ $product->desc }}</td>
                     <td class="border px-4 py-2">{{ $product->qty }}</td>
                 </tr>
