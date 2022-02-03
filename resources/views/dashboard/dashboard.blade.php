@@ -33,7 +33,7 @@
                                         <i class="sidenav-toggler-line bg-white"></i>
                                         <i class="sidenav-toggler-line bg-white"></i>
                                     </div>
-                                </div sty>
+                                </div>
                             </a>
                         </li>
                     </li>
@@ -113,25 +113,5 @@
         </div>
     </div>
 </div>
-
-<div class="d-flex justify-content-center" style="margin-top:100px">
-    <table class="table-striped table-sm">
-        <thead>
-            <tr>
-                <th class="border px-4 py-2">Nama Product</th>
-                <th class="border px-4 py-2">Desc</th>
-                <th class="border px-4 py-2">Qty</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($products as $product)
-                <tr>
-                    <td class="border px-4 py-2">{{ $product->product_name }}</td>
-                    <td class="border px-4 py-2">{{ $product->desc }}</td>
-                    <td class="border px-4 py-2">{{ $product->qty }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+@livewire('products')
 @endsection

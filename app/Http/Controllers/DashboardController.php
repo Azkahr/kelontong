@@ -17,8 +17,6 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
-            "products" => Product::where('user_id', auth()->user()->id)->get()
-
         ]);
     }
 
@@ -51,11 +49,11 @@ class DashboardController extends Controller
             'image' => 'image|file|max:1024'
         ]);
         
-        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['users_id'] = auth()->user()->id;
         
         Product::create($validatedData);
 
-        return redirect('/dashboard/create')->with('success', 'New post has been added');
+        return back()->with('success', 'Produk Ditambahkan');
     }
 
     /**
