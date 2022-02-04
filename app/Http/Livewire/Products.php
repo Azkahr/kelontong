@@ -11,10 +11,12 @@ class Products extends Component
     use WithPagination;
 
     public $qty = [];
-    public $check = [];
+    public $idU = [];
+    public $indicator = false;
 
     public function mount(){
         $this->qty = Product::pluck('qty');
+        $this->idU = Product::pluck('id');
     }
 
     public function render()
@@ -27,30 +29,31 @@ class Products extends Component
     
     }
 
-    public function plus($index, $id){
+    public function plus($index){
         $this->qty[$index] = $this->qty[$index] + 1;
-        array_push($this->check, $id);
+        $this->indicator = true;
     }
 
-    public function min($index, $id){
+    public function min($index){
         $this->qty[$index] = $this->qty[$index] - 1;
-        array_push($this->check, $id);
+        $this->indicator = true;
     }
 
     public function remove(){
         $this->qty = Product::pluck('qty');
-        $this->check = [];
+        $this->indicator = false;
+        $this->idU = [];
     }
 
     public function save(){
-        $uni = array_values(array_unique($this->check));
+        $uni = collect($this->idU)->toArray(); 
         $val = collect($this->qty)->toArray();
-        $length = sizeof($uni);
-        for($i = 0; $i < $length; $i++){
+        $length = sizeof($val) - 1;
+        for($i = 0; $i <= $length; $i++){
             Product::find($uni[$i])->update([
                 'qty' => $val[$i]
             ]);
         }
-        $this->check = [];
+        $this->indicator = [];
     }
 }

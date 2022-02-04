@@ -2,11 +2,6 @@
 @section('content')
     <div class="d-flex justify-content-center">
         <div class="col-lg-10">
-            @if (session()->has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
             <form action="/dashboard/create" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">

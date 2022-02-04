@@ -15,14 +15,14 @@
                         <td class="border px-4 py-2">{{ $loop->iteration }}</td>
                         <td class="border px-4 py-2">{{ $product->product_name }}</td>
                         <td class="border px-4 py-2">
-                            <button style="border: none; background-color:transparent; font-size:22px" value="{{ $product->id }}" wire:model="check" wire:click="plus({{ $loop->index }}, {{ $product->id }})">+</button>
+                            <button style="border: none; background-color:transparent; font-size:22px" wire:click="plus({{ $loop->index }})">+</button>
                             {{ $qty[$loop->index] }}
-                            <button style="border: none; background-color:transparent; font-size:24px" value="{{ $product->id }}" wire:model="check" wire:click="min({{ $loop->index }}, {{ $product->id }})">-</button>
+                            <button style="border: none; background-color:transparent; font-size:24px" wire:click="min({{ $loop->index }})">-</button>
                         </td>
                     </tr>
                 @endforeach
                 <tr>
-                    @if ($check)
+                    @if ($indicator)
                         <th class="px-4 py-2" colspan="3"><div class="d-flex justify-content-end" style="margin-left: 20px"><button class="btn btn-success" wire:click="save">Simpan</button><button class="btn btn-danger" wire:click="remove" style="margin-left: 20px">Buang</button></div></th>
                     @endif
                 </tr>

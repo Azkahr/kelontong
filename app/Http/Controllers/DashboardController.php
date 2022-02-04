@@ -59,7 +59,7 @@ class DashboardController extends Controller
         
         Product::create($validatedData);
 
-        return back()->with('success', 'Produk Ditambahkan');
+        return redirect(route('dashboard'))->with('success', 'Produk Ditambahkan');
     }
 
     /**
