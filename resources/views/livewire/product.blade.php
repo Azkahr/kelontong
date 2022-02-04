@@ -19,6 +19,13 @@
                             {{ $qty[$loop->index] }}
                             <button style="border: none; background-color:transparent; font-size:24px" wire:click="min({{ $loop->index }})">-</button>
                         </td>
+                            <td class="border px-4 py-2">
+                                <form action="/dashboard/{{ $product->id }}" method="post" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="badge bg-danger border-0" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                                </form>
+                            </td>
                     </tr>
                 @endforeach
                 <tr>
@@ -26,6 +33,7 @@
                         <th class="px-4 py-2" colspan="3"><div class="d-flex justify-content-end" style="margin-left: 20px"><button class="btn btn-success" wire:click="save">Simpan</button><button class="btn btn-danger" wire:click="remove" style="margin-left: 20px">Buang</button></div></th>
                     @endif
                 </tr>
+                
             </tbody>
         </table>
     </div>

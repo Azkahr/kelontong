@@ -102,8 +102,10 @@ class DashboardController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::find($id)->delete();
+
+        return redirect('/dashboard')->with('success', 'Product has been deleted');
     }
 }
