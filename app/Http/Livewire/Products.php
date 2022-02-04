@@ -36,6 +36,9 @@ class Products extends Component
 
     public function min($index){
         $this->qty[$index] = $this->qty[$index] - 1;
+        if($this->qty[$index] < 0){
+            $this->qty[$index] = 0;
+        }
         $this->indicator = true;
     }
 

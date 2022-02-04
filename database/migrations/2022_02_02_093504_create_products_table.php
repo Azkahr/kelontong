@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->text('desc');
             $table->string('image')->nullable();
-            $table->integer('qty');
+            $table->unsignedInteger('qty');
             $table->timestamps();
         });
     }
