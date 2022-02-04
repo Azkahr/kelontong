@@ -9,6 +9,7 @@ use App\Models\Category;
 class DashboardController extends Controller
 {
     /**
+     * test commit
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
