@@ -79,9 +79,14 @@ class DashboardController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Request $request)
     {
-        //
+        return view('dashboard.edit', [
+            $request->id,
+            'title' => "edit",
+            'categories' => Category::all(),
+            'products' => Product::where('users_id', auth()->user()->id)->get()
+        ]);
     }
 
     /**
