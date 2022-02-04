@@ -10,7 +10,7 @@ class Products extends Component
 {
     use WithPagination;
 
-    public $qty, $awal;
+    public $qty = [];
     public $check = [];
 
     public function mount(){
@@ -19,7 +19,12 @@ class Products extends Component
 
     public function render()
     {
-        return view('livewire.product', ['products' => Product::where('users_id', auth()->user()->id)->paginate(10)]);
+        return view('livewire.product', ['products' => Product::select('id','product_name')->where('users_id', auth()->user()->id)->paginate(10)]);
+    }
+
+    public function refresh()
+    {
+    
     }
 
     public function plus($index, $id){
@@ -38,6 +43,14 @@ class Products extends Component
     }
 
     public function save(){
-        dd($this->check);
+        $uni = array_values(array_unique($this->check));
+        $val = collect($this->qty)->toArray();
+        $length = sizeof($uni);
+        for($i = 0; $i < $length; $i++){
+            Product::find($uni[$i])->update([
+                'qty' => $val[$i]
+            ]);
+        }
+        $this->check = [];
     }
 }
