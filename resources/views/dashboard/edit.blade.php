@@ -5,9 +5,6 @@
             <form action="/dashboard/update/{{ $product->id }}" method="post" enctype="multipart/form-data">
                 @method('put')
                 @csrf
-
-                <input type="hidden" value="{{ $product->id }}" name="id">
-
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Nama Product</label>
                     <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ $product->product_name }}">
