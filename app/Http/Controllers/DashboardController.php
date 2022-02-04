@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
@@ -79,13 +81,10 @@ class DashboardController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-
-        $product = Product::find($id);
-
         return view('dashboard.edit', [
-            'title' => "edit",
+            'title' => "Edit",
             'categories' => Category::all(),
             'product' => $product
         ]);
@@ -100,23 +99,32 @@ class DashboardController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
+        $validatedData = $request -> validate([
             'product_name' => 'required|min:3',
-            'qty' => 'required|digits_between:1,9999999',
+            'qty' => 'required|between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
             'image' => 'image|file|max:1024'
         ]);
 
+        if($request->file('image')){
+            if($request->oldImage){
+                Storage::delete([$request->oldImage]);
+            }
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }else{
+            $validatedData['image'] = $request->oldImage;
+        }
+
         Product::where('id', $request->id)->update([
-            'product_name' => $request->product_name,
-            'qty' => $request->qty,
-            'desc' => $request->desc,
-            'category_id' => $request->category_id,
-            'image' => $request->image
+            'product_name' => $validatedData['product_name'],
+            'qty' => $validatedData['qty'],
+            'desc' => $validatedData['desc'],
+            'category_id' => $validatedData['category_id'],
+            'image' => $validatedData['image']
         ]);
         
-        return redirect('/dashboard')->with('success', 'Product has been updated');
+        return redirect(route('dashboard'))->with('success', 'Product has been updated');
     }
 
     /**

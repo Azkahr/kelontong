@@ -37,6 +37,6 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::post('/dashboard/create', [DashboardController::class, 'store']);
     Route::post('/dashboard/delete/{id}', [DashboardController::class, 'destroy']);
 
-    Route::get('/dashboard/edit/{id}', [DashboardController::class, 'edit']);
-    Route::put('/dashboard/update', [DashboardController::class, 'update']);
+    Route::get('/dashboard/update/{product:id}', [DashboardController::class, 'edit']);
+    Route::put('/dashboard/update/{id}', [DashboardController::class, 'update']);
 });
