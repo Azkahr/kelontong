@@ -79,13 +79,15 @@ class DashboardController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
+
+        $product = Product::find($id);
+
         return view('dashboard.edit', [
-            $request->id,
             'title' => "edit",
             'categories' => Category::all(),
-            'products' => Product::where('users_id', auth()->user()->id)->get()
+            'product' => $product
         ]);
     }
 
@@ -96,9 +98,25 @@ class DashboardController extends Controller
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'product_name' => 'required|min:3',
+            'qty' => 'required|digits_between:1,9999999',
+            'desc' => 'required',
+            'category_id' => 'required',
+            'image' => 'image|file|max:1024'
+        ]);
+
+        Product::where('id', $request->id)->update([
+            'product_name' => $request->product_name,
+            'qty' => $request->qty,
+            'desc' => $request->desc,
+            'category_id' => $request->category_id,
+            'image' => $request->image
+        ]);
+        
+        return redirect('/dashboard')->with('success', 'Product has been updated');
     }
 
     /**
