@@ -23,52 +23,46 @@
                             <td class="border px-4 py-2">
                                 <a href="dashboard/#" class="badge bg-primary ">See post product</a>
                                 <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning">Edit</a>
-                                <form action="/dashboard/delete/{{ $product->id }}" id="Dform" method="post" class="d-inline">
+                                <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline">
                                     @csrf
-                                    <button class="badge bg-danger border-0">Delete</button>
+                                    <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
-                
+                <input type="hidden" id="idA" wire:model="confirm">
             </table>
         </div>
     @else
         <div class="d-flex justify-content-center" style="margin-top:100px; opacity:65%"><h2 class="">Belum Ada Produk Yang Diposting</h2></div>
     @endif
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    document.querySelector('#Dform').addEventListener('submit', function(e){
-        var form = this;
-        e.preventDefault(); // <--- prevent form from submitting
-        Swal.fire({
-        title: 'Lanjutkan?',
-        text: "Anda Akan Menghapus Product dan Postingannya",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Hapus Saja',
-        cancelButtonText: 'Tidak, Jangan Hapus',
-        }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-            'Berhasil',
-            'Produk Berhasil Terhapus',
-            'success'
-            )
-            form.submit();
-        }else{
-            Swal.fire(
-            'Gagal',
-            'Penghapusan Gagal',
-            'error'
-            )
-        }
-        })
-    }); 
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            event.preventDefault();
+            Swal.fire({
+            title: 'Lanjutkan?',
+            text: "Anda Akan Menghapus Produk dan Postingannya",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus Saja',
+            cancelButtonText: 'Tidak, Jangan Hapus',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Berhasil',
+                'Product Berhasil Terhapus',
+                'success'
+                )
+                form.submit();
+            }
+            })
+        });
     </script>
 </div>

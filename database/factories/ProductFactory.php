@@ -11,10 +11,21 @@ class ProductFactory extends Factory
      *
      * @return array
      */
+
     public function definition()
     {
         return [
-            //
+            'category_id' => $this->faker->randomElement([1,2]),
+            'product_name' => $this->faker->word(),
+            'desc' => $this->faker->sentence(3),
+            'qty' => 20
         ];
+    }
+
+    public function withID($id)
+    {
+        return $this->state([
+            'users_id' => $id,
+        ]);
     }
 }
