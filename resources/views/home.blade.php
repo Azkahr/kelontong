@@ -18,7 +18,6 @@
     <a href="/register">Register</a>
     <br>
     <br>
-    <a href="/masuk">Login seller</a>
     <a href="/daftar">Register seller</a>
     @endauth
 @endsection

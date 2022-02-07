@@ -19,29 +19,29 @@ class LoginController extends Controller
         ]);
     }
 
-    public function check(Request $request){
-        $credentials = $request->validate([
-            "email" => "required|email:dns|exists:users,email",
-            "password" => "required"
-        ],[
-            "email.exists" => "You are not registered"
-        ]);
+//     public function check(Request $request){
+//         $credentials = $request->validate([
+//             "email" => "required|email:dns|exists:users,email",
+//             "password" => "required"
+//         ],[
+//             "email.exists" => "You are not registered"
+//         ]);
 
-        if(Auth::attempt($credentials)){
-            if(Auth::user()->role == "seller"){
-                return redirect()->intended('/dashboard')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
-            } elseif(Auth::user()->role == "user"){
-                return redirect('/')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
+//         if(Auth::attempt($credentials)){
+//             if(Auth::user()->role == "seller"){
+//                 return redirect()->intended('/dashboard')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
+//             } elseif(Auth::user()->role == "user"){
+//                 return redirect('/')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
             
-            $request->session()->regenerate();
+//             $request->session()->regenerate();
             
-        } else {
-            return redirect('/masuk')->with('fail', 'Login failed');
-        }
-    } else {
-        return redirect('/masuk')->with('fail', 'Login failed');
-    }
-}
+//         } else {
+//             return redirect('/masuk')->with('fail', 'Login failed');
+//         }
+//     } else {
+//         return redirect('/masuk')->with('fail', 'Login failed');
+//     }
+// }
 
     protected function redirectTo(){
         if(Auth()->user()->role == "seller"){

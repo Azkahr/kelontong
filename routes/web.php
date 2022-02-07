@@ -31,9 +31,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');    
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/masuk', [LoginController::class, 'tampil'])->middleware('guest');
-Route::post('/masuk', [LoginController::class, 'check']);
-
 Route::get('/daftar', [RegisterController::class, 'tampil'])->middleware('guest');
 Route::post('/daftar', [RegisterController::class, 'buat']);
 
