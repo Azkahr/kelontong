@@ -20,6 +20,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
+            "allpost" => Product::all()->where('users_id', auth()->user()->id)->count(),
+            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('qty'),
+            
         ]);
     }
 
