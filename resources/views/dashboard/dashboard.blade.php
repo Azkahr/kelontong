@@ -57,7 +57,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah Produk</p>
                             <h5 class="font-weight-bolder">
-                            {{ $allpost }}
+                            <div style="width:150px; height:70px; font-size:35px">{{ $allpost }}</div>
                             </h5>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Quantity</p>
                             <h5 class="font-weight-bolder">
-                        {{ $totalqty }}
+                                <div style="width:150px; height:70px; font-size:35px">{{ $totalqty }}</div>
                             </h5>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Jenis Produk</p>
                             <h5 class="font-weight-bolder">
-                                <div style="width:150px; height:55px; overflow: auto">
+                                <div style="width:150px; height:70px; overflow: auto; font-size:14px">
                                     @foreach ($category_s as $item)
                                         <li>{{ $item->category->name }}</ul>
                                     @endforeach
