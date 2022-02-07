@@ -14,7 +14,7 @@ class Products extends Component
     public $confirm = false;
 
     public function mount(){
-        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get();
+        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'category_id', 'users_id', 'product_name', 'image']);
         $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
     }
 
@@ -25,7 +25,8 @@ class Products extends Component
 
     public function refresh()
     {
-        $this->products = Product::latest()->get();
+        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'category_id', 'users_id', 'product_name', 'image']);
+        $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
     }
 
     public function plus(Product $product, $index){

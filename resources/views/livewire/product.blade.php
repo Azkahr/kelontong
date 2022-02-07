@@ -10,7 +10,7 @@
                         <th class="border px-4 py-2">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody wire:poll="refresh">
                     @foreach ($products as $product)
                         <tr>
                             <td class="border px-4 py-2">{{ $loop->iteration }}</td>
