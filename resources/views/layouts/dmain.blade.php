@@ -102,6 +102,6 @@
         <script>
             feather.replace()
         </script>
-        @livewireScripts           
+        @livewireScripts        
     </body>
 </html>
