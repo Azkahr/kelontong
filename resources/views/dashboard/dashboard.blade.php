@@ -57,7 +57,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah Produk</p>
                             <h5 class="font-weight-bolder">
-                            <div style="width:150px; height:70px; font-size:35px">{{ $allpost }}</div>
+                            <div style="width:150px; height:70px; font-size:30px">{{ $allpost }}</div>
                             </h5>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Quantity</p>
                             <h5 class="font-weight-bolder">
-                                <div style="width:150px; height:70px; font-size:35px">{{ $totalqty }}</div>
+                                <div style="width:150px; height:70px; font-size:30px">{{ $totalqty }}</div>
                             </h5>
                         </div>
                     </div>
