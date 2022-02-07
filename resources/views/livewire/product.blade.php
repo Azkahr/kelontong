@@ -21,6 +21,7 @@
                                 <button style="border: none; background-color:transparent; font-size:24px" wire:click="min({{$product}}, {{ $loop->index }})">-</button>
                             </td>
                             <td class="border px-4 py-2">
+                                <a href="dashboard/#" class="badge bg-primary ">See post product</a>
                                 <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning">Edit</a>
                                 <form action="/dashboard/delete/{{ $product->id }}" method="post" class="d-inline">
                                     @csrf
