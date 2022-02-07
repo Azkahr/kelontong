@@ -1,4 +1,5 @@
 <div>
+
     @if ($products->count())
         <div class="d-flex justify-content-center mt-7">
             <table class="table-striped table-sm col-md-12 text-center">
@@ -25,7 +26,7 @@
                                 <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning">Edit</a>
                                 <form action="/dashboard/delete/{{ $product->id }}" method="post" class="d-inline">
                                     @csrf
-                                    <button class="badge bg-danger border-0" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                                    <button class="badge bg-danger border-0" onclick="deleteA()">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -37,4 +38,28 @@
     @else
         <div class="d-flex justify-content-center" style="margin-top:100px; opacity:65%"><h2 class="">Belum Ada Produk Yang Diposting</h2></div>
     @endif
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function deleteA(){
+            Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                }
+                })
+            }
+    </script>
+
 </div>
