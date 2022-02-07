@@ -31,6 +31,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');    
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::get('/daftar', [RegisterController::class, 'tampil'])->middleware('guest');
+Route::post('/daftar', [RegisterController::class, 'buat']);
+
 Route::middleware('auth', 'verified')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/create', [DashboardController::class, 'create'])->name('createP');

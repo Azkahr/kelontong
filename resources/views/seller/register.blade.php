@@ -25,6 +25,7 @@
                     </div>
                 @enderror
             </div>
+            <input type="hidden" name="role" value="seller">
             <div class="form-floating">
                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password">
                 <label for="password">Password</label>
