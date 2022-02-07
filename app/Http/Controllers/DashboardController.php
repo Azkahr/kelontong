@@ -20,13 +20,10 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
-<<<<<<< HEAD
-            'category_s' => Product::select(['category_id'])->where('users_id', auth()->user()->id)->distinct()->get()
-=======
+            'category_s' => Product::select(['category_id'])->where('users_id', auth()->user()->id)->distinct()->get(),
             "allpost" => Product::all()->where('users_id', auth()->user()->id)->count(),
             "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('qty'),
             
->>>>>>> 094ec65fc7ded99777e21510731d8ad35809635f
         ]);
     }
 
