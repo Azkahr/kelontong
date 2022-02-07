@@ -140,6 +140,6 @@ class DashboardController extends Controller
     public function destroy(Request $request)
     {
         Product::find($request->id)->delete();
-        return redirect('/dashboard')->with('success', 'Product has been deleted (refresh untuk menghilangkan notifikasi)');
+        return back();
     }
 }
