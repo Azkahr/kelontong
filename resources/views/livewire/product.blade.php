@@ -1,5 +1,4 @@
 <div>
-
     @if ($products->count())
         <div class="d-flex justify-content-center mt-7">
             <table class="table-striped table-sm col-md-12 text-center">
@@ -24,9 +23,9 @@
                             <td class="border px-4 py-2">
                                 <a href="dashboard/#" class="badge bg-primary ">See post product</a>
                                 <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning">Edit</a>
-                                <form action="/dashboard/delete/{{ $product->id }}" method="post" class="d-inline">
+                                <form action="/dashboard/delete/{{ $product->id }}" id="Dform" method="post" class="d-inline">
                                     @csrf
-                                    <button class="badge bg-danger border-0" onclick="deleteA()">Delete</button>
+                                    <button class="badge bg-danger border-0">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -40,26 +39,36 @@
     @endif
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function deleteA(){
-            Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    )
-                }
-                })
-            }
-    </script>
 
+    <script>
+    document.querySelector('#Dform').addEventListener('submit', function(e){
+        var form = this;
+        e.preventDefault(); // <--- prevent form from submitting
+        Swal.fire({
+        title: 'Lanjutkan?',
+        text: "Anda Akan Menghapus Product dan Postingannya",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Hapus Saja',
+        cancelButtonText: 'Tidak, Jangan Hapus',
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+            'Berhasil',
+            'Produk Berhasil Terhapus',
+            'success'
+            )
+            form.submit();
+        }else{
+            Swal.fire(
+            'Gagal',
+            'Penghapusan Gagal',
+            'error'
+            )
+        }
+        })
+    }); 
+    </script>
 </div>
