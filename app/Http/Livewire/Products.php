@@ -13,8 +13,8 @@ class Products extends Component
     public $products, $qty;
 
     public function mount(){
-        $this->products = Product::latest()->get();
-        $this->qty = Product::latest()->pluck('qty');
+        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get();
+        $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
     }
 
     public function render()
