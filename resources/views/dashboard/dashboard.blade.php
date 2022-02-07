@@ -103,7 +103,11 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Jenis Produk</p>
                             <h5 class="font-weight-bolder">
-                            jenis produk
+                                <div style="width:150px; height:55px; overflow: auto">
+                                    @foreach ($category_s as $item)
+                                        <li>{{ $item->category->name }}</ul>
+                                    @endforeach
+                                </div>
                             </h5>
                             <p class="mb-0">
                         </div>

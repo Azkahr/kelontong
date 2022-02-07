@@ -20,6 +20,7 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
+            'category_s' => Product::select(['category_id'])->where('users_id', auth()->user()->id)->distinct()->get()
         ]);
     }
 
