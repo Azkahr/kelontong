@@ -65,7 +65,7 @@ class DashboardController extends Controller
         
         Product::create($validatedData);
 
-        return redirect(route('dashboard'))->with('success', 'Produk Ditambahkan');
+        return redirect(route('dashboard'))->with('success', 'Produk Ditambahkan (refresh untuk menghilangkan notifikasi)');
     }
 
     /**
@@ -128,7 +128,7 @@ class DashboardController extends Controller
             'image' => $validatedData['image']
         ]);
         
-        return redirect(route('dashboard'))->with('success', 'Product has been updated');
+        return redirect(route('dashboard'))->with('success', 'Product has been updated (refresh untuk menghilangkan notifikasi)');
     }
 
     /**
@@ -140,6 +140,6 @@ class DashboardController extends Controller
     public function destroy(Request $request)
     {
         Product::find($request->id)->delete();
-        return redirect('/dashboard')->with('success', 'Product has been deleted');
+        return redirect('/dashboard')->with('success', 'Product has been deleted (refresh untuk menghilangkan notifikasi)');
     }
 }

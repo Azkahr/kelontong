@@ -51,7 +51,11 @@
     
                 <div class="mb-3">
                     <label for="image" class="form-label">Foto Produk</label>
-                    <img src="{{ asset('storage/' . $product->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                    @if ($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                    @else
+                        <img class="img-preview img-fluid col-sm-5 d-block"><h6 style="opacity: 70%; margin-left: 3px">Belum ada foto product</h6>
+                    @endif
                     <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
                     @error('image')
                         <div class="invalid-feedback">
