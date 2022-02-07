@@ -14,9 +14,9 @@ class LoginController extends Controller
     }
 
     protected function redirectTo(){
-        if(Auth()->user()->role == 1){
+        if(Auth()->user()->role == "seller"){
             return route('dashboard');
-        } elseif(Auth()->user() == 2){
+        } elseif(Auth()->user()->role == "user"){
             return redirect('/');
         }
     }
@@ -30,10 +30,10 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials)){
-            if(Auth::user()->role == 1){
+            if(Auth::user()->role == "seller"){
                 return redirect()->intended('/dashboard')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
-            } elseif(Auth::user()->role == 2){
-                return redirect()->route('home');
+            } elseif(Auth::user()->role == "user"){
+                return redirect('/')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
             
             $request->session()->regenerate();
             return redirect()->intended('/dashboard')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
