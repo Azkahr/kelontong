@@ -54,7 +54,7 @@ class DashboardController extends Controller
         ]);
 
         if($request->file('image')){
-            $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('product-images');
         }
         
         $validatedData['users_id'] = auth()->user()->id;
@@ -111,7 +111,7 @@ class DashboardController extends Controller
             if($request->oldImage){
                 Storage::delete([$request->oldImage]);
             }
-            $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('product-images');
         }else{
             $validatedData['image'] = $request->oldImage;
         }

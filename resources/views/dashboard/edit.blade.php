@@ -51,9 +51,8 @@
     
                 <div class="mb-3">
                     <label for="image" class="form-label">Foto Produk</label>
-                    <input type="hidden" name="oldImage" value="{{ $product->image }}">
-                        <img src="{{ asset('storage/' . $product->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
-                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" onchange="previewImage()">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
