@@ -11,7 +11,6 @@ class Products extends Component
     use WithPagination;
 
     public $products, $qty;
-    public $confirm = false;
 
     public function mount(){
         $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'category_id', 'users_id', 'product_name', 'image']);
