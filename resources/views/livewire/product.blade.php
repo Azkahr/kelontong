@@ -1,7 +1,7 @@
 <div>
     @if ($products->count())
-        <div class="d-flex justify-content-center" style="margin-top:100px">
-            <table class="table-striped table-sm col-md-8 text-center">
+        <div class="d-flex justify-content-center mt-7">
+            <table class="table-striped table-sm col-md-12 text-center">
                 <thead>
                     <tr>
                         <th class="border px-4 py-2">No</th>
