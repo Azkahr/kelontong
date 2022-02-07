@@ -21,11 +21,11 @@
                                 <button style="border: none; background-color:transparent; font-size:24px" wire:click="min({{$product}}, {{ $loop->index }})">-</button>
                             </td>
                             <td class="border px-4 py-2">
-                                <a href="dashboard/#" class="badge bg-primary ">See post product</a>
-                                <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning">Edit</a>
+                                <a href="dashboard/#" class="badge bg-primary "><span data-feather="eye"></span></a>
+                                <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning"><span data-feather="edit"></span></a>
                                 <form action="/dashboard/delete/{{ $product->id }}" method="post" class="d-inline">
                                     @csrf
-                                    <button class="badge bg-danger border-0" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                                    <button class="badge bg-danger border-0" onclick="return confirm('Are you sure you want to delete this?')"><span data-feather="x-circle"></span></button>
                                 </form>
                             </td>
                         </tr>
