@@ -21,12 +21,14 @@
                                 <button style="border: none; background-color:transparent; font-size:24px" wire:click="min({{$product}}, {{ $loop->index }})">-</button>
                             </td>
                             <td class="border px-4 py-2">
-                                <a href="dashboard/#" class="badge bg-primary"><span data-feather="eye"></span></a>
-                                <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning"><span data-feather="edit"></span></a>
-                                <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm" data-toggle="tooltip" title='Delete'><span data-feather="x-circle"></span></button>
-                                </form>
+                                <div class="d-flex align-items-lg-center">
+                                    <a href="dashboard/#" class="badge bg-primary"><span data-feather="eye"></span></a>
+                                    <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning"><span data-feather="edit"></span></a>
+                                    <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm" data-toggle="tooltip" title='Delete'><span data-feather="x-circle"></span></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
