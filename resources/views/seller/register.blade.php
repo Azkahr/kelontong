@@ -4,7 +4,7 @@
 <div class="row justify-content-center">
     <div class="col-md-5">    
         <main class="form-signin">
-            <h1 class="h3 mb-3 fw-normal text-center">Please register</h1>
+            <h1 class="h3 mb-3 fw-normal text-center">Register as seller</h1>
             <form action="/register" method="post">
             @csrf
             <div class="form-floating">
