@@ -34,6 +34,8 @@ class RegisterController extends Controller
 
         User::create($validatedData);
 
+        notify()->success('Register Sukses', 'Berhasil');
+        
         return redirect('/login')->with('success', 'Registration successfully');
     }
 
@@ -52,6 +54,8 @@ class RegisterController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/login')->with('success', 'Registration successfully');
+        notify()->success('Register Sukses', 'Berhasil');
+
+        return redirect('/login');
     }
 }

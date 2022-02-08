@@ -65,7 +65,9 @@ class DashboardController extends Controller
         
         Product::create($validatedData);
 
-        return redirect(route('dashboard'))->with('success', 'Produk Ditambahkan (refresh untuk menghilangkan notifikasi)');
+        smilify('success', 'Produk Ditambahkan');
+
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -127,8 +129,10 @@ class DashboardController extends Controller
             'category_id' => $validatedData['category_id'],
             'image' => $validatedData['image']
         ]);
+
+        smilify('success', 'Produk Berhasil Diedit');
         
-        return redirect(route('dashboard'))->with('success', 'Product has been updated (refresh untuk menghilangkan notifikasi)');
+        return redirect(route('dashboard'));
     }
 
     /**

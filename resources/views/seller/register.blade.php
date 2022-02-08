@@ -1,6 +1,6 @@
 @extends('layouts.main')
-
 @section('container')
+<x:notify-messages />
 <div class="row justify-content-center">
     <div class="col-md-5">    
         <main class="form-signin">

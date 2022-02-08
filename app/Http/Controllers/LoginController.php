@@ -31,18 +31,17 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)){
             if(Auth::user()->role == "seller"){
-                return redirect()->intended('/dashboard')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
+                notify()->success('Selamat Datang Di Dashboard ⚡️', 'Login Berhasil');
+                return redirect()->intended('/dashboard');
             } elseif(Auth::user()->role == "user"){
-                return redirect('/')->with('success', 'Login successfully (refresh untuk menghilangkan notifikasi)');
-            
-            $request->session()->regenerate();
-            
+                notify()->success('Selamat Datang '.auth()->user()->name, 'Login Berhasil');
+                $request->session()->regenerate();
+                return redirect('/');
+            }
         } else {
-            return redirect('/login')->with('fail', 'Login failed');
+            notify()->error('Login Gagal', 'Gagal');
+            return redirect('/login');
         }
-    } else {
-        return redirect('/login')->with('fail', 'Login failed');
-    }
 }
 
     public function logout(Request $request){
@@ -51,6 +50,8 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        notify()->success('Logout Sukses', 'Berhasil');
 
         return redirect('/');
     }
