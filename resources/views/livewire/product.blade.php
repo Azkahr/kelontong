@@ -22,11 +22,11 @@
                             </td>
                             <td class="border px-4 py-2">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a href="dashboard/#" class="badge bg-primary"><span data-feather="eye"></span></a>
-                                    <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning mx-3"><span data-feather="edit"></span></a>
+                                    <a href="dashboard/#" class="badge bg-primary"><img src="{{ asset('assets\img\eye.svg') }}" alt="eye"></a>
+                                    <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning mx-3"><img src="{{ asset('assets\img\edit.svg') }}" alt="eye"></a>
                                     <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm" data-toggle="tooltip" title='Delete'><span data-feather="x-circle"></span></button>
+                                        <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm" data-toggle="tooltip" title='Delete'><img src="{{ asset('assets\img\trash-2.svg') }}" alt="eye"></span></button>
                                     </form>
                                 </div>
                             </td>
