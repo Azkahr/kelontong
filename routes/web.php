@@ -34,7 +34,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/daftar', [RegisterController::class, 'tampil'])->middleware('guest');
 Route::post('/daftar', [RegisterController::class, 'buat']);
 
-Route::middleware('auth', 'verified')->group(function(){
+Route::middleware('auth', 'verified', 'isSeller')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/create', [DashboardController::class, 'create'])->name('createP');
     Route::post('/dashboard/create', [DashboardController::class, 'store']);
