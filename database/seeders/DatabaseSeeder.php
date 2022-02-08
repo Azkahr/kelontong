@@ -41,5 +41,10 @@ class DatabaseSeeder extends Seeder
             'slug' => 'minuman'
         ]);
 
+        Category::create([
+            'name' => 'Makanan ringan',
+            'slug' => 'makanan-ringan'
+        ]);
+
     }
 }
