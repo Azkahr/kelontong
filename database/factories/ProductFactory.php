@@ -16,6 +16,7 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => $this->faker->randomElement([1,2]),
+            'users_id' => 1,
             'product_name' => $this->faker->unique()->word(),
             'desc' => $this->faker->unique()->sentence(3),
             'qty' => 20
