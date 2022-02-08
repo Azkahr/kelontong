@@ -6,9 +6,7 @@
                     <tr>
                         <td colspan="5">
                             <div class="d-flex justify-content-start">
-                                @if ($check == $checkall)
-                                    <button class="btn btn-danger" wire:click="deleteAll">Delete All Items</button>
-                                @elseif ($check)
+                                @if ($check)
                                     <button class="btn btn-danger" wire:click="deleteAll">Delete Selected Items</button>
                                 @endif
                             </div>

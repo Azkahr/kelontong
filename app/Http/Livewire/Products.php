@@ -12,14 +12,12 @@ class Products extends Component
 
     public $products, $qty;
     public $check = [];
-    public $checkall = [];
     public $selectAll = false;
 
 
     public function mount(){
         $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'category_id', 'users_id', 'product_name', 'image']);
         $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
-        $this->checkall = Product::latest()->pluck('id');
     }
 
     public function render()
