@@ -4,15 +4,28 @@
             <table class="table-striped table-sm col-md-12 text-center">
                 <thead>
                     <tr>
-                        <th class="border px-4 py-2">No</th>
-                        <th class="border px-4 py-2">Nama Product</th>
-                        <th class="border px-4 py-2">Stock Product</th>
-                        <th class="border px-4 py-2">Action</th>
+                        <td colspan="5">
+                            <div class="d-flex justify-content-start">
+                                @if ($check == $checkall)
+                                    <button class="btn btn-danger" wire:click="deleteAll">Delete All Items</button>
+                                @elseif ($check)
+                                    <button class="btn btn-danger" wire:click="deleteAll">Delete Selected Items</button>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="px-4 py-2"><input type="checkbox" wire:click="selectAll()" wire:model="selectAll"></th>
+                        <th class="px-4 py-2">No</th>
+                        <th class="px-4 py-2">Nama Product</th>
+                        <th class="px-4 py-2">Stock Product</th>
+                        <th class="px-4 py-2">Action</th>
                     </tr>
                 </thead>
                 <tbody wire:poll="refresh">
                     @foreach ($products as $product)
                         <tr>
+                            <th class="border px-4 py-2"><input value="{{ $product->id }}" type="checkbox" wire:model="check"></th>
                             <td class="border px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="border px-4 py-2">{{ $product->product_name }}</td>
                             <td class="border px-4 py-2">
@@ -24,9 +37,9 @@
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a href="dashboard/#" class="badge bg-primary" title="See"><img src="{{ asset('assets\img\eye.svg') }}" alt="eye"></a>
                                     <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning mx-3" title="Edit"><img src="{{ asset('assets\img\edit.svg') }}" alt="eye"></a>
-                                    <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline">
+                                    <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline" title='Delete'>
                                         @csrf
-                                        <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm" data-toggle="tooltip" title='Delete'><img src="{{ asset('assets\img\trash-2.svg') }}" alt="eye"></span></button>
+                                        <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm"><img src="{{ asset('assets\img\trash-2.svg') }}" alt="eye"></span></button>
                                     </form>
                                 </div>
                             </td>

@@ -11,10 +11,15 @@ class Products extends Component
     use WithPagination;
 
     public $products, $qty;
+    public $check = [];
+    public $checkall = [];
+    public $selectAll = false;
+
 
     public function mount(){
         $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'category_id', 'users_id', 'product_name', 'image']);
         $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
+        $this->checkall = Product::latest()->pluck('id');
     }
 
     public function render()
@@ -44,5 +49,22 @@ class Products extends Component
             'qty' => $decrement
         ]);
         $this->qty[$index] = $this->qty[$index] - 1;
+    }
+
+    public function selectAll()
+    {
+        if($this->selectAll === true){
+            $this->check = Product::latest()->pluck('id');
+        }else{
+            $this->check = [];
+        }
+    }
+
+    public function deleteAll()
+    {
+        $ids = $this->check;
+        Product::whereIn('id', $ids)->delete();
+        $this->check = [];
+        $this->selectAll = false;
     }
 }
