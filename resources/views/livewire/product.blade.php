@@ -8,6 +8,7 @@
                             <div class="d-flex justify-content-start">
                                 @if ($check)
                                     <button class="btn btn-danger" wire:click="deleteAll">Delete Selected Items</button>
+                                    <button class="btn btn-success mx-3" wire:click="unselectAll">Cancel</button>
                                 @endif
                             </div>
                         </td>

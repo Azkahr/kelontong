@@ -5,11 +5,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordController;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
-
-use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +38,15 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
     return redirect('/login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/verify-email/resend', function(Request $request){
+    if($request->user()->hasVerifiedEmail()){
+        return redirect()->intended('/dashboard');
+    }else{
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('success', 'Verifikasi Terkirim');
+    } 
+})->name('verification.resend');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);    

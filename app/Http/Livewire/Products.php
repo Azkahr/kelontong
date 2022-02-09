@@ -58,6 +58,12 @@ class Products extends Component
         }
     }
 
+    public function unselectAll()
+    {
+        $this->check = [];
+        $this->selectAll = false;
+    }
+
     public function deleteAll()
     {
         $ids = $this->check;

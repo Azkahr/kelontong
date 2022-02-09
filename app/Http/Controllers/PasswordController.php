@@ -38,7 +38,7 @@ class PasswordController extends Controller
         $action_link = route('reset',['token' => $token, 'email' => $request->email]);
         $body = "Kami telah mengirimkan permintaan untuk mereset password anda untuk web <b>Kelontong.ID </b> " . $request->email . ". Kamu bisa reset password anda setelah menekan link di bawah ini";
 
-        Mail::send('email-forgot',['action_link' => $action_link, 'body' => $body], function($message) use ($request){
+        Mail::send('auth.password.email-forgot',['action_link' => $action_link, 'body' => $body], function($message) use ($request){
             $message->from('shieldman0021@gmail.com','Kelontong.ID');
             $message->to($request->email,'Kelontong.ID')
                         ->subject('Reset Password');
