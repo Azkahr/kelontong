@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 
@@ -59,8 +60,14 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
+        if(Auth::attempt($request->only('email', 'password'))){
+            notify()->success('Register Sukses', 'Berhasil');
+            return redirect('/dashboard')->with('success', 'Registration successfully');
+        } else {
+            notify()->error('Register Gagal', 'Gagal');
+            return redirect('/register')->with('error', 'Registration failed');
+        }
         notify()->success('Register Sukses', 'Berhasil');
 
-        return redirect('/login');
     }
 }
