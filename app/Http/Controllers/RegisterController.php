@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -32,7 +33,9 @@ class RegisterController extends Controller
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+
+        event(new Registered($user));
 
         notify()->success('Register Sukses', 'Berhasil');
         
@@ -52,7 +55,9 @@ class RegisterController extends Controller
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+
+        event(new Registered($user));
 
         notify()->success('Register Sukses', 'Berhasil');
 
