@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -26,10 +27,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/verify-email', function(){
-    return view('auth.verify',[
-        "title" => "Verify"
-    ]);
+Route::get('/verify-email', function(Request $request){
+        return $request->user()->hasVerifiedEmail()
+                    ? redirect()->intended('/dashboard')
+                    : view('auth.verify', [
+                        "title" => "Verify"
+                     ]);
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
