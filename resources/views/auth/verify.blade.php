@@ -7,6 +7,6 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    <h1>TEst</h1>
+    <h1>Please check your email for email verification</h1>
 </body>
 </html>
