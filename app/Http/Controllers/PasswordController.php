@@ -17,10 +17,10 @@ class PasswordController extends Controller
         ]);
     }
 
-    public function resetForm(Request $request, $token = null){
+    public function resetForm(Request $request){
         return view('auth.password.reset', [
             "title" => 'Reset Password',
-        ])->with(['token' => $token, 'email' => $request->email]);
+        ])->with(['token' => $request->token, 'email' => $request->email]);
     }
 
     public function reset(Request $request){
