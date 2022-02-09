@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -59,3 +60,7 @@ Route::middleware('auth', 'verified', 'isSeller')->group(function(){
     Route::get('/dashboard/update/{product:id}', [DashboardController::class, 'edit']);
     Route::put('/dashboard/update/{id}', [DashboardController::class, 'update']);
 });
+
+Route::get('/password/forgot', [PasswordController::class, 'index'])->name('forgot');
+Route::post('/password/forgot', [PasswordController::class, 'reset'])->name('resetLink');
+Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])->name('reset');
