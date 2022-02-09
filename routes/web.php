@@ -64,3 +64,4 @@ Route::middleware('auth', 'verified', 'isSeller')->group(function(){
 Route::get('/password/forgot', [PasswordController::class, 'index'])->name('forgot');
 Route::post('/password/forgot', [PasswordController::class, 'reset'])->name('resetLink');
 Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])->name('reset');
+Route::post('/password/reset', [PasswordController::class, 'resetPassword'])->name('resetPassword');

@@ -5,10 +5,21 @@
     <div class="col-md-5">    
         <main class="form-signin">
             <h1 class="h3 mb-3 fw-normal text-center">Reset Password</h1>
-            <form action="" method="post">
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session()->has('error'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <form action="{{ route('resetPassword') }}" method="post">
             @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
             <div class="form-floating">
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" value="{{ old('email') }}" autocomplete="off">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" value="{{ $email ?? old('email') }}" autocomplete="off">
                 <label for="email">Email address</label>
                 @error('email')
                     <div class="invalid-feedback">
@@ -27,17 +38,17 @@
                 @enderror
             </div>
             <div class="form-floating">
-                <input type="password" name="cpassword" class="form-control @error('cpassword') is-invalid @enderror" id="cpassword" placeholder="Confirm password">
-                <label for="cpassword">Confirm password</label>
-                @error('cpassword')
+                <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Confirm password">
+                <label for="password_confirmation">Confirm password</label>
+                @error('password_confirmation')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-                <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+                <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Reset password   </button>
             </form>
-            <small class="d-block text-center">Already registered? <a href="/login">Login now!</a></small>
+            <small class="d-block text-center"><a href="/login">Login now!</a></small>
         </main>
     </div>
 </div>

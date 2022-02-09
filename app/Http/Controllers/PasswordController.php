@@ -17,6 +17,12 @@ class PasswordController extends Controller
         ]);
     }
 
+    public function resetForm(Request $request, $token = null){
+        return view('auth.password.reset', [
+            "title" => 'Reset Password',
+        ])->with(['token' => $token, 'email' => $request->email]);
+    }
+
     public function reset(Request $request){
         $request->validate([
             'email' => 'required|email|exists:users,email'
@@ -39,5 +45,32 @@ class PasswordController extends Controller
         });
 
         return back()->with('success', 'Kami telah mengirim link ke email untuk mereset password anda');
+    }
+
+    public function resetPassword(Request $request){
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:5|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        $check_token = DB::table('password_resets')->where([
+            'email' => $request->email,
+            'token' => $request->token
+        ])->first();
+
+        if(!$check_token){
+            return back()->withInput()->with('error', 'Token tidak valid');
+        } else {
+            User::where('email', $request->email)->update([
+                'password' => bcrypt($request->password)
+            ]);
+
+            DB::table('password_resets')->where([
+                'email' => $request->email
+            ])->delete();
+
+            return redirect()->route('login')->with('info', 'Password anda sudah diperbaharui! Anda bisa login dengan password baru')->with('verifiedEmail', $request->email);
+        }
     }
 }

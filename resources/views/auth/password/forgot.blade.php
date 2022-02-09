@@ -10,6 +10,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session()->has('error'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <p>Tuliskan alamat email yang kalian gunakan untuk login ke website kami, dan kami akan mengirim link untuk merubah password anda</p>
             <form action="{{ route('resetLink') }}" method="post">
             @csrf
