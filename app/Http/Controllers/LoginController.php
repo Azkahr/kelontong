@@ -29,7 +29,7 @@ class LoginController extends Controller
             "email.exists" => "You are not registered"
         ]);
 
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt($credentials, $request->remember)){
             if(Auth::user()->role == "seller"){
                 notify()->success('Selamat Datang Di Dashboard ⚡️', 'Login Berhasil');
                 return redirect()->intended('/dashboard');
@@ -39,7 +39,7 @@ class LoginController extends Controller
                 return redirect('/');
             }
         } else {
-            notify()->error('Login Gagal', 'Gagal');
+            notify()->error('Email / Password Salah', 'Login Gagal');
             return redirect('/login');
         }
 }
