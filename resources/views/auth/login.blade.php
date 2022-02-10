@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="login">
-                <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:50px">
+                <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px">
                     <form action="/login" method="post">
                     @csrf
                         <h1>HAYUU LOGIN</h1>
