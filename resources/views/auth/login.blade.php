@@ -1,8 +1,5 @@
 @extends('layouts.main')
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Spartan:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
 /* For extremely small screen devices (595px and below) */
 @media only screen and (max-width: 595px) {
     
