@@ -84,7 +84,7 @@
                         <h1>HAYUU LOGIN</h1>
                         <div>
                             <label for="email">Email :</label>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" size="50">
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" autofocus id="email" size="50">
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
