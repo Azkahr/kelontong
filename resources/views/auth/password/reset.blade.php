@@ -30,7 +30,7 @@
             <input type="hidden" name="role" value="user">
             <div class="form-floating">
                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password">
-                <label for="password">Password</label>
+                <label for="password">Masukkan password baru</label>
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -39,7 +39,7 @@
             </div>
             <div class="form-floating">
                 <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Confirm password">
-                <label for="password_confirmation">Confirm password</label>
+                <label for="password_confirmation">Confirm password baru</label>
                 @error('password_confirmation')
                     <div class="invalid-feedback">
                         {{ $message }}
