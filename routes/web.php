@@ -72,3 +72,8 @@ Route::get('/password/forgot', [PasswordController::class, 'index'])->name('forg
 Route::post('/password/forgot', [PasswordController::class, 'reset'])->name('resetLink');
 Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])->name('reset');
 Route::post('/password/reset', [PasswordController::class, 'resetPassword'])->name('resetPassword');
+
+Route::middleware('auth', 'verified')->group(function(){
+    Route::get('/profile/update/{user:id}', [ProfileController::class, 'edit'])->name('profile');
+    Route::put('/profile/update/{id}', [ProfileController::class, 'update']);
+});
