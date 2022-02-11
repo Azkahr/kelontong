@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -74,6 +75,6 @@ Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])-
 Route::post('/password/reset', [PasswordController::class, 'resetPassword'])->name('resetPassword');
 
 Route::middleware('auth', 'verified')->group(function(){
-    Route::get('/profile/update/{user:id}', [ProfileController::class, 'edit'])->name('profile');
+    Route::get('/profile/update/{user:id}', [ProfileController::class, 'edit']);
     Route::put('/profile/update/{id}', [ProfileController::class, 'update']);
 });
