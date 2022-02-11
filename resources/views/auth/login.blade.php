@@ -100,6 +100,10 @@
                                 </div>
                             @enderror
                         </div>
+                        <div>
+                            <label for="remember">Remember Me :</label>
+                            <input type="checkbox" name="remember" id="remember">
+                        </div>
                         <div class="d-flex justify-content-center" style="margin-top:15px;">
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Login</button>
                         </div>
