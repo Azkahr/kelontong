@@ -8,7 +8,7 @@
             <form action="/daftar" method="post">
             @csrf
             <div class="form-floating">
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter full name" value="{{ old('name') }}" autocomplete="off">
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autofocus id="name" placeholder="Enter full name" value="{{ old('name') }}" autocomplete="off">
                 <label for="name">Name</label>
                 @error('name')
                     <div class="invalid-feedback">
