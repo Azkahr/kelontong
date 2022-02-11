@@ -19,7 +19,7 @@
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
             <div class="form-floating">
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" value="{{ $email ?? old('email') }}" autocomplete="off">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" autofocus id="email" placeholder="name@example.com" value="{{ $email ?? old('email') }}" autocomplete="off">
                 <label for="email">Email address</label>
                 @error('email')
                     <div class="invalid-feedback">
