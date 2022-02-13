@@ -122,7 +122,7 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 130px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     }
@@ -151,7 +151,7 @@
                         <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
             @auth
-                <div style="display: flex; align-items:center; margin-right:60px; height:50px">
+                <div style="display: flex; align-items:center; margin-right:75px; height:50px">
                     <img style="align-self: center; display: inline; width: 30px" src="{{ asset('assets/img/cart.png') }}" alt="cart">
                     <div class="dropdown">
                         <button class="dropbtn"><p style="margin:3px 0px 0px 15px; display: inline; font-size:20px; font-family:spartan; font-weight:700; color:white">{{ auth()->user()->name }}</p></button>
