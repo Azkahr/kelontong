@@ -32,13 +32,13 @@ Route::get('/verify-email', function(Request $request){
                     ? redirect()->intended('/dashboard')
                     : view('auth.verify', [
                         "title" => "Verify"
-                     ]);
+                    ]);
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect('/login');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->name('verification.verify');
 
 Route::get('/verify-email/resend', function(Request $request){
     if($request->user()->hasVerifiedEmail()){

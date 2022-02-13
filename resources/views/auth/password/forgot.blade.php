@@ -5,16 +5,7 @@
     <div class="col-md-5">
         <main class="form-signin">
             <h1 class="h3 mb-3 fw-normal text-center">Forgot password</h1>
-            @if (session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session()->has('error'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
+            @include('notify::components.notify')
             <p>Tuliskan alamat email yang kalian gunakan untuk login ke website kami, dan kami akan mengirim link untuk merubah password anda</p>
             <form action="{{ route('resetLink') }}" method="post">
             @csrf
@@ -29,7 +20,6 @@
             </div>
                 <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Send reset password link</button>
             </form>
-                <a href="{{ route('login') }}">login</a>
         </main>
     </div>
 </div>
