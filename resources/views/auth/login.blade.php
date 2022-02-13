@@ -76,6 +76,7 @@
             </div>
             <div class="login">
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px">
+                    @include('notify::components.notify')
                     <form action="/login" method="post">
                     @csrf
                         <h1>HAYUU LOGIN</h1>

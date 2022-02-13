@@ -48,7 +48,6 @@
             </div>
                 <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Reset password   </button>
             </form>
-            <small class="d-block text-center"><a href="/login">Login now!</a></small>
         </main>
     </div>
 </div>

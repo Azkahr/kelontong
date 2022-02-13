@@ -44,7 +44,9 @@ class PasswordController extends Controller
                         ->subject('Reset Password');
         });
 
-        return back()->with('success', 'Kami telah mengirim link ke email untuk mereset password anda');
+        notify()->success('Kami telah mengirimkan email untuk mereset password anda', 'Berhasil');
+        
+        return back();
     }
 
     public function resetPassword(Request $request){
@@ -69,8 +71,10 @@ class PasswordController extends Controller
             DB::table('password_resets')->where([
                 'email' => $request->email
             ])->delete();
-
-            return redirect()->route('login')->with('info', 'Password anda sudah diperbaharui! Anda bisa login dengan password baru')->with('verifiedEmail', $request->email);
+            
+            notify()->success('Password anda sudah diperbaharui! Anda bisa login dengan password baru', 'Berhasil');
+            
+            return redirect()->route('login')->with('verifiedEmail', $request->email);
         }
     }
 }
