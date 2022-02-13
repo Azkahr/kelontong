@@ -99,7 +99,7 @@
         @else
             <div style="display:inline-block; font-size:18px; margin-right:30px; font-family:spartan; font-weight:800">
                 <a style="color: white; margin-right:2.5px; text-decoration:none" href="/login">Login</a>
-                <a style="color: white; padding:5px 0px 5px 5px; border-left:3px solid white; text-decoration:none" href="/login">Register</a>
+                <a style="color: white; padding:5px 0px 5px 5px; border-left:3px solid white; text-decoration:none" href="/register">Register</a>
             </div>
         @endauth
     </div>
