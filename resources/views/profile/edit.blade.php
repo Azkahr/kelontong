@@ -208,8 +208,8 @@ form .btn{
             <div class="col-md-3">
                 <div href=# class="d-inline">
                     @if ($user->image)
-                        <img src="{{ asset('storage/' . $user->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
-                        <h6 h6 style="opacity: 70%; margin-left: 3px">Profile picture</h6>
+                        <img src="{{ asset('storage/' . $user->image) }}" class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
+                        <h6 h6 style="opacity: 70%; margin-left: 40px">{{ auth()->user()->name }} profile picture</h6>
                     @else
                         <img class="img-preview img-fluid col-sm-5 d-block"><h6 style="opacity: 70%; margin-left: 3px">Belum mempunyai profile picture</h6>
                     @endif
