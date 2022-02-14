@@ -185,18 +185,23 @@ form .btn{
     </div>
     
     <div class="expand-menu nav flex-column">
-        <a href="/profile" class="nav-link active mt-auto"><i class="far fa-user-circle"></i>Profile</a>
-        @can('isSeller')
-            <a href="/dashboard" class="nav-link active mt-auth">Dashboard</a>
-        @endcan
-        <a href="/" class="nav-link mb-auto"><i class="far fa-bell"></i> Home</a>
+        @if (auth()->user()->role == 'seller')
+            <a href="/" class="nav-link active mt-auto"><i class="fas fa-home"></i> Home</a>
+            <a href="/dashboard" class="mb-auto nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+        @else
+            <a href="/" class="nav-link active mb-auto mt-auto"><i class="fas fa-home"></i> Home</a>
+        @endif
     </div>
     
     <div class="row align-items-center" style="height:100%">
     <div class="col-md-3 d-none d-md-block" style="height:100%" > 
         <div class="container-fluid nav sidebar flex-column">
-            <a href="/profile" class="nav-link active mt-auto"><i class="far fa-user-circle"></i> Profile</a>
-            <a href="/" class="nav-link mb-auto"><i class="fas fa-home"></i> Home</a>
+            @if (auth()->user()->role == 'seller')
+                <a href="/" class="nav-link active mt-auto"><i class="fas fa-home"></i> Home</a>
+                <a href="/dashboard" class="mb-auto nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+            @else
+                <a href="/" class="nav-link active mb-auto mt-auto"><i class="fas fa-home"></i> Home</a>
+            @endif
         </div>
     </div>
     
@@ -240,7 +245,7 @@ form .btn{
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="image">Image</label>
+                            <label for="image">Profile picture</label>
                             <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" onchange="previewImage()">
                             @error('image')
                                 <div class="invalid-feedback">
