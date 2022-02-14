@@ -205,9 +205,16 @@ form .btn{
         <h2 class="mt-5 mb-5">Profile setting</h2>
         <div class="row" style="height:100%">
             @include('notify::components.notify')
-            {{-- <div class="col-md-3">
-                <div href=# class="d-inline"><img src="https://image.flaticon.com/icons/svg/236/236831.svg" width=130px style="margin:0;"><br><p class="pl-2 mt-2"><a href="#" class="btn" style="color:#8f9096;font-weight:600">Edit Picture</a></p></div>
-            </div> --}}
+            <div class="col-md-3">
+                <div href=# class="d-inline">
+                    @if ($user->image)
+                        <img src="{{ asset('storage/' . $user->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
+                        <h6 h6 style="opacity: 70%; margin-left: 3px">Profile picture</h6>
+                    @else
+                        <img class="img-preview img-fluid col-sm-5 d-block"><h6 style="opacity: 70%; margin-left: 3px">Belum mempunyai profile picture</h6>
+                    @endif
+                </div>
+            </div>
             
             <div class="col-md-9">
                 <div class="container">
@@ -232,6 +239,16 @@ form .btn{
                                 </div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" onchange="previewImage()">
+                            @error('image')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" value="{{ $user->image }}" name="oldImage">
                         <div class="row mt-5">
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -266,5 +283,18 @@ form .btn{
 	})
     
 })
+
+        function previewImage(){
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+            
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+            
+            oFReader.onload = function(oFREvent){
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+        
 </script>
 @endsection

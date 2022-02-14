@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // User::create([
-        //     'name' => 'Azka',
-        //     'email' => 'azkahar@gmail.com',
-        //     'role' => 'seller',
-        //     'password' => bcrypt('password')
-        // ]);
+        User::create([
+            'name' => 'Azka',
+            'email' => 'azkahar@gmail.com',
+            'role' => 'seller',
+            'password' => bcrypt('password')
+        ]);
 
         // User::create([
         //     'name' => 'Naufal',
