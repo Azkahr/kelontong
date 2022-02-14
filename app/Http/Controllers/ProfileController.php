@@ -7,8 +7,11 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function index(){
-
+    public function index(User $user){
+        return view('profile.index', [
+            "title" => 'Profile',
+            "user" => $user
+        ]);
     }
 
     public function edit(User $user){
