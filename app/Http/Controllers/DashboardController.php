@@ -89,6 +89,10 @@ class DashboardController extends Controller
      */
     public function edit(Product $product)
     {
+        if($product->id !== auth()->user()->id){
+            abort(403);
+        }
+        
         return view('dashboard.edit', [
             'title' => "Edit",
             'categories' => Category::all(),

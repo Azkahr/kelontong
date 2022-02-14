@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         @notifyCss
         {{-- trix --}}
         <link rel="stylesheet" type="text/css" href="/assets/css/trix.css">
@@ -13,8 +10,7 @@
         <link
             rel="apple-touch-icon"
             sizes="76x76"
-            href="assets/img/apple-icon.png"
-        />
+            href="assets/img/apple-icon.png"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://unpkg.com/feather-icons"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -37,31 +33,34 @@
                     <span class="ms-1 font-weight-bold">Kelontong.ID</span>
                 </a>
             </div>
-            <hr class="horizontal dark mt-0" />
+            <hr class="horizontal dark mt-0"/>
             <div
                 class="collapse navbar-collapse w-auto"
-                id="sidenav-collapse-main"
-            >
+                id="sidenav-collapse-main">
             
             <!-- Sidenav Content-->
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('   dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                             <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
-                            >
-                                <i
-                                    class="ni ni-tv-2 text-primary text-sm opacity-10"
-                                ></i>
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-chart-line text-primary text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Dashboard</span>
+                            <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile/update/{{ auth()->user()->id }}">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <img src="{{ URL::asset('assets/img/user.png') }}" alt="user" style="transform: scale(1.3)">
+                            </div>
+                            <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('createP') ? 'active' : '' }}" href="{{ route('createP') }}">
                             <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
-                            >
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <img src="{{ URL::asset('assets/img/plus.svg') }}" style="transform: scale(1.7)">
                             </div>
                             <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Tambah Produk</span>
@@ -70,8 +69,7 @@
                     <li class="nav-item">
                         <a class="nav-link" id="logout">
                             <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
-                            >
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <img src="{{ URL::asset('assets/img/log-out.svg') }}" style="transform: scale(1.3)">
                             </div>
                             <form action="/logout" method="post">@csrf<button type="submit" style="margin:0; padding:2px; border: none; background-color:transparent"><span style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600; color:#707C95" class="nav-link-text ms-1" >Logout</span></button></form>
