@@ -157,7 +157,7 @@
                         <button class="dropbtn"><p style="margin:3px 0px 0px 15px; display: inline; font-size:20px; font-family:spartan; font-weight:700; color:white">{{ auth()->user()->name }}</p></button>
                         <div class="dropdown-content">
                             <a href="/dashboard">Dashboard</a>
-                            <a href="{{ route('profile') }}">Setting</a>
+                            <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                             <form action="/logout" method="post">
                                 @csrf
                                 <a><button type="submit">Logout</button></a>

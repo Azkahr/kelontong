@@ -75,7 +75,6 @@ Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])-
 Route::post('/password/reset', [PasswordController::class, 'resetPassword'])->name('resetPassword');
 
 Route::middleware('auth', 'verified')->group(function(){
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/update/{user:id}', [ProfileController::class, 'edit']);
     Route::put('/profile/update/{id}', [ProfileController::class, 'update']);
 });

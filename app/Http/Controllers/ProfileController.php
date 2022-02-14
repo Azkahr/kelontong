@@ -7,14 +7,18 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function index(User $user){
+    public function index(){
         return view('profile.index', [
             "title" => 'Profile',
-            "user" => $user
         ]);
     }
 
     public function edit(User $user){
+        
+        if($user->id !== auth()->user()->id){
+            abort(403);
+        }
+        
         return view('profile.edit', [
             'title' => 'Edit Profile',
             'user' => $user
@@ -35,6 +39,8 @@ class ProfileController extends Controller
             // 'image' => $validatedData['image']
         ]);
 
-        return back()->with('success', 'Profile updated');
+        notify()->success('Profile telah berubah', 'Berhasil');
+        
+        return back();
     }
 }
