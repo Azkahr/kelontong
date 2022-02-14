@@ -46,13 +46,13 @@
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Dashboard</span>
+                            <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile/update/{{ auth()->user()->id }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <span data-feather="settings"></span>
+                                <img src="{{ URL::asset('assets/img/user.png') }}" alt="user" style="transform: scale(1.3)">
                             </div>
                             <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Profile</span>
                         </a>
