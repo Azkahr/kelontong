@@ -89,7 +89,7 @@ class DashboardController extends Controller
      */
     public function edit(Product $product)
     {
-        if($product->id !== auth()->user()->id){
+        if($product->users_id !== auth()->user()->id){
             abort(403);
         }
         
