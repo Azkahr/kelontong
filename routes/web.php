@@ -52,7 +52,6 @@ Route::get('/verify-email/resend', function(Request $request){
 Route::middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);    
-    Route::post('/logout', [LoginController::class, 'logout']);
     
     Route::get('/register', [RegisterController::class, 'index']);    
     Route::post('/register', [RegisterController::class, 'store']);
@@ -61,8 +60,11 @@ Route::middleware('guest')->group(function(){
     Route::post('/daftar', [RegisterController::class, 'buat']);
 });
 
+Route::post('/logout', [LoginController::class, 'logout']);
+
 Route::middleware('auth', 'verified', 'isSeller')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/products/{product:id}', [DashboardController::class, 'show']);
     Route::get('/dashboard/create', [DashboardController::class, 'create'])->name('createP');
     Route::post('/dashboard/create', [DashboardController::class, 'store']);
     Route::post('/dashboard/delete/{id}', [DashboardController::class, 'destroy']);
