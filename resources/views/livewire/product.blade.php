@@ -34,7 +34,7 @@
                             </td>
                             <td class="border px-4 py-2">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a href="dashboard/products/{{ $product->id }}" class="badge bg-primary" title="See"><img src="{{ asset('assets\img\eye.svg') }}" alt="eye"></a>
+                                    <a href="dashboard/detail-product/{{ $product->id }}" class="badge bg-primary" title="See"><img src="{{ asset('assets\img\eye.svg') }}" alt="eye"></a>
                                     <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning mx-3" title="Edit"><img src="{{ asset('assets\img\edit.svg') }}" alt="eye"></a>
                                     <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline" title='Delete'>
                                         @csrf
