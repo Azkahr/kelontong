@@ -21,6 +21,11 @@
         <link href="{{ URL::asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
         <link id="pagestyle" href="{{ URL::asset('assets/css/argon-dashboard.css') }}" rel="stylesheet"/>
         <title>Kelontong | {{ $title }}</title>
+        <style>
+            trix-toolbar [data-trix-button-group="file-tools"] {
+                display: none;
+            }
+        </style>
     </head>
     <body class="g-sidenav-show bg-gray-100">
         @include('notify::components.notify')

@@ -6,7 +6,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="product_name" class="form-label">Nama Product</label>
-                    <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}">
+                    <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" autofocus>
                     @error('product_name')
                         <div class="invalid-feedback">
                             {{ $message }}
