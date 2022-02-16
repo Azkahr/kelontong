@@ -216,7 +216,7 @@ form .btn{
                         <img src="{{ asset('storage/' . $user->image) }}" class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
                         <h6 h6 style="opacity: 70%; margin-left: 60px">Profile picture</h6>
                     @else
-                        <img class="img-preview img-fluid rounded-circle col-sm-5 d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 300px; height: 210px">
+                        <img class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 350px; height: 205px">
                     @endif
                 </div>
             </div>
