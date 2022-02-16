@@ -109,7 +109,7 @@ class PasswordController extends Controller
 
             notify()->success('Password telah berubah', 'Berhasil');
 
-            return back();
+            return redirect('/profile/update/'.$request->id);
         }
 
         throw ValidationException::withMessages([

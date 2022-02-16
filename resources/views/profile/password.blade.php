@@ -247,7 +247,7 @@ form .btn{
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
 
-                                <a href="/profile/update/{{ auth()->user()->id }}" style="margin-left: 250px">Change profile?</a>
+                                <a href="{{ route('forgot') }}" style="margin-left: 250px">Forgot password?</a>
                             </div>
                         </div>
                     </form>
