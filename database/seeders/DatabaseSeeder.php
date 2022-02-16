@@ -49,6 +49,6 @@ class DatabaseSeeder extends Seeder
             'slug' => 'makanan-ringan'
         ]);
 
-        Product::factory(50)->create();
+        // Product::factory(50)->create();
     }
 }
