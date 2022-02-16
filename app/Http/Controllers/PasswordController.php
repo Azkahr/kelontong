@@ -82,6 +82,10 @@ class PasswordController extends Controller
 
     public function changePassword(User $user){
         
+        if($user->id !== auth()->user()->id){
+            abort(403);
+        }
+    
         return view('profile.password', [
             "title" => 'Change Password',
             "user" => $user
