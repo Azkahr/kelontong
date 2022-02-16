@@ -22,15 +22,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Azka',
             'email' => 'azkahar@gmail.com',
             'role' => 'seller',
+            'email_verified_at' => now(),
             'password' => bcrypt('password')
         ]);
 
-        // User::create([
-        //     'name' => 'Naufal',
-        //     'email' => 'kurabersayap002@gmail.com',
-        //     'role' => 'user',
-        //     'password' => bcrypt('12345')
-        // ]);
+        User::create([
+            'name' => 'Naufal',
+            'email' => 'kurabersayap002@gmail.com',
+            'role' => 'user',
+            'email_verified_at' => now(),
+            'password' => bcrypt('12345')
+        ]);
 
         Category::create([
             'name' => 'Makanan',

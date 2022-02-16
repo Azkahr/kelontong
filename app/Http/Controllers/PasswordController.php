@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class PasswordController extends Controller
 {
@@ -76,5 +78,38 @@ class PasswordController extends Controller
             
             return redirect()->route('login')->with('verifiedEmail', $request->email);
         }
+    }
+
+    public function changePassword(User $user){
+        
+        return view('profile.password', [
+            "title" => 'Change Password',
+            "user" => $user
+        ]);
+    }
+
+    public function updatePassword(Request $request){
+        
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:8',
+            'cpassword' => 'required|same:password',
+        ],[
+            'cpassword.same' => 'The confirm password must match'
+        ]);
+
+        if(Hash::check($request->current_password, auth()->user()->password)){
+            User::where('id', $request->id)->update([
+                'password' => bcrypt($request->password),
+            ]);
+
+            notify()->success('Password telah berubah', 'Berhasil');
+
+            return back();
+        }
+
+        throw ValidationException::withMessages([
+            'current_password' => 'Password lama tidak sesuai'
+        ]);
     }
 }

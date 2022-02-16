@@ -82,3 +82,8 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::get('/profile/update/{user:id}', [ProfileController::class, 'edit']);
     Route::put('/profile/update/{id}', [ProfileController::class, 'update']);
 });
+
+Route::middleware('auth', 'verified')->group(function(){
+    Route::get('/profile/password/{user:id}', [PasswordController::class, 'changePassword']);
+    Route::put('/profile/password/{id}', [PasswordController::class, 'updatePassword']);
+});
