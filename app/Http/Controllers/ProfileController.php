@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 
@@ -34,7 +36,7 @@ class ProfileController extends Controller
             'email' => 'required|email:dns|unique:users,email,' . auth()->user()->id,
             'image' => 'image|file|max:1024'
         ]);
-
+        
         if($request->file('image')){
             if($request->oldImage){
                 Storage::delete([$request->oldImage]);

@@ -49,18 +49,22 @@ Route::get('/verify-email/resend', function(Request $request){
     } 
 })->name('verification.resend');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);    
+Route::middleware('guest')->group(function(){
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);    
+    
+    Route::get('/register', [RegisterController::class, 'index']);    
+    Route::post('/register', [RegisterController::class, 'store']);
+    
+    Route::get('/daftar', [RegisterController::class, 'tampil']);
+    Route::post('/daftar', [RegisterController::class, 'buat']);
+});
+
 Route::post('/logout', [LoginController::class, 'logout']);
-
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');    
-Route::post('/register', [RegisterController::class, 'store']);
-
-Route::get('/daftar', [RegisterController::class, 'tampil'])->middleware('guest');
-Route::post('/daftar', [RegisterController::class, 'buat']);
 
 Route::middleware('auth', 'verified', 'isSeller')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/detail-product/{product:id}', [DashboardController::class, 'show']);
     Route::get('/dashboard/create', [DashboardController::class, 'create'])->name('createP');
     Route::post('/dashboard/create', [DashboardController::class, 'store']);
     Route::post('/dashboard/delete/{id}', [DashboardController::class, 'destroy']);
@@ -77,4 +81,9 @@ Route::post('/password/reset', [PasswordController::class, 'resetPassword'])->na
 Route::middleware('auth', 'verified')->group(function(){
     Route::get('/profile/update/{user:id}', [ProfileController::class, 'edit']);
     Route::put('/profile/update/{id}', [ProfileController::class, 'update']);
+});
+
+Route::middleware('auth', 'verified')->group(function(){
+    Route::get('/profile/password/{user:id}', [PasswordController::class, 'changePassword']);
+    Route::put('/profile/password/{id}', [PasswordController::class, 'updatePassword']);
 });

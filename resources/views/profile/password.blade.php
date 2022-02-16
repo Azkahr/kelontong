@@ -207,58 +207,47 @@ form .btn{
     
     <div class="col-md-9">
         <div class="container content clear-fix">
-        <h2 class="mt-5 mb-5">Profile setting</h2>
+        <h2 class="mt-5 mb-5">Change password</h2>
         <div class="row" style="height:100%">
             @include('notify::components.notify')
-            <div class="col-md-3">
-                <div href=# class="d-inline">
-                    @if ($user->image)
-                        <img src="{{ asset('storage/' . $user->image) }}" class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
-                        <h6 h6 style="opacity: 70%; margin-left: 60px">Profile picture</h6>
-                    @else
-                        <img class="img-preview img-fluid col-sm-5 d-block"><h6 style="opacity: 70%; margin-left: 3px">Belum mempunyai profile picture</h6>
-                    @endif
-                </div>
-            </div>
             
             <div class="col-md-9">
                 <div class="container">
-                    <form action="/profile/update/{{ $user->id }}" method="post" class="mb-5" enctype="multipart/form-data">
+                    <form action="/profile/password/{{ $user->id }}" method="post" class="mb-5">
                         @method('put')
                         @csrf
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name', $user->name) }}">
-                            @error('name')
+                            <label for="password_lama">Password lama</label>
+                            <input type="password" class="form-control @error('password_lama') is-invalid @enderror" name="password_lama" id="password_lama">
+                            @error('password_lama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $user->email) }}">
-                            @error('email')
+                            <label for="password">Masukkan password baru</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
+                            @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="image">Profile picture</label>
-                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" onchange="previewImage()">
-                            @error('image')
+                            <label for="cpassword">Confirmation Password</label>
+                            <input type="password" class="form-control @error('cpassword') is-invalid @enderror" id="cpassword" name="cpassword">
+                            @error('cpassword')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <input type="hidden" value="{{ $user->image }}" name="oldImage">
                         <div class="row mt-5">
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
 
-                                <a href="/profile/password/{{ auth()->user()->id }}" style="margin-left: 250px">Change password?</a>
+                                <a href="/profile/update/{{ auth()->user()->id }}" style="margin-left: 250px">Change profile?</a>
                             </div>
                         </div>
                     </form>

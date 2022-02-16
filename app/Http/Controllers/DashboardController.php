@@ -52,6 +52,7 @@ class DashboardController extends Controller
         $validatedData = $request->validate([
             'product_name' => 'required|min:3',
             'qty' => 'required|digits_between:1,9999999',
+            'title' => 'required|min:3',
             'desc' => 'required',
             'category_id' => 'required',
             'image' => 'image|file|max:1024'
@@ -78,7 +79,15 @@ class DashboardController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        if($product->users_id !== auth()->user()->id){
+            abort(403);
+        }
+
+        return view('dashboard.show', [
+            'title' => "Single product",
+            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('qty'),
+            'product' => $product
+        ]);
     }
 
     /**
@@ -89,7 +98,7 @@ class DashboardController extends Controller
      */
     public function edit(Product $product)
     {
-        if($product->id !== auth()->user()->id){
+        if($product->users_id !== auth()->user()->id){
             abort(403);
         }
         
@@ -112,6 +121,7 @@ class DashboardController extends Controller
         $validatedData = $request -> validate([
             'product_name' => 'required|min:3',
             'qty' => 'required|between:1,9999999',
+            'title' => 'required|min:3',
             'desc' => 'required',
             'category_id' => 'required',
             'image' => 'image|file|max:1024'
@@ -128,6 +138,7 @@ class DashboardController extends Controller
 
         Product::where('id', $request->id)->update([
             'product_name' => $validatedData['product_name'],
+            'title' => $validatedData['title'],
             'qty' => $validatedData['qty'],
             'desc' => $validatedData['desc'],
             'category_id' => $validatedData['category_id'],
