@@ -11,7 +11,7 @@
         .in h6 {
             display: inline-block;
             opacity: 70%;
-            padding: 20px;
+            padding: 15px;
         }
     </style>
     
