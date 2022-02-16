@@ -217,16 +217,16 @@ form .btn{
                         @method('put')
                         @csrf
                         <div class="form-group">
-                            <label for="current_password">Current Password</label>
-                            <input type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" id="current_password">
-                            @error('current_password')
+                            <label for="password_lama">Password lama</label>
+                            <input type="password" class="form-control @error('password_lama') is-invalid @enderror" name="password_lama" id="password_lama">
+                            @error('password_lama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="password">Masukkan password baru</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
                             @error('password')
                                 <div class="invalid-feedback">

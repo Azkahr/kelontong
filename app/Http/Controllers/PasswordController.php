@@ -91,14 +91,14 @@ class PasswordController extends Controller
     public function updatePassword(Request $request){
         
         $request->validate([
-            'current_password' => 'required',
+            'password_lama' => 'required',
             'password' => 'required|min:8',
             'cpassword' => 'required|same:password',
         ],[
             'cpassword.same' => 'The confirm password must match'
         ]);
 
-        if(Hash::check($request->current_password, auth()->user()->password)){
+        if(Hash::check($request->password_lama, auth()->user()->password)){
             User::where('id', $request->id)->update([
                 'password' => bcrypt($request->password),
             ]);
@@ -109,7 +109,7 @@ class PasswordController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'current_password' => 'Password lama tidak sesuai'
+            'password_lama' => 'Password lama tidak sesuai'
         ]);
     }
 }
