@@ -2,27 +2,23 @@
 <style>
 /* For extremely small screen devices (595px and below) */
 @media only screen and (max-width: 595px) {
-    
 }
 
 /* Small screen devices (600px and above) */
 @media only screen and (min-width: 600px) {
-    
 }
 
 /* Medium screen devices (768px and above) */
 @media only screen and (min-width: 768px) {
-    
 }
 
 /* Big screen devices (889px and above) */
 @media only screen and (min-width: 889px) {
-    
 }
 
 /* Extra big screen devices (1200px and above) */
 @media only screen and (min-width: 1200px) {
-    .container-master{
+    .container-master {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -31,33 +27,33 @@
         background-color: #fdfdff;
     }
 
-    .container-master > .container{
+    .container-master > .container {
         margin: 0;
         padding: 0;
         display: flex;
         width: 70%;
         height: 90%;
         background-color: white;
-        box-shadow: -3px 0px 20px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: -3px 3px 20px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .container .side{
+    .container .side {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 40%;
         height: 100%;
         background-color: #1d78ce;
-    } 
+    }
 
-    .container .login{
+    .container .login {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 60%;
         height: 100%;
-    } 
+    }
 }
 </style>
 @section('container')
@@ -75,7 +71,7 @@
                 </div>
             </div>
             <div class="login">
-                <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px">
+                <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     @include('notify::components.notify')
                     <form action="/login" method="post">
                     @csrf

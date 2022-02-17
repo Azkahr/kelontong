@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\Registered;
 class RegisterController extends Controller
 {
     public function index(){
-        return view('auth.register-user', [
+        return view('auth.register', [
             "title" => 'Register',
         ]);
     }
