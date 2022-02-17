@@ -6,7 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -21,11 +21,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::get('/', function () {
-    return view('home',[
-        "title" => "Home"
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()

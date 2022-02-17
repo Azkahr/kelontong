@@ -4,6 +4,7 @@ nav {
     top: 0;
     width: 100%;
     height: 115px;
+    z-index: 2;
 }
 
 nav .top {

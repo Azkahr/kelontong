@@ -186,10 +186,9 @@
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
                         <div class="d-flex justify-content-start" style="margin-top:15px;">
-                            <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai Seller</button>
+                            <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai User</button>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>
