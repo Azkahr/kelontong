@@ -16,7 +16,9 @@
                         </p>
                     </button>
                     <div class="dropdown-content">
-                        <a href="/dashboard">Dashboard</a>
+                        @if (auth()->user()->role === 'seller')
+                            <a href="/dashboard">Dashboard</a>
+                        @endif
                         <a href="#">Setting</a>
                         <form action="/logout" method="post">
                             @csrf
