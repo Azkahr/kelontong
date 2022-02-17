@@ -16,7 +16,7 @@ class RegisterController extends Controller
     }
 
     public function tampil(){
-        return view('auth.register-seller', [
+        return view('auth.register', [
             "title" => 'Daftar Seller',
         ]);
     }
@@ -38,9 +38,13 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-        notify()->success('Register Sukses', 'Berhasil');
-        
-        return redirect('/login')->with('success', 'Registration successfully');
+        if(Auth::attempt($request->only('email', 'password'))){
+            notify()->success('Register Sukses', 'Berhasil');
+            return redirect('/verify-email');
+        } else {
+            notify()->error('Register Gagal', 'Gagal');
+            return redirect('/register')->with('error', 'Registration failed');
+        }
     }
 
     public function buat(Request $request){
@@ -68,7 +72,5 @@ class RegisterController extends Controller
             notify()->error('Register Gagal', 'Gagal');
             return redirect('/register')->with('error', 'Registration failed');
         }
-        notify()->success('Register Sukses', 'Berhasil');
-
     }
 }
