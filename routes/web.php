@@ -52,7 +52,6 @@ Route::middleware('guest')->group(function(){
     Route::get('/register', [RegisterController::class, 'index']);    
     Route::post('/register', [RegisterController::class, 'store']);
     
-    Route::get('/daftar', [RegisterController::class, 'tampil']);
     Route::post('/daftar', [RegisterController::class, 'buat']);
 });
 
