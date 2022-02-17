@@ -1,0 +1,22 @@
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 1px;
+}
+
+nav .top {
+  background-color: #536aec;
+  width: 100%;
+  height: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=navbar2.css.map */
