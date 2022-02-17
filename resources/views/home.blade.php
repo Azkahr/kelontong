@@ -9,7 +9,7 @@
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col">
         <div class="card">
-            @if ($productLatest->image)
+            @if ($productLatest->image->count())
                 <img src="{{ asset('storage/'.$productLatest->image) }}" class="card-img-top" alt="product image">
             @else
                 <img src="https://source.unsplash.com/400x300/?{{ $productLatest->category->name }}" width="50px" height="50px" class="card-img-top" alt="product image">
