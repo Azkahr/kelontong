@@ -122,12 +122,15 @@
                                 </div>
                             @enderror
                         </div>
+                        <input type="hidden" name="role" value="user">
                         <div class="d-flex justify-content-center" style="margin-top:15px;">
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
-                        <div class="d-flex justify-content-start" style="margin-top:15px;">
-                            <button style="color: #0D6EFD" v-on:click.prevent="showSeller()">Daftar Sebagai Seller</button>
-                        </div>
+                        <form>
+                            <div class="d-flex justify-content-start" style="margin-top:15px;">
+                                <button style="color: #0D6EFD" v-on:click.prevent="showSeller()">Daftar Sebagai Seller</button>
+                            </div>
+                        </form>
                     </form>
                 </div>
             </div>
@@ -147,9 +150,9 @@
                             @enderror
                         </div>
                         <div>
-                            <label for="shop">Nama Toko :</label>
-                            <input type="text" name="shop" class="form-control @error('shop') is-invalid @enderror" id="shop" size="50">
-                            @error('shop')
+                            <label for="nama_toko">Nama Toko :</label>
+                            <input type="text" name="nama_toko" class="form-control @error('nama_toko') is-invalid @enderror" id="nama_toko" size="50">
+                            @error('nama_toko')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -182,12 +185,15 @@
                                 </div>
                             @enderror
                         </div>
+                        <input type="hidden" name="role" value="seller">
                         <div class="d-flex justify-content-center" style="margin-top:15px;">
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
-                        <div class="d-flex justify-content-start" style="margin-top:15px;">
-                            <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai User</button>
-                        </div>
+                        <form>
+                            <div class="d-flex justify-content-start" style="margin-top:15px;">
+                                <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai Seller</button>
+                            </div>
+                        </form>
                     </form>
                 </div>
             </div>
