@@ -48,6 +48,7 @@ class RegisterController extends Controller
             "name" => "required|min:3|max:255",
             "email" => "required|email:dns|unique:users,email",
             "role" => "required",
+            'nama_toko' => "required|min:5",
             "password" => "required|min:5|max:255",
             "cpassword" => "required|same:password"
         ],[
