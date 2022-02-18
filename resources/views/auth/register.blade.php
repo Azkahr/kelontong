@@ -191,7 +191,7 @@
                         </div>
                         <form>
                             <div class="d-flex justify-content-start" style="margin-top:15px;">
-                                <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai Seller</button>
+                                <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai User</button>
                             </div>
                         </form>
                     </form>
