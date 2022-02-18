@@ -207,6 +207,7 @@
                 judul: 'HAYUU DAFTAR',
                 modalUser: true,
                 modalSeller: false,
+                role:@json(session('role'))
             }
         },
         methods: {
@@ -219,6 +220,13 @@
                 this.judul = 'HAYUU JUALAN'
                 this.modalUser = false
                 this.modalSeller = true
+            }
+        },
+        mounted(){
+            if(this.role == 'user'){
+                this.showUser()
+            }else if(this.role == 'seller'){
+                this.showSeller()
             }
         }
     }).mount('#container-register')
