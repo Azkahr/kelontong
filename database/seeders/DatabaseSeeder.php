@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'azkahar@gmail.com',
             'role' => 'seller',
             'email_verified_at' => now(),
-            'password' => bcrypt('12345')
+            'password' => bcrypt('password')
         ]);
 
         User::create([
