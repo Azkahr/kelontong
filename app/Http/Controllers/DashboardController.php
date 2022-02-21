@@ -55,7 +55,7 @@ class DashboardController extends Controller
             'title' => 'required|min:3',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'required|image|file|max:1024'
         ]);
 
         if($request->file('image')){
@@ -85,7 +85,7 @@ class DashboardController extends Controller
 
         return view('dashboard.show', [
             'title' => "Single product",
-            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('qty'),
+            "totalqty" => Product::where('id', $product->id)->sum('qty'),
             'product' => $product
         ]);
     }
@@ -124,7 +124,7 @@ class DashboardController extends Controller
             'title' => 'required|min:3',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'required|image|file|max:1024'
         ]);
 
         if($request->file('image')){

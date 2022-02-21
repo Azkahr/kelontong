@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'azkahar@gmail.com',
             'role' => 'seller',
             'email_verified_at' => now(),
-            'password' => bcrypt('password')
+            'password' => bcrypt('12345')
         ]);
 
         User::create([
@@ -49,6 +49,6 @@ class DatabaseSeeder extends Seeder
             'slug' => 'makanan-ringan'
         ]);
 
-        // Product::factory(50)->create();
+        Product::factory(50)->create();
     }
 }

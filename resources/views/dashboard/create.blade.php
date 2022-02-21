@@ -26,7 +26,7 @@
                     
                 <div class="mb-3">
                     <label for="title" class="form-label">Judul post</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
                     @error('title')
                         <div class="invalid-feedback">
                             {{ $message }}

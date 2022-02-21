@@ -1,7 +1,7 @@
 <nav>
     <div class="top">
-            <form class="search" method="GET" action="/search">
-                    <input type="text" placeholder="Cari..." name="search">
+            <form class="search" method="GET" action="/">
+                    <input type="text" placeholder="Cari..." name="search" value="{{ request('search') }}">
                     <button class="btnSearch btn btn-outline-light" type="submit">Search</button>
             </form>
         @auth
@@ -16,7 +16,9 @@
                         </p>
                     </button>
                     <div class="dropdown-content">
-                        <a href="/dashboard">Dashboard</a>
+                        @if (auth()->user()->role == 'seller')
+                                <a href="/dashboard">Dashboard</a>
+                        @endif
                         <a href="#">Setting</a>
                         <form action="/logout" method="post">
                             @csrf

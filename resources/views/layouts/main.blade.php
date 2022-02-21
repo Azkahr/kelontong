@@ -25,6 +25,7 @@
     }
 </style>
 <body>
+    
     @include('notify::components.notify')
     <div id="container">
         @yield('container')
