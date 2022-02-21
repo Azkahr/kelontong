@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="mb-3">{{ $product->title }}</h1>
+                <h1 class="mb-3">{{ $product->product_name }}</h1>
                 
                 <div class="in">
                     <h6>Nama product : {{ $product->product_name }}</h6>|
