@@ -176,7 +176,12 @@ class DashboardController extends Controller
      */
     public function destroy(Request $request)
     {
-        Product::find($request->id)->delete();
+        $user = Product::find($request->id);
+        for($i=0; $i < sizeof(explode(',', $user->image)); $i++){
+            $arrimg = explode(',', $user->image);
+            Storage::delete($arrimg[$i]);
+        }
+        $user->delete();
         return back();
     }
 }
