@@ -124,7 +124,7 @@ class DashboardController extends Controller
             'title' => 'required|min:3',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'required|image|file|max:1024'
+            'image' => 'image|file|max:1024'
         ]);
 
         if($request->file('image')){
