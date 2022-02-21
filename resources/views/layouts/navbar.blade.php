@@ -22,7 +22,7 @@
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                         <form action="/logout" method="post">
                             @csrf
-                            <a href=""><button id="logout" type="submit">Logout</button></a>
+                            <a href="#"><button id="logout" type="submit">Logout</button></a>
                         </form>
                     </div>
                 </div>
