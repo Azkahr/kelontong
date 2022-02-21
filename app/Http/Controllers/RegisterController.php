@@ -9,15 +9,9 @@ use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         return view('auth.register', [
             "title" => 'Register',
-        ]);
-    }
-
-    public function tampil(){
-        return view('auth.register', [
-            "title" => 'Daftar Seller',
         ]);
     }
 

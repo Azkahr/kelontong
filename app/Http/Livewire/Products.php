@@ -10,14 +10,14 @@ class Products extends Component
 {
     use WithPagination;
 
-    public $products, $qty;
+    public $products, $stok;
     public $check = [];
     public $selectAll = false;
 
 
     public function mount(){
-        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'product_name']);
-        $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
+        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'product_name', 'harga']);
+        $this->stok = Product::latest()->where('users_id', auth()->user()->id)->pluck('stok');
     }
 
     public function render()
@@ -27,26 +27,26 @@ class Products extends Component
 
     public function refresh()
     {
-        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id','product_name']);
-        $this->qty = Product::latest()->where('users_id', auth()->user()->id)->pluck('qty');
+        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'product_name', 'harga']);
+        $this->stok = Product::latest()->where('users_id', auth()->user()->id)->pluck('stok');
     }
 
     public function plus(Product $product, $index){
-        $array = Product::where('id',$product->id)->pluck('qty')->toArray();
+        $array = Product::where('id',$product->id)->pluck('stok')->toArray();
         $increment = $array[0] + 1;
         Product::select(['id'])->find($product->id)->update([
-            'qty' => $increment
+            'stok' => $increment
         ]);
-        $this->qty[$index] = $this->qty[$index] + 1;
+        $this->stok[$index] = $this->stok[$index] + 1;
     }
 
     public function min(Product $product, $index){
-        $array = Product::where('id',$product->id)->pluck('qty')->toArray();
+        $array = Product::where('id',$product->id)->pluck('stok')->toArray();
         $decrement = $array[0] - 1;
         Product::select(['id'])->find($product->id)->update([
-            'qty' => $decrement
+            'stok' => $decrement
         ]);
-        $this->qty[$index] = $this->qty[$index] - 1;
+        $this->stok[$index] = $this->stok[$index] - 1;
     }
 
     public function selectAll()

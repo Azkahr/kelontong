@@ -18,10 +18,10 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id');
             $table->foreignId('users_id');
             $table->string('product_name');
-            $table->string('title');
+            $table->unsignedInteger('harga');
+            $table->unsignedInteger('stok');
             $table->text('desc');
-            $table->string('image')->nullable();
-            $table->unsignedInteger('qty');
+            $table->longtext('image')->nullable();
             $table->timestamps();
         });
     }

@@ -16,8 +16,10 @@
                         </p>
                     </button>
                     <div class="dropdown-content">
-                        <a href="/dashboard">Dashboard</a>
-                        <a href="#">Setting</a>
+                        @if (auth()->user()->role === 'seller')
+                            <a href="/dashboard">Dashboard</a>
+                        @endif
+                        <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                         <form action="/logout" method="post">
                             @csrf
                             <a href=""><button id="logout" type="submit">Logout</button></a>
@@ -29,7 +31,7 @@
             <div style="display:inline-block; font-size:18px; margin-right:30px; margin-bottom:10px; font-family:spartan; font-weight:800">
                 <a class="login" href="/login">Masuk</a>
                 <div style="position:relative; top:8px; display:inline-block; height: 30px; border-left:3px solid white; margin:0px 10px 0px 10px"></div>
-                <a class="register" href="/register">Daftar</a>
+                <a class="register" href="/register-user">Daftar</a>
             </div>
         @endauth
     </div>

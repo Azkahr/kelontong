@@ -1,6 +1,6 @@
 @extends('layouts/dmain')
 @section('content')
-    <div class="d-flex justify-content-center">
+    <div id="container" class="d-flex justify-content-center">
         <div class="col-lg-10">
             <form action="/dashboard/create" method="post" enctype="multipart/form-data">
                 @csrf
@@ -15,9 +15,9 @@
                 </div>
     
                 <div class="mb-3">
-                    <label for="qty" class="form-label">Stok Product</label>
-                    <input type="number" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror" value="{{ old('qty') }}">
-                    @error('qty')
+                    <label for="stok" class="form-label">Stok Product</label>
+                    <input type="number" name="stok" id="stok" class="form-control @error('stok') is-invalid @enderror" value={{ old('stok') }}>
+                    @error('stok')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -25,9 +25,9 @@
                     </div>
                     
                 <div class="mb-3">
-                    <label for="title" class="form-label">Judul post</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
-                    @error('title')
+                    <label for="harga" class="form-label">Harga Produk</label>
+                    <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value={{ old('harga') }}>
+                    @error('harga')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -49,8 +49,9 @@
     
                 <div class="mb-3">
                     <label for="image" class="form-label">Foto Produk</label>
-                    <img class="img-preview img-fluid mb-3 col-sm-5 d-block">
-                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
+                    <div style="overflow:auto; display: flex; gap: 5px; margin-bottom:10px" id="image_preview"></div>
+                    <div><a id="btnC" class="btn btn-danger" style="display:none; cursor: pointer;" onclick="cancelImage()">Batalkan Foto</a></div>
+                    <input style="margin:0" type="file" id="image" name="image[]" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -67,24 +68,23 @@
                     <input id="desc" type="hidden" name="desc" value="{{ old('desc') }}">
                     <trix-editor input="desc"></trix-editor>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Posting Produk</button>
             </form>
         </div>
     </div>
     <script>
-        
-        function previewImage(){
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
-            
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-            
-            oFReader.onload = function(oFREvent){
-                imgPreview.src = oFREvent.target.result;
-            }
+        function cancelImage(){
+            $('#image_preview').empty();
+            $('#image').val('');
+            document.getElementById('btnC').style.display="none";
         }
-        
+
+        function previewImage(){
+            const imageL = document.querySelector('#image').files.length;
+            for(i = 0; i < imageL; i++){
+                $('#image_preview').append("<img style='height:250px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+            }
+            document.getElementById('btnC').style.display="block";
+        }
     </script>
 @endsection
