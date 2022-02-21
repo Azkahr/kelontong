@@ -55,8 +55,8 @@ class DashboardController extends Controller
             'harga' => 'required|digits_between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
+            'image' => 'required|image',
+            'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf,JPG|max:2048'
         ]);
 
         if($request->file('image')){
@@ -75,7 +75,7 @@ class DashboardController extends Controller
 
         smilify('success', 'Produk Ditambahkan');
 
-        return redirect(route('dashboard'));
+        return redirect('/dashboard');
     }
 
     /**
