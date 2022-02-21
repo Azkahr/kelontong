@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index(){
         return view('home', [
             'title' => 'Home',
-            'products' => Product::latest()->filter(request(['search', 'category']))->get(),
+            'products' => Product::latest()->get(),
             'productsMakanan' => Product::whereHas('category', function($q){
                 $q->where('name', '=', 'Makanan');
             })->get(),
