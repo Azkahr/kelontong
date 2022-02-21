@@ -22,7 +22,7 @@ class DashboardController extends Controller
             "title" => "Dashboard",
             'category_s' => Product::select(['category_id'])->where('users_id', auth()->user()->id)->distinct()->get(),
             "allpost" => Product::all()->where('users_id', auth()->user()->id)->count(),
-            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('qty'),
+            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('stok'),
             
         ]);
     }
@@ -51,15 +51,22 @@ class DashboardController extends Controller
         
         $validatedData = $request->validate([
             'product_name' => 'required|min:3',
-            'qty' => 'required|digits_between:1,9999999',
-            'title' => 'required|min:3',
+            'stok' => 'required|digits_between:1,9999999',
+            'harga' => 'required|digits_between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
         ]);
 
         if($request->file('image')){
-            $validatedData['image'] = $request->file('image')->store('product-images');
+            $length = sizeof($request->file('image'));
+            for($i=0; $i < $length; $i++){
+                $request->file('image')[$i]->store('product-images');
+                $image[$i] = $request->file('image')[$i]->store('product-images');
+            }
+            $arrImg=implode(',', $image);
+            $validatedData['image'] = $arrImg;
         }
         
         $validatedData['users_id'] = auth()->user()->id;
@@ -85,7 +92,7 @@ class DashboardController extends Controller
 
         return view('dashboard.show', [
             'title' => "Single product",
-            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('qty'),
+            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('stok'),
             'product' => $product
         ]);
     }
@@ -105,7 +112,8 @@ class DashboardController extends Controller
         return view('dashboard.edit', [
             'title' => "Edit",
             'categories' => Category::all(),
-            'product' => $product
+            'product' => $product,
+            'image' => explode(',',$product->image)
         ]);
     }
 
@@ -120,26 +128,36 @@ class DashboardController extends Controller
     {
         $validatedData = $request -> validate([
             'product_name' => 'required|min:3',
-            'qty' => 'required|between:1,9999999',
-            'title' => 'required|min:3',
+            'stok' => 'required|digits_between:1,9999999',
+            'harga' => 'required|digits_between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'image|file|max:1024'
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
         ]);
 
         if($request->file('image')){
             if($request->oldImage){
-                Storage::delete([$request->oldImage]);
+                for($i=0; $i < sizeof(explode(',', $request->oldImage)); $i++){
+                    $arrimg = explode(',', $request->oldImage);
+                    Storage::delete($arrimg[$i]);
+                }
             }
-            $validatedData['image'] = $request->file('image')->store('product-images');
+            $length = sizeof($request->file('image'));
+            for($i=0; $i < $length; $i++){
+                $request->file('image')[$i]->store('product-images');
+                $image[$i] = $request->file('image')[$i]->store('product-images');
+            }
+            $arrImg=implode(',', $image);
+            $validatedData['image'] = $arrImg;
         }else{
             $validatedData['image'] = $request->oldImage;
         }
 
         Product::where('id', $request->id)->update([
             'product_name' => $validatedData['product_name'],
-            'title' => $validatedData['title'],
-            'qty' => $validatedData['qty'],
+            'harga' => $validatedData['harga'],
+            'stok' => $validatedData['stok'],
             'desc' => $validatedData['desc'],
             'category_id' => $validatedData['category_id'],
             'image' => $validatedData['image']
