@@ -17,6 +17,7 @@
                         <th class="px-4 py-2"><input type="checkbox" wire:click="selectAll()" wire:model="selectAll"></th>
                         <th class="px-4 py-2">No</th>
                         <th class="px-4 py-2">Nama Product</th>
+                        <th class="px-4 py-2">Harga</th>
                         <th class="px-4 py-2">Stock Product</th>
                         <th class="px-4 py-2">Action</th>
                     </tr>
@@ -27,9 +28,10 @@
                             <th class="border px-4 py-2"><input value="{{ $product->id }}" type="checkbox" wire:model="check"></th>
                             <td class="border px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="border px-4 py-2">{{ $product->product_name }}</td>
+                            <td class="border px-4 py-2">RP {{ number_format($product->harga, 0,",",".") }}</td>
                             <td class="border px-4 py-2">
                                 <button style="border: none; background-color:transparent; font-size:22px" wire:click="plus({{$product}}, {{ $loop->index }})">+</button>
-                                {{ $qty[$loop->index] }}
+                                {{ $stok[$loop->index] }}
                                 <button style="border: none; background-color:transparent; font-size:24px" wire:click="min({{$product}}, {{ $loop->index }})">-</button>
                             </td>
                             <td class="border px-4 py-2">

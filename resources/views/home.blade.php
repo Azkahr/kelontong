@@ -6,6 +6,9 @@
         
     </div>
 </div>
+<div class="latest">
+    
+</div>
 <div id="category" class="category">
 
 </div>

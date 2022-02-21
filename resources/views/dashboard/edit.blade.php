@@ -16,19 +16,19 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="qty" class="form-label">Stok Product</label>
-                    <input type="number" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror" value="{{ old('qty', $product->qty) }}">
-                    @error('qty')
+                    <label for="stok" class="form-label">Stok Product</label>
+                    <input type="number" name="stok" id="stok" class="form-control @error('stok') is-invalid @enderror" value="{{ $product->stok }}">
+                    @error('stok')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
-                    @enderror
-                </div>
-
+                        @enderror
+                    </div>
+                    
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $product->title) }}">
-                    @error('title')
+                    <label for="harga" class="form-label">Harga Produk</label>
+                    <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ $product->harga }}">
+                    @error('harga')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -49,13 +49,18 @@
                 </div>
     
                 <div class="mb-3">
-                    <label for="image" class="form-label">Foto Produk</label>
+                    <label id="labelFoto" for="image" class="form-label">Foto Produk Sebelumnya</label>
                     @if ($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                        <div id="image_preview" style="overflow:auto; display: flex; gap: 5px; margin-bottom:10px">
+                                @foreach ($image as $img)
+                                    <img src="{{ asset('storage/'.$img) }}" alt="foto">
+                                @endforeach
+                        </div>
                     @else
-                        <img class="img-preview img-fluid col-sm-5 d-block"><h6 style="opacity: 70%; margin-left: 3px">Belum ada foto product</h6>
+                        <div style="overflow:auto; display: flex; gap: 5px; margin-bottom:10px" id="image_preview"></div>
                     @endif
-                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
+                    <div><a id="btnC" class="btn btn-danger" style="display:none; cursor: pointer;" onclick="cancelImage()">Batalkan Foto</a></div>
+                    <input style="margin:0" type="file" id="image" name="image[]" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -80,17 +85,20 @@
         </div>
     </div>
     <script>
-        
+        function cancelImage(){
+            $('#image_preview').empty();
+            $('#image').val('');
+            document.getElementById('btnC').style.display="none";
+        }
+
         function previewImage(){
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
-            
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-            
-            oFReader.onload = function(oFREvent){
-                imgPreview.src = oFREvent.target.result;
+            const imageL = document.querySelector('#image').files.length;
+            $('#image_preview').empty();
+            for(i = 0; i < imageL; i++){
+                $('#image_preview').append("<img style='height:250px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
             }
+            document.getElementById('btnC').style.display="block";
+            document.getElementById('labelFoto').innerHTML="Foto Produk";
         }
         
     </script>

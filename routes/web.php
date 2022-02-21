@@ -49,10 +49,17 @@ Route::middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);    
     
-    Route::get('/register', [RegisterController::class, 'index']);    
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');    
     Route::post('/register', [RegisterController::class, 'store']);
     
     Route::post('/daftar', [RegisterController::class, 'buat']);
+
+    Route::get('/register-user', function(){
+        return redirect('/register')->with('role', 'user');
+    });
+    Route::get('/register-seller', function(){
+        return redirect('/register')->with('role', 'seller');
+    });
 });
 
 Route::post('/logout', [LoginController::class, 'logout']);
