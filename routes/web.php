@@ -80,3 +80,5 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::get('/profile/password/{user:id}', [PasswordController::class, 'changePassword']);
     Route::put('/profile/password/{id}', [PasswordController::class, 'updatePassword']);
 });
+
+Route::get('/search', [HomeController::class, 'search']);

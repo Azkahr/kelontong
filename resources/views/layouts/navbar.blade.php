@@ -1,6 +1,6 @@
 <nav>
     <div class="top">
-            <form class="search" method="GET" action="/">
+            <form class="search" method="GET" action="/search">
                     <input type="text" placeholder="Cari..." name="search" value="{{ request('search') }}">
                     <button class="btnSearch btn btn-outline-light" type="submit">Search</button>
             </form>

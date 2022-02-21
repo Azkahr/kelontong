@@ -19,4 +19,15 @@ class HomeController extends Controller
             })->get()
         ]);
     }
+
+    public function search(){
+        if(!request()->has('search')){
+            return back();
+        }
+
+        return view('search',[
+            'title' => 'Search',
+            'products' => Product::latest()->filter(request(['search', 'category']))->get(),
+        ]);
+    }
 }
