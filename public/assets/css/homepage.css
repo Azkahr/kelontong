@@ -16,3 +16,35 @@
     background-color: aqua;
     box-shadow: 0px 0px 5px 5px rgba(black, black, black, 0.3);
 }
+
+.swiper {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.swiper-slide {
+    width: 100%;
+}
+
+.swiper-buttonN,
+.swiper-buttonP {
+    opacity: 70%;
+    background-color: #dfdfdf;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.swiper-buttonN {
+    right: 0px;
+}
+.swiper-buttonP {
+    left: 0px;
+}
+
+.kartu .content {
+    margin: 12px 0px 0px 20px;
+}
