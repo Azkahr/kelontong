@@ -24,7 +24,7 @@
     padding: 0;
     overflow: hidden;
 }
-.swiper-slide {
+.swiper .swiper-wrapper .swiper-slide {
     width: 100%;
 }
 
@@ -35,7 +35,6 @@
     z-index: 2;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
 }
 
 .swiper-buttonN {
@@ -45,95 +44,80 @@
     left: 0px;
 }
 
-.kartu-container {
+.main {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.kartu-container3 {
+    width: 90%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 50px;
 }
 
-.kartu {
+.kartu3 {
     width: 14rem;
     margin: 0px 10px 20px 10px;
     border: 1px solid #dfdfdf;
     border-radius: 7px;
 }
 
-.kartu .content {
+.kartu3 .content {
     margin: 12px 0px 0px 20px;
 }
 
 .hero-container {
     margin-top: 150px;
     width: 100%;
-    height: 400px;
+    height: 450px;
     display: flex;
     justify-content: center;
 }
 
 .hero {
-    width: 80%;
+    width: 70%;
     height: 100%;
     border-radius: 12.5px;
     border: 1px solid #dfdfdf;
     transition: 3s;
 }
 
-.hero:hover > .aContainer {
-    opacity: 70;
-}
-
-.swiper2 {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.swiper-buttonN2,
-.swiper-buttonP2 {
-    opacity: 100;
-    background-color: #dfdfdf;
-}
-
-.aContainer {
+.category-container {
+    margin-top: 50px;
     width: 100%;
     height: auto;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    bottom: 50%;
-    z-index: 2;
-    opacity: 0;
-}
-
-.content-container {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
 }
 
-.content-container .image {
-    width: 50%;
+.category {
+    width: 80%;
     height: 100%;
 }
 
-.content-container .content {
-    width: 50%;
-    height: 100%;
-}
-
-.swiper3 {
+.kartu-container1,
+.kartu-container2 {
     width: 100%;
-    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    transform: scale(0.9);
     margin: 0;
-    padding: 0;
-    overflow: hidden;
+    overflow-x: scroll;
+    padding: 40px 0px 0px 20px;
 }
 
-.swiper .swiper-wrapper .swiper-slide .swiper-slide-active {
-    transform: scale(1.5);
+.kartu1,
+.kartu2 {
+    width: 14rem;
+    margin: -20px 40px 0px -20px;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+}
+
+.kartu1 .content,
+.kartu2 .content {
+    margin: 12px 0px 0px 20px;
 }

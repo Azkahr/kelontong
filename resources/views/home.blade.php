@@ -6,65 +6,95 @@
 @include('layouts/navbar')
 <div Class="hero-container">
     <div class="hero">
-        <div class="swiper2">
-            <div class="swiper-wrapper">
-                @foreach ($productsL as $productL)
-                <div class="swiper-slide" style="user-select: none; display:flex">
-                    <div class="content-container">
-                        <div class="image">
-                            <div class="swiper3">
-                                <div class="swiper-wrapper">
-                                    @foreach (explode(',',$productL->image) as $item)
-                                        <div class="swiper-slide">
-                                            <img style="object-fit: fill; width: 100%; height:100%; border-bottom-left-radius:12.5px; border-top-left-radius:12.5px" src="{{ asset('storage/'.$item) }}" alt="{{ $productL->product_name }}">
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
+        
+    </div>
+</div>
 
+<div class="category-container">
+    <div class="category">
+        <p style="margin: 0px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Makanan</p>
+        <div class="kartu-container1">
+            @foreach ($productsMakanan as $productMakanan)
+                <div class="kartu1">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            @foreach (explode(',',$productMakanan->image) as $item)
+                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMakanan->name }}"></div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-buttonP">
+                            <span style="margin:3px" data-feather="arrow-left"></span>
+                        </div>
+                        <div class="swiper-buttonN">
+                            <span style="margin:3px" data-feather="arrow-right"></span>
                         </div>
                     </div>
+                    <div class="content">
+                        <h6 style="font-size:18px">{{ $productMakanan->product_name }}</h6>
+                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMakanan->harga, 0,",",".") }}</p>
+                        <p style="margin:0">{{ $productMakanan->user->nama_toko}}</p>
+                        <a style="margin:20px 0px 25px 0px" href="#" class="btn btn-primary">Lihat Produk</a>
+                    </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
-        <div class="aContainer">
-            <div class="swiper-buttonP2">
-                <span style="margin:3px" data-feather="arrow-left"></span>
-            </div>
-            <div class="swiper-buttonN2">
-                <span style="margin:3px" data-feather="arrow-right"></span>
-            </div>
+
+        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Minuman</p>
+        <div class="kartu-container2">
+            @foreach ($productsMinuman as $productMinuman)
+                <div class="kartu2">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            @foreach (explode(',',$productMinuman->image) as $item)
+                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMinuman->name }}"></div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-buttonP">
+                            <span style="margin:3px" data-feather="arrow-left"></span>
+                        </div>
+                        <div class="swiper-buttonN">
+                            <span style="margin:3px" data-feather="arrow-right"></span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h6 style="font-size:18px">{{ $productMinuman->product_name }}</h6>
+                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMinuman->harga, 0,",",".") }}</p>
+                        <p style="margin:0">{{ $productMinuman->user->nama_toko}}</p>
+                        <a style="margin:20px 0px 25px 0px" href="#" class="btn btn-primary">Lihat Produk</a>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
-<div class="kartu-container">
-    @foreach ($products as $product)
-        <div class="kartu">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    @foreach (explode(',',$product->image) as $item)
-                        <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $product->name }}"></div>
-                    @endforeach
+
+<div class="main">
+    <div class="kartu-container3">
+        @foreach ($products as $product)
+            <div class="kartu3">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (explode(',',$product->image) as $item)
+                            <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $product->name }}"></div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-buttonP">
+                        <span style="margin:3px" data-feather="arrow-left"></span>
+                    </div>
+                    <div class="swiper-buttonN">
+                        <span style="margin:3px" data-feather="arrow-right"></span>
+                    </div>
                 </div>
-                <div class="swiper-buttonP">
-                    <span style="margin:3px" data-feather="arrow-left"></span>
-                </div>
-                <div class="swiper-buttonN">
-                    <span style="margin:3px" data-feather="arrow-right"></span>
+                <div class="content">
+                    <h6 style="font-size:18px">{{ $product->product_name }}</h6>
+                    <p style="margin:0; font-weight:bold">RP {{ number_format($product->harga, 0,",",".") }}</p>
+                    <p style="margin:0">{{ $product->user->nama_toko}}</p>
+                    <a style="margin:20px 0px 25px 0px" href="#" class="btn btn-primary">Lihat Produk</a>
                 </div>
             </div>
-            <div class="content">
-                <h6 style="font-size:18px">{{ $product->product_name }}</h6>
-                <p style="margin:0; font-weight:bold">RP {{ number_format($product->harga, 0,",",".") }}</p>
-                <p style="margin:0">{{ $product->user->nama_toko}}</p>
-                <a style="margin:20px 0px 25px 0px" href="#" class="btn btn-primary">Lihat Produk</a>
-            </div>
-        </div>
-    @endforeach
-</div>
+        @endforeach
+    </div>
+</divc>
 
 <script>
     feather.replace()
@@ -81,30 +111,6 @@ const swiper = new Swiper('.swiper', {
     nextEl: '.swiper-buttonN',
     prevEl: '.swiper-buttonP',
   },
-});
-
-const swiper2 = new Swiper('.swiper2', {
-  // Optional parameters
-  direction: 'horizontal',
-  loop: true,
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-buttonN2',
-    prevEl: '.swiper-buttonP2',
-  },
-});
-
-const swiper3 = new Swiper('.swiper3', {
-  // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-    slideToClickedSlide: true,
-
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-    },
 });
 </script>
 @endsection
