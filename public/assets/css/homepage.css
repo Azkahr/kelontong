@@ -45,6 +45,95 @@
     left: 0px;
 }
 
+.kartu-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.kartu {
+    width: 14rem;
+    margin: 0px 10px 20px 10px;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+}
+
 .kartu .content {
     margin: 12px 0px 0px 20px;
+}
+
+.hero-container {
+    margin-top: 150px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.hero {
+    width: 80%;
+    height: 100%;
+    border-radius: 12.5px;
+    border: 1px solid #dfdfdf;
+    transition: 3s;
+}
+
+.hero:hover > .aContainer {
+    opacity: 70;
+}
+
+.swiper2 {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.swiper-buttonN2,
+.swiper-buttonP2 {
+    opacity: 100;
+    background-color: #dfdfdf;
+}
+
+.aContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    bottom: 50%;
+    z-index: 2;
+    opacity: 0;
+}
+
+.content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.content-container .image {
+    width: 50%;
+    height: 100%;
+}
+
+.content-container .content {
+    width: 50%;
+    height: 100%;
+}
+
+.swiper3 {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.swiper .swiper-wrapper .swiper-slide .swiper-slide-active {
+    transform: scale(1.5);
 }

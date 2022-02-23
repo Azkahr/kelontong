@@ -4,12 +4,45 @@
 @endsection
 @section('container')
 @include('layouts/navbar')
-<div Class="latest">
+<div Class="hero-container">
+    <div class="hero">
+        <div class="swiper2">
+            <div class="swiper-wrapper">
+                @foreach ($productsL as $productL)
+                <div class="swiper-slide" style="user-select: none; display:flex">
+                    <div class="content-container">
+                        <div class="image">
+                            <div class="swiper3">
+                                <div class="swiper-wrapper">
+                                    @foreach (explode(',',$productL->image) as $item)
+                                        <div class="swiper-slide">
+                                            <img style="object-fit: fill; width: 100%; height:100%; border-bottom-left-radius:12.5px; border-top-left-radius:12.5px" src="{{ asset('storage/'.$item) }}" alt="{{ $productL->product_name }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
 
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="aContainer">
+            <div class="swiper-buttonP2">
+                <span style="margin:3px" data-feather="arrow-left"></span>
+            </div>
+            <div class="swiper-buttonN2">
+                <span style="margin:3px" data-feather="arrow-right"></span>
+            </div>
+        </div>
+    </div>
 </div>
-<div style="width: 100%; display:flex; justify-content:center; flex-wrap:wrap; margin-top:200px">
+<div class="kartu-container">
     @foreach ($products as $product)
-        <div class="kartu" style="width: 14rem; margin:0px 10px 20px 10px; border:1px solid #DFDFDF; border-radius:7px">
+        <div class="kartu">
             <div class="swiper">
                 <div class="swiper-wrapper">
                     @foreach (explode(',',$product->image) as $item)
@@ -48,6 +81,30 @@ const swiper = new Swiper('.swiper', {
     nextEl: '.swiper-buttonN',
     prevEl: '.swiper-buttonP',
   },
+});
+
+const swiper2 = new Swiper('.swiper2', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-buttonN2',
+    prevEl: '.swiper-buttonP2',
+  },
+});
+
+const swiper3 = new Swiper('.swiper3', {
+  // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+    slideToClickedSlide: true,
+
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: true,
+    },
 });
 </script>
 @endsection
