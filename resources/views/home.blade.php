@@ -4,9 +4,12 @@
 @endsection
 @section('container')
 @include('layouts/navbar')
-<div style="width: 100%; display:flex; justify-content:center; margin-top:200px">
+<div Class="latest">
+
+</div>
+<div style="width: 100%; display:flex; justify-content:center; flex-wrap:wrap; margin-top:200px">
     @foreach ($products as $product)
-        <div class="kartu" style="width: 14rem; margin:0px 5px 0px 5px; border:1px solid #DFDFDF; border-radius:7px">
+        <div class="kartu" style="width: 14rem; margin:0px 10px 20px 10px; border:1px solid #DFDFDF; border-radius:7px">
             <div class="swiper">
                 <div class="swiper-wrapper">
                     @foreach (explode(',',$product->image) as $item)
@@ -39,7 +42,6 @@ const swiper = new Swiper('.swiper', {
   // Optional parameters
   direction: 'horizontal',
   loop: true,
-  slidesPerView: 'auto',
 
   // Navigation arrows
   navigation: {
