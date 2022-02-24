@@ -15,7 +15,7 @@
         <p style="margin: 0px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Makanan</p>
         <div class="kartu-container1">
             @foreach ($productsMakanan as $productMakanan)
-                <div class="kartu1">
+                <div class="kartu1 mb-3">
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             @foreach (explode(',',$productMakanan->image) as $item)
@@ -33,7 +33,7 @@
                         <h6 style="font-size:18px">{{ $productMakanan->product_name }}</h6>
                         <p style="margin:0; font-weight:bold">RP {{ number_format($productMakanan->harga, 0,",",".") }}</p>
                         <p style="margin:0">{{ $productMakanan->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $product->id }}" class="btn btn-primary">Lihat Produk</a>
+                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productMakanan->id }}" class="btn btn-primary">Lihat Produk</a>
                     </div>
                 </div>
             @endforeach
@@ -42,7 +42,7 @@
         <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Minuman</p>
         <div class="kartu-container2">
             @foreach ($productsMinuman as $productMinuman)
-                <div class="kartu2">
+                <div class="kartu2 mb-3">
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             @foreach (explode(',',$productMinuman->image) as $item)
