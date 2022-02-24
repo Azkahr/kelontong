@@ -86,6 +86,18 @@ form .btn{
     
 }
 
+.main {
+    padding-right: 400px;
+}
+
+.container-form {
+    padding-right: 130px;
+}
+
+.content {
+    padding-left: 50px;
+}
+
 .menu {
     position: absolute;
     right: 10%;
@@ -212,7 +224,7 @@ form .btn{
             @include('notify::components.notify')
             
             <div class="col-md-9">
-                <div class="container">
+                <div class="container-form">
                     <form action="/profile/password/{{ $user->id }}" method="post" class="mb-5">
                         @method('put')
                         @csrf

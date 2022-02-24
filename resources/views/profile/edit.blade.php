@@ -33,6 +33,18 @@ form .btn{
     border-color: transparent;
 }
 
+.main {
+    padding-left: 170px;
+}
+
+.container-form {
+    padding-right: 130px;
+}
+
+.content {
+    padding-left: 50px;
+}
+
 .btn.btn-default{
     background: #ebebeb;
     color:#8f9096;
@@ -45,7 +57,7 @@ form .btn{
 .sidebar {
     height: 100vh !important;
     bottom: 0;
-    padding-left:20px;
+    padding-left: 80px;
     font-size: 1.3rem;
     background: #6c63ff;
 }
@@ -222,7 +234,7 @@ form .btn{
             </div>
             
             <div class="col-md-9">
-                <div class="container">
+                <div class="container-form">
                     <form action="/profile/update/{{ $user->id }}" method="post" class="mb-5" enctype="multipart/form-data">
                         @method('put')
                         @csrf

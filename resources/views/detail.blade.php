@@ -1,15 +1,15 @@
 @extends('layouts.main')
 @section('container')
+@include('layouts.navbar')
     <style>
         .container {
-            margin-top: 10px;
-            padding: 50px;
-            display: flex;
+            margin-top: 150px;
         }
         .image {
-            margin-right: 30px; 
-            width: 500px; 
-            height: 400px; 
+            width: 400px; 
+            height: 300px;
+            position: sticky;
+            top: 0;
             float: left;
         }
 
@@ -18,11 +18,24 @@
             display: flex;
         }
 
+        .detail-top {
+            padding-left: 430px;
+        }
+
         .detail-mid p {
             margin: 0 auto;
             width: 300px;
         }
 
+        .detail-mid {
+            padding-left: 430px;
+        }
+        
+        .detail-bot {
+            padding-left: 430px;
+            margin-bottom: 100px;
+        }
+        
         .detail-bot img {
             float: left;
             margin-right: 10px;
@@ -37,7 +50,7 @@
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
             <h6>RP {{ number_format($product->harga, 0,",",".") }}</h6>
-        <div>
+        </div>
         <div class="detail-mid">
             <hr>
                 <h5>Detail</h5>
