@@ -8,16 +8,17 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function index(  ){
+    public function index(){
         return view('home', [
             'title' => 'Home',
-            'products' => Product::latest()->get(),
-            'productsMakanan' => Product::whereHas('category', function($q){
+            'products' => Product::latest()->paginate(35),
+            'productsMakanan' => Product::latest()->whereHas('category', function($q){
                 $q->where('name', '=', 'Makanan');
-            })->get(),
-            'productsMinuman' => Product::whereHas('category', function($q){
+            })->take(10)->get(),
+            'productsMinuman' => Product::latest()->whereHas('category', function($q){
                 $q->where('name', '=', 'Minuman');
-            })->get(),
+            })->take(10)->get(),
+            'productsL' => Product::latest()->take(3)->get(),
         ]);
     }
 
