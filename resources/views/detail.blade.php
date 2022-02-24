@@ -8,8 +8,8 @@
         }
         .image {
             margin-right: 30px; 
-            width: 350px; 
-            height: 300px; 
+            width: 500px; 
+            height: 400px; 
             float: left;
         }
 
@@ -25,6 +25,7 @@
 
         .detail-bot img {
             float: left;
+            margin-right: 10px;
         }
     </style>
     <div class="container">
@@ -33,7 +34,7 @@
         </div>
         <div class="detail-top">
             <h5>{{ $product->product_name }}</h5>
-            <p class="text-muted">{{ $product->category->name }}</p>
+            <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
             <h6>RP {{ number_format($product->harga, 0,",",".") }}</h6>
         <div>
@@ -42,15 +43,11 @@
                 <h5>Detail</h5>
             <hr>
             <p>{!! $product->desc !!}</p>
+            <hr>
         </div>
-        <hr>
         <div class="detail-bot">
-            {{-- @if ($user->image) --}}
-                {{-- <img src="{{ asset('storage/' . $user->image) }}" class="rounded-circle d-block" style="width: 50px; height: 45px"> --}}
-            {{-- @else --}}
-                <img class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 50px; height: 45px">
-            {{-- @endif --}}
-            <h6>Nama toko</h6>
+            <img src="{{ asset('storage/' . $product->user->image) }}" alt="belum mempunyai profile picture" class="rounded-circle d-block" style="width: 50px; height: 45px">
+            <h6>{{ $product->user->nama_toko }}</h6>
         </div>
     </div>
 @endsection

@@ -8,7 +8,7 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(  ){
         return view('home', [
             'title' => 'Home',
             'products' => Product::latest()->get(),
