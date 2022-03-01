@@ -94,6 +94,3 @@ Route::middleware('auth', 'verified')->group(function(){
 });
 
 Route::get('/search', [HomeController::class, 'search']);
-Route::get('/minuman', function(){
-    return "test";
-});
