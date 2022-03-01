@@ -51,12 +51,14 @@ nav .middle {
     justify-content: center;
     align-items: center;
 }
-nav .logo {
+nav .middle .home .logo {
     width: 250px;
+}
+
+nav .middle .home {
     position: absolute;
     margin-bottom: 30px;
 }
-
 nav .bottom {
     background-color: #5266d9;
     width: 100%;

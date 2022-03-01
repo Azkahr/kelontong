@@ -37,7 +37,7 @@
     </div>
 
     <div class="middle">
-        <img class="logo" src="{{ asset('assets/img/kelontong-shape.png') }}" alt="logo">
+        <a class="home" href="/"><img class="logo" src="{{ asset('assets/img/kelontong-shape.png') }}" alt="logo"></a>
     </div>
 
     <div class="bottom">
