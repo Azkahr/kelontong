@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Azka',
             'email' => 'azkahar@gmail.com',
             'role' => 'seller',
+            'nama_toko' => 'Azka Shop',
+            'image' => 'user-images/BWiSI3PYVH9yrgWjOccLISqAkiPlzcwxxSFnoNVQ.jpg',
             'email_verified_at' => now(),
             'password' => bcrypt('password')
         ]);

@@ -11,8 +11,9 @@
             position: sticky;
             top: 0;
             float: left;
+            margin-right: 10px;
         }
-
+        
         .detail-top h6 {
             margin-top: 10px;
             display: flex;
@@ -24,7 +25,7 @@
 
         .detail-mid p {
             margin: 0 auto;
-            width: 300px;
+            width: 700px;
         }
 
         .detail-mid {
@@ -43,13 +44,15 @@
     </style>
     <div class="container">
         <div class="image">
-            <img src="{{ asset('storage/' . $product->image) }}" class="mr-5" alt="{{ $product->product_name }}">
+            @foreach (explode(',',$product->image) as $item)
+                <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
+            @endforeach
         </div>
         <div class="detail-top">
             <h5>{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
-            <h6>RP {{ number_format($product->harga, 0,",",".") }}</h6>
+            <h3>RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
         <div class="detail-mid">
             <hr>
@@ -63,4 +66,20 @@
             <h6>{{ $product->user->nama_toko }}</h6>
         </div>
     </div>
+<script>
+var slideIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1}
+        x[slideIndex-1].style.display = "block";
+        setTimeout(carousel, 2000);
+    }
+</script>
 @endsection
