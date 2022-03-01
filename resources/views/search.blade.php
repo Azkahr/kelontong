@@ -13,10 +13,26 @@
         margin: 0;
         margin-bottom: 10px;
     }
+    
+    .test a.kiri {
+        text-decoration: none;
+        float: left;
+        margin-top: 150px;
+        margin-right: 20px;
+    }
+
+    .test a.kanan {
+        float: left;
+        text-decoration: none;
+        margin-top: 150px;
+    }
 </style>
 <div class="container">
     <div class="row">
-        <p style="margin-top: 150px;">Produk</p>
+        <div class="test mb-2">
+            <a href="#" class="kiri">Produk</a>
+            <a href="#" class="kanan">Toko</a>
+        </div>
         <hr>
         <p class="text">Menampilkan pencarian hasil pencarian "{{ request('search') }}"</p>
         @foreach ($products as $product)
