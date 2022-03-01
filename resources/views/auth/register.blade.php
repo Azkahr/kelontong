@@ -207,7 +207,7 @@
                 judul: 'HAYUU DAFTAR',
                 modalUser: true,
                 modalSeller: false,
-                role:@json(session('role'))
+                role:@json(session('role-register'))
             }
         },
         methods: {

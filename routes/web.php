@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,10 +58,12 @@ Route::middleware('guest')->group(function(){
     Route::post('/daftar', [RegisterController::class, 'buat']);
 
     Route::get('/register-user', function(){
-        return redirect('/register')->with('role', 'user');
+        Session::put('role-register', 'user');
+        return redirect('/register');
     });
     Route::get('/register-seller', function(){
-        return redirect('/register')->with('role', 'seller');
+        Session::put('role-register', 'seller');
+        return redirect('/register');
     });
 });
 

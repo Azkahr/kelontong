@@ -13,7 +13,7 @@
 
 <div Class="hero-container">
     <div class="hero">
-        
+        <img src="{{ asset('assets/img/banner.png') }}" alt="">
     </div>
 </div>
 
