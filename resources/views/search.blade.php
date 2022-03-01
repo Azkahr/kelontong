@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('head')
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+@endsection
 @section('container')
 @include('layouts.navbar')
 <style>
@@ -20,8 +23,22 @@
         <hr>
         <p class="text">Menampilkan pencarian hasil pencarian "{{ request('search') }}"</p>
         @foreach ($products as $product)
-        <div class="card" style="width: 18rem; margin-right: 20px;">
-            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->product_name }}">
+        <div class="card" style="width: 18rem; margin-right: 20px; margin-bottom: 20px">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    @foreach (explode(',',$product->image) as $item)
+                    <div class="swiper-slide">
+                        <img src="{{ asset('storage/' . $item) }}" class="mySlides card-img-top" alt="{{ $product->product_name }}" style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px">
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-buttonP">
+                    <span style="margin:3px" data-feather="arrow-left"></span>
+                </div>
+                <div class="swiper-buttonN">
+                    <span style="margin:3px" data-feather="arrow-right"></span>
+                </div>
+            </div>
             <div class="card-body">
                 <h5 class="card-title">{{ $product->product_name }}</h5>
                 <h6>RP {{ number_format($product->harga, 0,",",".") }}</h6>
@@ -33,4 +50,21 @@
         <a href="/">Home</a>
     </div>
 </div>
+<script>
+    feather.replace()
+</script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script>
+const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-buttonN',
+    prevEl: '.swiper-buttonP',
+  },
+});
+</script>
 @endsection
