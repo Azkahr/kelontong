@@ -28,7 +28,7 @@
                 <div class="swiper-wrapper">
                     @foreach (explode(',',$product->image) as $item)
                     <div class="swiper-slide">
-                        <img src="{{ asset('storage/' . $item) }}" class="mySlides card-img-top" alt="{{ $product->product_name }}" style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px">
+                        <img src="{{ asset('storage/' . $item) }}" class="card-img-top" alt="{{ $product->product_name }}" style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px">
                     </div>
                     @endforeach
                 </div>
