@@ -41,9 +41,9 @@
     </div>
 
     <div class="bottom">
-        <a href="#">Makanan</a>
-        <a href="#">Minuman</a>
-        <a href="#">Snack</a>
+        <a href="search?category=makanan">Makanan</a>
+        <a href="search?category=makanan">Minuman</a>
+        <a href="search?category=snack">Snack</a>
     </div>
 </nav>
 
