@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
     public function index(){
+
+        $title = '';
+        if (request('category')) {
+            $category = Category::firstWhere('slug', request('category'));
+            $title = ' in ' . $category['name'];
+        }
+        
         return view('home', [
-            'title' => 'Home',
+            'title' => 'Home' . $title,
             'products' => Product::latest()->paginate(35),
             'productsMakanan' => Product::latest()->whereHas('category', function($q){
                 $q->where('name', '=', 'Makanan');
             })->take(10)->get(),
             'productsMinuman' => Product::latest()->whereHas('category', function($q){
                 $q->where('name', '=', 'Minuman');
+            })->take(10)->get(),
+            'productsSnack' => Product::latest()->whereHas('category', function($q){
+                $q->where('name', '=', 'Snack');
             })->take(10)->get(),
             'productsL' => Product::latest()->take(3)->get(),
         ]);

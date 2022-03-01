@@ -200,8 +200,10 @@ form .btn{
         @if (auth()->user()->role == 'seller')
             <a href="/" class="nav-link active mt-auto"><i class="fas fa-home"></i> Home</a>
             <a href="/dashboard" class="mb-auto nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="/profile/update/{{ auth()->user()->id }}" class="nav-link active"><i class="fas fa-user"></i> Profile</a>
         @else
             <a href="/" class="nav-link active mb-auto mt-auto"><i class="fas fa-home"></i> Home</a>
+            <a href="/profile/update/{{ auth()->user()->id }}" class="nav-link active"><i class="fas fa-user"></i> Profile</a>
         @endif
     </div>
     
@@ -210,9 +212,11 @@ form .btn{
         <div class="container-fluid nav sidebar flex-column">
             @if (auth()->user()->role == 'seller')
                 <a href="/" class="nav-link active mt-auto"><i class="fas fa-home"></i> Home</a>
+                <a href="/profile/update/{{ auth()->user()->id }}" class="nav-link active"><i class="fas fa-user"></i> Profile</a>
                 <a href="/dashboard" class="mb-auto nav-link"><i class="fas fa-chart-line"></i> Dashboard</a>
             @else
                 <a href="/" class="nav-link active mb-auto mt-auto"><i class="fas fa-home"></i> Home</a>
+                <a href="/profile/update/{{ auth()->user()->id }}" class="nav-link active"><i class="fas fa-user"></i> Profile</a>
             @endif
         </div>
     </div>
