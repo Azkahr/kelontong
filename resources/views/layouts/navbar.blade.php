@@ -22,7 +22,7 @@
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                         <form action="/logout" method="post">
                             @csrf
-                            <a href="#"><button id="logout" type="submit">Logout</button></a>
+                            <button style="margin-left: 16px; margin-bottom: 15px; margin-top: 10px;" id="logout" type="submit">Logout</button>
                         </form>
                     </div>
                 </div>
@@ -41,9 +41,9 @@
     </div>
 
     <div class="bottom">
-        <a href="search?category=makanan">Makanan</a>
-        <a href="search?category=makanan">Minuman</a>
-        <a href="search?category=snack">Snack</a>
+        <a href="/?category=makanan">Makanan</a>
+        <a href="/?category=minuman">Minuman</a>
+        <a href="/?category=snack">Snack</a>
     </div>
 </nav>
 

@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/detail/{product:id}', [HomeController::class, 'detail'])->name('detail');
+
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended('/dashboard')
@@ -92,3 +94,6 @@ Route::middleware('auth', 'verified')->group(function(){
 });
 
 Route::get('/search', [HomeController::class, 'search']);
+Route::get('/minuman', function(){
+    return "test";
+});
