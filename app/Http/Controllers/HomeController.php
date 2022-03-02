@@ -19,7 +19,7 @@ class HomeController extends Controller
         
         return view('home', [
             'title' => 'Home' . $title,
-            'products' => Product::latest()->paginate(35),
+            'products' => Product::latest()->paginate(30),
             'productsMakanan' => Product::latest()->whereHas('category', function($q){
                 $q->where('name', '=', 'Makanan');
             })->take(10)->get(),

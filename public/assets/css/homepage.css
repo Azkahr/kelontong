@@ -51,7 +51,7 @@
 }
 
 .kartu-container3 {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -82,7 +82,8 @@
     height: 100%;
     border-radius: 12.5px;
     border: 1px solid #dfdfdf;
-    transition: 3s;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .category-container {
@@ -120,4 +121,54 @@
 .kartu1 .content,
 .kartu2 .content {
     margin: 12px 0px 0px 20px;
+}
+
+.hero .banner {
+    width: 310px;
+    height: 100%;
+}
+
+.hero .banner img {
+    width: 310px;
+    height: 100%;
+    border-top-left-radius: 12.5px;
+    border-bottom-left-radius: 12.5px;
+}
+
+.swiper2 {
+    overflow: hidden;
+}
+
+.hero .content {
+    width: calc(100% - 310px) !important;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hero .content .container {
+    width: 100%;
+    height: auto;
+    padding-left: 20px;
+}
+
+.hero .content .container .kartu4 {
+    width: 14rem;
+    border: 1px solid #dfdfdf;
+    border-radius: 7px;
+    transform: scale(0.95);
+}
+
+.hero .content .container .kartu4 .contentK {
+    width: 100%;
+    height: 100%;
+    margin: 12px 0px 0px 20px;
+}
+
+.hero .content .arrowK4 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
