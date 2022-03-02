@@ -41,9 +41,18 @@
     </div>
 
     <div class="bottom">
-        <a href="/?category=makanan">Makanan</a>
-        <a href="/?category=minuman">Minuman</a>
-        <a href="/?category=snack">Snack</a>
+        <a href="/?category=sabun-mandi">Terigu</a>
+        <a href="/?category=air-mineral">Air Mineral</a>
+        <a href="/?category=obat">Obat</a>
+        <a href="/?category=snack">Sabun Mandi</a>
+        <a href="/?category=snack">Sabun Cuci Piring</a>
+        <a href="/?category=sembako">Sembako</a>
+        <a href="/?category=beras">Beras</a>
+        <a href="/?category=mi-instan">Mi Instan</a>
+        <a href="/?category=snack">Alat Tulis</a>
+        <a href="/?category=snack">Gas</a>
+        <a href="/?category=snack">Token Listrik</a>
+        <a href="/?category=snack">Pulsa</a>
     </div>
 </nav>
 
