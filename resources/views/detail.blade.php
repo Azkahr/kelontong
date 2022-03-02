@@ -63,7 +63,11 @@
             <hr>
         </div>
         <div class="detail-bot">
-            <img src="{{ asset('storage/' . $product->user->image) }}" alt="belum mempunyai profile picture" class="rounded-circle d-block" style="width: 50px; height: 45px">
+            @if ($product->user->image)
+            <img src="{{ asset('storage/' . $product->user->image) }}" class="rounded-circle d-block" style="width: 50px; height: 45px">
+            @else
+            <img class="rounded-circle d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 50px; height: 45px">
+            @endif
             <h6>{{ $product->user->nama_toko }}</h6>
         </div>
     </div>
