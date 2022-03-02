@@ -43,7 +43,7 @@
         }
     </style>
     <div class="container">
-        <a href="/" style="float: right; position: sticky; text-decoration: none" class="text-muted">Kembali?</a>
+        <a href="/" style="float: right; text-decoration: none" class="text-muted">Kembali?</a>
         <div class="image">
             @foreach (explode(',',$product->image) as $item)
                 <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
