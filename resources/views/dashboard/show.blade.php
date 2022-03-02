@@ -24,11 +24,11 @@
                     <h6>Harga : RP {{ number_format($product->harga, 0,",",".") }}</h6>
                 </div>
 
-                @if ($product->image)
                     <div style="max-height: 300px; overflow:hidden">
-                        <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid">
+                        @foreach (explode(',',$product->image) as $item)
+                            <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
+                        @endforeach
                     </div>
-                @endif
 
                 <article class="my-3 fs-6">
                     {!! $product->desc !!}
@@ -36,4 +36,20 @@
             </div>
         </div>
     </div>
+<script>
+var slideIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1}
+        x[slideIndex-1].style.display = "block";
+        setTimeout(carousel, 2000);
+    }
+</script>
 @endsection

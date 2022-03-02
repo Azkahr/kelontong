@@ -51,7 +51,7 @@
                 <div class="mb-3">
                     <label id="labelFoto" for="image" class="form-label">Foto Produk Sebelumnya</label>
                     @if ($product->image)
-                        <div id="image_preview" style="overflow:auto; display: flex; gap: 5px; margin-bottom:10px">
+                        <div id="image_preview" style="overflow:auto; height: 200px; display: flex; gap: 5px; margin-bottom:10px">
                                 @foreach ($image as $img)
                                     <img src="{{ asset('storage/'.$img) }}" alt="foto">
                                 @endforeach
@@ -95,7 +95,7 @@
             const imageL = document.querySelector('#image').files.length;
             $('#image_preview').empty();
             for(i = 0; i < imageL; i++){
-                $('#image_preview').append("<img style='height:250px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+                $('#image_preview').append("<img style='height:200px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
             }
             document.getElementById('btnC').style.display="block";
             document.getElementById('labelFoto').innerHTML="Foto Produk";
