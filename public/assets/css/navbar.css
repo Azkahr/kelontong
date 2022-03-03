@@ -53,7 +53,7 @@ nav .middle {
 }
 nav .middle .home .logo {
     width: 250px;
-    display: block;
+    image-rendering: auto;
 }
 
 nav .middle .home {
