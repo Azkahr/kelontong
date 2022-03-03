@@ -37,7 +37,7 @@
     </div>
 
     <div class="middle">
-        <a class="home" href="/"><img class="logo" src="{{ asset('assets/img/kelontong-shape.png') }}" alt="logo"></a>
+        <a class="home" href="/"><img class="logo" src="{{ asset('assets/img/kelontong-shape.webp') }}" alt="logo"></a>
     </div>
 
     <div class="bottom">
@@ -45,8 +45,8 @@
         <a href="/?category=air-mineral">Air Mineral</a>
         <a href="/?category=obat">Obat</a>
         <a href="/?category=snack">Sabun Mandi</a>
-        <a href="/?category=snack">Sabun Cuci Piring</a>
         <a href="/?category=sembako">Sembako</a>
+        <a href="/?category=snack">Sabun Cuci Piring</a>
         <a href="/?category=beras">Beras</a>
         <a href="/?category=mi-instan">Mi Instan</a>
         <a href="/?category=snack">Alat Tulis</a>

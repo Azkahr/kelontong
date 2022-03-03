@@ -53,11 +53,12 @@ nav .middle {
 }
 nav .middle .home .logo {
     width: 250px;
+    image-rendering: optimizeQuality;
 }
 
 nav .middle .home {
     position: absolute;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 nav .bottom {
     background-color: #5266d9;
