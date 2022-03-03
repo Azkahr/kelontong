@@ -132,7 +132,6 @@ class DashboardController extends Controller
             'harga' => 'required|digits_between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'required',
             'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
         ]);
 

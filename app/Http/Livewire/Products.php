@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 use Livewire\WithPagination;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 use Livewire\Component;
 
@@ -67,6 +68,13 @@ class Products extends Component
     public function deleteAll()
     {
         $ids = $this->check;
+        $findP=Product::find($ids)->pluck('image');
+        for($i = 0; $i < sizeof($findP); $i++){
+            $arrimg = explode(',', $findP[$i]);
+            for($x = 0; $x < sizeof($arrimg); $x++){
+                Storage::delete($arrimg[$x]);
+            }
+        }
         Product::whereIn('id', $ids)->delete();
         $this->check = [];
         $this->selectAll = false;

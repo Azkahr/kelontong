@@ -31,10 +31,8 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials, $request->remember)){
             if(Auth::user()->role == "seller"){
-                notify()->success('Selamat Datang Di Dashboard ⚡️', 'Login Berhasil');
                 return redirect()->intended('/dashboard');
             } elseif(Auth::user()->role == "user"){
-                notify()->success('Selamat Datang '.auth()->user()->name, 'Login Berhasil');
                 $request->session()->regenerate();
                 return redirect('/');
             }
@@ -50,8 +48,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
-        notify()->success('Logout Sukses', 'Berhasil');
 
         return redirect('/');
     }

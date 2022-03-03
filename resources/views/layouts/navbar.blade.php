@@ -22,7 +22,7 @@
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                         <form action="/logout" method="post">
                             @csrf
-                            <a href="#"><button id="logout" type="submit">Logout</button></a>
+                            <button style="margin-left: 16px; margin-bottom: 15px; margin-top: 10px;" id="logout" type="submit">Logout</button>
                         </form>
                     </div>
                 </div>
@@ -37,13 +37,22 @@
     </div>
 
     <div class="middle">
-        <img class="logo" src="{{ asset('assets/img/kelontong-shape.png') }}" alt="logo">
+        <a class="home" href="/"><img class="logo" src="{{ asset('assets/img/kelontong-shape.png') }}" alt="logo"></a>
     </div>
 
     <div class="bottom">
-        <a href="#">Makanan</a>
-        <a href="#">Minuman</a>
-        <a href="#">Snack</a>
+        <a href="/?category=sabun-mandi">Terigu</a>
+        <a href="/?category=air-mineral">Air Mineral</a>
+        <a href="/?category=obat">Obat</a>
+        <a href="/?category=snack">Sabun Mandi</a>
+        <a href="/?category=snack">Sabun Cuci Piring</a>
+        <a href="/?category=sembako">Sembako</a>
+        <a href="/?category=beras">Beras</a>
+        <a href="/?category=mi-instan">Mi Instan</a>
+        <a href="/?category=snack">Alat Tulis</a>
+        <a href="/?category=snack">Gas</a>
+        <a href="/?category=snack">Token Listrik</a>
+        <a href="/?category=snack">Pulsa</a>
     </div>
 </nav>
 
