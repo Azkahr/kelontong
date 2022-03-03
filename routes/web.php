@@ -69,7 +69,7 @@ Route::middleware('auth', 'verified', 'isSeller')->group(function(){
     Route::get('/dashboard/detail-product/{product:id}', [DashboardController::class, 'show']);
     Route::get('/dashboard/create', [DashboardController::class, 'create'])->name('createP');
     Route::post('/dashboard/create', [DashboardController::class, 'store'])->name('storeP');
-    Route::post('/dashboard/delete/{id}', [DashboardController::class, 'destroy']);
+    Route::delete('/dashboard/delete/{id}', [DashboardController::class, 'destroy']);
 
     Route::get('/dashboard/update/{product:id}', [DashboardController::class, 'edit']);
     Route::put('/dashboard/update/{id}', [DashboardController::class, 'update']);

@@ -39,6 +39,7 @@
                                     <a href="dashboard/detail-product/{{ $product->id }}" class="badge bg-primary" title="See"><img src="{{ asset('assets\img\eye.svg') }}" alt="eye"></a>
                                     <a href="/dashboard/update/{{ $product->id }}" class="badge bg-warning mx-3" title="Edit"><img src="{{ asset('assets\img\edit.svg') }}" alt="eye"></a>
                                     <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline" title='Delete'>
+                                        @method('delete')
                                         @csrf
                                         <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm"><img src="{{ asset('assets\img\trash-2.svg') }}" alt="eye"></span></button>
                                     </form>
