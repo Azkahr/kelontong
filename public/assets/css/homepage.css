@@ -1,8 +1,3 @@
-html,
-body {
-    scroll-behavior: smooth;
-}
-
 .loader {
     display: flex;
     align-items: center;
@@ -52,6 +47,16 @@ body {
     height: 90%;
     background-color: white;
     opacity: 100;
+}
+
+.cart .btnClose {
+    width: 100%;
+    text-align: end;
+}
+
+.cart .btnClose button {
+    padding: 10px;
+    transform: scale(1.5);
 }
 
 .swiper {
