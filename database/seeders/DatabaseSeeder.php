@@ -50,7 +50,5 @@ class DatabaseSeeder extends Seeder
             'name' => 'Snack',
             'slug' => 'snack'
         ]);
-
-        Product::factory(50)->create();
     }
 }

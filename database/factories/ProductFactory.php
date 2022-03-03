@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'product_name' => $this->faker->unique()->word(),
             'harga' => 2500,
             'desc' => $this->faker->unique()->sentence(3),
-            'image' => $this->faker->randomElement(['product-images/eHtfnb27HIOxVYUSaQGfTAO9K8ZwQVYd1C6SA60Z.jpg','product-images/4tcLpWIevn3EsYu0rcyCGgqMQyPnL4VQle6DjzSo.jpg,product-images/gKpwt3w6CBiVCKrjnlezDN2eQ1UeyJpQDAq8H68E.jpg,product-images/eHtfnb27HIOxVYUSaQGfTAO9K8ZwQVYd1C6SA60Z.jpg']),
+            'image' => 'product-images/be0sAJqYTi1ToxVDkOIPiwIWLGkZlZ5JbkKRHWMH.jpg,product-images/EFlRPZ2WMz3iSUqbnfKoVZHOKtsRP7go1rLsIMNL.jpg,product-images/ERO0DpjBcDam2plSlQ9zW191ZfoWiiEtprVxTVxz.jpg,product-images/lmAIKCpmPCU4wf9XFYFlM6Znt8EyzlxEFAqPPAWB.jpg,product-images/roqdJZq4sT25NTejHDyzn0gYUSUI9oPa2hduRock.jpg',
             'stok' => 20
         ];
     }

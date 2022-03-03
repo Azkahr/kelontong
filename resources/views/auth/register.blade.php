@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('head')
+    <script src="https://unpkg.com/vue@3"></script>
+@endsection
 <style>
 /* For extremely small screen devices (595px and below) */
 @media only screen and (max-width: 595px) {
@@ -200,6 +203,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
 <script>
     Vue.createApp({
         data() {

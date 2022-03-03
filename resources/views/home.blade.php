@@ -1,14 +1,23 @@
 @extends('layouts.main')
 @section('head')
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<script>
+    $('html, body').css('overflow', 'hidden');
+</script>
 @endsection
 @section('container')
 @include('layouts/navbar')
-<form action="/" method="get">
-    @if (request('category'))
-        <input type="hidden" name="category" value="{{ request('category') }}">
-    @endif
-</form>
+<div class="loader">
+  <span>↓</span>
+  <span style="--delay: 0.1s">↓</span>
+  <span style="--delay: 0.3s">↓</span>
+  <span style="--delay: 0.4s">↓</span>
+  <span style="--delay: 0.5s">↓</span>
+</div>
+
+<div class="cartPage">
+    <div class="cart"></div>
+</div>
 
 <div Class="hero-container">
     <div class="hero">
@@ -232,6 +241,24 @@
         </div>
     </div>
 @endif
+<form action="/" method="get">
+    @if (request('category'))
+        <input type="hidden" name="category" value="{{ request('category') }}">
+    @endif
+</form>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('.loader').hide();
+        $('.cartPage').hide();
+        $('html, body').css('overflow', 'initial');
+        $('.cartBtn').click(function(){
+            $('.cartPage').show();
+        });
+    });
+</script>
 
 <script>
     feather.replace()
