@@ -6,15 +6,8 @@
 </script>
 @endsection
 @section('container')
-@include('layouts/navbar')
-<div class="loader">
-  <span>↓</span>
-  <span style="--delay: 0.1s">↓</span>
-  <span style="--delay: 0.3s">↓</span>
-  <span style="--delay: 0.4s">↓</span>
-  <span style="--delay: 0.5s">↓</span>
-</div>
-
+@include('partials/navbar')
+@include('partials/loader')
 <div class="cartPage">
     <div class="cart">
         <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>
