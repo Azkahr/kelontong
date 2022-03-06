@@ -6,8 +6,8 @@
 </script>
 @endsection
 @section('container')
-@include('partials/navbar')
 @include('partials/loader')
+@include('partials/navbar')
 <div class="cartPage">
     <div class="cart">
         <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>

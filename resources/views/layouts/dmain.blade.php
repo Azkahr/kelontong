@@ -35,7 +35,7 @@
         <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
             <div class="sidenav-header">
                 <a class="navbar-brand text-center" href="/">
-                    <img src="{{ URL::asset('assets/img/snack-booth.png') }}" class="navbar-brand-img h-100 d-inline" alt="main_logo"/>
+                    <img src="{{ URL::asset('assets/img/snack-booth.svg') }}" class="navbar-brand-img h-100 d-inline" alt="main_logo"/>
                     <span class="ms-1 font-weight-bold">Kelontong.ID</span>
                 </a>
             </div>
@@ -47,7 +47,7 @@
             <!-- Sidenav Content-->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('   dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fas fa-chart-line text-primary text-sm opacity-10"></i>
