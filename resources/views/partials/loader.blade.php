@@ -17,6 +17,7 @@
     font-weight: 600;
     font-size: 30px;
     margin: 0px 0px 0px 15px;
+    color: #5E72E4;
   }
 
   .loader p span {
