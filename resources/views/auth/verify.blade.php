@@ -31,7 +31,7 @@
     <div class="d-flex justify-content-center align-items-center text-light" style="width: 100%; height:100%; font-family: 'Open Sans', sans-serif;">
         <div style="padding:20px; background-color:#536aec; border-radius:15px" class="d-flex flex-column align-items-center">
             <div style="margin-bottom: 30px">
-                <img src="{{ asset('assets/img/snack-booth.png') }}" width="35px" style="filter:invert(100%);" alt="logo">
+                <img src="{{ asset('assets/img/snack-booth.svg') }}" width="35px" style="filter:invert(100%);" alt="logo">
                 <span style="font-family: 'Spartan', sans-serif;">Kelontong.ID</span>
             </div>
             <div>

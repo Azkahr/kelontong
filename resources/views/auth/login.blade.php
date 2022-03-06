@@ -63,7 +63,7 @@
             <div class="side">
                 <div style="display: flex; flex-direction: column; width: 100%;">
                     <div style="display: flex; justify-content:center">
-                        <a href="/"><img src="{{ asset('assets/img/snack-booth.png') }}" style="filter: invert(100%)" width="65px" alt="logo"></a>
+                        <a href="/"><img src="{{ asset('assets/img/snack-booth.svg') }}" style="filter: invert(100%)" width="65px" alt="logo"></a>
                     </div>
                     <div style="display: flex; justify-content:center; margin-top:10px">
                         <a href="/" style="text-decoration:none; font-family: Spartan; font-weight:700; font-size:19px; color:white">Kelontong.ID</a>
