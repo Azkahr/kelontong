@@ -130,8 +130,9 @@
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
                         <form>
-                            <div class="d-flex justify-content-start" style="margin-top:15px;">
+                            <div class="d-flex justify-content-between" style="margin-top:15px;">
                                 <button style="color: #0D6EFD" v-on:click.prevent="showSeller()">Daftar Sebagai Seller</button>
+                                <a style="color: #0D6EFD" href="/login">Login</a>
                             </div>
                         </form>
                     </form>
@@ -193,8 +194,9 @@
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
                         <form>
-                            <div class="d-flex justify-content-start" style="margin-top:15px;">
+                            <div class="d-flex justify-content-between" style="margin-top:15px;">
                                 <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai User</button>
+                                <a style="color: #0D6EFD" href="/login">Login</a>
                             </div>
                         </form>
                     </form>
