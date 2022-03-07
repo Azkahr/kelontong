@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Session;
@@ -91,6 +92,14 @@ Route::middleware('auth', 'verified')->group(function(){
 
     Route::get('/profile/password/{user:id}', [PasswordController::class, 'changePassword']);
     Route::put('/profile/password/{id}', [PasswordController::class, 'updatePassword']);
+
+});
+
+Route::middleware('auth', 'verified')->group(function(){
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart']);
+    Route::patch('update-cart', [CartController::class, 'update']);
+    Route::delete('remove-from-cart', [CartController::class, 'delete']);
 });
 
 Route::get('/search', [HomeController::class, 'search']);

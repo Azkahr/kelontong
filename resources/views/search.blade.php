@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 @endsection
 @section('container')
-@include('layouts.navbar')
+@include('partials/navbar')
 <style>
     .card {
         margin-top: 150px;

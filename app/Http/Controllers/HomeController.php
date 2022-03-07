@@ -26,8 +26,8 @@ class HomeController extends Controller
             'productsMinuman' => Product::latest()->whereHas('category', function($q){
                 $q->where('name', '=', 'Minuman');
             })->take(10)->get(),
-            'productsSnack' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Snack');
+            'productsJajanan' => Product::latest()->whereHas('category', function($q){
+                $q->where('name', '=', 'Jajanan');
             })->take(10)->get(),
             'productsL' => Product::latest()->take(3)->get(),
         ]);

@@ -50,25 +50,28 @@
             @endforeach
         </div>
         <div class="detail-top">
-            <h5>{{ $product->product_name }}</h5>
+            <h5 style="font-weight: bold; font-size: 166%">{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
-            <h3>RP {{ number_format($product->harga, 0,",",".") }}</h3>
+            <p class="btn-holder">
+                <a href="{{ url('add-to-cart/'.$product->id) }}" class="btn btn-primary" style="float: right" role="button"><span style="font-size: 20px">+</span> Keranjang</a>
+            </p>
+            <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
         <div class="detail-mid">
             <hr>
-                <h5>Detail</h5>
+                <h5 class="mb-2 mt-2" style="font-weight: bold; font-size: 20px">Detail</h5>
             <hr>
-            <p>{!! $product->desc !!}</p>
+            <p class="mb-2">{!! $product->desc !!}</p>
             <hr>
         </div>
-        <div class="detail-bot">
+        <div class="detail-bot mt-2">
             @if ($product->user->image)
             <img src="{{ asset('storage/' . $product->user->image) }}" class="rounded-circle d-block" style="width: 50px; height: 45px">
             @else
             <img class="rounded-circle d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 50px; height: 45px">
             @endif
-            <h6>{{ $product->user->nama_toko }}</h6>
+            <h6 style="font-weight: bold; font-size: 134%">{{ $product->user->nama_toko }}</h6>
         </div>
     </div>
 <script>
