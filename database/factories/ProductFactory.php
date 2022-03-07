@@ -16,11 +16,11 @@ class ProductFactory extends Factory
     {
         return [
             'users_id' => 1,
-            'category_id' => $this->faker->randomElement([1,2,3]),
+            'category_id' => $this->faker->randomElement([1,2,3,4,5,6,7,8]),
             'product_name' => $this->faker->unique()->word(),
             'harga' => 2500,
             'desc' => $this->faker->unique()->sentence(3),
-            'image' => 'product-images/be0sAJqYTi1ToxVDkOIPiwIWLGkZlZ5JbkKRHWMH.jpg,product-images/EFlRPZ2WMz3iSUqbnfKoVZHOKtsRP7go1rLsIMNL.jpg,product-images/ERO0DpjBcDam2plSlQ9zW191ZfoWiiEtprVxTVxz.jpg,product-images/lmAIKCpmPCU4wf9XFYFlM6Znt8EyzlxEFAqPPAWB.jpg,product-images/roqdJZq4sT25NTejHDyzn0gYUSUI9oPa2hduRock.jpg',
+            'image' => 'product-images/5H1b4hn2y7vQqPgACOkcp6m3H2ebNcYhXLcCGlVQ.jpg,product-images/3VpSVbkHQyguN0tBVOPhn5BIjaLV74A6qoIDGTlN.jpg,product-images/1ANBxvE1ovX2lJgpdHejGBqStSSqO5NdW1Jmko8Z.png,product-images/wDFGyRTwGZfmT3dYAcKpF6kwR22qomRRg8ckFbeT.jpg,product-images/wDFGyRTwGZfmT3dYAcKpF6kwR22qomRRg8ckFbeT.jpg',
             'stok' => 20
         ];
     }

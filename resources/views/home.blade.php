@@ -208,14 +208,14 @@
 
 @if (request('category') == 'jajanan')
     <div class="wrap" style="padding-left: 150px">
-        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Snack</p>
+        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Jajanan</p>
         <div class="kartu-container2">
-            @foreach ($productsSnack as $productSnack)
+            @foreach ($productsJajanan as $productJajanan)
                 <div class="kartu2 mb-3">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-                            @foreach (explode(',',$productSnack->image) as $item)
-                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productSnack->name }}"></div>
+                            @foreach (explode(',',$productJajanan->image) as $item)
+                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productJajanan->name }}"></div>
                             @endforeach
                         </div>
                         <div class="swiper-buttonP">
@@ -226,10 +226,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h6 style="font-size:18px">{{ $productSnack->product_name }}</h6>
-                        <p style="margin:0; font-weight:bold">RP {{ number_format($productSnack->harga, 0,",",".") }}</p>
-                        <p style="margin:0">{{ $productSnack->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productSnack->id }}" class="btn btn-primary">Lihat Produk</a>
+                        <h6 style="font-size:18px">{{ $productJajanan->product_name }}</h6>
+                        <p style="margin:0; font-weight:bold">RP {{ number_format($productJajanan->harga, 0,",",".") }}</p>
+                        <p style="margin:0">{{ $productJajanan->user->nama_toko}}</p>
+                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productJajanan->id }}" class="btn btn-primary">Lihat Produk</a>
                     </div>
                 </div>
             @endforeach

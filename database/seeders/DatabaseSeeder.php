@@ -47,8 +47,33 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Snack',
-            'slug' => 'snack'
+            'name' => 'Jajanan',
+            'slug' => 'jajanan'
+        ]);
+
+        Category::create([
+            'name' => 'Obat',
+            'slug' => 'obat',
+        ]);
+
+        Category::create([
+            'name' => 'Sembako',
+            'slug' => 'sembako',
+        ]);
+
+        Category::create([
+            'name' => 'Alat tulis',
+            'slug' => 'alat-tulis',
+        ]);
+
+        Category::create([
+            'name' => 'Pulsa',
+            'slug' => 'pulsa',
+        ]);
+
+        Category::create([
+            'name' => 'Token listrik',
+            'slug' => 'listrik',
         ]);
 
         Product::factory(50)->create();
