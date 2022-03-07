@@ -206,7 +206,7 @@
     </div>
 @endif
 
-@if (request('category') == 'snack')
+@if (request('category') == 'jajanan')
     <div class="wrap" style="padding-left: 150px">
         <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Snack</p>
         <div class="kartu-container2">
