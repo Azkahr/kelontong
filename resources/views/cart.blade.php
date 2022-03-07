@@ -18,13 +18,13 @@
                 <?php $total += $details['harga'] * $details['quantity']; ?>
                 <tr>
                     <td data-th="product">
-                        {{-- @if ($details['image'] > 1) --}}
                         @foreach (explode(',',$details['image']) as $item)
-                            <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
+                            @if (count(explode(',',$details['image'])) > 1)
+                                <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
+                            @else    
+                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
+                            @endif
                         @endforeach
-                        {{-- <img src="{{ $details['image'] }}" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px"> --}}
-                        {{-- @else --}}
-                        {{-- @endif --}}
                         <h4 style="font-weight: bold; font-size: 200%">{{ $details['product_name'] }}</h4>
                     </td>
                     <td data-th="harga">Rp. {{ number_format($details['harga'], 0,",",".") }}</td>
