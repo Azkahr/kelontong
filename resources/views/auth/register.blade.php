@@ -88,7 +88,7 @@
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     <form action="/register" method="post">
                     @csrf
-                        <h1>@{{ judul }}</h1>
+                        <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>
                             <label for="name">Nama :</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autofocus id="name" size="50">
@@ -142,7 +142,7 @@
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     <form action="/daftar" method="post">
                     @csrf
-                        <h1>@{{ judul }}</h1>
+                        <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>
                             <label for="name">Nama :</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autofocus id="name" size="50">
