@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('container')
-@include('layouts.navbar')
+@include('partials/navbar')
     <style>
         .container {
             margin-top: 150px;
