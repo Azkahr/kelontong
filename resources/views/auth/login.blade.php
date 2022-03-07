@@ -102,7 +102,7 @@
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Login</button>
                         </div>
                         <div class="d-flex justify-content-between" style="margin-top:15px;">
-                            <a style="text-decoration:none" href="{{ route('forgot') }}">Forgot Password</a>
+                            <a style="text-decoration:none" href="{{ route('password.request') }}">Forgot Password</a>
                             <a style="text-decoration:none" href="/register">Register</a>
                         </div>
                     </form>

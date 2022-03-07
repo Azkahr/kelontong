@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
 
 class PasswordController extends Controller
 {
@@ -26,28 +25,9 @@ class PasswordController extends Controller
     }
 
     public function reset(Request $request){
-        $request->validate([
-            'email' => 'required|email|exists:users,email'
-        ]);
-
-        $token = Str::random(64);
-        DB::table('password_resets')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => Carbon::now()
-        ]);
-
-        $action_link = route('reset',['token' => $token, 'email' => $request->email]);
-        $body = "Kami telah mengirimkan permintaan untuk mereset password anda untuk web <b>Kelontong.ID </b> " . $request->email . ". Kamu bisa reset password anda setelah menekan link di bawah ini";
-
-        Mail::send('auth.password.email-forgot',['action_link' => $action_link, 'body' => $body], function($message) use ($request){
-            $message->from('shieldman0021@gmail.com','Kelontong.ID');
-            $message->to($request->email,'Kelontong.ID')
-                        ->subject('Reset Password');
-        });
-
+        $request->validate(['email' => 'required|email|exists:users,email']);
+        Password::sendResetLink($request->only('email'));
         notify()->success('Kami telah mengirimkan email untuk mereset password anda', 'Berhasil');
-        
         return back();
     }
 
@@ -55,28 +35,28 @@ class PasswordController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users,email',
             'password' => 'required|min:5|confirmed',
+            'token' => 'required',
             'password_confirmation' => 'required'
         ]);
 
-        $check_token = DB::table('password_resets')->where([
-            'email' => $request->email,
-            'token' => $request->token
-        ])->first();
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+    
+                $user->save();
+    
+                event(new PasswordReset($user));
+            }
+        );
 
-        if(!$check_token){
-            return back()->withInput()->with('error', 'Token tidak valid');
-        } else {
-            User::where('email', $request->email)->update([
-                'password' => bcrypt($request->password)
-            ]);
-
-            DB::table('password_resets')->where([
-                'email' => $request->email
-            ])->delete();
-            
-            notify()->success('Password anda sudah diperbaharui! Anda bisa login dengan password baru', 'Berhasil');
-            
-            return redirect()->route('login')->with('verifiedEmail', $request->email);
+        if($status === Password::PASSWORD_RESET){
+            return redirect()->route('login')->with('status', __($status));
+        }else{
+            notify()->error('Coba Kirimkan Link Sekali Lagi', 'Link Kedaluarsa');
+            return redirect(route('password.request'));
         }
     }
 
