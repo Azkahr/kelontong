@@ -263,7 +263,7 @@ form .btn{
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
 
-                                <a href="{{ route('forgot') }}" style="margin-left: 250px">Forgot password?</a>
+                                <a href="{{ route('password.request') }}" style="margin-left: 250px">Forgot password?</a>
                             </div>
                         </div>
                     </form>
