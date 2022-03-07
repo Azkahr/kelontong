@@ -54,6 +54,10 @@
         width: 60%;
         height: 100%;
     }
+
+    .container .login form a{
+        color: #0a58ca;
+    }
 }
 </style>
 @section('container')
@@ -75,7 +79,7 @@
                     @include('notify::components.notify')
                     <form action="/login" method="post">
                     @csrf
-                        <h1>HAYUU LOGIN</h1>
+                        <p style="font-size:32pt; font-family:Spartan; font-weight:500">HAYUU LOGIN</p>
                         <div>
                             <label for="email">Email :</label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" autofocus id="email" size="50">
@@ -95,14 +99,14 @@
                             @enderror
                         </div>
                         <div>
-                            <label for="remember">Remember Me :</label>
+                            <label style="margin-top: 5px" for="remember">Remember Me :</label>
                             <input type="checkbox" name="remember" id="remember">
                         </div>
                         <div class="d-flex justify-content-center" style="margin-top:15px;">
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Login</button>
                         </div>
                         <div class="d-flex justify-content-between" style="margin-top:15px;">
-                            <a style="text-decoration:none" href="{{ route('forgot') }}">Forgot Password</a>
+                            <a style="text-decoration:none" href="{{ route('password.request') }}">Forgot Password</a>
                             <a style="text-decoration:none" href="/register">Register</a>
                         </div>
                     </form>

@@ -81,9 +81,9 @@ Route::middleware('auth', 'verified', 'isSeller')->group(function(){
     Route::put('/dashboard/update/{id}', [DashboardController::class, 'update']);
 });
 
-Route::get('/password/forgot', [PasswordController::class, 'index'])->name('forgot');
-Route::post('/password/forgot', [PasswordController::class, 'reset'])->name('resetLink');
-Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])->name('reset');
+Route::get('/password/forgot', [PasswordController::class, 'index'])->name('password.request');
+Route::post('/password/forgot', [PasswordController::class, 'reset'])->name('password.email')->middleware('guest');
+Route::get('/password/reset/{token}', [PasswordController::class, 'resetForm'])->name('password.reset');
 Route::post('/password/reset', [PasswordController::class, 'resetPassword'])->name('resetPassword');
 
 Route::middleware('auth', 'verified')->group(function(){

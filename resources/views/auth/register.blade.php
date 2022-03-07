@@ -88,7 +88,7 @@
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     <form action="/register" method="post">
                     @csrf
-                        <h1>@{{ judul }}</h1>
+                        <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>
                             <label for="name">Nama :</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autofocus id="name" size="50">
@@ -130,8 +130,9 @@
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
                         <form>
-                            <div class="d-flex justify-content-start" style="margin-top:15px;">
+                            <div class="d-flex justify-content-between" style="margin-top:15px;">
                                 <button style="color: #0D6EFD" v-on:click.prevent="showSeller()">Daftar Sebagai Seller</button>
+                                <a style="color: #0D6EFD" href="/login">Login</a>
                             </div>
                         </form>
                     </form>
@@ -142,7 +143,7 @@
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     <form action="/daftar" method="post">
                     @csrf
-                        <h1>@{{ judul }}</h1>
+                        <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>
                             <label for="name">Nama :</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autofocus id="name" size="50">
@@ -193,8 +194,9 @@
                             <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
                         </div>
                         <form>
-                            <div class="d-flex justify-content-start" style="margin-top:15px;">
+                            <div class="d-flex justify-content-between" style="margin-top:15px;">
                                 <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai User</button>
+                                <a style="color: #0D6EFD" href="/login">Login</a>
                             </div>
                         </form>
                     </form>
