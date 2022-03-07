@@ -78,7 +78,14 @@
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <img src="{{ URL::asset('assets/img/log-out.svg') }}" style="transform: scale(1.3)">
                             </div>
-                            <form action="/logout" method="post">@csrf<button type="submit" style="margin:0; padding:2px; border: none; background-color:transparent"><span style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600; color:#707C95" class="nav-link-text ms-1" >Logout</span></button></form>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button type="submit" style="margin:0; padding:2px; border: none; background-color:transparent">
+                                    <span style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600; color:#707C95" class="nav-link-text ms-1" >
+                                        Logout
+                                    </span>
+                                </button>
+                            </form>
                         </a>
                     </li>
                 </ul>

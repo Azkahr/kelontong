@@ -28,8 +28,10 @@ class LoginController extends Controller
         ],[
             "email.exists" => "You are not registered"
         ]);
+        
+        $remember = $request->has('remember') ? true : false;
 
-        if(Auth::attempt($credentials, $request->remember)){
+        if(Auth::attempt($credentials, $remember)){
             if(Auth::user()->role == "seller"){
                 return redirect()->intended('/dashboard');
             } elseif(Auth::user()->role == "user"){
