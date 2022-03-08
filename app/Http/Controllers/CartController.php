@@ -47,7 +47,6 @@ class CartController extends Controller
 
                 session()->put('cart', $cart);
 
-
                 return redirect()->back();
             }
         }
@@ -63,6 +62,8 @@ class CartController extends Controller
         session()->put('cart', $cart);
 
         return redirect()->back();
+
+        //
     }
 
     public function update(Request $request) {
