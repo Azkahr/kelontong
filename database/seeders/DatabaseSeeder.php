@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'azkahar@gmail.com',
             'role' => 'seller',
             'nama_toko' => 'Azka Shop',
-            'image' => 'user-images/BWiSI3PYVH9yrgWjOccLISqAkiPlzcwxxSFnoNVQ.jpg',
             'email_verified_at' => now(),
             'password' => bcrypt('password')
         ]);
@@ -67,15 +66,35 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Pulsa',
-            'slug' => 'pulsa',
+            'name' => 'Produk Digital',
+            'slug' => 'produk-digital',
         ]);
 
         Category::create([
-            'name' => 'Token listrik',
-            'slug' => 'listrik',
+            'name' => 'Perlengkapan Mandi',
+            'slug' => 'perlengkapan-mandi',
         ]);
 
-        Product::factory(50)->create();
+        Category::create([
+            'name' => 'Perlengkapan Mencuci',
+            'slug' => 'perlengkapan-mencuci',
+        ]);
+
+        Category::create([
+            'name' => 'Perlengkapan Rumah Tangga',
+            'slug' => 'perlengkapan-rumah-tangga',
+        ]);
+
+        Category::create([
+            'name' => 'Perlengkapan Bayi',
+            'slug' => 'perlengkapan-bayi',
+        ]);
+
+        Category::create([
+            'name' => 'Bahan - Bahan Dapur',
+            'slug' => 'bahan-bahan-dapur',
+        ]);
+
+        // Product::factory(50)->create();
     }
 }

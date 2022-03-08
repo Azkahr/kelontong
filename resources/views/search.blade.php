@@ -16,6 +16,12 @@
         margin: 0;
         margin-bottom: 10px;
     }
+
+    .link-bawah {
+        height: 40px;
+        width: 70px; 
+        margin-left: 115px;
+    }
 </style>
 <div class="container">
     <div class="row">
@@ -47,9 +53,9 @@
             </div>
         </div>
         @endforeach
-        <a href="/">Home</a>
     </div>
 </div>
+<a href="/" class="btn btn-primary link-bawah">Home</a>
 <script>
     feather.replace()
 </script>

@@ -4,7 +4,7 @@
     <thead>
     <tr>
         <th style="width:50%">Product</th>
-        <th style="width:10%">Price</th>
+        <th style="width:10%">Harga</th>
         <th style="width:8%">Quantity</th>
         <th style="width:22%" class="text-center">Subtotal</th>
         <th style="width:20%">Action</th>
@@ -26,6 +26,9 @@
                             @endif
                         @endforeach
                         <h4 style="font-weight: bold; font-size: 200%">{{ $details['product_name'] }}</h4>
+                        {{-- @if($id && !$product->id)
+                            <h1 style="font-weight: bold; size: 100px; color: red;">Produk {{ $details['product_name'] }} tidak tersedia</h1>
+                        @endif --}}
                     </td>
                     <td data-th="harga">Rp. {{ number_format($details['harga'], 0,",",".") }}</td>
                     <td data-th="Quantity">
@@ -37,10 +40,10 @@
                         <button class="btn btn-danger btn-sm remove-from-cart delete" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
                     </td>
                 </tr>
-            @endforeach
+                @endforeach
         @endif
-        
     </tbody>
+    
     <tfoot>
         <tr>
             <td><a href="/" class="btn btn-primary">Home</a></td>
@@ -48,7 +51,7 @@
             <td class="hidden-xs text-center"><strong>Total Belanja Rp.{{ number_format($total, 0,",",".") }}</strong></td>
         </tr>
     </tfoot>
-
+    
     <script type="text/javascript">
 
         $(".update-cart").click(function (e) {
