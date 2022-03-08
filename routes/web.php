@@ -47,11 +47,11 @@ Route::get('/verify-email/resend', function(Request $request){
         $request->user()->sendEmailVerificationNotification();
         return back()->with('success', 'Verifikasi Terkirim');
     } 
-})->name('verification.resend')->middleware('throttle:5,5');
+})->name('verification.resend')->middleware('throttle:5,5,verify-email');
 
 Route::middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'authenticate'])->middleware('throttle:5,5');    
+    Route::post('/login', [LoginController::class, 'authenticate'])->middleware('throttle:5,5,login');    
     
     Route::get('/register', [RegisterController::class, 'index'])->name('register');    
     Route::post('/register', [RegisterController::class, 'store']);
