@@ -39,21 +39,20 @@ class CartController extends Controller
 
             session()->put('cart', $cart);
 
-            smilify('berhasil', 'Berhasil ditambahkan ke keranjang');
-
             return redirect()->back();
 
+            // jika cart tidak kosong maka cek apakah produknya ada, jika ada maka tambahkan/increment quantitynya
             if(isset($cart[$id])){
                 $cart[$id]['quantity']++;
 
                 session()->put('cart', $cart);
 
-                smilify('berhasil', 'Berhasil ditambahkan ke keranjang');
 
                 return redirect()->back();
             }
         }
-
+        
+        // jika item tidak ada di cart maka tambahkan ke cart dengan quantity = 1
         $cart[$id] = [
             "product_name" => $product->product_name,
             "quantity" => 1,
@@ -62,8 +61,6 @@ class CartController extends Controller
         ];
 
         session()->put('cart', $cart);
-
-        smilify('berhasil', 'Berhasil ditambahkan ke keranjang');
 
         return redirect()->back();
     }
