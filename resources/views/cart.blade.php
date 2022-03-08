@@ -19,7 +19,11 @@
                 <tr>
                     <td data-th="product">
                         @foreach (explode(',',$details['image']) as $item)
-                            <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
+                            @if (count(explode(',',$details['image'])) > 1)
+                                <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
+                            @else    
+                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
+                            @endif
                         @endforeach
                         <h4 style="font-weight: bold; font-size: 200%">{{ $details['product_name'] }}</h4>
                     </td>
@@ -27,7 +31,7 @@
                     <td data-th="Quantity">
                         <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity">
                     </td>
-                    <td class="text-center" data-th="Subtotal">Rp. {{ $details['harga'] * $details['quantity'] }}</td>
+                    <td class="text-center" data-th="Subtotal">Rp. {{ number_format($details['harga'] * $details['quantity'], 0,",",".") }}</td>
                     <td class="actions" data-th="">
                         <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}" style="font-weight: bold"><i class="fa fa-refresh"></i> Update</button>
                         <button class="btn btn-danger btn-sm remove-from-cart delete" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
@@ -41,7 +45,7 @@
         <tr>
             <td><a href="/" class="btn btn-primary">Home</a></td>
             <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total Rp.{{ $total }}</strong></td>
+            <td class="hidden-xs text-center"><strong>Total Belanja Rp.{{ number_format($total, 0,",",".") }}</strong></td>
         </tr>
     </tfoot>
 

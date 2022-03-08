@@ -52,18 +52,18 @@
     </div>
 
     <div class="bottom">
-        <a href="/search/?">Terigu</a>
-        <a href="/search/?">Air Mineral</a>
-        <a href="/search/?">Obat</a>
-        <a href="/search/?">Sabun Mandi</a>
-        <a href="/search/?">Sembako</a>
-        <a href="/search/?">Sabun Cuci Piring</a>
-        <a href="/search/?">Beras</a>
-        <a href="/search/?">Mi Instan</a>
-        <a href="/search/?">Alat Tulis</a>
-        <a href="/search/?">Gas</a>
-        <a href="/search/?">Token Listrik</a>
-        <a href="/search/?">Pulsa</a>
+        <a href="/search?search=">Terigu</a>
+        <a href="/search?search=">Air Mineral</a>
+        <a href="/search?search=">Obat</a>
+        <a href="/search?search=">Sabun Mandi</a>
+        <a href="/search?search=">Sembako</a>
+        <a href="/search?search=">Sabun Cuci Piring</a>
+        <a href="/search?search=">Beras</a>
+        <a href="/search?search=">Mi Instan</a>
+        <a href="/search?search=">Alat Tulis</a>
+        <a href="/search?search=">Gas</a>
+        <a href="/search?search=">Token Listrik</a>
+        <a href="/search?search=">Pulsa</a>
     </div>
 </nav>
 
