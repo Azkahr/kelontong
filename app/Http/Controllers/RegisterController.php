@@ -33,7 +33,6 @@ class RegisterController extends Controller
         event(new Registered($user));
 
         if(Auth::attempt($request->only('email', 'password'))){
-            notify()->success('Register Sukses', 'Berhasil');
             return redirect('/verify-email');
         } else {
             notify()->error('Register Gagal', 'Gagal');
