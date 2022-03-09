@@ -84,4 +84,16 @@ class CartDetailController extends Controller
             return back()->with('success', 'Item berhasil diupdate');
         }
     }
+    
+    public function destroy($id){
+
+        $itemdetail = CartDetail::findOrFail($id);
+        // update total cart 
+        $itemdetail->cart->updateTotal($itemdetail->cart, '-' . $itemdetail->subtotal);
+        if($itemdetail->delete()){
+            return back()->with('success', 'Item berhasil dihapus');
+        } else {
+            return back()->with('error', 'Item gagal dihapus');
+        }
+    }
 }
