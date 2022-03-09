@@ -75,5 +75,13 @@ class CartDetailController extends Controller
             $itemdetail->updateTotal($itemdetail->cart, ($itemdetail->harga * $qty));
             return back()->with('success', 'Item berhasil diupdate');
         }
+        if($param == 'kurang'){
+            // update detail cart
+            $qty = 1;
+            $itemdetail->updateDetail($itemdetail, '-' . $qty, $itemdetail->harga);
+            // update total cart 
+            $itemdetail->cart->updateTotal($itemdetail->cart, '-' . ($itemdetail->harga - $qty));
+            return back()->with('success', 'Item berhasil diupdate');
+        }
     }
 }
