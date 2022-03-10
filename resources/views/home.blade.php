@@ -1,10 +1,12 @@
 @extends('layouts.main')
-@section('head')
-<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-<link rel="stylesheet" href="{{ asset('assets/css/homepage.css') }}">
+@section('headS')
 <script>
     $('html, body').css('overflow', 'hidden');
 </script>
+@endsection
+@section('headC')
+<link rel="stylesheet" href="{{ asset('assets/css/homepage.css') }}">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 @endsection
 @section('container')
 @include('partials/loader')
@@ -15,289 +17,121 @@
     </div>
 </div>
 
-<div Class="hero-container">
-    <div class="hero">
-        <div class="banner">
-            <img src="{{ asset('assets/img/banner.png') }}" alt="banner">
+<div class="background-element">
+    <img src="{{ asset('assets/img/fluid.png') }}" alt="">
+    <img src="{{ asset('assets/img/fluid.png') }}" alt="">
+    <img src="{{ asset('assets/img/fluid.png') }}" alt="">
+</div>
+
+<div class="hero">
+    <div class="main">
+        <div class="slider">
+            <img class="banner banner1" src="{{ asset('assets/img/kitchen 1.jpg') }}" alt="">
+            <img class="banner banner2" src="{{ asset('assets/img/kitchen 2.jpg') }}" alt="">
+            <img class="banner banner3" src="{{ asset('assets/img/food 1.jpg') }}" alt="">
         </div>
-        <div class="content">
-            <div class="container">
-                <div class="swiper2">
-                    <div class="swiper-wrapper">
-                        @foreach ($productsMakanan as $productMakanan)
-                            <div class="swiper-slide">
-                                <div class="kartu4">
-                                    <div class="swiper">
-                                        <div class="swiper-wrapper">
-                                            @foreach (explode(',',$productMakanan->image) as $item)
-                                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMakanan->name }}"></div>
-                                            @endforeach
-                                        </div>
-                                        <div class="swiper-buttonP">
-                                            <span style="margin:3px" data-feather="arrow-left"></span>
-                                        </div>
-                                        <div class="swiper-buttonN">
-                                            <span style="margin:3px" data-feather="arrow-right"></span>
-                                        </div>
-                                    </div>
-                                    <div class="contentK">
-                                        <h6 style="font-size:18px">{{ $productMakanan->product_name }}</h6>
-                                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMakanan->harga, 0,",",".") }}</p>
-                                        <p style="margin:0">{{ $productMakanan->user->nama_toko}}</p>
-                                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productMakanan->id }}" class="btn btn-primary">Lihat Produk</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+        <div class="arrow-container">
+            <span id="prevA" class="prevA" style="opacity:0; background-color:#536AEC; color:white; transform:scale(1.3) translateX(5px); transition:0.5s; border-radius: 50%" data-feather="arrow-left"></span>
+            <span class="nextA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(-5px); transition:0.5s; border-radius: 50%" data-feather="arrow-right"></span>
         </div>
     </div>
 </div>
 
-@if (!request('category'))
-<div class="category-container">
-    <div class="category">
-        <p style="margin: 0px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Makanan</p>
-        <div class="kartu-container1">
-            @foreach ($productsMakanan as $productMakanan)
-                <div class="kartu1 mb-3">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            @foreach (explode(',',$productMakanan->image) as $item)
-                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMakanan->name }}"></div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-buttonP">
-                            <span style="margin:3px" data-feather="arrow-left"></span>
-                        </div>
-                        <div class="swiper-buttonN">
-                            <span style="margin:3px" data-feather="arrow-right"></span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h6 style="font-size:18px">{{ $productMakanan->product_name }}</h6>
-                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMakanan->harga, 0,",",".") }}</p>
-                        <p style="margin:0">{{ $productMakanan->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productMakanan->id }}" class="btn btn-primary">Lihat Produk</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Minuman</p>
-        <div class="kartu-container2">
-            @foreach ($productsMinuman as $productMinuman)
-                <div class="kartu2 mb-3">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            @foreach (explode(',',$productMinuman->image) as $item)
-                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMinuman->name }}"></div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-buttonP">
-                            <span style="margin:3px" data-feather="arrow-left"></span>
-                        </div>
-                        <div class="swiper-buttonN">
-                            <span style="margin:3px" data-feather="arrow-right"></span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h6 style="font-size:18px">{{ $productMinuman->product_name }}</h6>
-                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMinuman->harga, 0,",",".") }}</p>
-                        <p style="margin:0">{{ $productMinuman->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productMinuman->id }}" class="btn btn-primary">Lihat Produk</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+<div class="category">
+    <div class="cate c1">
+        <p class="cateText t1">Makanan</p>
+        <img class="cateImg img1" src="{{ asset('assets/img/food 2.jpg') }}" alt="makanan">
+    </div>
+    <div class="cate c2">
+        <p class="cateText t2">Minuman</p>
+        <img class="cateImg img2" src="{{ asset('assets/img/drink 1.webp') }}" alt="minuman">
+    </div>
+    <div class="cate c3 ">
+        <p class="cateText t3">Perlengkapan Mandi</p>
+        <img class="cateImg img3" src="{{ asset('assets/img/bath 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c4">
+        <p class="cateText t4">Perlengkapan Mencuci</p>
+        <img class="cateImg img4" src="{{ asset('assets/img/clean 2.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c5">
+        <p class="cateText t5">Perlengkapan Rumah Tangga</p>
+        <img class="cateImg img5" src="{{ asset('assets/img/house 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c6">
+        <p class="cateText t6">Perlengkapan Bayi</p>
+        <img class="cateImg img6" src="{{ asset('assets/img/baby 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c7">
+        <p class="cateText t7">Bahan-Bahan Dapur</p>
+        <img class="cateImg img7" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c8">
+        <p class="cateText t8">Produk Digital</p>
+        <img class="cateImg img8" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c9">
+        <p class="cateText t9">Sembako</p>
+        <img class="cateImg img9" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c10">
+        <p class="cateText t10">Obat</p>
+        <img class="cateImg img10" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c11">
+        <p class="cateText t11">Jajanan</p>
+        <img class="cateImg img11" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
+    </div>
+    <div class="cate c12">
+        <p class="cateText t12">Alat tulis</p>
+        <img class="cateImg img12" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
     </div>
 </div>
 
-<div class="main">
-    <div class="kartu-container3">
-        @foreach ($products as $product)
-            <div class="kartu3">
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        @foreach (explode(',',$product->image) as $item)
-                            <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $product->name }}"></div>
-                        @endforeach
-                    </div>
-                    <div class="swiper-buttonP">
-                        <span style="margin:3px" data-feather="arrow-left"></span>
-                    </div>
-                    <div class="swiper-buttonN">
-                        <span style="margin:3px" data-feather="arrow-right"></span>
-                    </div>
-                </div>
-                <div class="content">
-                    <h6 style="font-size:18px">{{ $product->product_name }}</h6>
-                    <p style="margin:0; font-weight:bold">RP {{ number_format($product->harga, 0,",",".") }}</p>
-                    <small class="text-muted">{{ $product->category->name }}</small>
-                    <p style="margin:0;">{{ $product->user->nama_toko}}</p>
-                    <a style="margin:20px 0px 25px 0px" href="/detail/{{ $product->id }}" class="btn btn-primary">Lihat Produk</a>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-@endif
-
-@if (request('category') == 'minuman')
-    <div class="wrap" style="padding-left: 150px">
-        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Minuman</p>
-        <div class="kartu-container2">
-            @foreach ($productsMinuman as $productMinuman)
-                <div class="kartu2 mb-3">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            @foreach (explode(',',$productMinuman->image) as $item)
-                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMinuman->name }}"></div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-buttonP">
-                            <span style="margin:3px" data-feather="arrow-left"></span>
-                        </div>
-                        <div class="swiper-buttonN">
-                            <span style="margin:3px" data-feather="arrow-right"></span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h6 style="font-size:18px">{{ $productMinuman->product_name }}</h6>
-                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMinuman->harga, 0,",",".") }}</p>
-                        <p style="margin:0">{{ $productMinuman->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productMinuman->id }}" class="btn btn-primary">Lihat Produk</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endif
-
-@if (request('category') == 'makanan')
-    <div class="wrap" style="padding-left: 150px">
-        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Makanan</p>
-        <div class="kartu-container2">
-            @foreach ($productsMakanan as $productMakanan)
-                <div class="kartu2 mb-3">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            @foreach (explode(',',$productMakanan->image) as $item)
-                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productMakanan->name }}"></div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-buttonP">
-                            <span style="margin:3px" data-feather="arrow-left"></span>
-                        </div>
-                        <div class="swiper-buttonN">
-                            <span style="margin:3px" data-feather="arrow-right"></span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h6 style="font-size:18px">{{ $productMakanan->product_name }}</h6>
-                        <p style="margin:0; font-weight:bold">RP {{ number_format($productMakanan->harga, 0,",",".") }}</p>
-                        <p style="margin:0">{{ $productMakanan->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productMakanan->id }}" class="btn btn-primary">Lihat Produk</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endif
-
-@if (request('category') == 'jajanan')
-    <div class="wrap" style="padding-left: 150px">
-        <p style="margin: 20px 0px 0px 30px; font-size:25px; font-family: Spartan, sans-serif; font-weight:700">Jajanan</p>
-        <div class="kartu-container2">
-            @foreach ($productsJajanan as $productJajanan)
-                <div class="kartu2 mb-3">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            @foreach (explode(',',$productJajanan->image) as $item)
-                                <div class="swiper-slide" style="user-select: none"><img style="object-fit: cover; width: 100%; height:200px; border-top-right-radius:7px; border-top-left-radius:7px" src="{{ asset('storage/'.$item) }}" alt="{{ $productJajanan->name }}"></div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-buttonP">
-                            <span style="margin:3px" data-feather="arrow-left"></span>
-                        </div>
-                        <div class="swiper-buttonN">
-                            <span style="margin:3px" data-feather="arrow-right"></span>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h6 style="font-size:18px">{{ $productJajanan->product_name }}</h6>
-                        <p style="margin:0; font-weight:bold">RP {{ number_format($productJajanan->harga, 0,",",".") }}</p>
-                        <p style="margin:0">{{ $productJajanan->user->nama_toko}}</p>
-                        <a style="margin:20px 0px 25px 0px" href="/detail/{{ $productJajanan->id }}" class="btn btn-primary">Lihat Produk</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endif
-<form action="/" method="get">
-    @if (request('category'))
-        <input type="hidden" name="category" value="{{ request('category') }}">
-    @endif
-</form>
-@endsection
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, numquam? Accusantium officiis, laudantium deleniti est ad nesciunt fuga maiores vel consequuntur, nihil cumque ipsa distinctio atque voluptates! Obcaecati saepe dolorum laborum ex asperiores, nisi aut aperiam minima. Aspernatur, ducimus temporibus quia ex laborum hic odio dicta magnam aliquam aut quas.
 
 @section('script')
 <script>
+    feather.replace();
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.js"></script>
+<script>
 $(document).ready(function(){
     $('.loader').fadeOut(500);
+
     $('html, body').css('overflow', 'initial');
+
     $('.cartPage').hide();
+
     $('.cartBtn').click(function(){
         disableScroll();
         $('.cartPage').show();
     });
+
     $('#btnClose').click(function(){
         enableScroll();
         $('.cartPage').hide();
     });
+
+    $('.background-element').addClass('bE');
+
+    $('.slider').slick({
+        prevArrow: '.prevA',
+        nextArrow: '.nextA',
+    });
+
+    $('.main').hover(function () {
+        $('.prevA').css('transform', 'translateX(-10px) scale(1.3)');
+        $('.prevA').css('opacity', '100%');
+        $('.nextA').css('transform', 'translateX(10px) scale(1.3)');
+        $('.nextA').css('opacity', '100%');
+    }, function () {
+        $('.prevA').css('transform', 'translateX(5px) scale(1.3)');
+        $('.prevA').css('opacity', '0');
+        $('.nextA').css('transform', 'translateX(-5px) scale(1.3)');
+        $('.nextA').css('opacity', '0');
+    });
 });
 </script>
-
-<script>
-    feather.replace()
-</script>
-
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
-<script>
-const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  direction: 'horizontal',
-  loop: true,
-  slidesPerView:1,
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-buttonN',
-    prevEl: '.swiper-buttonP',
-  },
-});
-
-const swiper2 = new Swiper('.swiper2', {
-  // Optional parameters
-  direction: 'horizontal',
-  slidesPerView: 3,
-  loop: true,
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-buttonN2',
-    prevEl: '.swiper-buttonP2',
-  },
-
-  autoplay: {
-   delay: 3000,
-   disableOnInteraction: false,
-   pauseOnMouseEnter: true,
- },
-});
-</script>
+@endsection
 @endsection
