@@ -41,7 +41,7 @@ class CartDetailController extends Controller
         $qty = 1; 
         $harga = $itemproduct->harga;
         $subtotal = ($qty * $harga);
-        
+
         if($cekdetail){
             // update detail di table cart_details
             $cekdetail->updateDetail($cekdetail, $qty, $harga);
@@ -91,10 +91,8 @@ class CartDetailController extends Controller
         $itemdetail = CartDetail::findOrFail($id);
         // update total cart 
         $itemdetail->cart->updateTotal($itemdetail->cart, '-' . $itemdetail->subtotal);
-        if($itemdetail->delete()){
-            return back()->with('success', 'Item berhasil dihapus');
-        } else {
-            return back()->with('error', 'Item gagal dihapus');
-        }
+        
+        $itemdetail->delete();
+        return back()->with('success', 'Item berhasil dihapus');
     }
 }

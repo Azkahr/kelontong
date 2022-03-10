@@ -36,9 +36,9 @@
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>
-                                            {{ $detail->product->product_name }}
+                                            {{ $product->product_name }}
                                         </td>
-                                        <td>Rp.{{ number_format($detail->harga, 2) }}</td>
+                                        <td>Rp.{{ number_format($detail->harga, 0,",",".") }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <form action="{{ route('cartdetail.update', $detail->id) }}" method="POST">
@@ -63,7 +63,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            Rp.{{ number_format($detail->subtotal, 2) }}
+                                            Rp.{{ number_format($detail->subtotal, 0,",",".") }}
                                         </td>
                                         <td>
                                             <form action="{{ route('cartdetail.destroy', $detail->id) }}" method="post" style="display: inline">
@@ -75,9 +75,53 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
-                            </tbody>
+                                    @endforeach
+                                </tbody>
                         </table>
+                        <a href="/" class="btn btn-primary">Lanjut belanja</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Ringkasan
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>No Invoice</td>
+                                <td class="text-right">
+                                    {{ $itemcart->no_invoice }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td class="text-right">
+                                    Rp.{{ number_format($itemcart->subtotal, 0,",",".") }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td class="text-right">
+                                    Rp.{{ number_format($itemcart->total, 0,",",".") }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-primary btn-block">Checkout</button>
+                            </div>
+                            <div class="col">
+                                <form action="{{ route('clearCart', $itemcart->id) }}" method="POST">
+                                    @method('patch')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-block">Kosongkan cart</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

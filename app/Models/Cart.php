@@ -18,7 +18,7 @@ class Cart extends Model
     public function detail(){
         return $this->hasMany(CartDetail::class, 'carts_id');
     }
-
+    
     public function updateTotal($itemcart, $subtotal){
         $this->attributes['subtotal'] = $itemcart->subtotal + $subtotal;
         $this->attributes['total'] = $itemcart->total + $subtotal;

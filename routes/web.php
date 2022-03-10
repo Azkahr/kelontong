@@ -99,11 +99,11 @@ Route::middleware('auth', 'verified')->group(function(){
 Route::middleware('auth', 'verified')->group(function(){
     // cart
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::patch('/clear-cart/{id}', [CartController::class, 'clearCart']);
+    Route::patch('/clear-cart/{id}', [CartController::class, 'clearCart'])->name('clearCart');
     // cart detail
     Route::post('/cartdetail/store', [CartDetailController::class, 'store'])->name('cartdetail.store');
     Route::patch('/cartdetail/update', [CartDetailController::class, 'update'])->name('cartdetail.update');
-    Route::delete('/cartdetail/destroy', [CartDetailController::class, 'destroy'])->name('cartdetail.destroy');
+    Route::delete('/cartdetail/destroy/{id}', [CartDetailController::class, 'destroy'])->name('cartdetail.destroy');
 });
 
 Route::get('/search', [HomeController::class, 'search']);
