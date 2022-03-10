@@ -6,7 +6,7 @@
             </form>
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
-                    <a href="/cart">
+                    <a href="{{ route('cart') }}">
                         <button class="cartBtn">
                             <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
                         </button>

@@ -54,7 +54,7 @@ class CartDetailController extends Controller
             $inputan['qty'] = $qty;
             $inputan['harga'] = $harga;
             $inputan['subtotal'] = ($harga * $qty);
-            $itemdetail = CartDetail::create('inputan');
+            $itemdetail = CartDetail::create($inputan);
             // update subtotal dan total pada table cart
             $itemdetail->cart->updateTotal($itemdetail->cart, $subtotal);
 
@@ -81,6 +81,7 @@ class CartDetailController extends Controller
             $itemdetail->updateDetail($itemdetail, '-' . $qty, $itemdetail->harga);
             // update total cart 
             $itemdetail->cart->updateTotal($itemdetail->cart, '-' . ($itemdetail->harga - $qty));
+            
             return back()->with('success', 'Item berhasil diupdate');
         }
     }
