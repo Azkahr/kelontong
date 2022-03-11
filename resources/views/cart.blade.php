@@ -36,7 +36,7 @@
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>
-                                            {{ $product->product_name }}
+                                            {{ $detail->product_name }}
                                         </td>
                                         <td>Rp.{{ number_format($detail->harga, 0,",",".") }}</td>
                                         <td>

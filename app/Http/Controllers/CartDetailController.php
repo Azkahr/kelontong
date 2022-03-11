@@ -51,6 +51,7 @@ class CartDetailController extends Controller
             $inputan = $request->all();
             $inputan['carts_id'] = $itemcart->id;
             $inputan['products_id'] = $itemcart->id;
+            $inputan['product_name'] = $itemproduct->product_name;
             $inputan['qty'] = $qty;
             $inputan['harga'] = $harga;
             $inputan['subtotal'] = ($harga * $qty);
@@ -73,6 +74,7 @@ class CartDetailController extends Controller
             $itemdetail->updateDetail($itemdetail, $qty, $itemdetail->harga);
             // update total cart
             $itemdetail->updateTotal($itemdetail->cart, ($itemdetail->harga * $qty));
+            
             return back()->with('success', 'Item berhasil diupdate');
         }
         if($param == 'kurang'){

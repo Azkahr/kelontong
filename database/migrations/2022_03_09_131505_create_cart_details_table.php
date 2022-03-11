@@ -17,6 +17,7 @@ class CreateCartDetailsTable extends Migration
             $table->id();
             $table->foreignId('products_id');
             $table->foreignId('carts_id');
+            $table->string('product_name');
             $table->double('qty', 12, 2)->default(0);
             $table->double('harga', 12, 2)->default(0);
             $table->double('subtotal', 12, 2)->default(0);
