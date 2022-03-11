@@ -146,15 +146,69 @@
 .best-seller {
     margin-top: 50px;
     width: 100%;
-    height: 200px;
-    background-color: black;
+    padding-left: 50px;
+    display: flex;
 }
 
-.slogan {
-    text-align: center;
-    font-family: "Spartan";
-    font-weight: 700;
+.best-text {
     font-size: 30px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 900;
+    color: #536aec;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.blue-bg {
+    width: 20%;
+    height: 350px;
+    background-color: #536aec;
+}
+
+.card-container {
+    margin-left: 80px;
+    margin-top: 5px;
+    align-self: center;
+    display: flex;
+    width: 90%;
+    position: absolute;
+}
+
+.slider-best {
+    width: 100%;
+}
+
+.cardB {
+    width: 180px !important;
+    height: 250px !important;
+    margin: 0px 10px;
+    background-color: wheat;
+}
+
+@media only screen and (min-width: 1920px) {
+    .background-element {
+        transform: translateY(30px);
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: stretch;
+        z-index: 2;
+    }
+
+    .main {
+        width: 85%;
+        height: 900px;
+        grid-area: main;
+        transition: 1s;
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .category {
+        width: 85%;
+        display: grid;
+        grid-template-columns: repeat(6, 260px);
+        grid-template-rows: repeat(2, 250px);
+        justify-content: space-between;
+        row-gap: 30px;
+    }
 }

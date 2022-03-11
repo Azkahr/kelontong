@@ -92,13 +92,76 @@
 
 <hr style="width: 80%; opacity:60%; margin: 40px auto 0px auto; height:2px">
 
-<div class="slogan">HAYUU JAJAN</div>
-
-<hr style="width: 80%; opacity:60%; margin: 0px auto 0px auto; height:2px">
-
 <div class="best-seller">
-
+    <div class="blue-bg"></div>
+    <p class="best-text">Best Seller</p>
+    <div class="card-container">
+        <div class="slider-best">
+            <div class="cardB cb1">
+                <div class="cImg">
+                    <img src="" alt="">
+                </div>
+                <div class="cContent">
+                    <h4>Nama Product</h4>
+                    <p> desc</p>
+                    <p>dll</p>
+                </div>
+            </div>
+            <div class="cardB cb2">
+                <div class="cImg">
+                    <img src="" alt="">
+                </div>
+                <div class="cContent">
+                    <h4>Nama Product</h4>
+                    <p> desc</p>
+                    <p>dll</p>
+                </div>
+            </div>
+            <div class="cardB cb3">
+                <div class="cImg">
+                    <img src="" alt="">
+                </div>
+                <div class="cContent">
+                    <h4>Nama Product</h4>
+                    <p> desc</p>
+                    <p>dll</p>
+                </div>
+            </div>
+            <div class="cardB cb4">
+                <div class="cImg">
+                    <img src="" alt="">
+                </div>
+                <div class="cContent">
+                    <h4>Nama Product</h4>
+                    <p> desc</p>
+                    <p>dll</p>
+                </div>
+            </div>
+            <div class="cardB cb5">
+                <div class="cImg">
+                    <img src="" alt="">
+                </div>
+                <div class="cContent">
+                    <h4>Nama Product</h4>
+                    <p> desc</p>
+                    <p>dll</p>
+                </div>
+            </div>
+            <div class="cardB cb5">
+                <div class="cImg">
+                    <img src="" alt="">
+                </div>
+                <div class="cContent">
+                    <h4>Nama Product</h4>
+                    <p> desc</p>
+                    <p>dll</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt culpa soluta quod eveniet dolorum deleniti voluptas accusantium ducimus voluptatibus nisi. Alias, similique. Architecto earum dignissimos eligendi, exercitationem quasi quae eveniet sapiente ipsam non ducimus soluta repellat sequi illo perferendis voluptates ipsum ex fugit quis eius eos. A amet eius eos.
 
 @section('script')
 <script>
@@ -128,6 +191,10 @@ $(document).ready(function(){
     $('.slider').slick({
         prevArrow: '.prevA',
         nextArrow: '.nextA',
+    });
+
+    $('.slider-best').slick({
+        slidesPerRow: 6,
     });
 
     $('.main').hover(function () {
