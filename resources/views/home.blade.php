@@ -94,6 +94,8 @@
 
 <div class="slogan">HAYUU JAJAN</div>
 
+<hr style="width: 80%; opacity:60%; margin: 0px auto 0px auto; height:2px">
+
 <div class="best-seller">
 
 </div>
