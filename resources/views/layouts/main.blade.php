@@ -17,7 +17,6 @@
     @notifyCss
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
     html,body{

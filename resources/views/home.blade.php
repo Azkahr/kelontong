@@ -31,64 +31,72 @@
             <img class="banner banner3" src="{{ asset('assets/img/food 1.jpg') }}" alt="">
         </div>
         <div class="arrow-container">
-            <span id="prevA" class="prevA" style="opacity:0; background-color:#536AEC; color:white; transform:scale(1.3) translateX(5px); transition:0.5s; border-radius: 50%" data-feather="arrow-left"></span>
+            <span id="prevA" class="prevA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(5px); transition:0.5s; border-radius: 50%" data-feather="arrow-left"></span>
             <span class="nextA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(-5px); transition:0.5s; border-radius: 50%" data-feather="arrow-right"></span>
         </div>
     </div>
 </div>
 
-<div class="category">
-    <div class="cate c1">
-        <p class="cateText t1">Makanan</p>
-        <img class="cateImg img1" src="{{ asset('assets/img/food 2.jpg') }}" alt="makanan">
-    </div>
-    <div class="cate c2">
-        <p class="cateText t2">Minuman</p>
-        <img class="cateImg img2" src="{{ asset('assets/img/drink 1.webp') }}" alt="minuman">
-    </div>
-    <div class="cate c3 ">
-        <p class="cateText t3">Perlengkapan Mandi</p>
-        <img class="cateImg img3" src="{{ asset('assets/img/bath 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c4">
-        <p class="cateText t4">Perlengkapan Mencuci</p>
-        <img class="cateImg img4" src="{{ asset('assets/img/clean 2.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c5">
-        <p class="cateText t5">Perlengkapan Rumah Tangga</p>
-        <img class="cateImg img5" src="{{ asset('assets/img/house 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c6">
-        <p class="cateText t6">Perlengkapan Bayi</p>
-        <img class="cateImg img6" src="{{ asset('assets/img/baby 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c7">
-        <p class="cateText t7">Bahan-Bahan Dapur</p>
-        <img class="cateImg img7" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c8">
-        <p class="cateText t8">Produk Digital</p>
-        <img class="cateImg img8" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c9">
-        <p class="cateText t9">Sembako</p>
-        <img class="cateImg img9" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c10">
-        <p class="cateText t10">Obat</p>
-        <img class="cateImg img10" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c11">
-        <p class="cateText t11">Jajanan</p>
-        <img class="cateImg img11" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
-    </div>
-    <div class="cate c12">
-        <p class="cateText t12">Alat tulis</p>
-        <img class="cateImg img12" src="{{ asset('assets/img/drink 1.jpg') }}" alt="minuman">
+<div class="category-container">
+    <div class="category">
+        <div class="cate c1">
+            <p class="cateText t1">Makanan</p>
+            <img class="cateImg img1" src="{{ asset('assets/img/food 2.jpg') }}" alt="makanan">
+        </div>
+        <div class="cate c2">
+            <p class="cateText t2">Minuman</p>
+            <img class="cateImg img2" src="{{ asset('assets/img/drink 1.webp') }}" alt="minuman">
+        </div>
+        <div class="cate c3 ">
+            <p class="cateText t3">Mandi</p>
+            <img class="cateImg img3" src="{{ asset('assets/img/bath 1.jpg') }}" alt="Perlengkapan Mandi">
+        </div>
+        <div class="cate c4">
+            <p class="cateText t4">Mencuci</p>
+            <img class="cateImg img4" src="{{ asset('assets/img/clean 2.jpg') }}" alt="Perlengkapan Mencuci">
+        </div>
+        <div class="cate c5">
+            <p class="cateText t5">Rumah Tangga</p>
+            <img class="cateImg img5" src="{{ asset('assets/img/house 1.jpg') }}" alt="Perlengkapan Rumah Tangga">
+        </div>
+        <div class="cate c6">
+            <p class="cateText t6">Bayi</p>
+            <img class="cateImg img6" src="{{ asset('assets/img/baby 1.jpg') }}" alt="Perlengkapan Bayi">
+        </div>
+        <div class="cate c7">
+            <p class="cateText t7">Dapur</p>
+            <img class="cateImg img7" src="{{ asset('assets/img/kitchen 3.webp') }}" alt="Bahan-Bahan Dapur">
+        </div>
+        <div class="cate c8">
+            <p class="cateText t8">Digital</p>
+            <img class="cateImg img8" src="{{ asset('assets/img/digital 1.png') }}" alt="Produk Digital">
+        </div>
+        <div class="cate c9">
+            <p class="cateText t9">Sembako</p>
+            <img class="cateImg img9" src="{{ asset('assets/img/sembako 1.png') }}" alt="Sembako">
+        </div>
+        <div class="cate c10">
+            <p class="cateText t10">Obat</p>
+            <img class="cateImg img10" src="{{ asset('assets/img/obat 1.jpg') }}" alt="Obat">
+        </div>
+        <div class="cate c11">
+            <p class="cateText t11">Jajanan</p>
+            <img class="cateImg img11" src="{{ asset('assets/img/jajanan 1.jpg') }}" alt="Jajanan">
+        </div>
+        <div class="cate c12">
+            <p class="cateText t12">Alat tulis</p>
+            <img class="cateImg img12" src="{{ asset('assets/img/tulis 1.jpg') }}" alt="Alat tulis">
+        </div>
     </div>
 </div>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, numquam? Accusantium officiis, laudantium deleniti est ad nesciunt fuga maiores vel consequuntur, nihil cumque ipsa distinctio atque voluptates! Obcaecati saepe dolorum laborum ex asperiores, nisi aut aperiam minima. Aspernatur, ducimus temporibus quia ex laborum hic odio dicta magnam aliquam aut quas.
+<hr style="width: 80%; opacity:60%; margin: 40px auto 0px auto; height:2px">
+
+<div class="slogan">HAYUU JAJAN</div>
+
+<div class="best-seller">
+
+</div>
 
 @section('script')
 <script>
