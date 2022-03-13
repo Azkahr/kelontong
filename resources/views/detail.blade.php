@@ -53,9 +53,13 @@
             <h5 style="font-weight: bold; font-size: 166%">{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
-            <p class="btn-holder">
-                <a href="{{ url('add-to-cart/'.$product->id) }}" class="btn btn-primary" style="float: right" role="button"><span style="font-size: 20px">+</span> Keranjang</a>
-            </p>
+            <form action="{{ route('cartdetail.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="products_id" value="{{ $product->id }}">
+                <button type="submit" class="btn btn-block btn-primary" style="float: right">
+                    <i class="fa fa-shopping-cart"> Tambahkan ke Keranjang</i>
+                </button>
+            </form>
             <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
         <div class="detail-mid">

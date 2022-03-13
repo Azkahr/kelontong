@@ -8,6 +8,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Session;
@@ -96,10 +97,13 @@ Route::middleware('auth', 'verified')->group(function(){
 });
 
 Route::middleware('auth', 'verified')->group(function(){
-    Route::get('/cart', [CartController::class, 'index']);
-    Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart']);
-    Route::patch('update-cart', [CartController::class, 'update']);
-    Route::delete('remove-from-cart', [CartController::class, 'delete']);
+    // cart
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::patch('/clear-cart/{id}', [CartController::class, 'clearCart'])->name('clearCart');
+    // cart detail
+    Route::post('/cartdetail/store', [CartDetailController::class, 'store'])->name('cartdetail.store');
+    Route::patch('/cartdetail/update', [CartDetailController::class, 'update'])->name('cartdetail.update');
+    Route::delete('/cartdetail/destroy/{id}', [CartDetailController::class, 'destroy'])->name('cartdetail.destroy');
 });
 
 Route::get('/search', [HomeController::class, 'search']);
