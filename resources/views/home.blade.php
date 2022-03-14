@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<hr style="width: 80%; opacity:60%; margin: 40px auto 0px auto; height:2px">
+<hr style="width: 80%; opacity:60%; margin: 40px auto 40px auto; height:2px">
 
 <div class="best-seller">
     <div class="blue-bg"></div>
@@ -117,7 +117,36 @@
     </div>
 </div>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt culpa soluta quod eveniet dolorum deleniti voluptas accusantium ducimus voluptatibus nisi. Alias, similique. Architecto earum dignissimos eligendi, exercitationem quasi quae eveniet sapiente ipsam non ducimus soluta repellat sequi illo perferendis voluptates ipsum ex fugit quis eius eos. A amet eius eos.
+<div class="diskon">
+    <div class="blue-bg2"></div>
+    <p class="dis-text">Diskon</p>
+    <div class="card-container2">
+        <div class="slider-dis">
+            @foreach ($productsBest as $pb)
+            <div class="cardB cb{{ $loop->iteration }}">
+                <div class="cImg">
+                    @php
+                        $fotoMain = explode(',', $pb->image);
+                    @endphp
+                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                </div>
+                <div class="cContent">
+                    <h4>{{ $pb->product_name }}</h4>
+                    <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <span class="prevA3" data-feather="arrow-left"></span>
+        <span class="nextA3" data-feather="arrow-right"></span>
+    </div>
+</div>
+
+<hr style="width: 80%; opacity:60%; margin: 40px auto 40px auto; height:2px">
+
+<div class="footer">
+    &copy; 
+</div>
 
 @section('script')
 <script>
@@ -156,10 +185,13 @@ $(document).ready(function(){
         centerPadding: '0px',
     });
 
-    $('.cImg').slick({
-        slidesPerRow: 1,
-        arrows:false,
-
+    $('.slider-dis').slick({
+        prevArrow: '.prevA3',
+        nextArrow: '.nextA3',
+        centerMode: true,
+        slidesToShow: 6,
+        draggable: false,
+        centerPadding: '0px',
     });
 
     $('.main').hover(function () {
@@ -180,6 +212,14 @@ $(document).ready(function(){
     }, function () {
         $('.prevA2').css('transform', 'translateX(5px) scale(1.3)');
         $('.nextA2').css('transform', 'translateX(5px) scale(1.3)');
+    });
+
+    $('.card-container2').hover(function () {
+        $('.prevA3').css('transform', 'translateX(-5px) scale(1.4)');
+        $('.nextA3').css('transform', 'translateX(10px) scale(1.4)');
+    }, function () {
+        $('.prevA3').css('transform', 'translateX(5px) scale(1.3)');
+        $('.nextA3').css('transform', 'translateX(5px) scale(1.3)');
     });
 });
 </script>
