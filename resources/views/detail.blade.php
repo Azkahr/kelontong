@@ -3,7 +3,7 @@
 @include('partials/navbar')
     <style>
         .container {
-            margin-top: 150px;
+            padding-top: 150px;
         }
         .image {
             width: 400px; 
@@ -48,10 +48,9 @@
             @foreach (explode(',',$product->image) as $item)
                 <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
             @endforeach
-            <div class="mr-3 flex-row">
-                <div class="text-center">
-                    <label for="stok">Quantity</label>
-                </div>
+            <div class="text-center">
+                <input type="hidden" value="{{ $product->id }}" class="products_id">
+                <label for="stok">Quantity</label>
                 <div class="mb-3 d-flex justify-content-center flex-row">
                     <button class="btn btn-primary decrement-btn">-</button>
                     <input type="text" name="stok" class="form-control qty-input" value="1" style="width: 50px">
@@ -63,7 +62,7 @@
             <h5 style="font-weight: bold; font-size: 166%">{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
-            <button class="btn btn-block btn-primary" style="float: right" role="button"><i class="fa fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
+            <button class="btn btn-block btn-primary" id="addToCartBtn" style="float: right"><i class="fa fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
             <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
         <div class="detail-mid">
@@ -82,6 +81,7 @@
             <h6 style="font-weight: bold; font-size: 134%">{{ $product->user->nama_toko }}</h6>
         </div>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 var slideIndex = 0;
 carousel();
@@ -99,6 +99,32 @@ function carousel() {
     }
 
     $(document).ready(function () {
+
+        $('#addToCartBtn').click(function (e) { 
+            
+            var products_id = $('.products_id').val();
+            var products_qty = $('.qty-input').val();
+            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "/add-to-cart",
+                data: {
+                    'products_id' : products_id,
+                    'products_qty' : products_qty,
+                },
+                dataType: "json",
+                success: function (response) {
+                    Swal.fire(response.status);
+                }
+            });
+        });
+        
         $('.increment-btn').click(function (e) { 
             e.preventDefault();
             
