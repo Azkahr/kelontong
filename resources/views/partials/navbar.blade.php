@@ -6,19 +6,10 @@
             </form>
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
-                @if (session('cart'))
-                    <a href="/cart">
-                        <button class="cartBtn" v-on:click="showCart()">
-                            <span class="badge badge-pill badge-danger">{{ count(session('cart')) }}</span>
-                            <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
-                        </button>
-                    </a>
-                @else
-                    <a href="/cart">
-                        <button class="cartBtn" v-on:click="showCart()">
-                            <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
-                        </button>
-                    </a>
+                @if (auth()->check())
+                    <button class="cartBtn">
+                        <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                    </button>
                 @endif
                 <div class="dropdown">
                     <button class="dropbtn">

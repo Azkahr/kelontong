@@ -31,8 +31,8 @@
             <img class="banner banner3" src="{{ asset('assets/img/food 1.jpg') }}" alt="">
         </div>
         <div class="arrow-container">
-            <span id="prevA" class="prevA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(5px); transition:0.5s; border-radius: 50%" data-feather="arrow-left"></span>
-            <span class="nextA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(-5px); transition:0.5s; border-radius: 50%" data-feather="arrow-right"></span>
+            <span class="prevA" data-feather="arrow-left"></span>
+            <span class="nextA" data-feather="arrow-right"></span>
         </div>
     </div>
 </div>
@@ -97,67 +97,23 @@
     <p class="best-text">Best Seller</p>
     <div class="card-container">
         <div class="slider-best">
-            <div class="cardB cb1">
+            @foreach ($productsBest as $pb)
+            <div class="cardB cb{{ $loop->iteration }}">
                 <div class="cImg">
-                    <img src="" alt="">
+                    @php
+                        $fotoMain = explode(',', $pb->image);
+                    @endphp
+                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                 </div>
                 <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
+                    <h4>{{ $pb->product_name }}</h4>
+                    <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
                 </div>
             </div>
-            <div class="cardB cb2">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb3">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb4">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb5">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb5">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
+            @endforeach
         </div>
+        <span class="prevA2" data-feather="arrow-left"></span>
+        <span class="nextA2" data-feather="arrow-right"></span>
     </div>
 </div>
 
@@ -177,12 +133,10 @@ $(document).ready(function(){
     $('.cartPage').hide();
 
     $('.cartBtn').click(function(){
-        disableScroll();
         $('.cartPage').show();
     });
 
     $('#btnClose').click(function(){
-        enableScroll();
         $('.cartPage').hide();
     });
 
@@ -194,7 +148,18 @@ $(document).ready(function(){
     });
 
     $('.slider-best').slick({
-        slidesPerRow: 6,
+        prevArrow: '.prevA2',
+        nextArrow: '.nextA2',
+        centerMode: true,
+        slidesToShow: 6,
+        draggable: false,
+        centerPadding: '0px',
+    });
+
+    $('.cImg').slick({
+        slidesPerRow: 1,
+        arrows:false,
+
     });
 
     $('.main').hover(function () {
@@ -207,6 +172,14 @@ $(document).ready(function(){
         $('.prevA').css('opacity', '0');
         $('.nextA').css('transform', 'translateX(-5px) scale(1.3)');
         $('.nextA').css('opacity', '0');
+    });
+
+    $('.card-container').hover(function () {
+        $('.prevA2').css('transform', 'translateX(-5px) scale(1.4)');
+        $('.nextA2').css('transform', 'translateX(10px) scale(1.4)');
+    }, function () {
+        $('.prevA2').css('transform', 'translateX(5px) scale(1.3)');
+        $('.nextA2').css('transform', 'translateX(5px) scale(1.3)');
     });
 });
 </script>
