@@ -48,14 +48,22 @@
             @foreach (explode(',',$product->image) as $item)
                 <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
             @endforeach
+            <div class="mr-3 flex-row">
+                <div class="text-center">
+                    <label for="stok">Quantity</label>
+                </div>
+                <div class="mb-3 d-flex justify-content-center flex-row">
+                    <button class="btn btn-primary decrement-btn">-</button>
+                    <input type="text" name="stok" class="form-control qty-input" value="1" style="width: 50px">
+                    <button class="btn btn-primary increment-btn">+</button>
+                </div>
+            </div>
         </div>
         <div class="detail-top">
             <h5 style="font-weight: bold; font-size: 166%">{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
-            <p class="btn-holder">
-                <a href="{{ url('add-to-cart/'.$product->id) }}" class="btn btn-primary" style="float: right" role="button"><span style="font-size: 20px">+</span> Keranjang</a>
-            </p>
+            <button class="btn btn-block btn-primary" style="float: right" role="button"><i class="fa fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
             <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
         <div class="detail-mid">
@@ -89,5 +97,33 @@ function carousel() {
         x[slideIndex-1].style.display = "block";
         setTimeout(carousel, 2000);
     }
+
+    $(document).ready(function () {
+        $('.increment-btn').click(function (e) { 
+            e.preventDefault();
+            
+            var inc_value = $('.qty-input').val();
+            var value = parseInt(inc_value);
+            value = isNaN(value) ? 0 : value;
+            if(value < 10000){
+
+                value++;
+                $('.qty-input').val(value);
+            }
+        });
+        
+        $('.decrement-btn').click(function (e) { 
+            e.preventDefault();
+            
+            var dec_value = $('.qty-input').val();
+            var value = parseInt(dec_value);
+            value = isNaN(value) ? 0 : value;
+            if(value > 1){
+
+                value--;
+                $('.qty-input').val(value);
+            }
+        });
+    });
 </script>
 @endsection
