@@ -98,18 +98,20 @@
     <div class="card-container">
         <div class="slider-best">
             @foreach ($productsBest as $pb)
-            <div class="cardB cb{{ $loop->iteration }}">
-                <div class="cImg">
-                    @php
-                        $fotoMain = explode(',', $pb->image);
-                    @endphp
-                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+            <a href="/{{ $pb->user->nama_toko }}" class="lBest">
+                <div class="cardB cb{{ $loop->iteration }}">
+                    <div class="cImg">
+                        @php
+                            $fotoMain = explode(',', $pb->image);
+                        @endphp
+                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                    </div>
+                    <div class="cContent">
+                        <h4 class="h5">{{ $pb->product_name}}</h4>
+                        <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                    </div>
                 </div>
-                <div class="cContent">
-                    <h4>{{ $pb->product_name }}</h4>
-                    <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                </div>
-            </div>
+            </a>
             @endforeach
         </div>
         <span class="prevA2" data-feather="arrow-left"></span>
@@ -123,18 +125,20 @@
     <div class="card-container2">
         <div class="slider-dis">
             @foreach ($productsBest as $pb)
-            <div class="cardB cb{{ $loop->iteration }}">
-                <div class="cImg">
-                    @php
-                        $fotoMain = explode(',', $pb->image);
-                    @endphp
-                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+            <a href="/{{ $pb->user->nama_toko }}" class="lDis">
+                <div class="cardB cb{{ $loop->iteration }}">
+                    <div class="cImg">
+                        @php
+                            $fotoMain = explode(',', $pb->image);
+                        @endphp
+                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                    </div>
+                    <div class="cContent">
+                        <h4 class="h4">{{ $pb->product_name }}</h4>
+                        <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                    </div>
                 </div>
-                <div class="cContent">
-                    <h4>{{ $pb->product_name }}</h4>
-                    <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                </div>
-            </div>
+            </a>
             @endforeach
         </div>
         <span class="prevA3" data-feather="arrow-left"></span>
@@ -162,11 +166,13 @@ $(document).ready(function(){
     $('.cartPage').hide();
 
     $('.cartBtn').click(function(){
-        $('.cartPage').show();
+        $('.cartPage').fadeIn(300);
+        $('body').css('overflow', 'hidden');
     });
 
     $('#btnClose').click(function(){
-        $('.cartPage').hide();
+        $('.cartPage').fadeOut(300);
+        $('body').css('overflow', 'initial');
     });
 
     $('.background-element').addClass('bE');

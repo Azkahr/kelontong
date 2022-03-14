@@ -16,7 +16,7 @@ class HomeController extends Controller
             $category = Category::firstWhere('slug', request('category'));
             $title = ' in ' . $category['name'];
         }
-        
+
         return view('home', [
             'title' => 'Home' . $title,
             'products' => Product::latest()->paginate(30),
