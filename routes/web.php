@@ -95,11 +95,4 @@ Route::middleware('auth', 'verified')->group(function(){
 
 });
 
-Route::middleware('auth', 'verified')->group(function(){
-    Route::get('/cart', [CartController::class, 'index']);
-    Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart']);
-    Route::patch('update-cart', [CartController::class, 'update']);
-    Route::delete('remove-from-cart', [CartController::class, 'delete']);
-});
-
 Route::get('/search', [HomeController::class, 'search']);
