@@ -12,10 +12,11 @@ class CartController extends Controller
 
     public function index(){
 
-        $carts = Cart::where('users_id', Auth::id())->get();
-        return view('cart', [
-            "title" => "Cart",
-            "carts" => $carts
+        $carts = Cart::where('users_id', Auth::id())->makeHidden(['created_at', 'updated_at']);
+        dd($carts);
+        return response()->json([
+            'name' => 'Abigail',
+            'state' => 'CA',
         ]);
     }
     

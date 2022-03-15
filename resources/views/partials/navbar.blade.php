@@ -71,6 +71,14 @@
         $('.cartBtn').click(function(){
             $('.cartPage').fadeIn(300);
             $('body').css('overflow', 'hidden');
+            $.ajax({
+                type: "GET",
+                url: "/cart",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                }
+            });
         });
 
         $('#btnClose').click(function(){

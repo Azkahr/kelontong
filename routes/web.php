@@ -101,4 +101,12 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::post('/delete-cart', [CartController::class, 'delete']);
 });
 
+
+
+Route::get('/fc', function(){
+    return response()->json([
+        'status' => '1'
+    ]);
+});
+
 Route::get('/search', [HomeController::class, 'search']);
