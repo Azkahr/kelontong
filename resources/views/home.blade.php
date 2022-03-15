@@ -93,7 +93,7 @@
     <div class="card-container">
         <div class="slider-best">
             @foreach ($productsBest as $pb)
-            <a href="/{{ $pb->user->nama_toko }}" class="lBest">
+            <a href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lBest">
                 <div class="cardB cb{{ $loop->iteration }}">
                     <div class="cImg">
                         @php
@@ -120,7 +120,7 @@
     <div class="card-container2">
         <div class="slider-dis">
             @foreach ($productsBest as $pb)
-            <a href="/{{ $pb->user->nama_toko }}" class="lDis">
+            <a href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lDis">
                 <div class="cardB cb{{ $loop->iteration }}">
                     <div class="cImg">
                         @php
@@ -155,7 +155,7 @@
 
 <div class="preview">
     @foreach ($products as $product)
-        <a href="/{{ $product->user->nama_toko }}">
+        <a href="/{{ $product->user->nama_toko }}/{{ $product->product_name}}">
             <div style="transform: scale(0.95)" class="cardB cp{{ $loop->iteration }}">
                 <div class="cImg">
                     @php

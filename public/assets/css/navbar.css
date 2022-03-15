@@ -146,16 +146,14 @@ nav .bottom a:hover:after {
     z-index: 20;
 }
 
-/* .cart {
-    display: block;
-    width: 70%;
+.cart {
     height: 90%;
+    width: 90%;
     background-color: white;
-    opacity: 100;
     overflow-x: hidden;
     overflow-y: auto;
 }
- */
+
 .btnClose {
     width: 100%;
     text-align: end;

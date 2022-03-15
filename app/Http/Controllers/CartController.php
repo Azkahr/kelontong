@@ -15,13 +15,19 @@ class CartController extends Controller
         if(!request()->ajax()){
             return redirect('/');
         }
-
+        
         $carts = Cart::select('id', 'users_id', 'products_id', 'qty')->where('users_id', Auth::id())->with('products')->get();
 
-        return response()->json([
-            'status' => 'Berhasil',
-            'data' => $carts,
-        ]);
+        if($carts->count()){
+            return response()->json([
+                'status' => 'Berhasil',
+                'data' => $carts,
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'Belum Ada Produk Di Cart',
+            ]);
+        }        
     }
     
     public function addToCart(Request $request){

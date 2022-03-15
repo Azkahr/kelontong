@@ -16,6 +16,7 @@ class HomeController extends Controller
             'title' => 'Home',
             'products' => Product::latest()->take(30)->get(),
             'productsBest' => Product::latest()->take(12)->get(),
+            'carts' => Cart::where('users_id', Auth::id())->get(),
         ]);
     }
 
@@ -31,13 +32,19 @@ class HomeController extends Controller
         ]);
     }
 
-    public function detail(Product $product, User $user, Cart $carts){
+    public function detail(Request $request){
+
+        $namaP = $request->produk;
+        $toko = $request->toko;
+
+        $product = Product::whereHas('user', function($q) use ($toko){
+            $q->where('nama_toko', '=' , $toko);
+        })->where('product_name', $namaP)->first();
+        
         return view('detail', [
             'title' => $product->product_name,
-            'carts' => $carts->where('users_id', Auth::id())->get(),
+            'carts' => Cart::where('users_id', auth()->user()->id),
             'product' => $product,
-            "totalqty" => Product::where('id', $product->id)->sum('stok'),
-            'user' => $user
         ]);
     }
 }

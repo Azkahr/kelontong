@@ -61,7 +61,7 @@
         <div class="detail-top">
             <h5 style="font-weight: bold; font-size: 166%">{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
-            <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
+            <p class="text-muted">Stok tersedia : {{ $product->stok }}</p>
             <button class="btn btn-block btn-primary" id="addToCartBtn" style="float: right"><i class="fa fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
             <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
