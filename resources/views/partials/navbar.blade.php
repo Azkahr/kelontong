@@ -65,9 +65,9 @@
 </nav>
 
 <script>
+    $('.cartPage').hide();
+    
     $(function(){
-        $('.cartPage').hide();
-
         $('.cartBtn').click(function(){
             $('.cartPage').fadeIn(300);
             $('body').css('overflow', 'hidden');

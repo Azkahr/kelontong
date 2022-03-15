@@ -10,15 +10,8 @@ use App\Models\Category;
 class HomeController extends Controller
 {
     public function index(){
-
-        $title = '';
-        if (request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
-            $title = ' in ' . $category['name'];
-        }
-
         return view('home', [
-            'title' => 'Home' . $title,
+            'title' => 'Home',
             'products' => Product::latest()->take(30)->get(),
             'productsBest' => Product::latest()->take(12)->get(),
         ]);
