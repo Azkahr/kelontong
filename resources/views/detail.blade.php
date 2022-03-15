@@ -120,7 +120,7 @@ function carousel() {
                 },
                 dataType: "json",
                 success: function (response) {
-                    window.location.href = "/cart";
+                    window.location.reload();
                     Swal.fire(response.status);
                 }
             });

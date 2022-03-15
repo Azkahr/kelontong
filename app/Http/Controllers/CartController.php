@@ -30,7 +30,7 @@ class CartController extends Controller
 
             if($product){
                 
-                if(Cart::where('id', $products_id)->where('users_id', Auth::id())->exists()){
+                if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
 
                     return response()->json(['status' => $product->product_name . " sudah ada di keranjang"]);
                     
