@@ -6,11 +6,14 @@
             </form>
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
-                <a href="{{ route('cart') }}">
-                    <button class="cartBtn" v-on:click="showCart()">
-                        <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
-                    </button>
-                </a>
+                @if ($carts)
+                    <a href="{{ route('cart') }}">
+                        <button class="cartBtn" v-on:click="showCart()">
+                            <span class="badge badge-pill badge-danger">{{ count($carts) }}</span>
+                            <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                        </button>
+                    </a>
+                @endif
                 <div class="dropdown">
                     <button class="dropbtn">
                         <p style="margin-left:7px; display: inline; font-size:20px; font-family:spartan; font-weight:700; color:white">

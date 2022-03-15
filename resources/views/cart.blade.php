@@ -43,7 +43,7 @@
                             <label for="stok">Quantity</label>
                             <div class="mb-3 d-flex justify-content-center flex-row">
                                 <button class="btn btn-primary changeQuantity decrement-btn">-</button>
-                                <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px">
+                                <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
                                 <button class="btn btn-primary changeQuantity increment-btn">+</button>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
         </div>
     </div>
 </div>
-<a href="/" class="btn btn-primary" style="margin-left: 120px;">Lanjut belanja</a>
+<a href="/" class="btn btn-primary" style="margin-left: 125px;">Lanjut belanja</a>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
