@@ -19,10 +19,6 @@
             @foreach ($carts as $cart)
                 <div class="row product_data">
                     <div class="col-md-2">
-                        {{-- @php
-                            $image = explode(',', $cart->products->image);
-                        @endphp
-                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}"> --}}
                         @foreach (explode(',',$cart->products->image) as $item)
                             @if (count(explode(',',$cart->products->image)) > 1)
                                 <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
