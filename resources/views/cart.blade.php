@@ -1,102 +1,120 @@
 @extends('layouts.main')
 @section('container')
-<table id="cart" class="table table-hover table-condensed">
-    <thead>
-    <tr>
-        <th style="width:50%">Product</th>
-        <th style="width:10%">Harga</th>
-        <th style="width:8%">Quantity</th>
-        <th style="width:22%" class="text-center">Subtotal</th>
-        <th style="width:20%">Action</th>
-    </tr>
-    </thead>
-    
-    <tbody>
-    <?php $total = 0; ?>
-        @if (session('cart'))
-            @foreach (session('cart') as $id => $details)
-                <?php $total += $details['harga'] * $details['quantity']; ?>
-                <tr>
-                    <td data-th="product">
-                        @foreach (explode(',',$details['image']) as $item)
-                            @if (count(explode(',',$details['image'])) > 1)
-                                <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
-                            @else    
-                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $details['product_name'] }}" style="float: left" height="200px" width="250px">
-                            @endif
-                        @endforeach
-                        <h4 style="font-weight: bold; font-size: 200%">{{ $details['product_name'] }}</h4>
-                        {{-- @if($id && !$product->id)
-                            <h1 style="font-weight: bold; size: 100px; color: red;">Produk {{ $details['product_name'] }} tidak tersedia</h1>
-                        @endif --}}
-                    </td>
-                    <td data-th="harga">Rp. {{ number_format($details['harga'], 0,",",".") }}</td>
-                    <td data-th="Quantity">
-                        <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity">
-                    </td>
-                    <td class="text-center" data-th="Subtotal">Rp. {{ number_format($details['harga'] * $details['quantity'], 0,",",".") }}</td>
-                    <td class="actions" data-th="">
-                        <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}" style="font-weight: bold"><i class="fa fa-refresh"></i> Update</button>
-                        <button class="btn btn-danger btn-sm remove-from-cart delete" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
-                    </td>
-                </tr>
-                @endforeach
-        @endif
-    </tbody>
-    
-    <tfoot>
-        <tr>
-            <td><a href="/" class="btn btn-primary">Home</a></td>
-            <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total Belanja Rp.{{ number_format($total, 0,",",".") }}</strong></td>
-        </tr>
-    </tfoot>
-    
-    <script type="text/javascript">
+@include('partials/navbar')
+<style>
+    .container {
+        padding-top: 150px;
+        margin-bottom: 20px;
+    }
 
-        $(".update-cart").click(function (e) {
+    h3 {
+        font-size: 18.72px;
+        font-weight: 600;
+    }
+</style>
+<div class="container">
+    <div class="card shadow">
+        <div class="card-body">
+            @foreach ($carts as $cart)
+                <div class="row product_data">
+                    <div class="col-md-2">
+                        @php
+                            $image = explode(',', $cart->products->image);
+                        @endphp
+                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
+                    </div>
+                    <div class="col-md-5">
+                        <h3>{{ $cart->products->product_name }}</h3>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
+                            <label for="stok">Quantity</label>
+                            <div class="mb-3 d-flex justify-content-center flex-row">
+                                <button class="btn btn-primary decrement-btn">-</button>
+                                <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px">
+                                <button class="btn btn-primary increment-btn">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<a href="/" class="btn btn-primary" style="margin-left: 120px;">Lanjut belanja</a>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $('.increment-btn').click(function (e) { 
             e.preventDefault();
-            var ele = $(this);
+            
+            var inc_value = $(this).closest('.product_data').find('.qty-input').val();
+            var value = parseInt(inc_value);
+            value = isNaN(value) ? 0 : value;
+            if(value < 10000){
+
+                value++;
+                $(this).closest('.product_data').find('.qty-input').val(value);
+
+            }
+        });
+        
+        $('.decrement-btn').click(function (e) { 
+            e.preventDefault();
+            
+            var dec_value = $(this).closest('.product_data').find('.qty-input').val();
+            var value = parseInt(dec_value);
+            value = isNaN(value) ? 0 : value;
+            if(value > 1){
+
+                value--;
+                $(this).closest('.product_data').find('.qty-input').val(value);
+            }
+        });
+
+        $('.delete-cart-item').click(function (e) { 
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var products_id = $(this).closest('.product_data').find('.qty-input').val();
             $.ajax({
-                url: '{{ url('update-cart') }}',
-                method: "patch",
-                data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+                method: "POST",
+                url: "/delete-cart",
+                data: {
+                    'products_id' : products_id,
+                },
                 success: function (response) {
-                    window.location.reload();
+                    Swal.fire("", response.status, "success");  
                 }
             });
         });
+    });
 
-        $(".remove-from-cart").click(function (e) {
-            e.preventDefault();
-            var ele = $(this);
-            if(confirm("Are you sure")) {
-                $.ajax({
-                    url: '{{ url('remove-from-cart') }}',
-                    method: "DELETE",
-                    data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id")},
-                    success: function (response) {
-                        window.location.reload();
-                        
-                    }
-                });
-            }
-        });
+var slideIndex = 0;
+carousel();
 
-        var slideIndex = 0;
-        carousel();
-
-        function carousel() {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > x.length) {slideIndex = 1}
-                x[slideIndex-1].style.display = "block";
-                setTimeout(carousel, 2000);
-            }
-    </script>
-
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {slideIndex = 1}
+            x[slideIndex-1].style.display = "block";
+            setTimeout(carousel, 2000);
+        }
+</script>
 @endsection
