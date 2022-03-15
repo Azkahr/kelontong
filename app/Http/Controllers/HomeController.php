@@ -19,9 +19,8 @@ class HomeController extends Controller
 
         return view('home', [
             'title' => 'Home' . $title,
-            'products' => Product::latest()->paginate(30),
+            'products' => Product::latest()->take(30)->get(),
             'productsBest' => Product::latest()->take(12)->get(),
-            'productsL' => Product::latest()->take(3)->get(),
         ]);
     }
 

@@ -129,8 +129,14 @@
                         <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                     </div>
                     <div class="cContent">
-                        <h4 class="h4">{{ $pb->product_name }}</h4>
-                        <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                        <div>
+                            <h4 class="h4">{{ $pb->product_name }}</h4>
+                            <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                        </div>
+                        <div style="display: flex; justify-content:space-between; margin-top:25px">
+                            <p>Rating</p>
+                            <p>{{ $pb->user->nama_toko }}</p>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -141,10 +147,38 @@
     </div>
 </div>
 
-<hr style="width: 80%; opacity:60%; margin: 40px auto 40px auto; height:2px">\
+<hr style="width: 80%; opacity:60%; margin: 40px auto 15px auto; height:2px">
+
+<p style="text-align: center; font-size:30px; font-family:spartan; font-weight:700">HAYUU JAJAN</p>
+
+<hr style="width: 80%; opacity:60%; margin: 15px auto 25px auto; height:2px">
 
 <div class="preview">
-
+    @foreach ($products as $product)
+        <a href="/{{ $product->user->nama_toko }}">
+            <div style="transform: scale(0.95)" class="cardB cp{{ $loop->iteration }}">
+                <div class="cImg">
+                    @php
+                        $fotoMain = explode(',', $product->image);
+                    @endphp
+                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                </div>
+                <div class="cContent">
+                    <div>
+                        <h4 class="h4">{{ $product->product_name }}</h4>
+                        <p>RP {{ number_format($product->harga, 0,",",".") }}</p>
+                    </div>
+                    <div style="display: flex; justify-content:space-between; margin-top:25px">
+                        <p>Rating</p>
+                        <p>{{ $product->user->nama_toko }}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    @endforeach
+    <div style="margin:auto; width:90%; text-align:end">
+        <a style="color:#0A58CA" href="#">Lebih Banyak</a>
+    </div>
 </div>
 
 <div class="footer">
