@@ -53,7 +53,7 @@
                 <label for="stok">Quantity</label>
                 <div class="mb-3 d-flex justify-content-center flex-row">
                     <button class="btn btn-primary decrement-btn">-</button>
-                    <input type="text" name="stok" class="form-control qty-input" value="1" style="width: 50px">
+                    <input type="text" name="stok" class="form-control qty-input" value="1" style="width: 50px; background-color: white" disabled>
                     <button class="btn btn-primary increment-btn">+</button>
                 </div>
             </div>
@@ -120,6 +120,7 @@ function carousel() {
                 },
                 dataType: "json",
                 success: function (response) {
+                    window.location.href = "/cart";
                     Swal.fire(response.status);
                 }
             });
