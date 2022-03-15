@@ -53,7 +53,9 @@ class CartController extends Controller
                     $cart->qty = $products_qty;
                     $cart->save();
 
-                    return response()->json(['status' => $product->product_name . " berhasil ditambahkan ke keranjang"]);
+                    return response()->json([
+                        'status' => $product->product_name . " berhasil ditambahkan ke keranjang",
+                    ]);
                 }
             }
         } else {
