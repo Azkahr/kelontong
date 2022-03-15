@@ -12,11 +12,15 @@ class CartController extends Controller
 
     public function index(){
 
-        $carts = Cart::where('users_id', Auth::id())->makeHidden(['created_at', 'updated_at']);
-        dd($carts);
+        if(!request()->ajax()){
+            return redirect('/');
+        }
+
+        $carts = Cart::select('id', 'users_id', 'products_id', 'qty')->where('users_id', Auth::id())->with('products')->get();
+
         return response()->json([
-            'name' => 'Abigail',
-            'state' => 'CA',
+            'status' => 'Berhasil',
+            'data' => $carts,
         ]);
     }
     
@@ -50,26 +54,6 @@ class CartController extends Controller
             return response()->json(['status' => "Login terlebih dahulu"]);
         }
     }
-
-    public function update(Request $request){
-        
-        $products_id = $request->input('products_id');
-        $qty = $request->input('qty');
-
-        if(Auth::check()){
-
-            if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
-
-                $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id())->first();
-                $cart->qty = $qty;
-                $cart->update();
-
-                return response()->json(['status' => "Berhasil update keranjang"]);
-            }
-        } else {
-            return response()->json(['status' => "Login terlebih dahulu"]);
-        }
-    }   
 
     public function delete(Request $request){
 

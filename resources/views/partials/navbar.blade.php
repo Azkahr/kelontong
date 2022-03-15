@@ -1,6 +1,11 @@
 <div class="cartPage">
-    <div class="cart">
-        <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>
+    <div class="container">
+        <div class="card shadow">
+            <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>
+            <div class="cart">
+                
+            </div>
+        </div>
     </div>
 </div>
 
@@ -65,18 +70,51 @@
 </nav>
 
 <script>
-    $('.cartPage').hide();
-    
     $(function(){
+        $('.cartPage').hide();
         $('.cartBtn').click(function(){
             $('.cartPage').fadeIn(300);
             $('body').css('overflow', 'hidden');
             $.ajax({
                 type: "GET",
-                url: "/cart",
-                dataType: "json",
+                url: "{{ route('cart') }}",
                 success: function (response) {
-                    console.log(response);
+                    let data = response.data;
+                    console.log(data);
+                    $.each(data, function (i, e) { 
+                         $('.cart').append(
+                            `
+                                <div class="row product_data">
+                                    <div class="col-md-2">
+                                        @php
+                                            $image = explode(',', `+ e.products.image +`);
+                                        @endphp
+                                        <img src="{{ asset('storage/' . $image[0]) }}" alt=`+ e.products.product_name +`>
+                                    </div>
+                                    <div class="col-md-3 my-auto">
+                                        <h3>`+ e.products.product_name +`</h3>
+                                    </div>
+                                    <div class="col-md-2 my-auto">
+                                        <h3>Rp.{{ number_format(`+ e.products.harga +`, 0,",",".") }}</h3>
+                                    </div>
+                                    <div class="col-md-2 my-auto">
+                                        <div class="text-center">
+                                            <input type="hidden" class="products_id" value=`+ e.id +`>
+                                            <label for="stok">Quantity</label>
+                                            <div class="mb-3 d-flex justify-content-center flex-row">
+                                                <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                                <input type="text" name="stok" class="form-control qty-input" value=`+ e.id +` style="width: 50px; background-color: white;" disabled>
+                                                <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 my-auto">
+                                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
+                                    </div>
+                                </div>
+                            `
+                        );
+                    });
                 }
             });
         });
