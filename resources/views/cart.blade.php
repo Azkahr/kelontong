@@ -15,33 +15,49 @@
 <div class="container">
     <div class="card shadow">
         <div class="card-body">
+            @php $total = 0; @endphp
             @foreach ($carts as $cart)
                 <div class="row product_data">
                     <div class="col-md-2">
-                        @php
+                        {{-- @php
                             $image = explode(',', $cart->products->image);
                         @endphp
-                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
+                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}"> --}}
+                        @foreach (explode(',',$cart->products->image) as $item)
+                            @if (count(explode(',',$cart->products->image)) > 1)
+                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
+                            @else
+                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}">
+                            @endif
+                        @endforeach
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3 my-auto">
                         <h3>{{ $cart->products->product_name }}</h3>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2 my-auto">
+                        <h3>Rp.{{ number_format($cart->products->harga, 0,",",".") }}</h3>
+                    </div>
+                    <div class="col-md-2 my-auto">
                         <div class="text-center">
                             <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
                             <label for="stok">Quantity</label>
                             <div class="mb-3 d-flex justify-content-center flex-row">
-                                <button class="btn btn-primary decrement-btn">-</button>
+                                <button class="btn btn-primary changeQuantity decrement-btn">-</button>
                                 <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px">
-                                <button class="btn btn-primary increment-btn">+</button>
+                                <button class="btn btn-primary changeQuantity increment-btn">+</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 my-auto">
                         <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
                     </div>
                 </div>
+                @php $total += $cart->products->harga * $cart->qty; @endphp
             @endforeach
+        </div>
+        <div class="card-footer">
+            <h6>Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
+            <button class="btn btn-success float-end">Checkout</button>
         </div>
     </div>
 </div>
@@ -88,7 +104,7 @@
                 }
             });
 
-            var products_id = $(this).closest('.product_data').find('.qty-input').val();
+            var products_id = $(this).closest('.product_data').find('.products_id').val();
             $.ajax({
                 method: "POST",
                 url: "/delete-cart",
@@ -96,7 +112,34 @@
                     'products_id' : products_id,
                 },
                 success: function (response) {
+                    window.location.reload();
                     Swal.fire("", response.status, "success");  
+                }
+            });
+        });
+
+        $('.changeQuantity').click(function (e) { 
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            var products_id = $(this).closest('.product_data').find('.products_id').val();
+            var qty = $(this).closest('.product_data').find('.qty-input').val();
+            data = {
+                'products_id' : products_id,
+                'qty' : qty,
+            }
+            $.ajax({
+                method: "POST",
+                url: "/update-cart",
+                data: data,
+                success: function (response) {
+                    window.location.reload();
+                    Swal.fire(response.status);
                 }
             });
         });
