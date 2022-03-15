@@ -140,14 +140,15 @@
         });
 
         $('.delete-cart-item').click(function (e) { 
+            var products_id = $(this).closest('.product_data').find('.products_id').val();
+            let remE = $(this).parents('.product_data');
+            remE.remove();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var products_id = $(this).closest('.product_data').find('.products_id').val();
-            let remE = $(this).parents('.product_data');
-            remE.remove();
+            
             $.ajax({
                 method: "POST",
                 url: "/delete-cart",
