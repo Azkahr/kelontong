@@ -1,12 +1,12 @@
 <div class="cartPage">
-    <div class="card shadow col-8">
-        <div class="card-body p-3">
-            <div class="btnClose">
-                <button id="btnClose"><span data-feather="x"></span></button id="btnClose">
-            </div>
+    <div class="card shadow col-8 h-75">
+        <div class="btnClose">
+            <button id="btnClose"><span data-feather="x"></span></button id="btnClose">
+        </div>
+        <div class="card-body overflow-auto">
             @php $total = 0; @endphp
             @foreach ($carts as $cart)
-                <div class="row product_data">
+                <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
                     <div class="col-md-2">
                         @foreach (explode(',',$cart->products->image) as $item)
                             @if (count(explode(',',$cart->products->image)) > 1)

@@ -146,14 +146,6 @@ nav .bottom a:hover:after {
     z-index: 20;
 }
 
-.cart {
-    height: 90%;
-    width: 90%;
-    background-color: white;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
 .btnClose {
     width: 100%;
     text-align: end;
