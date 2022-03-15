@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\User;
-use App\Models\Category;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +38,7 @@ class HomeController extends Controller
         $product = Product::whereHas('user', function($q) use ($toko){
             $q->where('nama_toko', '=' , $toko);
         })->where('product_name', $namaP)->first();
-        
+
         return view('detail', [
             'title' => $product->product_name,
             'carts' => Cart::where('users_id', auth()->user()->id),
