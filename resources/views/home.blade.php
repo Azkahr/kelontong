@@ -11,11 +11,6 @@
 @section('container')
 @include('partials/loader')
 @include('partials/navbar')
-<div class="cartPage">
-    <div class="cart">
-        <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>
-    </div>
-</div>
 
 <div class="background-element">
     <img src="{{ asset('assets/img/fluid.png') }}" alt="">
@@ -146,7 +141,11 @@
     </div>
 </div>
 
-<hr style="width: 80%; opacity:60%; margin: 40px auto 40px auto; height:2px">
+<hr style="width: 80%; opacity:60%; margin: 40px auto 40px auto; height:2px">\
+
+<div class="preview">
+
+</div>
 
 <div class="footer">
     &copy; 
@@ -162,18 +161,6 @@ $(document).ready(function(){
     $('.loader').fadeOut(500);
 
     $('html, body').css('overflow', 'initial');
-
-    $('.cartPage').hide();
-
-    $('.cartBtn').click(function(){
-        $('.cartPage').fadeIn(300);
-        $('body').css('overflow', 'hidden');
-    });
-
-    $('#btnClose').click(function(){
-        $('.cartPage').fadeOut(300);
-        $('body').css('overflow', 'initial');
-    });
 
     $('.background-element').addClass('bE');
 
