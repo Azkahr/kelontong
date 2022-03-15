@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('head')
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="{{ asset('assets/css/homepage.css') }}">
 <script>
     $('html, body').css('overflow', 'hidden');
 </script>
