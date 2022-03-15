@@ -8,6 +8,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Session;
@@ -98,6 +99,7 @@ Route::middleware('auth', 'verified')->group(function(){
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
 Route::middleware('auth', 'verified')->group(function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/update-cart', [CartController::class, 'update']);
     Route::post('/delete-cart', [CartController::class, 'delete']);
 });

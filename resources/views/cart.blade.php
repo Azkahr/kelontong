@@ -36,24 +36,28 @@
                     <div class="col-md-2 my-auto">
                         <div class="text-center">
                             <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
-                            <label for="stok">Quantity</label>
-                            <div class="mb-3 d-flex justify-content-center flex-row">
-                                <button class="btn btn-primary changeQuantity decrement-btn">-</button>
-                                <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
-                                <button class="btn btn-primary changeQuantity increment-btn">+</button>
-                            </div>
+                            @if ($cart->products->stok > $cart->qty)
+                                <label for="stok">Quantity</label>
+                                <div class="mb-3 d-flex justify-content-center flex-row">
+                                    <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                    <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                    <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                </div>
+                                @php $total += $cart->products->harga * $cart->qty; @endphp
+                            @else
+                                <h6>Out of stock</h6>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-2 my-auto">
                         <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
                     </div>
                 </div>
-                @php $total += $cart->products->harga * $cart->qty; @endphp
             @endforeach
         </div>
         <div class="card-footer">
             <h6>Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
-            <button class="btn btn-success float-end">Checkout</button>
+            <a href="{{ route('checkout') }}" class="btn btn-success float-end">Checkout</a>
         </div>
     </div>
 </div>
@@ -108,7 +112,6 @@
                     'products_id' : products_id,
                 },
                 success: function (response) {
-                    window.location.reload();
                     Swal.fire("", response.status, "success");  
                 }
             });
