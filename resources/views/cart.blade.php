@@ -44,13 +44,28 @@
                                     <button class="btn btn-primary changeQuantity increment-btn">+</button>
                                 </div>
                                 @php $total += $cart->products->harga * $cart->qty; @endphp
+                            @elseif($cart->products->stok == $cart->qty)
+                                <label for="stok">Quantity</label>
+                                <div class="mb-3 d-flex justify-content-center flex-row">
+                                    <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                    <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                    <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                </div>
+                                @php $total += $cart->products->harga * $cart->qty; @endphp
                             @else
-                                <h6>Out of stock</h6>
+                                <h6 style="font-size: 134%; font-weight: 600">Out of stock</h6>
+                                <p>Stok tersedia : {{ $cart->products->stok }}</p>
+                                <label for="stok">Jumlah pesanan anda :</label>
+                                <div class="mb-3 d-flex justify-content-center flex-row">
+                                    <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                    <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                    <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                </div>
                             @endif
                         </div>
                     </div>
                     <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
+                        <button class="btn btn-danger delete-cart-item" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</button>
                     </div>
                 </div>
             @endforeach
@@ -112,6 +127,7 @@
                     'products_id' : products_id,
                 },
                 success: function (response) {
+                    window.location.reload();
                     Swal.fire("", response.status, "success");  
                 }
             });
