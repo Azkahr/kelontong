@@ -102,6 +102,8 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/update-cart', [CartController::class, 'update']);
     Route::post('/delete-cart', [CartController::class, 'delete']);
+
+    Route::post('/place-order', [CheckoutController::class, 'order'])->name('order');
 });
 
 Route::get('/search', [HomeController::class, 'search']);

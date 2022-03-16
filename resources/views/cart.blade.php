@@ -14,58 +14,64 @@
 </style>
 <div class="container">
     <div class="card shadow">
-        <div class="card-body">
-            @php $total = 0; @endphp
-            @foreach ($carts as $cart)
-                <div class="row product_data">
-                    <div class="col-md-2">
-                        @foreach (explode(',',$cart->products->image) as $item)
-                            @if (count(explode(',',$cart->products->image)) > 1)
-                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
-                            @else
-                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}">
-                            @endif
-                        @endforeach
-                    </div>
-                    <div class="col-md-3 my-auto">
-                        <h3>{{ $cart->products->product_name }}</h3>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <h3>Rp.{{ number_format($cart->products->harga, 0,",",".") }}</h3>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <div class="text-center">
-                            <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
-                            @if ($cart->products->stok >= $cart->qty)
-                                <label for="stok">Quantity</label>
-                                <div class="mb-3 d-flex justify-content-center flex-row">
-                                    <button class="btn btn-primary changeQuantity decrement-btn">-</button>
-                                    <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
-                                    <button class="btn btn-primary changeQuantity increment-btn">+</button>
-                                </div>
-                                @php $total += $cart->products->harga * $cart->qty; @endphp
-                            @else
-                                <h6 style="font-size: 134%; font-weight: 600">Out of stock</h6>
-                                <p>Stok tersedia : {{ $cart->products->stok }}</p>
-                                <label for="stok">Jumlah pesanan anda :</label>
-                                <div class="mb-3 d-flex justify-content-center flex-row">
-                                    <button class="btn btn-primary changeQuantity decrement-btn">-</button>
-                                    <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
-                                    <button class="btn btn-primary changeQuantity increment-btn">+</button>
-                                </div>
-                            @endif
+        @if ($carts->count() > 0)
+            <div class="card-body">
+                @php $total = 0; @endphp
+                @foreach ($carts as $cart)
+                    <div class="row product_data">
+                        <div class="col-md-2">
+                            @foreach (explode(',',$cart->products->image) as $item)
+                                @if (count(explode(',',$cart->products->image)) > 1)
+                                    <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
+                                @else
+                                    <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}">
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="col-md-3 my-auto">
+                            <h3>{{ $cart->products->product_name }}</h3>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <h3>Rp.{{ number_format($cart->products->harga, 0,",",".") }}</h3>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <div class="text-center">
+                                <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
+                                @if ($cart->products->stok >= $cart->qty)
+                                    <label for="stok">Quantity</label>
+                                    <div class="mb-3 d-flex justify-content-center flex-row">
+                                        <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                        <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                        <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                    </div>
+                                    @php $total += $cart->products->harga * $cart->qty; @endphp
+                                @else
+                                    <h6 style="font-size: 134%; font-weight: 600">Out of stock</h6>
+                                    <p>Stok tersedia : {{ $cart->products->stok }}</p>
+                                    <label for="stok">Jumlah pesanan anda :</label>
+                                    <div class="mb-3 d-flex justify-content-center flex-row">
+                                        <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                        <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                        <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <button class="btn btn-danger delete-cart-item" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</button>
                         </div>
                     </div>
-                    <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</button>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <div class="card-footer">
-            <h6>Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
-            <a href="{{ route('checkout') }}" class="btn btn-success float-end">Checkout</a>
-        </div>
+                @endforeach
+            </div>
+            <div class="card-footer">
+                <h6>Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
+                <a href="{{ route('checkout') }}" class="btn btn-success float-end">Checkout</a>
+            </div>
+        @else
+            <div class="card-body text-center">
+                <h2 style="font-size: 300%; font-weight: bold;">Keranjang <i class="fa fa-shopping-cart"></i> Kosong</h2>
+            </div>
+        @endif
     </div>
 </div>
 <a href="/" class="btn btn-primary" style="margin-left: 125px;">Lanjut belanja</a>
