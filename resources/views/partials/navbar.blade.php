@@ -6,17 +6,15 @@
         <div class="card-body overflow-auto">
             @php $total = 0; @endphp
             @foreach ($carts as $cart)
+                @php 
+                    $total += $cart->products->harga * $cart->qty;
+                    $image = explode(',',$cart->products->image);
+                @endphp
                 <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
                     <div class="col-md-2">
-                        @foreach (explode(',',$cart->products->image) as $item)
-                            @if (count(explode(',',$cart->products->image)) > 1)
-                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
-                            @else
-                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}">
-                            @endif
-                        @endforeach
+                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
                     </div>
-                    <div class="col-md-3 my-auto">
+                    <div class="col-md-3 my-auto ms-3">
                         <h3>{{ $cart->products->product_name }}</h3>
                     </div>
                     <div class="col-md-2 my-auto">
@@ -34,15 +32,12 @@
                         </div>
                     </div>
                     <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
+                        <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
                     </div>
                 </div>
-                @php 
-                    $total += $cart->products->harga * $cart->qty;
-                @endphp
             @endforeach
         </div>
-        <div class="card-footer">
+        <div class="card-footer d-flex justify-content-between align-items-center">
             <h6>Total : Rp.<span class="total-harga">{{ number_format($total, 0,",",".") }}</span></h6>
             <button class="btn btn-success float-end">Checkout</button>
         </div>

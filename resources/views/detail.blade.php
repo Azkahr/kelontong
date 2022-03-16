@@ -52,9 +52,9 @@
                 <input type="hidden" value="{{ $product->id }}" class="products_id">
                 <label for="stok">Quantity</label>
                 <div class="mb-3 d-flex justify-content-center flex-row">
-                    <button class="btn btn-primary decrement-btn">-</button>
+                    <button class="btn btn-primary decrement-btn2">-</button>
                     <input type="text" name="stok" class="form-control qty-input" value="1" style="width: 50px; background-color: white" disabled>
-                    <button class="btn btn-primary increment-btn">+</button>
+                    <button class="btn btn-primary increment-btn2">+</button>
                 </div>
             </div>
         </div>
@@ -124,9 +124,8 @@ function carousel() {
             });
         });
         
-        $('.increment-btn').click(function (e) { 
+        $('.increment-btn2').click(function (e) { 
             e.preventDefault();
-            
             var inc_value = $('.qty-input').val();
             var value = parseInt(inc_value);
             value = isNaN(value) ? 0 : value;
@@ -137,9 +136,8 @@ function carousel() {
             }
         });
         
-        $('.decrement-btn').click(function (e) { 
+        $('.decrement-btn2').click(function (e) { 
             e.preventDefault();
-            
             var dec_value = $('.qty-input').val();
             var value = parseInt(dec_value);
             value = isNaN(value) ? 0 : value;
