@@ -102,7 +102,7 @@
                         <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                     </div>
                     <div class="cContent">
-                        <h4 class="h5">{{ $pb->product_name}}</h4>
+                        <p style="font-size: 17px; font-weight:bold">{{ $pb->product_name}}</p>
                         <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="cContent">
                         <div>
-                            <h4 class="h4">{{ $pb->product_name }}</h4>
+                            <p style="font-size: 17px; font-weight:bold">{{ $pb->product_name}}</p>
                             <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
                         </div>
                         <div style="display: flex; justify-content:space-between; margin-top:25px">
