@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Session;
@@ -104,6 +105,7 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::post('/delete-cart', [CartController::class, 'delete']);
 
     Route::post('/place-order', [CheckoutController::class, 'order'])->name('order');
+    Route::get('/my-order', [UserController::class, 'index'])->name('myOrder');
 });
 
 Route::get('/search', [HomeController::class, 'search']);
