@@ -11,28 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(Cart $carts){
-
-        $title = '';
-        if (request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
-            $title = ' in ' . $category['name'];
-        }
-        
+    public function index(){
         return view('home', [
-            'title' => 'Home' . $title,
-            'products' => Product::latest()->paginate(30),
-            'carts' => $carts->where('users_id', Auth::id())->get(),
-            'productsMakanan' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Makanan');
-            })->take(10)->get(),
-            'productsMinuman' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Minuman');
-            })->take(10)->get(),
-            'productsJajanan' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Jajanan');
-            })->take(10)->get(),
-            'productsL' => Product::latest()->take(3)->get(),
+            'title' => 'Home',
+            'products' => Product::latest()->take(30)->get(),
+            'productsBest' => Product::latest()->take(12)->get(),
         ]);
     }
 

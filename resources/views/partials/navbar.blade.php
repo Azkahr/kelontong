@@ -1,3 +1,9 @@
+<div class="cartPage">
+    <div class="cart">
+        <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>
+    </div>
+</div>
+
 <nav>
     <div class="top">
             <form class="search" method="GET" action="/search">
@@ -6,6 +12,7 @@
             </form>
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
+<<<<<<< HEAD
                 @if ($carts)
                     <a href="{{ route('cart') }}">
                         <button class="cartBtn" v-on:click="showCart()">
@@ -13,6 +20,12 @@
                             <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
                         </button>
                     </a>
+=======
+                @if (auth()->check())
+                    <button class="cartBtn">
+                        <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                    </button>
+>>>>>>> homepage
                 @endif
                 <div class="dropdown">
                     <button class="dropbtn">
@@ -60,5 +73,23 @@
         <a href="/search?search=Pulsa">Pulsa</a>
     </div>
 </nav>
+
+<script>
+    $('.cartPage').hide();
+    
+    $(function(){
+        $('.cartBtn').click(function(){
+            $('.cartPage').fadeIn(300);
+            $('body').css('overflow', 'hidden');
+        });
+
+        $('#btnClose').click(function(){
+            $('.cartPage').fadeOut(300);
+            $('body').css('overflow', 'initial');
+        });
+    });
+</script>
+
+
 
 
