@@ -8,28 +8,7 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
-{
-
-    public function index(){
-
-        if(!request()->ajax()){
-            return redirect('/');
-        }
-        
-        $carts = Cart::select('id', 'users_id', 'products_id', 'qty')->where('users_id', Auth::id())->with('products')->get();
-
-        if($carts->count()){
-            return response()->json([
-                'status' => 'Berhasil',
-                'data' => $carts,
-            ]);
-        }else{
-            return response()->json([
-                'status' => 'Belum Ada Produk Di Cart',
-            ]);
-        }        
-    }
-    
+{   
     public function addToCart(Request $request){
         
         $products_id = $request->input('products_id');
@@ -97,11 +76,14 @@ class CartController extends Controller
 
         if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
 
-            $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id());
-
+            $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id())->first();
+            $data = $cart->qty * $cart->products->harga;
             $cart->delete();
             
-            return response()->json(['status' => "Berhasil dihapus"]);
+            return response()->json([
+                'status' => "Berhasil dihapus",
+                'data' => $data
+            ]);
         } else {
             return response()->json(['status' => "Gagal dihapus"]);
         }

@@ -156,7 +156,6 @@
                 success: function (response) {
                     totalHarga += parseFloat(response.data);
                     $('.total-harga').html(nDots(totalHarga));
-                    console.log(response.data);
                 }
             });
         });
@@ -187,13 +186,13 @@
                     success: function (response) {
                         totalHarga -= parseFloat(response.data);
                         $('.total-harga').html(nDots(totalHarga));
-                        console.log(response.data);
                     }
                 });
             }
         });
 
         $('.delete-cart-item').click(function (e) { 
+            e.preventDefault();
             var products_id = $(this).closest('.product_data').find('.products_id').val();
             let remE = $(this).parents('.product_data');
             remE.remove();
@@ -209,6 +208,10 @@
                     'products_id' : products_id,
                 },
                 dataType: 'json',
+                success: function (response) {
+                    totalHarga -= parseFloat(response.data);
+                    $('.total-harga').html(nDots(totalHarga));
+                }
             });
         });
     });
