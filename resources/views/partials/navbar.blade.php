@@ -27,9 +27,9 @@
                             <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
                             <label for="stok">Quantity</label>
                             <div class="mb-3 d-flex justify-content-center flex-row">
-                                <button class="btn btn-primary changeQuantity decrement-btn">-</button>
-                                <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
-                                <button class="btn btn-primary changeQuantity increment-btn">+</button>
+                                <button class="btn btn-primary decrement-btn rounded-0">-</button>
+                                <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                <button class="btn btn-primary increment-btn rounded-0">+</button>
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,8 @@
         });
 
         $('.increment-btn').click(function (e) { 
-            var inc_value = $(this).closest('.product_data').find('.qty-input').val();
+            e.preventDefault();
+            var inc_value = $(this).siblings('.qty-input').val();
             var value = parseInt(inc_value);
             value = isNaN(value) ? 0 : value;
             value++;
@@ -161,6 +162,7 @@
         });
         
         $('.decrement-btn').click(function (e) { 
+            e.preventDefault();
             var dec_value = $(this).closest('.product_data').find('.qty-input').val();
             var value = parseInt(dec_value);
             value = isNaN(value) ? 0 : value;
