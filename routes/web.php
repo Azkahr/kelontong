@@ -25,8 +25,6 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
-
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended('/dashboard')
@@ -104,3 +102,5 @@ Route::middleware('auth', 'verified')->group(function(){
 Route::put('/update-cart', [CartController::class, 'update']);
 
 Route::get('/search', [HomeController::class, 'search']);
+
+Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
