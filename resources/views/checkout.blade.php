@@ -23,6 +23,7 @@
     }
 </style>
     <div class="container">
+        <form action="">
         <div class="row">
             <div class="col-md-7">
                 <div class="card">
@@ -31,36 +32,36 @@
                         <hr>
                         <div class="row checkout-form">
                             <div class="col-md-6">
-                                <label for="">First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" name="" id="">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name" name="fname" id="fname">
                             </div>
                             <div class="col-md-6">
-                                <label for="">Last Name</label>
-                                <input type="text" name="" id="" placeholder="Enter Last Name" class="form-control">
+                                <label for="lname">Last Name</label>
+                                <input type="text" name="lname" id="lname" placeholder="Enter Last Name" class="form-control">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="">Email</label>
-                                <input type="email" name="" id="" placeholder="Enter Email" class="form-control">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="">Nomor Hp</label>
-                                <input type="text" name="" id="" placeholder="Enter Nomor Hp" class="form-control">
+                                <label for="no_hp">Nomor Hp</label>
+                                <input type="text" name="no_hp" id="no_hp" placeholder="Enter Nomor Hp" class="form-control">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="">Alamat</label>
-                                <input type="text" name="" id="" placeholder="Enter Alamat" class="form-control">
+                                <label for="alamat">Alamat</label>
+                                <input type="text" name="alamat" id="alamat" placeholder="Enter Alamat" class="form-control">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="">Kota</label>
-                                <input type="text" name="" id="" placeholder="Enter Kota" class="form-control">
+                                <label for="kota">Kota</label>
+                                <input type="text" name="kota" id="kota" placeholder="Enter Kota" class="form-control">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="">Provinsi</label>
-                                <input type="text" name="" id="" placeholder="Enter Provinsi" class="form-control">
+                                <label for="provinsi">Provinsi</label>
+                                <input type="text" name="provinsi" id="provinsi" placeholder="Enter Provinsi" class="form-control">
                             </div>
                             <div class="col-md-6 mt-3">
-                                <label for="">Pin code</label>
-                                <input type="text" name="" id="" placeholder="Enter Pin Code" class="form-control">
+                                <label for="pin">Pin code</label>
+                                <input type="text" name="pin" id="pin" placeholder="Enter Pin Code" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -101,5 +102,6 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
 @endsection

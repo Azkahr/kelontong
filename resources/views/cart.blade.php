@@ -36,15 +36,7 @@
                     <div class="col-md-2 my-auto">
                         <div class="text-center">
                             <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
-                            @if ($cart->products->stok > $cart->qty)
-                                <label for="stok">Quantity</label>
-                                <div class="mb-3 d-flex justify-content-center flex-row">
-                                    <button class="btn btn-primary changeQuantity decrement-btn">-</button>
-                                    <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
-                                    <button class="btn btn-primary changeQuantity increment-btn">+</button>
-                                </div>
-                                @php $total += $cart->products->harga * $cart->qty; @endphp
-                            @elseif($cart->products->stok == $cart->qty)
+                            @if ($cart->products->stok >= $cart->qty)
                                 <label for="stok">Quantity</label>
                                 <div class="mb-3 d-flex justify-content-center flex-row">
                                     <button class="btn btn-primary changeQuantity decrement-btn">-</button>
