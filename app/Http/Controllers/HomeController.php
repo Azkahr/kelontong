@@ -18,14 +18,14 @@ class HomeController extends Controller
         ]);
     }
 
-    public function search(Cart $carts){
+    public function search(){
         if(!request()->has('search')){
             return back();
         }
 
         return view('search',[
             'title' => 'Search',
-            'carts' => $carts->where('users_id', Auth::id())->get(),
+            'carts' => Cart::where('users_id', Auth::id())->get(),
             'products' => Product::latest()->filter(request(['search', 'category']))->get(),
         ]);
     }
@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         return view('detail', [
             'title' => $product->product_name,
-            'carts' => Cart::where('users_id', auth()->user()->id),
+            'carts' => Cart::where('users_id', Auth::id())->get(),
             'product' => $product,
         ]);
     }

@@ -37,11 +37,13 @@
                         <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
                     </div>
                 </div>
-                @php $total += $cart->products->harga * $cart->qty; @endphp
+                @php 
+                    $total += $cart->products->harga * $cart->qty;
+                @endphp
             @endforeach
         </div>
         <div class="card-footer">
-            <h6>Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
+            <h6 class="total-harga">Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
             <button class="btn btn-success float-end">Checkout</button>
         </div>
     </div>
@@ -109,7 +111,9 @@
 
 <script>
     $('.cartPage').hide();
+
     $(function(){
+
         $('.cartBtn').click(function(){
             $('.cartPage').fadeIn(300);
             $('body').css('overflow', 'hidden');
@@ -127,6 +131,20 @@
             value = isNaN(value) ? 0 : value;
             value++;
             $(this).closest('.product_data').find('.qty-input').val(value);
+            var products_id = $(this).closest('.product_data').find('.products_id').val();
+            var qty = $(this).closest('.product_data').find('.qty-input').val();
+            data = {
+                'products_id' : products_id,
+                'qty' : qty,
+            }
+            $.ajax({
+                method: "PUT",
+                url: "/update-cart",
+                data: data,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
         });
         
         $('.decrement-btn').click(function (e) { 
@@ -148,9 +166,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            
             $.ajax({
-                method: "POST",
+                method: "DELETE",
                 url: "/delete-cart",
                 data: {
                     'products_id' : products_id,

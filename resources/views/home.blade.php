@@ -186,9 +186,6 @@
 </div>
 
 @section('script')
-<script>
-    feather.replace();
-</script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.js"></script>
 <script>
 $(document).ready(function(){
