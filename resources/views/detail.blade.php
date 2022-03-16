@@ -101,8 +101,6 @@ function carousel() {
     $(document).ready(function () {
 
         $('#addToCartBtn').click(function (e) { 
-            
-            var products_id = $('.products_id').val();
             var products_qty = $('.qty-input').val();
             
             $.ajaxSetup({
@@ -115,12 +113,12 @@ function carousel() {
                 method: "POST",
                 url: "/add-to-cart",
                 data: {
-                    'products_id' : products_id,
+                    'products_id' : '{{ $product->id }}',
                     'products_qty' : products_qty,
                 },
                 dataType: "json",
                 success: function (response) {
-                    window.location.href = "/cart";
+                    window.location.href = "/";
                     Swal.fire(response.status);
                 }
             });
