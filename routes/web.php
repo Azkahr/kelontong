@@ -98,8 +98,9 @@ Route::middleware('auth', 'verified')->group(function(){
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
 Route::middleware('auth', 'verified')->group(function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::get('/update-cart', [CartController::class, 'update']);
     Route::delete('/delete-cart', [CartController::class, 'delete']);
 });
+
+Route::put('/update-cart', [CartController::class, 'update']);
 
 Route::get('/search', [HomeController::class, 'search']);

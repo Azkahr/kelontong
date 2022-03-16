@@ -65,19 +65,27 @@ class CartController extends Controller
 
     public function update(Request $request){
 
-        $products_id = $request->input('products_id');
-        $qty = $request->input('qty');
-        $update = Cart::where('products_id', 2)->update(['qty', 3]);
-        $cart = Cart::where('users_id', Auth::id())->get();
-        $response = 0;
-        foreach ($cart as $c) {
-            $response += $c->products->harga * $c->qty;
+        if(!$request->ajax()){
+            return redirect('/');
         }
 
-        dd($response);
-        if ($update) {
+        $products_id = $request->products_id;
+        $qty = $request->qty;
+
+        $update = Cart::where('products_id', $products_id)->where('users_id', Auth::user()->id)->first();
+        $update->qty = $qty;
+        $update->update();
+        
+        $data = $update->products->harga;
+
+        if($update){
             return response()->json([
-                'status' => 'Berhasil'
+                'status' => 'Berhasil',
+                'data' => $data,
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'Gagal',
             ]);
         }
     }

@@ -43,7 +43,7 @@
             @endforeach
         </div>
         <div class="card-footer">
-            <h6 class="total-harga">Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
+            <h6>Total : Rp.<span class="total-harga">{{ number_format($total, 0,",",".") }}</span></h6>
             <button class="btn btn-success float-end">Checkout</button>
         </div>
     </div>
@@ -114,6 +114,12 @@
 
     $(function(){
 
+        let totalHarga = parseFloat('{{ $total }}');
+
+        function nDots(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
         $('.cartBtn').click(function(){
             $('.cartPage').fadeIn(300);
             $('body').css('overflow', 'hidden');
@@ -131,18 +137,25 @@
             value = isNaN(value) ? 0 : value;
             value++;
             $(this).closest('.product_data').find('.qty-input').val(value);
-            var products_id = $(this).closest('.product_data').find('.products_id').val();
-            var qty = $(this).closest('.product_data').find('.qty-input').val();
-            data = {
-                'products_id' : products_id,
-                'qty' : qty,
-            }
+            var products_id = $(this).parent().siblings(".products_id").val();
+            var qty = $(this).siblings('.qty-input').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
-                method: "PUT",
+                type: "PUT",
                 url: "/update-cart",
-                data: data,
+                data: {
+                    products_id: products_id,
+                    qty: qty,
+                },
+                dataType: 'json',
                 success: function (response) {
-                    console.log(response);
+                    totalHarga += parseFloat(response.data);
+                    $('.total-harga').html(nDots(totalHarga));
+                    console.log(response.data);
                 }
             });
         });
@@ -154,6 +167,27 @@
             if(value > 1){
                 value--;
                 $(this).closest('.product_data').find('.qty-input').val(value);
+                var products_id = $(this).parent().siblings(".products_id").val();
+                var qty = $(this).siblings('.qty-input').val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "PUT",
+                    url: "/update-cart",
+                    data: {
+                        products_id: products_id,
+                        qty: qty,
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        totalHarga -= parseFloat(response.data);
+                        $('.total-harga').html(nDots(totalHarga));
+                        console.log(response.data);
+                    }
+                });
             }
         });
 
@@ -173,32 +207,6 @@
                     'products_id' : products_id,
                 },
                 dataType: 'json',
-            });
-        });
-
-        $('.changeQuantity').click(function (e) { 
-            e.preventDefault();
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            
-            var products_id = $(this).closest('.product_data').find('.products_id').val();
-            var qty = $(this).closest('.product_data').find('.qty-input').val();
-            data = {
-                'products_id' : products_id,
-                'qty' : qty,
-            }
-            $.ajax({
-                method: "POST",
-                url: "/update-cart",
-                data: data,
-                success: function (response) {
-                    window.location.reload();
-                    Swal.fire(response.status);
-                }
             });
         });
     });
