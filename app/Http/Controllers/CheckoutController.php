@@ -86,6 +86,6 @@ class CheckoutController extends Controller
 
         notify()->success('Item sudah di order', 'Berhasil');
         
-        return redirect('/');
+        return redirect('/my-order');
     }
 }
