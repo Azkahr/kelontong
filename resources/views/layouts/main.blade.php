@@ -35,7 +35,7 @@
 </style>
 <body>
     @include('notify::components.notify')
-    <div id="container">
+    <div id="layouts-container" class="layouts-container">
         @yield('container')
     </div>
     @yield('script')
