@@ -1,130 +1,163 @@
 @extends('layouts.main')
 @section('container')
-    <div class="container">
-        <div class="row">
-            <div class="col col-md-8 mt-5">
-                @if (count($errors) > 0)
-                    @foreach ($errors->all() as $error)
-                        <div class="alert alert-warning">{{ $error }}</div>
-                    @endforeach
-                @endif
-                @if ($message = Session::get('error'))
-                    <div class="invalid-feedback">
-                        {{ $message }}
+@include('partials/navbar')
+<style>
+    .container {
+        padding-top: 150px;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 18.72px;
+        font-weight: 600;
+    }
+</style>
+<div class="container">
+    <div class="card shadow">
+        <div class="card-body">
+            @php $total = 0; @endphp
+            @foreach ($carts as $cart)
+                <div class="row product_data">
+                    <div class="col-md-2">
+                        {{-- @php
+                            $image = explode(',', $cart->products->image);
+                        @endphp
+                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}"> --}}
+                        @foreach (explode(',',$cart->products->image) as $item)
+                            @if (count(explode(',',$cart->products->image)) > 1)
+                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
+                            @else
+                                <img src="{{ asset('storage/' . $item) }}" alt="{{ $cart->products->product_name }}">
+                            @endif
+                        @endforeach
                     </div>
-                @endif
-                @if (session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
+                    <div class="col-md-3 my-auto">
+                        <h3>{{ $cart->products->product_name }}</h3>
                     </div>
-                @endif
-                <div class="card mt-5">
-                    <div class="card-body">
-                        <table class="table table-stripped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Product</th>
-                                    <th>Harga</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($itemcart->detail as $detail)
-                                    <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>
-                                            {{ $detail->product_name }}
-                                        </td>
-                                        <td>Rp.{{ number_format($detail->harga, 0,",",".") }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <form action="{{ route('cartdetail.update', $detail->id) }}" method="POST">
-                                                    @method('patch')
-                                                    @csrf
-                                                    <input type="hidden" name="param" value="kurang">
-                                                    <button class="btn btn-primary btn-sm">
-                                                        -
-                                                    </button>
-                                                </form>
-                                                <button class="btn btn-outline-primary btn-sm" disabled="true">
-                                                    {{ number_format($detail->qty) }}
-                                                </button>
-                                                <form action="{{ route('cartdetail.update', $detail->id) }}" method="post">
-                                                    @method('patch')
-                                                    @csrf
-                                                    <input type="hidden" name="param" value="tambah">
-                                                    <button class="btn btn-primary btn-sm">
-                                                        +
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Rp.{{ number_format($detail->subtotal, 0,",",".") }}
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('cartdetail.destroy', $detail->id) }}" method="post" style="display: inline">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger mb-2">
-                                                    Hapus
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                        </table>
-                        <a href="/" class="btn btn-primary">Lanjut belanja</a>
+                    <div class="col-md-2 my-auto">
+                        <h3>Rp.{{ number_format($cart->products->harga, 0,",",".") }}</h3>
                     </div>
-                </div>
-            </div>
-            <div class="col col-md-4">
-                <div class="card mt-5">
-                    <div class="card-header">
-                        Ringkasan
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <tr>
-                                <td>No Invoice</td>
-                                <td class="text-right">
-                                    {{ $itemcart->no_invoice }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td class="text-right">
-                                    Rp.{{ number_format($itemcart->subtotal, 0,",",".") }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td class="text-right">
-                                    Rp.{{ number_format($itemcart->total, 0,",",".") }}
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn btn-primary btn-block">Checkout</button>
-                            </div>
-                            <div class="col">
-                                <form action="{{ route('clearCart', $itemcart->id) }}" method="POST">
-                                    @method('patch')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-block">Kosongkan cart</button>
-                                </form>
+                    <div class="col-md-2 my-auto">
+                        <div class="text-center">
+                            <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
+                            <label for="stok">Quantity</label>
+                            <div class="mb-3 d-flex justify-content-center flex-row">
+                                <button class="btn btn-primary changeQuantity decrement-btn">-</button>
+                                <input type="text" name="stok" class="form-control qty-input" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
+                                <button class="btn btn-primary changeQuantity increment-btn">+</button>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-2 my-auto">
+                        <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Delete</button>
+                    </div>
                 </div>
-            </div>
+                @php $total += $cart->products->harga * $cart->qty; @endphp
+            @endforeach
+        </div>
+        <div class="card-footer">
+            <h6>Total : Rp.{{ number_format($total, 0,",",".") }}</h6>
+            <button class="btn btn-success float-end">Checkout</button>
         </div>
     </div>
+</div>
+<a href="/" class="btn btn-primary" style="margin-left: 125px;">Lanjut belanja</a>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $('.increment-btn').click(function (e) { 
+            e.preventDefault();
+            
+            var inc_value = $(this).closest('.product_data').find('.qty-input').val();
+            var value = parseInt(inc_value);
+            value = isNaN(value) ? 0 : value;
+            if(value < 10000){
+
+                value++;
+                $(this).closest('.product_data').find('.qty-input').val(value);
+
+            }
+        });
+        
+        $('.decrement-btn').click(function (e) { 
+            e.preventDefault();
+            
+            var dec_value = $(this).closest('.product_data').find('.qty-input').val();
+            var value = parseInt(dec_value);
+            value = isNaN(value) ? 0 : value;
+            if(value > 1){
+
+                value--;
+                $(this).closest('.product_data').find('.qty-input').val(value);
+            }
+        });
+
+        $('.delete-cart-item').click(function (e) { 
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var products_id = $(this).closest('.product_data').find('.products_id').val();
+            $.ajax({
+                method: "POST",
+                url: "/delete-cart",
+                data: {
+                    'products_id' : products_id,
+                },
+                success: function (response) {
+                    window.location.reload();
+                    Swal.fire("", response.status, "success");  
+                }
+            });
+        });
+
+        $('.changeQuantity').click(function (e) { 
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            var products_id = $(this).closest('.product_data').find('.products_id').val();
+            var qty = $(this).closest('.product_data').find('.qty-input').val();
+            data = {
+                'products_id' : products_id,
+                'qty' : qty,
+            }
+            $.ajax({
+                method: "POST",
+                url: "/update-cart",
+                data: data,
+                success: function (response) {
+                    window.location.reload();
+                    Swal.fire(response.status);
+                }
+            });
+        });
+    });
+
+var slideIndex = 0;
+carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {slideIndex = 1}
+            x[slideIndex-1].style.display = "block";
+            setTimeout(carousel, 2000);
+        }
+</script>
 @endsection

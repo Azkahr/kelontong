@@ -9,19 +9,10 @@ class Cart extends Model
 {
     use HasFactory;
 
+    protected $table = 'carts';
     protected $guarded = [];
 
-    public function user(){
-        return $this->belongsTo(User::class, 'users_id');
-    }
-
-    public function detail(){
-        return $this->hasMany(CartDetail::class, 'carts_id');
-    }
-    
-    public function updateTotal($itemcart, $subtotal){
-        $this->attributes['subtotal'] = $itemcart->subtotal + $subtotal;
-        $this->attributes['total'] = $itemcart->total + $subtotal;
-        self::save();
+    public function products(){
+        return $this->belongsTo(Product::class, 'products_id','id');
     }
 }

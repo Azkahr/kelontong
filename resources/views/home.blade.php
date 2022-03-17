@@ -11,11 +11,6 @@
 @section('container')
 @include('partials/loader')
 @include('partials/navbar')
-<div class="cartPage">
-    <div class="cart">
-        <div class="btnClose"><button id="btnClose"><span data-feather="x"></span></button></div>
-    </div>
-</div>
 
 <div class="background-element">
     <img src="{{ asset('assets/img/fluid.png') }}" alt="">
@@ -31,8 +26,8 @@
             <img class="banner banner3" src="{{ asset('assets/img/food 1.jpg') }}" alt="">
         </div>
         <div class="arrow-container">
-            <span id="prevA" class="prevA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(5px); transition:0.5s; border-radius: 50%" data-feather="arrow-left"></span>
-            <span class="nextA" style="opacity:0; background-color:white; color:#536AEC; transform:scale(1.3) translateX(-5px); transition:0.5s; border-radius: 50%" data-feather="arrow-right"></span>
+            <span class="prevA" data-feather="arrow-left"></span>
+            <span class="nextA" data-feather="arrow-right"></span>
         </div>
     </div>
 </div>
@@ -90,101 +85,113 @@
     </div>
 </div>
 
-<hr style="width: 80%; opacity:60%; margin: 40px auto 0px auto; height:2px">
+<hr style="width: 80%; opacity:60%; margin: 40px auto 40px auto; height:2px">
 
 <div class="best-seller">
     <div class="blue-bg"></div>
     <p class="best-text">Best Seller</p>
     <div class="card-container">
         <div class="slider-best">
-            <div class="cardB cb1">
-                <div class="cImg">
-                    <img src="" alt="">
+            @foreach ($productsBest as $pb)
+            <a href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lBest">
+                <div class="cardB cb{{ $loop->iteration }}">
+                    <div class="cImg">
+                        @php
+                            $fotoMain = explode(',', $pb->image);
+                        @endphp
+                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                    </div>
+                    <div class="cContent">
+                        <h4 class="h5">{{ $pb->product_name}}</h4>
+                        <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                    </div>
                 </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb2">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb3">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb4">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb5">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
-            <div class="cardB cb5">
-                <div class="cImg">
-                    <img src="" alt="">
-                </div>
-                <div class="cContent">
-                    <h4>Nama Product</h4>
-                    <p> desc</p>
-                    <p>dll</p>
-                </div>
-            </div>
+            </a>
+            @endforeach
         </div>
+        <span class="prevA2" data-feather="arrow-left"></span>
+        <span class="nextA2" data-feather="arrow-right"></span>
     </div>
 </div>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt culpa soluta quod eveniet dolorum deleniti voluptas accusantium ducimus voluptatibus nisi. Alias, similique. Architecto earum dignissimos eligendi, exercitationem quasi quae eveniet sapiente ipsam non ducimus soluta repellat sequi illo perferendis voluptates ipsum ex fugit quis eius eos. A amet eius eos.
+<div class="diskon">
+    <div class="blue-bg2"></div>
+    <p class="dis-text">Diskon</p>
+    <div class="card-container2">
+        <div class="slider-dis">
+            @foreach ($productsBest as $pb)
+            <a href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lDis">
+                <div class="cardB cb{{ $loop->iteration }}">
+                    <div class="cImg">
+                        @php
+                            $fotoMain = explode(',', $pb->image);
+                        @endphp
+                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                    </div>
+                    <div class="cContent">
+                        <div>
+                            <h4 class="h4">{{ $pb->product_name }}</h4>
+                            <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                        </div>
+                        <div style="display: flex; justify-content:space-between; margin-top:25px">
+                            <p>Rating</p>
+                            <p>{{ $pb->user->nama_toko }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
+        <span class="prevA3" data-feather="arrow-left"></span>
+        <span class="nextA3" data-feather="arrow-right"></span>
+    </div>
+</div>
+
+<hr style="width: 80%; opacity:60%; margin: 40px auto 15px auto; height:2px">
+
+<p style="text-align: center; font-size:30px; font-family:spartan; font-weight:700">HAYUU JAJAN</p>
+
+<hr style="width: 80%; opacity:60%; margin: 15px auto 25px auto; height:2px">
+
+<div class="preview">
+    @foreach ($products as $product)
+        <a href="/{{ $product->user->nama_toko }}/{{ $product->product_name}}">
+            <div style="transform: scale(0.95)" class="cardB cp{{ $loop->iteration }}">
+                <div class="cImg">
+                    @php
+                        $fotoMain = explode(',', $product->image);
+                    @endphp
+                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                </div>
+                <div class="cContent">
+                    <div>
+                        <h4 class="h4">{{ $product->product_name }}</h4>
+                        <p>RP {{ number_format($product->harga, 0,",",".") }}</p>
+                    </div>
+                    <div style="display: flex; justify-content:space-between; margin-top:25px">
+                        <p>Rating</p>
+                        <p>{{ $product->user->nama_toko }}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    @endforeach
+    <div style="margin:auto; width:90%; text-align:end">
+        <a style="color:#0A58CA" href="#">Lebih Banyak</a>
+    </div>
+</div>
+
+<div class="footer">
+    &copy; 
+</div>
 
 @section('script')
-<script>
-    feather.replace();
-</script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.js"></script>
 <script>
 $(document).ready(function(){
     $('.loader').fadeOut(500);
 
     $('html, body').css('overflow', 'initial');
-
-    $('.cartPage').hide();
-
-    $('.cartBtn').click(function(){
-        disableScroll();
-        $('.cartPage').show();
-    });
-
-    $('#btnClose').click(function(){
-        enableScroll();
-        $('.cartPage').hide();
-    });
 
     $('.background-element').addClass('bE');
 
@@ -194,7 +201,21 @@ $(document).ready(function(){
     });
 
     $('.slider-best').slick({
-        slidesPerRow: 6,
+        prevArrow: '.prevA2',
+        nextArrow: '.nextA2',
+        centerMode: true,
+        slidesToShow: 6,
+        draggable: false,
+        centerPadding: '0px',
+    });
+
+    $('.slider-dis').slick({
+        prevArrow: '.prevA3',
+        nextArrow: '.nextA3',
+        centerMode: true,
+        slidesToShow: 6,
+        draggable: false,
+        centerPadding: '0px',
     });
 
     $('.main').hover(function () {
@@ -207,6 +228,22 @@ $(document).ready(function(){
         $('.prevA').css('opacity', '0');
         $('.nextA').css('transform', 'translateX(-5px) scale(1.3)');
         $('.nextA').css('opacity', '0');
+    });
+
+    $('.card-container').hover(function () {
+        $('.prevA2').css('transform', 'translateX(-5px) scale(1.4)');
+        $('.nextA2').css('transform', 'translateX(10px) scale(1.4)');
+    }, function () {
+        $('.prevA2').css('transform', 'translateX(5px) scale(1.3)');
+        $('.nextA2').css('transform', 'translateX(5px) scale(1.3)');
+    });
+
+    $('.card-container2').hover(function () {
+        $('.prevA3').css('transform', 'translateX(-5px) scale(1.4)');
+        $('.nextA3').css('transform', 'translateX(10px) scale(1.4)');
+    }, function () {
+        $('.prevA3').css('transform', 'translateX(5px) scale(1.3)');
+        $('.nextA3').css('transform', 'translateX(5px) scale(1.3)');
     });
 });
 </script>

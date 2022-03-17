@@ -8,7 +8,6 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CartDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Session;
@@ -25,8 +24,6 @@ use Illuminate\Support\Facades\Session;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/detail/{product:id}', [HomeController::class, 'detail'])->name('detail');
 
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
@@ -96,14 +93,13 @@ Route::middleware('auth', 'verified')->group(function(){
 
 });
 
+Route::post('add-to-cart', [CartController::class, 'addToCart']);
 Route::middleware('auth', 'verified')->group(function(){
-    // cart
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::patch('/clear-cart/{id}', [CartController::class, 'clearCart'])->name('clearCart');
-    // cart detail
-    Route::post('/cartdetail/store', [CartDetailController::class, 'store'])->name('cartdetail.store');
-    Route::patch('/cartdetail/update', [CartDetailController::class, 'update'])->name('cartdetail.update');
-    Route::delete('/cartdetail/destroy/{id}', [CartDetailController::class, 'destroy'])->name('cartdetail.destroy');
+    Route::put('/update-cart', [CartController::class, 'update']);
+    Route::delete('/delete-cart', [CartController::class, 'delete']);
 });
 
+
 Route::get('/search', [HomeController::class, 'search']);
+
+Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');

@@ -4,32 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\User;
-use App\Models\Category;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index(){
-
-        $title = '';
-        if (request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
-            $title = ' in ' . $category['name'];
-        }
-        
         return view('home', [
-            'title' => 'Home' . $title,
-            'products' => Product::latest()->paginate(30),
-            'productsMakanan' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Makanan');
-            })->take(10)->get(),
-            'productsMinuman' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Minuman');
-            })->take(10)->get(),
-            'productsJajanan' => Product::latest()->whereHas('category', function($q){
-                $q->where('name', '=', 'Jajanan');
-            })->take(10)->get(),
-            'productsL' => Product::latest()->take(3)->get(),
+            'title' => 'Home',
+            'products' => Product::latest()->take(30)->get(),
+            'productsBest' => Product::latest()->take(12)->get(),
+            'carts' => Cart::where('users_id', Auth::id())->get(),
         ]);
     }
 
@@ -40,16 +25,24 @@ class HomeController extends Controller
 
         return view('search',[
             'title' => 'Search',
+            'carts' => Cart::where('users_id', Auth::id())->get(),
             'products' => Product::latest()->filter(request(['search', 'category']))->get(),
         ]);
     }
 
-    public function detail(Product $product, User $user){
+    public function detail(Request $request){
+
+        $namaP = $request->produk;
+        $toko = $request->toko;
+
+        $product = Product::whereHas('user', function($q) use ($toko){
+            $q->where('nama_toko', '=' , $toko);
+        })->where('product_name', $namaP)->first();
+
         return view('detail', [
             'title' => $product->product_name,
+            'carts' => Cart::where('users_id', Auth::id())->get(),
             'product' => $product,
-            "totalqty" => Product::where('id', $product->id)->sum('stok'),
-            'user' => $user
         ]);
     }
 }
