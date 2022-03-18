@@ -3,7 +3,7 @@
         <div class="btnClose">
             <button id="btnClose"><span data-feather="x"></span></button id="btnClose">
         </div>
-        <div class="card-body overflow-auto" id="card-body">
+        <div class="card-body overflow-auto">
             @php
                 $total = 0;
                 $modal = false;
@@ -144,7 +144,7 @@
             $('.cart').empty();
         });
 
-        $('#card-body').on('click', '.increment-btn', function(e) {
+        $('#qty').on('click', '.increment-btn', function (e) { 
             e.preventDefault();
             let inc_value = parseInt($(this).siblings('.qty-input').val());
             inc_value++;
@@ -156,7 +156,7 @@
             $('.total-harga').html(nDots(totalHarga));
         });
         
-        $('#card-body').on('click', '.decrement-btn', function(e) {
+        $('#qty').on('click', '.decrement-btn', function (e) { 
             e.preventDefault();
             let dec_value = parseInt($(this).siblings('.qty-input').val());
             if(dec_value > 1){
@@ -170,7 +170,7 @@
             }
         });
 
-        $('#card-body').on('click', '.delete-cart-item' ,function (e) { 
+        $('.delete-cart-item').click(function (e) { 
             e.preventDefault();
             let products_id = $(this).closest('.product_data').find('.products_id').val();
             let remE = $(this).parents('.product_data');
@@ -179,6 +179,7 @@
             let qty = parseInt($(this).closest('.product_data').find(".qty-input").val());
             let harga = parseFloat($(this).closest('.product_data').find(".harga_product").val());
             totalHarga -= (qty * harga);
+            console.log(harga);
             $('.total-harga').html(nDots(totalHarga));
         });
     });

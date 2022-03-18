@@ -43,11 +43,13 @@
         }
     </style>
     <div class="container">
+        
         <a href="/" style="float: right; text-decoration: none" class="text-muted">Kembali?</a>
         <div class="image">
             @php
                 $image = explode(',',$product->image)[0];
             @endphp
+            <input type="hidden" id="image-source" value="{{ asset('storage/'.$image) }}">
             @foreach (explode(',',$product->image) as $item)
                 <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
             @endforeach
@@ -84,7 +86,7 @@
             <h6 style="font-weight: bold; font-size: 134%">{{ $product->user->nama_toko }}</h6>
         </div>
     </div>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 var slideIndex = 0;
 carousel();
@@ -105,7 +107,7 @@ function carousel() {
 
         $('#addToCartBtn').click(function (e) { 
             let products_qty = $('.qty-input2').val();
-            let image = '{{ $image }}'.toString();
+            let image = $('#image-source').val();
             let name = '{{ $product->product_name }}';
             let harga = nDots('{{ $product->harga }}');
             let id = parseInt('{{ $product->products_id }}');
@@ -132,11 +134,11 @@ function carousel() {
                 }
             });
 
-            $('.card-body').append(
+            $('#card-body').append(
                 `
                 <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
                     <div class="col-md-2">
-                        <img src="{{ asset('storage/'.`+image+`) }}" alt="`+ name +`">
+                        <img src="`+ image +`" alt="`+ name +`">
                     </div>
                     <div class="col-md-3 my-auto ms-3">
                         <h3>{{ `+ name +` }}</h3>
@@ -149,7 +151,7 @@ function carousel() {
                             <input type="hidden" class="products_id" value="`+ id +`">
                             <input type="hidden" class="harga_product" value="`+ harga +`">
                             <label for="stok">Quantity</label>
-                            <div class="mb-3 d-flex justify-content-center flex-row">
+                            <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
                                 <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                 <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
                                 <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
