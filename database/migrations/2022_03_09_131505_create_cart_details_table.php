@@ -18,10 +18,10 @@ class CreateCartDetailsTable extends Migration
             $table->foreignId('products_id');
             $table->foreignId('carts_id');
             $table->string('product_name');
-            $table->double('qty', 12, 2)->default(0);
-            $table->double('harga', 12, 2)->default(0);
-            $table->double('subtotal', 12, 2)->default(0);
-            $table->longtext('image')->nullable();
+            $table->unsignedInteger('qty');
+            $table->double('harga');
+            $table->double('subtotal');
+            $table->longtext('image');
             $table->timestamps();
         });
     }

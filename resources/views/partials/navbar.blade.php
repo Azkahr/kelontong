@@ -3,7 +3,7 @@
         <div class="btnClose">
             <button id="btnClose"><span data-feather="x"></span></button id="btnClose">
         </div>
-        <div class="card-body overflow-auto">
+        <div class="card-body cart overflow-auto">
             @php
                 $total = 0;
             @endphp
@@ -122,17 +122,6 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         }
 
-        $('.cartBtn').click(function(){
-            $('.cartPage').fadeIn(300);
-            $('body').css('overflow', 'hidden');
-        });
-
-        $('#btnClose').click(function(){
-            $('.cartPage').fadeOut(300);
-            $('body').css('overflow', 'initial');
-            $('.cart').empty();
-        });
-
         function ajaxF(url, data, type) {
             $.ajaxSetup({
                 headers: {
@@ -147,37 +136,41 @@
             });
         }
 
+        $('.cartBtn').click(function(){
+            $('.cartPage').fadeIn(300);
+            $('body').css('overflow', 'hidden');
+        });
+
+        $('#btnClose').click(function(){
+            $('.cartPage').fadeOut(300);
+            $('body').css('overflow', 'initial');
+            $('.cart').empty();
+        });
+
         $('.increment-btn').click(function (e) { 
             e.preventDefault();
-            let inc_value = $(this).siblings('.qty-input').val();
+            let inc_value = parseInt($(this).siblings('.qty-input').val());
             inc_value++;
             $(this).siblings('.qty-input').val(inc_value);
             let products_id = $(this).parent().siblings(".products_id").val();
             let harga = parseFloat($(this).parent().siblings(".harga_product").val());
-            let qty = $(this).siblings('.qty-input').val();
-            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : qty,}, 'PUT');
+            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : inc_value,}, 'PUT');
             totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
         });
         
         $('.decrement-btn').click(function (e) { 
             e.preventDefault();
-            let inc_value = $(this).siblings('.qty-input').val();
-            inc_value--;
-            $(this).siblings('.qty-input').val(inc_value);
-            let products_id = $(this).parent().siblings(".products_id").val();
-            let harga = parseFloat($(this).parent().siblings(".harga_product").val());
-            let qty = $(this).siblings('.qty-input').val();
-            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : qty,}, 'PUT');
-            totalHarga -= harga;
-            $('.total-harga').html(nDots(totalHarga));
-        });
-
-        $('.qty-input').change(function (e) {
-            e.preventDefault();
-            let products_id = $(this).parent().siblings(".products_id").val();
-            let qty = $(this).val();
-            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : qty,}, 'PUT');
+            let dec_value = parseInt($(this).siblings('.qty-input').val());
+            if(dec_value > 1){
+                dec_value--
+                $(this).siblings('.qty-input').val(dec_value);
+                let products_id = $(this).parent().siblings(".products_id").val();
+                let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+                ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
+                totalHarga -= harga;
+                $('.total-harga').html(nDots(totalHarga));
+            }
         });
 
         $('.delete-cart-item').click(function (e) { 
@@ -186,7 +179,7 @@
             let remE = $(this).parents('.product_data');
             remE.remove();
             ajaxF('/delete-cart', {'products_id' : products_id,}, 'DELETE');
-            let qty = $(this).closest('.product_data').find(".qty-input").val();
+            let qty = parseInt($(this).closest('.product_data').find(".qty-input").val());
             let harga = parseFloat($(this).closest('.product_data').find(".harga_product").val());
             totalHarga -= (qty * harga);
             console.log(harga);

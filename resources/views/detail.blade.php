@@ -45,6 +45,9 @@
     <div class="container">
         <a href="/" style="float: right; text-decoration: none" class="text-muted">Kembali?</a>
         <div class="image">
+            @php
+                $image = explode(',',$product->image)[0];
+            @endphp
             @foreach (explode(',',$product->image) as $item)
                 <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
             @endforeach
@@ -101,8 +104,17 @@ function carousel() {
     $(document).ready(function () {
 
         $('#addToCartBtn').click(function (e) { 
-            var products_qty = $('.qty-input2').val();
-            
+            let products_qty = $('.qty-input2').val();
+            let image = '{{ $image }}';
+            let name = '{{ $product->product_name }}';
+            let harga = '{{ $product->harga }}';
+            let id = '{{ $product->products_id }}';
+
+            console.log(image, products_qty);
+
+            function nDots(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -118,7 +130,36 @@ function carousel() {
                 },
                 dataType: "json",
                 success: function (response) {
-                    window.location.href = "/";
+                    $('.cart').append(
+                        `
+                        <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
+                            <div class="col-md-2">
+                                <img src="{{ asset('storage/'.`+ image +`) }}" alt="`+ name +`">
+                            </div>
+                            <div class="col-md-3 my-auto ms-3">
+                                <h3>{{ `+ name +` }}</h3>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <h3>Rp.`+ nDots(harga) +`</h3>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <div class="text-center">
+                                    <input type="hidden" class="products_id" value="`+ id +`">
+                                    <input type="hidden" class="harga_product" value="`+ harga +`">
+                                    <label for="stok">Quantity</label>
+                                    <div class="mb-3 d-flex justify-content-center flex-row">
+                                        <button class="btn btn-primary decrement-btn rounded-0">-</button>
+                                        <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
+                                        <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
+                            </div>
+                        </div>
+                        `
+                    );
                     Swal.fire(response.status);
                 }
             });
@@ -129,11 +170,8 @@ function carousel() {
             var inc_value = $('.qty-input2').val();
             var value = parseInt(inc_value);
             value = isNaN(value) ? 0 : value;
-            if(value < 10000){
-
-                value++;
-                $('.qty-input').val(value);
-            }
+            value++;
+            $('.qty-input').val(value);
         });
         
         $('.decrement-btn2').click(function (e) { 
@@ -142,7 +180,6 @@ function carousel() {
             var value = parseInt(dec_value);
             value = isNaN(value) ? 0 : value;
             if(value > 1){
-
                 value--;
                 $('.qty-input2').val(value);
             }
