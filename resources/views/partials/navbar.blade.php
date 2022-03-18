@@ -4,38 +4,45 @@
             <button id="btnClose"><span data-feather="x"></span></button id="btnClose">
         </div>
         <div class="card-body overflow-auto">
-            @php $total = 0; @endphp
-            @foreach ($carts as $cart)
-                @php 
-                    $total += $cart->products->harga * $cart->qty;
-                    $image = explode(',',$cart->products->image);
-                @endphp
-                <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
-                    <div class="col-md-2">
-                        <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}" class="mySlides">
-                    </div>
-                    <div class="col-md-3 my-auto ms-3">
-                        <h3>{{ $cart->products->product_name }}</h3>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <h3>Rp.{{ number_format($cart->products->harga, 0,",",".") }}</h3>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <div class="text-center">
-                            <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
-                            <label for="stok">Quantity</label>
-                            <div class="mb-3 d-flex justify-content-center flex-row">
-                                <button class="btn btn-primary decrement-btn rounded-0">-</button>
-                                <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white;" disabled>
-                                <button class="btn btn-primary increment-btn rounded-0">+</button>
+            @php
+                $total = 0;
+            @endphp
+            @if ($carts->count())
+                @foreach ($carts as $cart)
+                    @php 
+                        $total += $cart->products->harga * $cart->qty;
+                        $image = explode(',',$cart->products->image);
+                    @endphp
+                    <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
+                        <div class="col-md-2">
+                            <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}">
+                        </div>
+                        <div class="col-md-3 my-auto ms-3">
+                            <h3>{{ $cart->products->product_name }}</h3>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <h3>Rp.{{ number_format($cart->products->harga, 0,",",".") }}</h3>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <div class="text-center">
+                                <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
+                                <input type="hidden" class="harga_product" value="{{ $cart->products->harga }}">
+                                <label for="stok">Quantity</label>
+                                <div class="mb-3 d-flex justify-content-center flex-row">
+                                    <button class="btn btn-primary decrement-btn rounded-0">-</button>
+                                    <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white; width:70px">
+                                    <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-2 my-auto">
+                            <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
+                        </div>
                     </div>
-                    <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
+            @else
+                <div class="text-center my-auto">Belum Ada Produk</div>
+            @endif
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
             <h6>Total : Rp.<span class="total-harga">{{ number_format($total, 0,",",".") }}</span></h6>
@@ -112,7 +119,7 @@
         let totalHarga = parseFloat('{{ $total }}');
 
         function nDots(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         }
 
         $('.cartBtn').click(function(){
@@ -126,88 +133,64 @@
             $('.cart').empty();
         });
 
-        $('.increment-btn').click(function (e) { 
-            e.preventDefault();
-            var inc_value = $(this).siblings('.qty-input').val();
-            var value = parseInt(inc_value);
-            value = isNaN(value) ? 0 : value;
-            value++;
-            $(this).closest('.product_data').find('.qty-input').val(value);
-            var products_id = $(this).parent().siblings(".products_id").val();
-            var qty = $(this).siblings('.qty-input').val();
+        function ajaxF(url, data, type) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.ajax({
-                type: "PUT",
-                url: "/update-cart",
-                data: {
-                    products_id: products_id,
-                    qty: qty,
-                },
+                type: type,
+                url: url,
+                data: data,
                 dataType: 'json',
-                success: function (response) {
-                    totalHarga += parseFloat(response.data);
-                    $('.total-harga').html(nDots(totalHarga));
-                }
             });
+        }
+
+        $('.increment-btn').click(function (e) { 
+            e.preventDefault();
+            let inc_value = $(this).siblings('.qty-input').val();
+            inc_value++;
+            $(this).siblings('.qty-input').val(inc_value);
+            let products_id = $(this).parent().siblings(".products_id").val();
+            let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+            let qty = $(this).siblings('.qty-input').val();
+            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : qty,}, 'PUT');
+            totalHarga += harga;
+            $('.total-harga').html(nDots(totalHarga));
         });
         
         $('.decrement-btn').click(function (e) { 
             e.preventDefault();
-            var dec_value = $(this).closest('.product_data').find('.qty-input').val();
-            var value = parseInt(dec_value);
-            value = isNaN(value) ? 0 : value;
-            if(value > 1){
-                value--;
-                $(this).closest('.product_data').find('.qty-input').val(value);
-                var products_id = $(this).parent().siblings(".products_id").val();
-                var qty = $(this).siblings('.qty-input').val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type: "PUT",
-                    url: "/update-cart",
-                    data: {
-                        products_id: products_id,
-                        qty: qty,
-                    },
-                    dataType: 'json',
-                    success: function (response) {
-                        totalHarga -= parseFloat(response.data);
-                        $('.total-harga').html(nDots(totalHarga));
-                    }
-                });
-            }
+            let inc_value = $(this).siblings('.qty-input').val();
+            inc_value--;
+            $(this).siblings('.qty-input').val(inc_value);
+            let products_id = $(this).parent().siblings(".products_id").val();
+            let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+            let qty = $(this).siblings('.qty-input').val();
+            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : qty,}, 'PUT');
+            totalHarga -= harga;
+            $('.total-harga').html(nDots(totalHarga));
+        });
+
+        $('.qty-input').change(function (e) {
+            e.preventDefault();
+            let products_id = $(this).parent().siblings(".products_id").val();
+            let qty = $(this).val();
+            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : qty,}, 'PUT');
         });
 
         $('.delete-cart-item').click(function (e) { 
             e.preventDefault();
-            var products_id = $(this).closest('.product_data').find('.products_id').val();
+            let products_id = $(this).closest('.product_data').find('.products_id').val();
             let remE = $(this).parents('.product_data');
             remE.remove();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                method: "DELETE",
-                url: "/delete-cart",
-                data: {
-                    'products_id' : products_id,
-                },
-                dataType: 'json',
-                success: function (response) {
-                    totalHarga -= parseFloat(response.data);
-                    $('.total-harga').html(nDots(totalHarga));
-                }
-            });
+            ajaxF('/delete-cart', {'products_id' : products_id,}, 'DELETE');
+            let qty = $(this).closest('.product_data').find(".qty-input").val();
+            let harga = parseFloat($(this).closest('.product_data').find(".harga_product").val());
+            totalHarga -= (qty * harga);
+            console.log(harga);
+            $('.total-harga').html(nDots(totalHarga));
         });
     });
 </script>

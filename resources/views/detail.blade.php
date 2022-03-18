@@ -53,7 +53,7 @@
                 <label for="stok">Quantity</label>
                 <div class="mb-3 d-flex justify-content-center flex-row">
                     <button class="btn btn-primary decrement-btn2">-</button>
-                    <input type="text" name="stok" class="form-control qty-input" value="1" style="width: 50px; background-color: white" disabled>
+                    <input type="text" name="stok" class="form-control qty-input2" value="1" style="width: 50px; background-color: white" disabled>
                     <button class="btn btn-primary increment-btn2">+</button>
                 </div>
             </div>
@@ -101,7 +101,7 @@ function carousel() {
     $(document).ready(function () {
 
         $('#addToCartBtn').click(function (e) { 
-            var products_qty = $('.qty-input').val();
+            var products_qty = $('.qty-input2').val();
             
             $.ajaxSetup({
                 headers: {
@@ -126,7 +126,7 @@ function carousel() {
         
         $('.increment-btn2').click(function (e) { 
             e.preventDefault();
-            var inc_value = $('.qty-input').val();
+            var inc_value = $('.qty-input2').val();
             var value = parseInt(inc_value);
             value = isNaN(value) ? 0 : value;
             if(value < 10000){
@@ -138,13 +138,13 @@ function carousel() {
         
         $('.decrement-btn2').click(function (e) { 
             e.preventDefault();
-            var dec_value = $('.qty-input').val();
+            var dec_value = $('.qty-input2').val();
             var value = parseInt(dec_value);
             value = isNaN(value) ? 0 : value;
             if(value > 1){
 
                 value--;
-                $('.qty-input').val(value);
+                $('.qty-input2').val(value);
             }
         });
     });
