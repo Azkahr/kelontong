@@ -105,7 +105,7 @@ function carousel() {
 
         $('#addToCartBtn').click(function (e) { 
             let products_qty = $('.qty-input2').val();
-            let image = '{{ $image }}';
+            let image = '{{ $image }}'.toString();
             let name = '{{ $product->product_name }}';
             let harga = '{{ $product->harga }}';
             let id = '{{ $product->products_id }}';
@@ -134,7 +134,7 @@ function carousel() {
                         `
                         <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
                             <div class="col-md-2">
-                                <img src="{{ asset('storage/'.`+ image +`) }}" alt="`+ name +`">
+                                <img src="{{ asset('storage/'.`+image+`) }}" alt="`+ name +`">
                             </div>
                             <div class="col-md-3 my-auto ms-3">
                                 <h3>{{ `+ name +` }}</h3>
