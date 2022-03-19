@@ -27,7 +27,7 @@
                             <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
                             <input type="hidden" class="harga_product" value="{{ $cart->products->harga }}">
                             <label for="stok">Quantity</label>
-                            <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
+                            <div class="mb-3 d-flex justify-content-center flex-row qty-container">
                                 <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                 <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white; width:70px">
                                 <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
@@ -149,8 +149,8 @@
             console.log(inc_value);
             inc_value++;
             $(e.target).siblings('.qty-input').val(inc_value);
-            let products_id = $(e.target).parents('#qty').siblings(".products_id").val();
-            let harga = parseFloat($(e.target).parents('#qty').siblings(".harga_product").val());
+            let products_id = $(e.target).parents().siblings(".products_id").val();
+            let harga = parseFloat($(e.target).parents().siblings(".harga_product").val());
             ajaxF('/update-cart', {'products_id' : products_id, 'qty' : inc_value,}, 'PUT');
             window.totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
@@ -162,8 +162,8 @@
             if(dec_value > 1){
                 dec_value--
                 $(e.target).siblings('.qty-input').val(dec_value);
-                let products_id = $(e.target).parents('#qty').siblings(".products_id").val();
-                let harga = parseFloat($(e.target).parents('#qty').siblings(".harga_product").val());
+                let products_id = $(e.target).parent().siblings(".products_id").val();
+                let harga = parseFloat($(e.target).parents().siblings(".harga_product").val());
                 ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
                 window.totalHarga -= harga;
                 $('.total-harga').html(nDots(totalHarga));
