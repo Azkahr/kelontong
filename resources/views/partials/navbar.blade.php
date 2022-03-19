@@ -6,14 +6,13 @@
         <div class="card-body overflow-auto" id="card-body">
             @php
                 $total = 0;
-                $modal = false;
             @endphp
             @foreach ($carts as $cart)
                 @php 
                     $total += $cart->products->harga * $cart->qty;
                     $image = explode(',',$cart->products->image);
                 @endphp
-                <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
+                <div class="product_data" id="product_data" style="width:100; display:flex; justify-content:flex-end;">
                     <div class="col-md-2">
                         <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}">
                     </div>
@@ -146,24 +145,25 @@
 
         $('#card-body').on('click', '.increment-btn', function(e) {
             e.preventDefault();
-            let inc_value = parseInt($(this).siblings('.qty-input').val());
+            let inc_value = $(e.target).siblings('.qty-input').val();
+            console.log(inc_value);
             inc_value++;
-            $(this).siblings('.qty-input').val(inc_value);
-            let products_id = $(this).parent().siblings(".products_id").val();
-            let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+            $(e.target).siblings('.qty-input').val(inc_value);
+            let products_id = $(e.target).parent().siblings(".products_id").val();
+            let harga = parseFloat($(e.target).parent().siblings(".harga_product").val());
             ajaxF('/update-cart', {'products_id' : products_id, 'qty' : inc_value,}, 'PUT');
             window.totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
         });
-        
+
         $('#card-body').on('click', '.decrement-btn', function(e) {
             e.preventDefault();
-            let dec_value = parseInt($(this).siblings('.qty-input').val());
+            let dec_value = parseInt($(e.target).siblings('.qty-input').val());
             if(dec_value > 1){
                 dec_value--
-                $(this).siblings('.qty-input').val(dec_value);
-                let products_id = $(this).parent().siblings(".products_id").val();
-                let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+                $(e.target).siblings('.qty-input').val(dec_value);
+                let products_id = $(e.target).parent().siblings(".products_id").val();
+                let harga = parseFloat($(e.target).parent().siblings(".harga_product").val());
                 ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
                 window.totalHarga -= harga;
                 $('.total-harga').html(nDots(totalHarga));
@@ -172,12 +172,12 @@
 
         $('#card-body').on('click', '.delete-cart-item' ,function (e) { 
             e.preventDefault();
-            let products_id = $(this).closest('.product_data').find('.products_id').val();
-            let remE = $(this).parents('.product_data');
+            let products_id = $(e.target).closest('.product_data').find('.products_id').val();
+            let remE = $(e.target).parents('.product_data');
             remE.remove();
             ajaxF('/delete-cart', {'products_id' : products_id,}, 'DELETE');
-            let qty = parseInt($(this).closest('.product_data').find(".qty-input").val());
-            let harga = parseFloat($(this).closest('.product_data').find(".harga_product").val());
+            let qty = parseInt($(e.target).closest('.product_data').find(".qty-input").val());
+            let harga = parseFloat($(e.target).closest('.product_data').find(".harga_product").val());
             window.totalHarga -= (qty * harga);
             $('.total-harga').html(nDots(totalHarga));
         });

@@ -182,6 +182,45 @@
             console.log(harga);
             $('.total-harga').html(nDots(totalHarga));
         });
+
+
+        $('#card-body').on('click', '.increment-btn', function(e) {
+            e.preventDefault();
+            let inc_value = parseInt($(this).closest('.product-data').find('.qty-input').val());
+            inc_value++;
+            $(this).siblings('.qty-input').val(inc_value);
+            let products_id = $(this).parent().siblings(".products_id").val();
+            let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+            ajaxF('/update-cart', {'products_id' : products_id, 'qty' : inc_value,}, 'PUT');
+            window.totalHarga += harga;
+            $('.total-harga').html(nDots(totalHarga));
+        });
+        
+        $('#card-body').on('click', '.decrement-btn', function(e) {
+            e.preventDefault();
+            let dec_value = parseInt($(this).siblings('.qty-input').val());
+            if(dec_value > 1){
+                dec_value--
+                $(this).siblings('.qty-input').val(dec_value);
+                let products_id = $(this).parent().siblings(".products_id").val();
+                let harga = parseFloat($(this).parent().siblings(".harga_product").val());
+                ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
+                window.totalHarga -= harga;
+                $('.total-harga').html(nDots(totalHarga));
+            }
+        });
+
+        $('#card-body').on('click', '.delete-cart-item' ,function (e) { 
+            e.preventDefault();
+            let products_id = $(this).closest('.product_data').find('.products_id').val();
+            let remE = $(this).parents('.product_data');
+            remE.remove();
+            ajaxF('/delete-cart', {'products_id' : products_id,}, 'DELETE');
+            let qty = parseInt($(this).closest('.product_data').find(".qty-input").val());
+            let harga = parseFloat($(this).closest('.product_data').find(".harga_product").val());
+            window.totalHarga -= (qty * harga);
+            $('.total-harga').html(nDots(totalHarga));
+        });
     });
 </script>
 

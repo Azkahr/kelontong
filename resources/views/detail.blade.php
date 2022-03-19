@@ -109,7 +109,7 @@ function carousel() {
             let products_qty = $('.qty-input2').val();
             let image = $('#image-source').val();
             let name = '{{ $product->product_name }}';
-            let harga = nDots('{{ $product->harga }}');
+            let harga = parseFloat('{{ $product->harga }}');
             let id = parseInt('{{ $product->products_id }}');
 
             function nDots(x) {
@@ -144,7 +144,7 @@ function carousel() {
                         <h3>{{ `+ name +` }}</h3>
                     </div>
                     <div class="col-md-2 my-auto">
-                        <h3>Rp.`+ harga +`</h3>
+                        <h3>Rp.`+ nDots(harga) +`</h3>
                     </div>
                     <div class="col-md-2 my-auto">
                         <div class="text-center">
