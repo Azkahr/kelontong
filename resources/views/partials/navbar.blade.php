@@ -149,8 +149,8 @@
             console.log(inc_value);
             inc_value++;
             $(e.target).siblings('.qty-input').val(inc_value);
-            let products_id = $(e.target).parent().siblings(".products_id").val();
-            let harga = parseFloat($(e.target).parent().siblings(".harga_product").val());
+            let products_id = $(e.target).parents('#qty').siblings(".products_id").val();
+            let harga = parseFloat($(e.target).parents('#qty').siblings(".harga_product").val());
             ajaxF('/update-cart', {'products_id' : products_id, 'qty' : inc_value,}, 'PUT');
             window.totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
@@ -162,8 +162,8 @@
             if(dec_value > 1){
                 dec_value--
                 $(e.target).siblings('.qty-input').val(dec_value);
-                let products_id = $(e.target).parent().siblings(".products_id").val();
-                let harga = parseFloat($(e.target).parent().siblings(".harga_product").val());
+                let products_id = $(e.target).parents('#qty').siblings(".products_id").val();
+                let harga = parseFloat($(e.target).parents('#qty').siblings(".harga_product").val());
                 ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
                 window.totalHarga -= harga;
                 $('.total-harga').html(nDots(totalHarga));
