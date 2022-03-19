@@ -113,7 +113,7 @@
 
     $(function(){
 
-        let totalHarga = parseFloat('{{ $total }}');
+        window.totalHarga = parseFloat('{{ $total }}');
 
         function nDots(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -152,7 +152,7 @@
             let products_id = $(this).parent().siblings(".products_id").val();
             let harga = parseFloat($(this).parent().siblings(".harga_product").val());
             ajaxF('/update-cart', {'products_id' : products_id, 'qty' : inc_value,}, 'PUT');
-            totalHarga += harga;
+            window.totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
         });
         
@@ -165,7 +165,7 @@
                 let products_id = $(this).parent().siblings(".products_id").val();
                 let harga = parseFloat($(this).parent().siblings(".harga_product").val());
                 ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
-                totalHarga -= harga;
+                window.totalHarga -= harga;
                 $('.total-harga').html(nDots(totalHarga));
             }
         });
@@ -178,7 +178,7 @@
             ajaxF('/delete-cart', {'products_id' : products_id,}, 'DELETE');
             let qty = parseInt($(this).closest('.product_data').find(".qty-input").val());
             let harga = parseFloat($(this).closest('.product_data').find(".harga_product").val());
-            totalHarga -= (qty * harga);
+            window.totalHarga -= (qty * harga);
             $('.total-harga').html(nDots(totalHarga));
         });
     });

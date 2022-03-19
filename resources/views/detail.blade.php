@@ -164,6 +164,9 @@ function carousel() {
                 </div>
                 `
             );
+            window.totalHarga += (products_qty * harga);
+            $('.total-harga').html(nDots(totalHarga));
+            console.log(window.totalHarga);
         });
         
         $('.increment-btn2').click(function (e) { 
