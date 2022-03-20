@@ -12,7 +12,7 @@
                     $total += $cart->products->harga * $cart->qty;
                     $image = explode(',',$cart->products->image);
                 @endphp
-                <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
+                <div class="product_data mt-3" style="width:100; display:flex; justify-content:flex-end;">
                     <div class="col-md-2">
                         <img src="{{ asset('storage/' . $image[0]) }}" alt="{{ $cart->products->product_name }}">
                     </div>

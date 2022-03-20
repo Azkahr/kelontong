@@ -132,7 +132,7 @@ function carousel() {
                     if(response.status === "Produk Berhasil Ditambahkan Ke Keranjang"){
                         $('#card-body').append(
                             `
-                            <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
+                            <div class="product_data mt-3" style="width:100; display:flex; justify-content:flex-end;">
                                 <div class="col-md-2">
                                     <img src="`+ image +`" alt="`+ name +`">
                                 </div>
