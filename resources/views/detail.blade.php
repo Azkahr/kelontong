@@ -54,7 +54,6 @@
                 <img src="{{ asset('storage/' . $item) }}" class="mySlides" alt="{{ $product->product_name }}">
             @endforeach
             <div class="text-center">
-                <input type="hidden" value="{{ $product->id }}" class="products_id">
                 <label for="stok">Quantity</label>
                 <div class="mb-3 d-flex justify-content-center flex-row">
                     <button class="btn btn-primary decrement-btn2">-</button>
@@ -109,8 +108,8 @@ function carousel() {
             let products_qty = $('.qty-input2').val();
             let image = $('#image-source').val();
             let name = '{{ $product->product_name }}';
-            let harga = parseFloat('{{ $product->harga }}');
-            let id = parseInt('{{ $product->products_id }}');
+            let harga = '{{ $product->harga }}';
+            let id = '{{ $product->id }}';
 
             function nDots(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -145,10 +144,10 @@ function carousel() {
                                 </div>
                                 <div class="col-md-2 my-auto">
                                     <div class="text-center">
-                                        <input type="hidden" class="products_id" value="`+ id +`">
-                                        <input type="hidden" class="harga_product" value="`+ harga +`">
                                         <label for="stok">Quantity</label>
                                         <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
+                                            <input type="hidden" class="products_id" value="`+ id +`">
+                                            <input type="hidden" class="harga_product" value="`+ harga +`">
                                             <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                             <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
                                             <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>

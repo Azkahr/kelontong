@@ -24,10 +24,10 @@
                     </div>
                     <div class="col-md-2 my-auto">
                         <div class="text-center">
-                            <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
-                            <input type="hidden" class="harga_product" value="{{ $cart->products->harga }}">
                             <label for="stok">Quantity</label>
                             <div class="mb-3 d-flex justify-content-center flex-row qty-container">
+                                <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
+                                <input type="hidden" class="harga_product" value="{{ $cart->products->harga }}">
                                 <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                 <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white; width:70px">
                                 <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
@@ -131,12 +131,11 @@
 
         $('#card-body').on('click', '.increment-btn', function(e) {
             e.preventDefault();
-            let inc_value = $(e.target).closest('.product_data').find('.qty-input').val();
-            inc_value++;
-            $(e.target).closest('.product_data').find(".qty-input").val(inc_value);
-            let harga = parseFloat($(e.target).closest('.product_data').find(".harga_product").val());
-            let products_id = $(e.target).parents('.product_data').find('.products_id').val();
-            console.log(products_id, harga);
+            let inc_value = $(e.target).siblings('.qty-input').val();
+            let products_id = parseInt($(e.target).siblings('.products_id').val());
+            let harga = parseFloat($(e.target).siblings('.harga_product').val());
+            inc_value++
+            $(e.target).siblings('.qty-input').val(inc_value);
 
             $.ajaxSetup({
                 headers: {
@@ -147,34 +146,39 @@
                 type: 'PUT',
                 url: '/update-cart',
                 data: {'products_id': products_id, 'qty': parseInt(inc_value)},
-                dataType: 'json',
-                success: function (response) {
-                    console.log(response);
-                }
             });
 
             window.totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
         });
 
-        /* $('#card-body').on('click', '.decrement-btn', function(e) {
+        $('#card-body').on('click', '.decrement-btn', function(e) {
             e.preventDefault();
-            let dec_value = parseInt($(e.target).siblings('.qty-input').val());
+            let dec_value = $(e.target).siblings('.qty-input').val();
+            let products_id = parseInt($(e.target).siblings('.products_id').val());
+            let harga = parseFloat($(e.target).siblings('.harga_product').val());
             if(dec_value > 1){
                 dec_value--
-                $(e.target).siblings('.qty-input').val(dec_value);
-                let products_id = $(e.target).parent().siblings(".products_id").val();
-                let harga = parseFloat($(e.target).parent().siblings(".harga_product").val());
-                ajaxF('/update-cart', {'products_id' : products_id, 'qty' : dec_value,}, 'PUT');
+                $(e.target).siblings('.qty-input').val(inc_value);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: 'PUT',
+                    url: '/update-cart',
+                    data: {'products_id': products_id, 'qty': parseInt(inc_value)},
+                });
+
                 window.totalHarga -= harga;
                 $('.total-harga').html(nDots(totalHarga));
             }
-        }); */
+        });
 
         $('#card-body').on('click', '.delete-cart-item' ,function (e) { 
             e.preventDefault();
             let products_id = $(e.target).parents('.product_data').find('.products_id').val();
-            console.log(products_id);
             let remE = $(e.target).parents('.product_data');
             remE.remove();
 
@@ -187,10 +191,6 @@
                 type: 'DELETE',
                 url: '/delete-cart',
                 data: {'products_id': products_id},
-                dataType: 'json',
-                success: function (response) {
-                    console.log(response);
-                }
             });
             
             let qty = parseInt($(e.target).closest('.product_data').find(".qty-input").val());

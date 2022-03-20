@@ -11,7 +11,7 @@ class CartController extends Controller
 {   
     public function addToCart(Request $request){
         
-        if(Auth::check()){
+        if(Auth::check() && $request->ajax()){
 
             $products_id = $request->input('products_id');
             $qty = $request->input('products_qty');
@@ -20,21 +20,15 @@ class CartController extends Controller
                 return response()->json(['status' =>"Produk Sudah Ada Di Keranjang"]);
             } else {
             
-                $insert = Cart::create([
+                Cart::create([
                     'users_id' => Auth::user()->id,
                     'products_id' => $products_id,
                     'qty' => $qty,
                 ]);
 
-                if($insert){
-                    return response()->json([
-                        'status' => "Produk Berhasil Ditambahkan Ke Keranjang",
-                    ]);
-                }else{
-                    return response()->json([
-                        'status' => "Produk Gagal Ditambahkan Ke Keranjang",
-                    ]);
-                }
+                return response()->json([
+                    'status' => "Produk Berhasil Ditambahkan Ke Keranjang",
+                ]);
             }
         } else {
             return response()->json(['status' => "Login Terlebih Dahulu"]);
