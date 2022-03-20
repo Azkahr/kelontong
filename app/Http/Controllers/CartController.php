@@ -8,81 +8,75 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
-{
-
-    public function index(){
-
-        $carts = Cart::where('users_id', Auth::id())->get();
-        return view('cart', [
-            "title" => "Cart",
-            "carts" => $carts
-        ]);
-    }
-    
+{   
     public function addToCart(Request $request){
         
-        $products_id = $request->input('products_id');
-        $products_qty = $request->input('products_qty');
+        if(Auth::check() && $request->ajax()){
 
-        if(Auth::check()){
+            $products_id = $request->input('products_id');
+            $qty = $request->input('products_qty');
 
-            $product = Product::where('id', $products_id)->first();
+            if(Cart::where('users_id', Auth::id())->where('products_id', $products_id)->exists()){
+                return response()->json(['status' =>"Produk Sudah Ada Di Keranjang"]);
+            } else {
+            
+                Cart::create([
+                    'users_id' => Auth::user()->id,
+                    'products_id' => $products_id,
+                    'qty' => $qty,
+                ]);
 
-            if($product){
-                
-                if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
-
-                    return response()->json(['status' => $product->product_name . " sudah ada di keranjang"]);
-                    
-                } else {
-                
-                    $cart = new Cart();
-                    $cart->products_id = $products_id;
-                    $cart->users_id = Auth::id();
-                    $cart->qty = $products_qty;
-                    $cart->save();
-
-                    return response()->json(['status' => $product->product_name . " berhasil ditambahkan ke keranjang"]);
-                }
+                return response()->json([
+                    'status' => "Produk Berhasil Ditambahkan Ke Keranjang",
+                ]);
             }
         } else {
-            return response()->json(['status' => "Login terlebih dahulu"]);
+            return response()->json(['status' => "Login Terlebih Dahulu"]);
         }
     }
 
     public function update(Request $request){
-        
+
+        if(!$request->ajax()){
+            return redirect('/');
+        }
+
         $products_id = $request->input('products_id');
         $qty = $request->input('qty');
 
-        if(Auth::check()){
+        $update = Cart::where('users_id', Auth::user()->id)->where('products_id', $products_id)->first();
+        $update->qty = $qty;
+        $update->update();
 
-            if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
-
-                $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id())->first();
-                $cart->qty = $qty;
-                $cart->update();
-
-                return response()->json(['status' => "Berhasil update keranjang"]);
-            }
-        } else {
-            return response()->json(['status' => "Login terlebih dahulu"]);
+        if($update){
+            return response()->json([
+                'status' => 'Berhasil Diupdate'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'Gagal Diupdate'
+            ]);
         }
-    }   
+    }
+
 
     public function delete(Request $request){
 
+        if(!$request->ajax()){
+            return redirect('/');
+        }
+
         $products_id = $request->input('products_id');
 
-        if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
-
-            $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id());
-
-            $cart->delete();
-            
-            return response()->json(['status' => "Berhasil dihapus"]);
-        } else {
-            return response()->json(['status' => "Gagal dihapus"]);
+        $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id())->first();
+        $cart->delete();
+        
+        if ($cart) {
+            return response()->json([
+                'status' => "Berhasil Dihapus",
+            ]);
+        }else{
+            return response()->json(['status' => "Gagal Dihapus"]);
         }
     }
 }
