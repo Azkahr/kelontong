@@ -188,6 +188,9 @@
 @section('script')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.js"></script>
 <script>
+window.onhashchange = function() {
+    window.location.reload();
+}
 $(document).ready(function(){
     $('.loader').fadeOut(500);
 

@@ -102,7 +102,7 @@ function carousel() {
         x[slideIndex-1].style.display = "block";
         setTimeout(carousel, 2000);
     }
-
+    
     $(document).ready(function () {
 
         $('#addToCartBtn').click(function (e) { 
@@ -130,40 +130,43 @@ function carousel() {
                 },
                 dataType: "json",
                 success: function (response) {
-                    Swal.fire(response.status);
+                    if(response.status === "Produk Berhasil Ditambahkan Ke Keranjang"){
+                        $('#card-body').append(
+                            `
+                            <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
+                                <div class="col-md-2">
+                                    <img src="`+ image +`" alt="`+ name +`">
+                                </div>
+                                <div class="col-md-3 my-auto ms-3">
+                                    <h3>{{ `+ name +` }}</h3>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <h3>Rp.`+ nDots(harga) +`</h3>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <div class="text-center">
+                                        <input type="hidden" class="products_id" value="`+ id +`">
+                                        <input type="hidden" class="harga_product" value="`+ harga +`">
+                                        <label for="stok">Quantity</label>
+                                        <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
+                                            <button class="btn btn-primary decrement-btn rounded-0">-</button>
+                                            <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
+                                            <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                            `
+                        );
+                        Swal.fire(response.status);
+                    }else{
+                        Swal.fire(response.status);
+                    }
                 }
             });
-
-            $('#card-body').append(
-                `
-                <div class="product_data" style="width:100; display:flex; justify-content:flex-end;">
-                    <div class="col-md-2">
-                        <img src="`+ image +`" alt="`+ name +`">
-                    </div>
-                    <div class="col-md-3 my-auto ms-3">
-                        <h3>{{ `+ name +` }}</h3>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <h3>Rp.`+ nDots(harga) +`</h3>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <div class="text-center">
-                            <input type="hidden" class="products_id" value="`+ id +`">
-                            <input type="hidden" class="harga_product" value="`+ harga +`">
-                            <label for="stok">Quantity</label>
-                            <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
-                                <button class="btn btn-primary decrement-btn rounded-0">-</button>
-                                <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
-                                <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
-                    </div>
-                </div>
-                `
-            );
             window.totalHarga += (products_qty * harga);
             $('.total-harga').html(nDots(totalHarga));
         });

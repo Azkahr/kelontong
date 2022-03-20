@@ -11,34 +11,33 @@ class CartController extends Controller
 {   
     public function addToCart(Request $request){
         
-        $products_id = $request->input('products_id');
-        $products_qty = $request->input('products_qty');
-
         if(Auth::check()){
 
-            $product = Product::where('id', $products_id)->first();
+            $products_id = $request->input('products_id');
+            $qty = $request->input('products_qty');
 
-            if($product){
-                
-                if(Cart::where('id', $products_id)->where('users_id', Auth::id())->exists()){
+            if(Cart::where('users_id', Auth::id())->where('products_id', $products_id)->exists()){
+                return response()->json(['status' =>"Produk Sudah Ada Di Keranjang"]);
+            } else {
+            
+                $insert = Cart::create([
+                    'users_id' => Auth::user()->id,
+                    'products_id' => $products_id,
+                    'qty' => $qty,
+                ]);
 
-                    return response()->json(['status' => $product->product_name . " sudah ada di keranjang"]);
-                    
-                } else {
-                
-                    $cart = new Cart();
-                    $cart->products_id = $products_id;
-                    $cart->users_id = Auth::id();
-                    $cart->qty = $products_qty;
-                    $cart->save();
-
+                if($insert){
                     return response()->json([
-                        'status' => $product->product_name . " berhasil ditambahkan ke keranjang",
+                        'status' => "Produk Berhasil Ditambahkan Ke Keranjang",
+                    ]);
+                }else{
+                    return response()->json([
+                        'status' => "Produk Gagal Ditambahkan Ke Keranjang",
                     ]);
                 }
             }
         } else {
-            return response()->json(['status' => "Login terlebih dahulu"]);
+            return response()->json(['status' => "Login Terlebih Dahulu"]);
         }
     }
 
@@ -48,23 +47,20 @@ class CartController extends Controller
             return redirect('/');
         }
 
-        $products_id = $request->products_id;
-        $qty = $request->qty;
+        $products_id = $request->input('products_id');
+        $qty = $request->input('qty');
 
-        $update = Cart::where('products_id', $products_id)->where('users_id', Auth::user()->id)->first();
+        $update = Cart::where('users_id', Auth::user()->id)->where('products_id', $products_id)->first();
         $update->qty = $qty;
         $update->update();
-        
-        $data = $update->products->harga;
 
         if($update){
             return response()->json([
-                'status' => 'Berhasil',
-                'data' => $data,
+                'status' => 'Berhasil Diupdate'
             ]);
         }else{
             return response()->json([
-                'status' => 'Gagal',
+                'status' => 'Gagal Diupdate'
             ]);
         }
     }
@@ -72,20 +68,21 @@ class CartController extends Controller
 
     public function delete(Request $request){
 
+        if(!$request->ajax()){
+            return redirect('/');
+        }
+
         $products_id = $request->input('products_id');
 
-        if(Cart::where('products_id', $products_id)->where('users_id', Auth::id())->exists()){
-
-            $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id())->first();
-            $data = $cart->qty * $cart->products->harga;
-            $cart->delete();
-            
+        $cart = Cart::where('products_id', $products_id)->where('users_id', Auth::id())->first();
+        $cart->delete();
+        
+        if ($cart) {
             return response()->json([
-                'status' => "Berhasil dihapus",
-                'data' => $data
+                'status' => "Berhasil Dihapus",
             ]);
-        } else {
-            return response()->json(['status' => "Gagal dihapus"]);
+        }else{
+            return response()->json(['status' => "Gagal Dihapus"]);
         }
     }
 }
