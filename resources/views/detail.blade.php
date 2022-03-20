@@ -129,10 +129,6 @@ function carousel() {
                 },
                 dataType: "json",
                 success: function (response) {
-<<<<<<< HEAD
-                    window.location.reload();
-                    Swal.fire(response.status);
-=======
                     if(response.status === "Produk Berhasil Ditambahkan Ke Keranjang"){
                         $('#card-body').append(
                             `
@@ -168,7 +164,6 @@ function carousel() {
                     }else{
                         Swal.fire(response.status);
                     }
->>>>>>> cart
                 }
             });
             window.totalHarga += (products_qty * harga);
