@@ -118,6 +118,19 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         }
 
+        function ngaJax(type, url, data) {
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: type,
+                url: url,
+                data: data,
+            });
+        }
+
         $('.cartBtn').click(function(){
             $('.cartPage').fadeIn(300);
             $('body').css('overflow', 'hidden');
@@ -136,18 +149,7 @@
             let harga = parseFloat($(e.target).siblings('.harga_product').val());
             inc_value++
             $(e.target).siblings('.qty-input').val(inc_value);
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'PUT',
-                url: '/update-cart',
-                data: {'products_id': products_id, 'qty': parseInt(inc_value)},
-            });
-
+            ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
             window.totalHarga += harga;
             $('.total-harga').html(nDots(totalHarga));
         });
@@ -157,20 +159,11 @@
             let dec_value = $(e.target).siblings('.qty-input').val();
             let products_id = parseInt($(e.target).siblings('.products_id').val());
             let harga = parseFloat($(e.target).siblings('.harga_product').val());
+            console.log(dec_value, products_id, harga);
             if(dec_value > 1){
                 dec_value--
-                $(e.target).siblings('.qty-input').val(inc_value);
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type: 'PUT',
-                    url: '/update-cart',
-                    data: {'products_id': products_id, 'qty': parseInt(inc_value)},
-                });
-
+                $(e.target).siblings('.qty-input').val(dec_value);
+                ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(dec_value)});
                 window.totalHarga -= harga;
                 $('.total-harga').html(nDots(totalHarga));
             }
@@ -181,18 +174,7 @@
             let products_id = $(e.target).parents('.product_data').find('.products_id').val();
             let remE = $(e.target).parents('.product_data');
             remE.remove();
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'DELETE',
-                url: '/delete-cart',
-                data: {'products_id': products_id},
-            });
-            
+            ngaJax('DELETE', '/delete-cart', {'products_id': products_id});
             let qty = parseInt($(e.target).closest('.product_data').find(".qty-input").val());
             let harga = parseFloat($(e.target).closest('.product_data').find(".harga_product").val());
             window.totalHarga -= (qty * harga);
