@@ -87,7 +87,7 @@
                                             <option {{ $orders->status == "beres" ? 'selected' : '' }} value="beres">Beres</option>
                                         </select>
                                         <label for="alasan">Alasan</label>
-                                        <input type="text" name="alasan" class="form-control alasan" style="display: none">
+                                        <input type="text" id="pesan" name="alasan" class="form-control" style="display: none">
                                         <button type="submit" class="btn btn-primary mt-3 float-end">Update</button>
                                     </form>
                                 </div>
@@ -117,12 +117,12 @@ carousel();
 
         function muncul(){
             var alasan = document.getElementById("alasan");
-            var status = document.getElementsByClassName("alasan");
+            var pesan = document.getElementById("pesan");
 
-            if(alasan.value == "tolak"){
-                status.style.display = "block";
+            if(alasan.value === "tolak"){
+                pesan.style.display = "block";
             } else {
-                status.style.display = "none";
+                pesan.style.display = "none";
             }
         }
 </script>
