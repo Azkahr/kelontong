@@ -79,6 +79,11 @@ Route::middleware('auth', 'verified', 'isSeller')->group(function(){
 
     Route::get('/dashboard/update/{product:id}', [DashboardController::class, 'edit']);
     Route::put('/dashboard/update/{id}', [DashboardController::class, 'update']);
+
+    Route::get('/dashboard/orders', [DashboardController::class, 'orders'])->name('orders');
+    Route::get('/dashboard/view-order/{id}', [DashboardController::class, 'view'])->name('viewOrder');
+    Route::put('/dashboard/update-order/{id}', [DashboardController::class, 'updateOrder']);
+    Route::get('/dashboard/order-history', [DashboardController::class, 'orderHistory'])->name('history');
 });
 
 Route::get('/password/forgot', [PasswordController::class, 'index'])->name('password.request');

@@ -1,11 +1,6 @@
-@extends('layouts.main')
-@section('container')
-@include('partials/navbar')
+@extends('layouts.dmain')
+@section('content')
 <style>
-    .container {
-        padding-top: 150px;
-    }
-
     h4 {
         font-size: 2em; 
         font-weight: bolder;
@@ -22,7 +17,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Order View
-                            <a href="{{ route('myOrder') }}" class="btn btn-primary float-end">Kembali</a>
+                            <a href="{{ route('orders') }}" class="btn btn-primary float-end">Kembali</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -51,18 +46,18 @@
                             <div class="col-md-6">
                                 <h6>Order Details</h6>
                                 <hr>
-                                <table class="table table-bordered mt-4">
+                                <table class="table mt-4">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Quantity</th>
-                                            <th>Harga</th>
-                                            <th>Gambar</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Gambar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($orders->orderItems as $order)
-                                            <tr>
+                                            <tr scope="row">
                                                 <td>{{ $order->products->product_name }}</td>
                                                 <td>{{ $order->qty }}</td>
                                                 <td>Rp.{{ number_format($order->harga, 0,",",".") }}</td>
@@ -81,9 +76,21 @@
                                 </table>
                                 <h4>Total : <span class="float-end">Rp.{{ number_format($orders->total_harga, 0,",",".") }}</span></h4>
 
-                                @if ($orders->status == "tolak")
-                                    <h4 style="color: red" class="mt-5">akjsdajksdha</h4>
-                                @endif
+                                <div class="mt-5">
+                                    <label for="">Order status</label>
+                                    <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <select class="form-select" name="status" id="alasan" onchange="muncul()">
+                                            <option {{ $orders->status == "pending" ? 'selected' : '' }} value="pending">Pending</option>
+                                            <option {{ $orders->status == "tolak" ? 'selected' : '' }} value="tolak">Tolak</option>
+                                            <option {{ $orders->status == "beres" ? 'selected' : '' }} value="beres">Beres</option>
+                                        </select>
+                                        <label for="alasan">Alasan</label>
+                                        <input type="text" name="alasan" class="form-control alasan" style="display: none">
+                                        <button type="submit" class="btn btn-primary mt-3 float-end">Update</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,6 +113,17 @@ carousel();
         if (slideIndex > x.length) {slideIndex = 1}
             x[slideIndex-1].style.display = "block";
             setTimeout(carousel, 2000);
+        }
+
+        function muncul(){
+            var alasan = document.getElementById("alasan");
+            var status = document.getElementsByClassName("alasan");
+
+            if(alasan.value == "tolak"){
+                status.style.display = "block";
+            } else {
+                status.style.display = "none";
+            }
         }
 </script>
 @endsection
