@@ -42,6 +42,7 @@ class HomeController extends Controller
         return view('detail', [
             'title' => $product->product_name,
             'carts' => Cart::where('users_id', Auth::id())->get(),
+            "totalqty" => Product::where('id', $product->id)->sum('stok'),
             'product' => $product,
         ]);
     }

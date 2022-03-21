@@ -57,9 +57,12 @@
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
                 @if (auth()->check())
-                    <button class="cartBtn">
-                        <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
-                    </button>
+                    @if ($carts)
+                        <button class="cartBtn">
+                            <span style="color: white">{{ count($carts) }}</span>
+                            <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                        </button>
+                    @endif
                 @endif
                 <div class="dropdown">
                     <button class="dropbtn">
