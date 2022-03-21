@@ -11,7 +11,7 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table text-center">
                             <thead>
                                 <tr>
                                     <th scope="col">Tanggal Order</th>
