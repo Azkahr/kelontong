@@ -85,9 +85,9 @@
             </div>
         @else
             <div style="display:inline-block; font-size:18px; margin-right:30px; margin-bottom:10px; font-family:spartan; font-weight:800">
-                <a class="login" href="/login">Masuk</a>
+                <a class="login" href="/auth/login">Masuk</a>
                 <div style="position:relative; top:8px; display:inline-block; height: 30px; border-left:3px solid white; margin:0px 10px 0px 10px"></div>
-                <a class="register" href="/register-user">Daftar</a>
+                <a class="register" href="/auth/register-user">Daftar</a>
             </div>
         @endauth
     </div>
