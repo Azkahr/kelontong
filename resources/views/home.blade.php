@@ -102,8 +102,10 @@
                         <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                     </div>
                     <div class="cContent">
-                        <p style="font-size: 17px; font-weight:bold">{{ $pb->product_name}}</p>
-                        <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                        <p class="text-card">{{ $pb->product_name}}</p>
+                        <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                        <p class="text-card3">Rating</p>
+                        <p class="text-card4">{{ $pb->user->nama_toko }}</p>
                     </div>
                 </div>
             </a>
@@ -129,14 +131,10 @@
                         <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                     </div>
                     <div class="cContent">
-                        <div>
-                            <p style="font-size: 17px; font-weight:bold">{{ $pb->product_name}}</p>
-                            <p>RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                        </div>
-                        <div style="display: flex; justify-content:space-between; margin-top:25px">
-                            <p>Rating</p>
-                            <p>{{ $pb->user->nama_toko }}</p>
-                        </div>
+                        <p class="text-card">{{ $pb->product_name}}</p>
+                        <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                        <p class="text-card3">Rating</p>
+                        <p class="text-card4">{{ $pb->user->nama_toko }}</p>
                     </div>
                 </div>
             </a>
@@ -164,14 +162,10 @@
                     <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                 </div>
                 <div class="cContent">
-                    <div>
-                        <h4 class="h4">{{ $product->product_name }}</h4>
-                        <p>RP {{ number_format($product->harga, 0,",",".") }}</p>
-                    </div>
-                    <div style="display: flex; justify-content:space-between; margin-top:25px">
-                        <p>Rating</p>
-                        <p>{{ $product->user->nama_toko }}</p>
-                    </div>
+                    <p class="text-card">{{ $pb->product_name}}</p>
+                    <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                    <p class="text-card3">Rating</p>
+                    <p class="text-card4">{{ $pb->user->nama_toko }}</p>
                 </div>
             </div>
         </a>
