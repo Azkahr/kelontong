@@ -48,6 +48,7 @@
 </div>
 
 <nav>
+    @include('notify::components.notify')
     <div class="top">
             <form class="search" method="GET" action="/search">
                     <input type="text" placeholder="Cari..." name="search" value="{{ request('search') }}">
@@ -70,6 +71,7 @@
                         @if (auth()->user()->role == 'seller')
                                 <a href="/dashboard">Dashboard</a>
                         @endif
+                        <a href="{{ route('myOrder') }}">My order</a>
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                         <form action="/logout" method="post">
                             @csrf
