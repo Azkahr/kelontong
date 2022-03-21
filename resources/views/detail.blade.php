@@ -177,11 +177,15 @@ function carousel() {
         
         $('.increment-btn2').click(function (e) { 
             e.preventDefault();
+
+            let qty = parseInt('{{ $product->stok }}');
             var inc_value = $('.qty-input2').val();
             var value = parseInt(inc_value);
             value = isNaN(value) ? 0 : value;
-            value++;
-            $('.qty-input2').val(value);
+            if(qty > value){
+                value++;
+                $('.qty-input2').val(value);
+            }
         });
         
         $('.decrement-btn2').click(function (e) { 
