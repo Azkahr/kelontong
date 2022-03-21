@@ -27,13 +27,7 @@
                                         <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
                                         <td>{{ $order->no_resi }}</td>
                                         <td>Rp.{{ number_format($order->total_harga, 0,",",".") }}</td>
-                                        @if ($order->status == "pending")
-                                            <td>Pending</td>
-                                        @elseif($order->status == "proses")
-                                            <td>Proses</td>
-                                        @elseif($order->status == "dikirim")
-                                            <td>Sedang dikirim</td>
-                                        @endif
+                                        <td>{{ $order->status }}</td>
                                         <td>
                                             <a href="{{ route('viewOrder', $order->id) }}" class="btn btn-primary">View</a>
                                         </td>

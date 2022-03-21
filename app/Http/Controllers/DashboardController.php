@@ -26,7 +26,7 @@ class DashboardController extends Controller
         
         return view('dashboard.order', [
             "title" => "Order",
-            "orders" => Order::where('status', "pending")->orWhere('status', 'proses')->orWhere('status', 'dikirim')->get()
+            "orders" => Order::where('status', "pending")->orWhere('status', 'proses')->orWhere('status', 'kirim')->get()
         ]);
     }
 
@@ -50,10 +50,6 @@ class DashboardController extends Controller
 
         $orders = Order::find($id);
         $orders->status = $request->input('status');
-
-        // $validatedData = $request->validate([
-        //     'message' => 'required|min:3'
-        // ]);
 
         $orders->update();
 

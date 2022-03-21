@@ -77,25 +77,29 @@
                                 <h4>Total : <span class="float-end">Rp.{{ number_format($orders->total_harga, 0,",",".") }}</span></h4>
 
                                 <div class="mt-5">
-                                    <label for="">Order status</label>
-                                    <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                    <label style="display:block" for="">Order status</label>
+                                    @if($orders->status == "pending")
+                                        <button id="terimabtn" class="erima btn btn-success mt-3">Terima</button>
+                                        <button id="tolakbtn" class="btn btn-danger mt-3">Tolak</button>
+                                    @elseif($orders->status == "proses")
+                                        <button style="" id="kirimbtn" class="btn btn-info mt-3">Dikirim</button>
+                                    @endif
+                                    <form id="formKirim" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <select class="form-select" name="status" id="alasan" onchange="muncul()" >
-                                            <option {{ $orders->status == "pending" ? 'selected' : '' }} value="pending">Pending</option>
-                                            <option {{ $orders->status == "tolak" ? 'selected' : '' }} value="tolak">Tolak</option>
-                                            <option {{ $orders->status == "beres" ? 'selected' : '' }} value="beres">Beres</option>
-                                        </select>
-                                        <div id="pesan" style="display: none">
-                                            <label for="message">Alasan</label>
-                                            <input type="text" name="message" id="message" class="form-control @error('message') is-invalid @enderror">
-                                            @error('message')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <button type="submit" class="btn btn-primary mt-3 float-end">Update</button>
+                                        <input type="hidden" name="status" value="kirim">
+                                    </form>
+                                    <form id="formTerima" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="proses">
+                                    </form>
+                                    <form id="formTolak" style="display:none" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="tolak">
+                                        <input type="text" name="message">
+                                        <button type="submit" class="btn btn-danger mt-3">Tolak</button>
                                     </form>
                                     {{-- <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
                                         @csrf
@@ -111,33 +115,40 @@
             </div>
         </div>
     </div>
-
+@endsection
+@section('script')
 <script>
-var slideIndex = 0;
-carousel();
+    
+    $('#tolakbtn').click(function (e) { 
+        $('#formTolak').css('display', 'block');
+    });
+    $('#terimabtn').click(function (e) { 
+        $('#formTerima').submit();
+        $('#formTolak').css('display', 'none');
+        $('#tolakbtn').css('display', 'none');
+        $('#terimabtn').css('display', 'none');
+        $('#kirimbtn').css('display', 'block');
+    });
 
-    function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > x.length) {slideIndex = 1}
-            x[slideIndex-1].style.display = "block";
-            setTimeout(carousel, 2000);
-        }
+    $('#kirimbtn').click(function (e) { 
+        e.preventDefault();
+        
+        $('#formKirim').submit();
+    });
 
-        function muncul(){
-            var alasan = document.getElementById("alasan");
-            var pesan = document.getElementById("pesan");
-
-            if(alasan.value === "tolak"){
-                pesan.style.display = "block";
-                pesan.setAttribute("required", true);
-            } else {
-                pesan.style.display = "none";
-            }
-        }
+    // var slideIndex = 0;
+    // carousel();
+    
+    //     function carousel() {
+    //         var i;
+    //         var x = document.getElementsByClassName("mySlides");
+    //         for (i = 0; i < x.length; i++) {
+    //             x[i].style.display = "none";
+    //         }
+    //         slideIndex++;
+    //         if (slideIndex > x.length) {slideIndex = 1}
+    //             x[slideIndex-1].style.display = "block";
+    //             setTimeout(carousel, 2000);
+    //         }
 </script>
 @endsection

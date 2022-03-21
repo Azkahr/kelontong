@@ -123,6 +123,7 @@
         <script>
             feather.replace()
         </script>
+        @yield('script')
         @livewireScripts 
     </body>
 </html>

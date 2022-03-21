@@ -22,9 +22,7 @@
                                     <th>Total harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
-                                    @if ($order->status == "tolak")
-                                        <th>Alasan ditolak</th>
-                                    @endif
+                                    <th>Alasan ditolak</th>
                                 </tr>
                             </thead>
                             <tbody>
