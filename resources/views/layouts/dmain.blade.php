@@ -16,7 +16,6 @@
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/vue@3"></script>
         @livewireStyles
         <link rel="icon" type="image/png" href="{{ URL::asset('assets/img/favicon.png') }} " />
         <link href="{{ URL::asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
@@ -70,6 +69,14 @@
                                 <img src="{{ URL::asset('assets/img/plus.svg') }}" style="transform: scale(1.7)">
                             </div>
                             <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Tambah Produk</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('orders') ? 'active' : '' }}" href="{{ route('orders') }}">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <img src="{{ URL::asset('assets/img/clipboard.png') }}" style="transform: scale(1.7)">
+                            </div>
+                            <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Orders</span>
                         </a>
                     </li>
                     <li class="nav-item">
