@@ -1,47 +1,9 @@
 @extends('layouts.main')
+@section('headC')
+    <link rel="stylesheet" href="{{ asset('assets/css/detail.css') }}">
+@endsection
 @section('container')
 @include('partials/navbar')
-    <style>
-        .container {
-            padding-top: 150px;
-        }
-        .image {
-            width: 400px; 
-            height: 300px;
-            position: sticky;
-            top: 0;
-            float: left;
-            margin-right: 10px;
-        }
-        
-        .detail-top h6 {
-            margin-top: 10px;
-            display: flex;
-        }
-
-        .detail-top {
-            padding-left: 430px;
-        }
-
-        .detail-mid p {
-            margin: 0 auto;
-            width: 700px;
-        }
-
-        .detail-mid {
-            padding-left: 430px;
-        }
-        
-        .detail-bot {
-            padding-left: 430px;
-            margin-bottom: 30px;
-        }
-        
-        .detail-bot img {
-            float: left;
-            margin-right: 10px;
-        }
-    </style>
     <div class="container">
         
         <a href="/" style="float: right; text-decoration: none" class="text-muted">Kembali?</a>
