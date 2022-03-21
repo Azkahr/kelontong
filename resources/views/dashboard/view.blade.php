@@ -77,18 +77,21 @@
                                 <h4>Total : <span class="float-end">Rp.{{ number_format($orders->total_harga, 0,",",".") }}</span></h4>
 
                                 <div class="mt-5">
-                                    <label for="">Order status</label>
-                                    <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                    <label style="display:block" for="">Order status</label>
+                                    <button id="terimabtn" class="erima btn btn-success mt-3">Terima</button>
+                                    <button id="tolakbtn" class="btn btn-danger mt-3">Tolak</button>
+                                    <button style="display:none" id="kirimbtn" class="btn btn-info mt-3">Dikirim</button>
+                                    <form id="formTerima" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <select class="form-select" name="status" id="alasan" onchange="muncul()">
-                                            <option {{ $orders->status == "pending" ? 'selected' : '' }} value="pending">Pending</option>
-                                            <option {{ $orders->status == "tolak" ? 'selected' : '' }} value="tolak">Tolak</option>
-                                            <option {{ $orders->status == "beres" ? 'selected' : '' }} value="beres">Beres</option>
-                                        </select>
-                                        <label for="alasan">Alasan</label>
-                                        <input type="text" id="pesan" name="alasan" class="form-control" style="display: none">
-                                        <button type="submit" class="btn btn-primary mt-3 float-end">Update</button>
+                                        <input type="hidden" name="status" value="proses">
+                                    </form>
+                                    <form id="formTolak" style="display:none" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="tolak">
+                                        <input type="text" name="message">
+                                        <button type="submit" class="btn btn-danger mt-3">Tolak</button>
                                     </form>
                                 </div>
                             </div>
@@ -98,32 +101,18 @@
             </div>
         </div>
     </div>
-
+@endsection
+@section('script')
 <script>
-var slideIndex = 0;
-carousel();
-
-    function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > x.length) {slideIndex = 1}
-            x[slideIndex-1].style.display = "block";
-            setTimeout(carousel, 2000);
-        }
-
-        function muncul(){
-            var alasan = document.getElementById("alasan");
-            var pesan = document.getElementById("pesan");
-
-            if(alasan.value === "tolak"){
-                pesan.style.display = "block";
-            } else {
-                pesan.style.display = "none";
-            }
-        }
+    $('#tolakbtn').click(function (e) { 
+        $('#formTolak').css('display', 'block');
+    });
+    $('#terimabtn').click(function (e) { 
+        $('#formTerima').submit();
+        $('#formTolak').css('display', 'none');
+        $('#tolakbtn').css('display', 'none');
+        $('#terimabtn').css('display', 'none');
+        $('#kirimbtn').css('display', 'block');
+    });
 </script>
 @endsection
