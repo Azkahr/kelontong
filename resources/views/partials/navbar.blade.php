@@ -42,7 +42,7 @@
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
             <h6>Total : Rp.<span class="total-harga">{{ number_format($total, 0,",",".") }}</span></h6>
-            <button class="btn btn-success float-end">Checkout</button>
+            <a href="{{ route('checkout') }}" class="btn btn-success float-end">Checkout</a>
         </div>
     </div>
 </div>
