@@ -34,7 +34,7 @@
         
         .detail-bot {
             padding-left: 430px;
-            margin-bottom: 100px;
+            margin-bottom: 30px;
         }
         
         .detail-bot img {
@@ -74,13 +74,7 @@
             @endif
             <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
-        <div class="detail-mid">
-            <hr>
-                <h5 class="mb-2 mt-2" style="font-weight: bold; font-size: 20px">Detail</h5>
-            <hr>
-            <p class="mb-2">{!! $product->desc !!}</p>
-            <hr>
-        </div>
+        <hr>
         <div class="detail-bot mt-2">
             @if ($product->user->image)
             <img src="{{ asset('storage/' . $product->user->image) }}" class="rounded-circle d-block" style="width: 50px; height: 45px">
@@ -88,6 +82,11 @@
             <img class="rounded-circle d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 50px; height: 45px">
             @endif
             <h6 style="font-weight: bold; font-size: 134%">{{ $product->user->nama_toko }}</h6>
+        </div>
+        <hr>
+        <div class="detail-mid">
+            <h5 class="mb-2 mt-2" style="font-weight: bold; font-size: 20px">Detail</h5>
+            <p class="mb-2">{!! $product->desc !!}</p>
         </div>
     </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -119,6 +118,7 @@ function carousel() {
             function nDots(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -142,7 +142,7 @@ function carousel() {
                                     <img src="`+ image +`" alt="`+ name +`">
                                 </div>
                                 <div class="col-md-3 my-auto ms-3">
-                                    <h3>{{ `+ name +` }}</h3>
+                                    <h3>`+ name +`</h3>
                                 </div>
                                 <div class="col-md-2 my-auto">
                                     <h3>Rp.`+ nDots(harga) +`</h3>
