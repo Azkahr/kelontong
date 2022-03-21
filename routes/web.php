@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Session;
@@ -66,6 +67,9 @@ Route::prefix('auth')->middleware('guest')->group(function(){
         Session::put('role-register', 'seller');
         return redirect('/register');
     });
+
+    Route::get('/google', [OAuthController::class, 'googleRedirect']);
+    Route::get('/google/callback', [OAuthController::class, 'googleCallback']);
 });
 
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -92,7 +96,6 @@ Route::middleware('auth', 'verified')->group(function(){
 
     Route::get('/profile/password/{user:id}', [PasswordController::class, 'changePassword']);
     Route::put('/profile/password/{id}', [PasswordController::class, 'updatePassword']);
-
 });
 
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
