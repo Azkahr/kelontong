@@ -1,39 +1,20 @@
-.container {
-    padding-top: 150px;
-}
-.image {
-    width: 400px;
-    height: 300px;
-    position: sticky;
-    top: 0;
-    float: left;
-    margin-right: 10px;
+.product-container {
+    margin-top: 120px;
+    padding: 0px 30px;
 }
 
-.detail-top h6 {
-    margin-top: 10px;
-    display: flex;
+.product-image {
+    width: 33%;
+    height: 400px;
+    background-color: salmon;
+    position: fixed;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
-.detail-top {
-    padding-left: 430px;
-}
-
-.detail-mid p {
-    margin: 0 auto;
-    width: 700px;
-}
-
-.detail-mid {
-    padding-left: 430px;
-}
-
-.detail-bot {
-    padding-left: 430px;
-    margin-bottom: 30px;
-}
-
-.detail-bot img {
-    float: left;
-    margin-right: 10px;
+.product-content {
+    width: 60%;
+    height: auto;
+    margin-left: 33%;
+    background-color: aqua;
 }
