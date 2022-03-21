@@ -40,7 +40,7 @@
                                     {{ $orders->provinsi }},
                                     {{ $orders->negara }}
                                 </div>
-                                <label for="">Pin code</label>
+                                <label for="">Kode Pos</label>
                                 <div class="border p-2">{{ $orders->pincode }}</div>
                             </div>
                             <div class="col-md-6">
@@ -81,15 +81,28 @@
                                     <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <select class="form-select" name="status" id="alasan" onchange="muncul()">
+                                        <select class="form-select" name="status" id="alasan" onchange="muncul()" >
                                             <option {{ $orders->status == "pending" ? 'selected' : '' }} value="pending">Pending</option>
                                             <option {{ $orders->status == "tolak" ? 'selected' : '' }} value="tolak">Tolak</option>
                                             <option {{ $orders->status == "beres" ? 'selected' : '' }} value="beres">Beres</option>
                                         </select>
-                                        <label for="alasan">Alasan</label>
-                                        <input type="text" id="pesan" name="alasan" class="form-control" style="display: none">
+                                        <div id="pesan" style="display: none">
+                                            <label for="message">Alasan</label>
+                                            <input type="text" name="message" id="message" class="form-control @error('message') is-invalid @enderror">
+                                            @error('message')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                         <button type="submit" class="btn btn-primary mt-3 float-end">Update</button>
                                     </form>
+                                    {{-- <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="terima">
+                                        <button type="submit" class="btn btn-primary mt-3 float-end">Terima</button>
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -121,6 +134,7 @@ carousel();
 
             if(alasan.value === "tolak"){
                 pesan.style.display = "block";
+                pesan.setAttribute("required", true);
             } else {
                 pesan.style.display = "none";
             }

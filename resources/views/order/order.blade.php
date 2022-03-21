@@ -22,6 +22,9 @@
                                     <th>Total harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    @if ($order->status == "tolak")
+                                        <th>Alasan ditolak</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,6 +37,11 @@
                                         <td>
                                             <a href="{{ url('view-order', $order->id) }}" class="btn btn-primary">View</a>
                                         </td>
+                                        @if ($order->status == "tolak")
+                                        <td>
+                                            {{ $order->message }}
+                                        </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -82,7 +82,7 @@
                                 <h4>Total : <span class="float-end">Rp.{{ number_format($orders->total_harga, 0,",",".") }}</span></h4>
 
                                 @if ($orders->status == "tolak")
-                                    <h4 style="color: red" class="mt-5">akjsdajksdha</h4>
+                                    <h4 style="color: red" class="mt-5">{{ $orders->message }}</h4>
                                 @endif
                             </div>
                         </div>

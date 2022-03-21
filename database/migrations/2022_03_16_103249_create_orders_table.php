@@ -26,7 +26,7 @@ class CreateOrdersTable extends Migration
             $table->string('pincode');
             $table->string('total_harga');
             $table->string('status')->default("pending");
-            $table->string('message')->nullable();
+            $table->longText('message')->nullable();
             $table->string('no_resi');
             $table->timestamps();
         });

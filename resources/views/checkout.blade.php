@@ -96,7 +96,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="pincode">Pin code</label>
+                                    <label for="pincode">Kode Pos</label>
                                     <input type="text" name="pincode" id="pincode" placeholder="Enter Pin Code" class="form-control @error('pincode') is-invalid @enderror">
                                     @error('pincode')
                                         <div class="invalid-feedback">
