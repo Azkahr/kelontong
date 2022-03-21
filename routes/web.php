@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
@@ -49,7 +49,7 @@ Route::get('/verify-email/resend', function(Request $request){
     } 
 })->name('verification.resend')->middleware('throttle:5,5,verify-email');
 
-Route::middleware('guest')->group(function(){
+Route::prefix('auth')->middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate'])->middleware('throttle:5,5,login');    
     
@@ -112,3 +112,7 @@ Route::middleware('auth', 'verified')->group(function(){
 Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
+
+Route::fallback(function () {
+    return redirect('/');
+});
