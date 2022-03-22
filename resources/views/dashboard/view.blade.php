@@ -98,16 +98,10 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="tolak">
-                                        <input type="text" name="message">
+                                        <label for="" class="d-block m-0">Alasan</label>
+                                        <input type="text" name="message" class="border border-3 d-inline-block m-0">
                                         <button type="submit" class="btn btn-danger mt-3">Tolak</button>
                                     </form>
-                                    {{-- <form action="/dashboard/update-order/{{ $orders->id }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="status" value="terima">
-                                        <button type="submit" class="btn btn-primary mt-3 float-end">Terima</button>
-                                    </form> --}}
-                                </div>
                             </div>
                         </div>
                     </div>

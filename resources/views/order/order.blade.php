@@ -22,7 +22,6 @@
                                     <th>Total harga</th>
                                     <th>Status</th>
                                     <th>Action</th>
-                                    <th>Alasan ditolak</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,15 +30,16 @@
                                         <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
                                         <td>{{ $order->no_resi }}</td>
                                         <td>Rp.{{ number_format($order->total_harga, 0,",",".") }}</td>
-                                        <td>{{ $order->status }}</td>
+                                        @if ($order->status == "kirim")
+                                            <td>Sedang dikirim</td>
+                                        @elseif($order->status == "tolak")
+                                            <td style="color: red; font-weight: bolder">Tolak</td>
+                                        @else
+                                            <td>{{ $order->status }}</td>
+                                        @endif
                                         <td>
                                             <a href="{{ url('view-order', $order->id) }}" class="btn btn-primary">View</a>
                                         </td>
-                                        @if ($order->status == "tolak")
-                                        <td>
-                                            {{ $order->message }}
-                                        </td>
-                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

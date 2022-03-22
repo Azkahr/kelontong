@@ -99,7 +99,13 @@
                         @php
                             $fotoMain = explode(',', $pb->image);
                         @endphp
-                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                        @if ($pb->stok > 0)
+                            <label class="badge bg-success ms-2 mt-2">In Stock</label>
+                            <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                        @else   
+                            <label class="badge bg-danger ms-2 mt-2">Out of Stock</label>
+                            <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                        @endif
                     </div>
                     <div class="cContent">
                         <p class="text-card">{{ $pb->product_name}}</p>
