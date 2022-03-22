@@ -168,7 +168,6 @@
             let dec_value = $(e.target).siblings('.qty-input').val();
             let products_id = parseInt($(e.target).siblings('.products_id').val());
             let harga = parseFloat($(e.target).siblings('.harga_product').val());
-            console.log(dec_value, products_id, harga);
             if(dec_value > 1){
                 dec_value--
                 $(e.target).siblings('.qty-input').val(dec_value);
