@@ -167,14 +167,14 @@ function carousel() {
                             </div>
                             `
                         );
+                        window.totalHarga += (products_qty * harga);
+                        $('.total-harga').html(nDots(totalHarga));
                         Swal.fire(response.status);
                     }else{
                         Swal.fire(response.status);
                     }
                 }
             });
-            window.totalHarga += (products_qty * harga);
-            $('.total-harga').html(nDots(totalHarga));
         });
         
         $('.increment-btn2').click(function (e) { 
