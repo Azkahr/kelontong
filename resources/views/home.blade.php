@@ -193,7 +193,7 @@
 
 <div class="preview">
     @foreach ($products as $product)
-        @if ($pb->stok === 0)
+        @if ($product->stok === 0)
             <div class="cardB cb{{ $loop->iteration }}">
                 <div class="cImg">
                     <div class="img-overlay">
