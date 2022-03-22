@@ -78,6 +78,13 @@
 
                                 <div class="mt-5">
                                     <label style="display:block" for="">Order status</label>
+                                    @if ($orders->status == "kirim")
+                                        <h6 class="h6 ms-1">Sedang dikirim</h6>
+                                    @elseif($orders->status == "tolak")
+                                        <h6 class="h6 ms-1">Ditolak</h6>
+                                    @else
+                                        <h6 class="h6 ms-1">{{ $orders->status }}</h6>
+                                    @endif
                                     @if($orders->status == "pending")
                                         <button id="terimabtn" class="erima btn btn-success mt-3">Terima</button>
                                         <button id="tolakbtn" class="btn btn-danger mt-3">Tolak</button>
