@@ -7,10 +7,7 @@
         {{-- trix --}}
         <link rel="stylesheet" type="text/css" href="/assets/css/trix.css">
         <script type="text/javascript" src="/assets/js/trix.js"></script>
-        <link
-            rel="apple-touch-icon"
-            sizes="76x76"
-            href="assets/img/apple-icon.png"/>
+        <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://unpkg.com/feather-icons"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -64,8 +61,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('createP') ? 'active' : '' }}" href="{{ route('createP') }}">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <img src="{{ URL::asset('assets/img/plus.svg') }}" style="transform: scale(1.7)">
                             </div>
                             <span class="nav-link-text ms-1" style="font-family:'Open Sans', sans-serif; font-size:14px; font-weight:600">Tambah Produk</span>
@@ -81,8 +77,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="logout">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <img src="{{ URL::asset('assets/img/log-out.svg') }}" style="transform: scale(1.3)">
                             </div>
                             <form action="/logout" method="post">
