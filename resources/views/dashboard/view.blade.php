@@ -1,11 +1,6 @@
-@extends('layouts.main')
-@section('container')
-@include('partials/navbar')
+@extends('layouts.dmain')
+@section('content')
 <style>
-    .container {
-        padding-top: 150px;
-    }
-
     h4 {
         font-size: 2em; 
         font-weight: bolder;
@@ -22,7 +17,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Order View
-                            <a href="{{ route('myOrder') }}" class="btn btn-primary float-end">Kembali</a>
+                            <a href="{{ route('orders') }}" class="btn btn-primary float-end">Kembali</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -45,24 +40,24 @@
                                     {{ $orders->provinsi }},
                                     {{ $orders->negara }}
                                 </div>
-                                <label for="">Pin code</label>
+                                <label for="">Kode Pos</label>
                                 <div class="border p-2">{{ $orders->pincode }}</div>
                             </div>
                             <div class="col-md-6">
                                 <h6>Order Details</h6>
                                 <hr>
-                                <table class="table table-bordered mt-4">
+                                <table class="table mt-4">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Quantity</th>
-                                            <th>Harga</th>
-                                            <th>Gambar</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Gambar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($orders->orderItems as $order)
-                                            <tr>
+                                            <tr scope="row">
                                                 <td>{{ $order->products->product_name }}</td>
                                                 <td>{{ $order->qty }}</td>
                                                 <td>Rp.{{ number_format($order->harga, 0,",",".") }}</td>
@@ -81,13 +76,32 @@
                                 </table>
                                 <h4>Total : <span class="float-end">Rp.{{ number_format($orders->total_harga, 0,",",".") }}</span></h4>
 
-                                @if ($orders->status == "tolak")
-                                    <div class="mt-5 text-danger">
-                                        <h4 class="h4 m-0">Alasan ditolak : </h4>
-                                        <br>
-                                        <h6 class="h6 m-0">{{ $orders->message }}</h6>
-                                    </div>
-                                @endif
+                                <div class="mt-5">
+                                    <label style="display:block" for="">Order status</label>
+                                    @if($orders->status == "pending")
+                                        <button id="terimabtn" class="erima btn btn-success mt-3">Terima</button>
+                                        <button id="tolakbtn" class="btn btn-danger mt-3">Tolak</button>
+                                    @elseif($orders->status == "proses")
+                                        <button style="" id="kirimbtn" class="btn btn-info mt-3">Dikirim</button>
+                                    @endif
+                                    <form id="formKirim" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="kirim">
+                                    </form>
+                                    <form id="formTerima" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="proses">
+                                    </form>
+                                    <form id="formTolak" style="display:none" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="tolak">
+                                        <label for="" class="d-block m-0">Alasan</label>
+                                        <input type="text" name="message" class="border border-3 d-inline-block m-0">
+                                        <button type="submit" class="btn btn-danger mt-3">Tolak</button>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -95,21 +109,40 @@
             </div>
         </div>
     </div>
-
+@endsection
+@section('script')
 <script>
-var slideIndex = 0;
-carousel();
+    
+    $('#tolakbtn').click(function (e) { 
+        $('#formTolak').css('display', 'block');
+    });
+    $('#terimabtn').click(function (e) { 
+        $('#formTerima').submit();
+        $('#formTolak').css('display', 'none');
+        $('#tolakbtn').css('display', 'none');
+        $('#terimabtn').css('display', 'none');
+        $('#kirimbtn').css('display', 'block');
+    });
 
-    function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > x.length) {slideIndex = 1}
-            x[slideIndex-1].style.display = "block";
-            setTimeout(carousel, 2000);
-        }
+    $('#kirimbtn').click(function (e) { 
+        e.preventDefault();
+        
+        $('#formKirim').submit();
+    });
+
+    // var slideIndex = 0;
+    // carousel();
+    
+    //     function carousel() {
+    //         var i;
+    //         var x = document.getElementsByClassName("mySlides");
+    //         for (i = 0; i < x.length; i++) {
+    //             x[i].style.display = "none";
+    //         }
+    //         slideIndex++;
+    //         if (slideIndex > x.length) {slideIndex = 1}
+    //             x[slideIndex-1].style.display = "block";
+    //             setTimeout(carousel, 2000);
+    //         }
 </script>
 @endsection

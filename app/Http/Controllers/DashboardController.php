@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
-    /**
-     * test commit
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('dashboard.dashboard',[
@@ -27,11 +22,47 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function orders(){
+        
+        return view('dashboard.order', [
+            "title" => "Order",
+            "orders" => Order::where('status', "pending")->orWhere('status', 'proses')->orWhere('status', 'kirim')->get()
+        ]);
+    }
+
+    public function orderHistory(){
+
+        return view('dashboard.history', [
+            "title" => "Order",
+            "orders" => Order::where('status', "beres")->orWhere('status', "tolak")->get()
+        ]);
+    }
+    
+    public function view($id){
+        
+        return view('dashboard.view', [
+            "title" => "Order",
+            "orders" => Order::where('id', $id)->first()
+        ]);
+    }
+    
+    public function updateOrder(Request $request, $id){
+
+        $validatedData = $request->validate([
+            'message' => 'required'
+        ]);
+
+        $orders = Order::find($id);
+        $orders->status = $request->input('status');
+        $orders->message = $validatedData['message'];
+        
+        $orders->update();
+
+        smilify('success', 'Status order diupdate');
+
+        return redirect()->route('orders');
+    }
+
     public function create()
     {
         return view('dashboard.create', [
@@ -40,12 +71,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         
@@ -78,12 +103,6 @@ class DashboardController extends Controller
         return redirect('/dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
         if($product->users_id !== auth()->user()->id){
@@ -97,12 +116,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $Product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
         if($product->users_id !== auth()->user()->id){
@@ -117,13 +130,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $Product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $validatedData = $request -> validate([
@@ -167,12 +173,6 @@ class DashboardController extends Controller
         return redirect(route('dashboard'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $Product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         $user = Product::find($request->id);

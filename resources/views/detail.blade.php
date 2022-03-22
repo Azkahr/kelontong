@@ -9,7 +9,7 @@
             width: 400px; 
             height: 300px;
             position: sticky;
-            top: 0;
+            top: 150px;
             float: left;
             margin-right: 10px;
         }
