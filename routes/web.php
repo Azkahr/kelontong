@@ -13,6 +13,8 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\Product;
+use App\Models\Toko;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -113,8 +115,8 @@ Route::get('/search', [HomeController::class, 'search']);
 
 
 Route::get('/toko', function(){
-    $p = Product::first();
-    dd($p->user->toko->kota);
+    $p = User::first();
+    dd($p->products->product_name);
 });
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');

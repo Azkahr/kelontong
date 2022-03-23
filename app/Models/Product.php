@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory, \Znck\Eloquent\Traits\BelongsToThrough;
+    use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
     
     protected $guarded = [];
 
-    protected $with=['user', 'category'];
+    protected $with = ['user', 'category'];
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
@@ -30,9 +31,9 @@ class Product extends Model
         return $this->belongsTo(User::class, 'users_id');
     }
 
-    public function toko(){
-        return $this->BelongsToThrough(User::class, 'users_id');
-    }
+    /* public function toko(){
+        return $this->belongsToThrough(Toko::class, User::class);
+    } */
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');

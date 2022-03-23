@@ -108,7 +108,7 @@
                             <p class="text-card">{{ $pb->product_name}}</p>
                             <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
                             <p class="text-card3">Rating</p>
-                            <p class="text-card4">{{ $pb->user->nama_toko }}</p>
+                            <p class="text-card4">{{ $pb->user->toko->nama_toko }}</p>
                         </div>
                     </div>
                 @else
@@ -124,7 +124,7 @@
                                 <p class="text-card">{{ $pb->product_name}}</p>
                                 <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
                                 <p class="text-card3">Rating</p>
-                                <p class="text-card4">{{ $pb->user->nama_toko }}</p>
+                                <p class="text-card4">{{ $pb->user->toko->nama_toko }}</p>
                             </div>
                         </div>
                     </a>
@@ -157,7 +157,7 @@
                             <p class="text-card">{{ $pb->product_name}}</p>
                             <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
                             <p class="text-card3">Rating</p>
-                            <p class="text-card4">{{ $pb->user->nama_toko }}</p>
+                            <p class="text-card4">{{ $pb->user->toko->nama_toko }}</p>
                         </div>
                     </div>
                 @else
@@ -173,7 +173,7 @@
                                 <p class="text-card">{{ $pb->product_name}}</p>
                                 <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
                                 <p class="text-card3">Rating</p>
-                                <p class="text-card4">{{ $pb->user->nama_toko }}</p>
+                                <p class="text-card4">{{ $pb->user->toko->nama_toko }}</p>
                             </div>
                         </div>
                     </a>
@@ -208,11 +208,11 @@
                     <p class="text-card">{{ $product->product_name}}</p>
                     <p class="text-card2">RP {{ number_format($product->harga, 0,",",".") }}</p>
                     <p class="text-card3">Rating</p>
-                    <p class="text-card4">{{ $product->user->nama_toko }}</p>
+                    <p class="text-card4">{{ $pb->user->toko->nama_toko }}</p>
                 </div>
             </div>
         @else
-            <a style="color: inherit" href="/{{ $product->user->toko->nama_toko }}/{{ $product->product_name }}" class="lBest">
+            <a style="color: inherit" href="/{{ $pb->user->toko->nama_toko }}/{{ $product->product_name }}" class="lBest">
                 <div class="cardB cb{{ $loop->iteration }}">
                     <div class="cImg">
                         @php
@@ -224,7 +224,7 @@
                         <p class="text-card">{{ $product->product_name}}</p>
                         <p class="text-card2">RP {{ number_format($product->harga, 0,",",".") }}</p>
                         <p class="text-card3">Rating</p>
-                        <p class="text-card4">{{ $product->user->nama_toko }}</p>
+                        <p class="text-card4">{{ $pb->user->toko->nama_toko }}</p>
                     </div>
                 </div>
             </a>

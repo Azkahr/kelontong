@@ -15,7 +15,11 @@ class Toko extends Model
 
     protected $with = ['user'];
 
-    public function user(){
+    /* public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function products(){
+        return $this->hasManyThrough(Product::class, User::class);
+    } */
 }
