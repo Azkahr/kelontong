@@ -112,7 +112,7 @@
                         </div>
                     </div>
                 @else
-                    <a style="color: inherit" href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lBest">
+                    <a style="color: inherit" href="/{{ $pb->user->toko->nama_toko }}/{{ $pb->product_name }}" class="lBest">
                         <div class="cardB cb{{ $loop->iteration }}">
                             <div class="cImg">
                                 @php
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                 @else
-                    <a style="color: inherit" href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lBest">
+                    <a style="color: inherit" href="/{{ $pb->user->toko->nama_toko }}/{{ $pb->product_name }}" class="lBest">
                         <div class="cardB cb{{ $loop->iteration }}">
                             <div class="cImg">
                                 @php
@@ -212,7 +212,7 @@
                 </div>
             </div>
         @else
-            <a style="color: inherit" href="/{{ $product->user->nama_toko }}/{{ $product->product_name }}" class="lBest">
+            <a style="color: inherit" href="/{{ $product->user->toko->nama_toko }}/{{ $product->product_name }}" class="lBest">
                 <div class="cardB cb{{ $loop->iteration }}">
                     <div class="cImg">
                         @php

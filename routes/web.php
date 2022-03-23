@@ -12,6 +12,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -109,6 +110,12 @@ Route::middleware('auth', 'verified')->group(function(){
 
 
 Route::get('/search', [HomeController::class, 'search']);
+
+
+Route::get('/toko', function(){
+    $p = Product::first();
+    dd($p->user->toko->kota);
+});
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
 

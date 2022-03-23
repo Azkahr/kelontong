@@ -12,7 +12,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
-        "mckenziearts/laravel-notify": "^2.2"
+        "mckenziearts/laravel-notify": "^2.2",
+        "staudenmeir/belongs-to-through": "^2.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
