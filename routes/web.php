@@ -61,11 +61,12 @@ Route::prefix('auth')->middleware('guest')->group(function(){
     Route::get('/register-user', function(){
         Session::put('role-register', 'user');
         return redirect('/register');
-    });
+    })->name('registerUser');
+    
     Route::get('/register-seller', function(){
         Session::put('role-register', 'seller');
         return redirect('/register');
-    });
+    })->name('registerSeller');
 });
 
 Route::post('/logout', [LoginController::class, 'logout']);

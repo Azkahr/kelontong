@@ -86,7 +86,7 @@
         <div class="container-register" id="container-register">
             <div v-show="modalUser" class="register">
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
-                    <form action="/register" method="post">
+                    <form action="{{ route('registerUser') }}" method="post">
                     @csrf
                         <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>
@@ -141,7 +141,7 @@
     
             <div v-show="modalSeller" class="register">
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
-                    <form action="/daftar" method="post">
+                    <form action="{{ route('registerSeller') }}" method="post">
                     @csrf
                         <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>

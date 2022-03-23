@@ -77,7 +77,7 @@
             <div class="login">
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     @include('notify::components.notify')
-                    <form action="/login" method="post">
+                    <form action="{{ route('login') }}" method="post">
                     @csrf
                         <p style="font-size:32pt; font-family:Spartan; font-weight:500">HAYUU LOGIN</p>
                         <div>
