@@ -141,7 +141,7 @@
     
             <div v-show="modalSeller" class="register">
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
-                    <form action="{{ route('registerPost') }}}" method="post">
+                    <form action="/auth/daftar" method="post">
                     @csrf
                         <p style="font-size:32pt; font-family:Spartan; font-weight:500">@{{ judul }}</p>
                         <div>
