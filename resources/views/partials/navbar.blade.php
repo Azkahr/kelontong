@@ -57,14 +57,10 @@
             </form>
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
-                @if (auth()->check())
-                    @if ($carts)
-                        <button class="cartBtn">
-                            <span style="color: white">{{ count($carts) }}</span>
-                            <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
-                        </button>
-                    @endif
-                @endif
+                <button class="cartBtn">
+                    <span style="color: white">{{ count($carts) }}</span>
+                    <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                </button>
                 <div class="dropdown">
                     <button class="dropbtn">
                         <p style="margin-left:7px; display: inline; font-size:20px; font-family:spartan; font-weight:700; color:white">
@@ -73,7 +69,10 @@
                     </button>
                     <div class="dropdown-content">
                         @if (auth()->user()->role == 'seller')
-                                <a href="/dashboard">Dashboard</a>
+                            <a href="/dashboard">Dashboard</a>
+                        @endif
+                        @if (auth()->user()->role === 'user')
+                            <a href="{{ route('registerSeller') }}">Buka Toko</a>
                         @endif
                         <a href="{{ route('myOrder') }}">My order</a>
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
@@ -88,7 +87,7 @@
             <div style="display:inline-block; font-size:18px; margin-right:30px; margin-bottom:10px; font-family:spartan; font-weight:800">
                 <a class="login" href="{{ route('login') }}">Masuk</a>
                 <div style="position:relative; top:8px; display:inline-block; height: 30px; border-left:3px solid white; margin:0px 10px 0px 10px"></div>
-                <a class="register" href="{{ route('registerUser') }}">Daftar</a>
+                <a class="register" href="{{ route('register') }}">Daftar</a>
             </div>
         @endauth
     </div>

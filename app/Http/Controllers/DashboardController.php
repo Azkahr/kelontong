@@ -81,7 +81,7 @@ class DashboardController extends Controller
             'desc' => 'required',
             'category_id' => 'required',
             'image' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf,JPG|max:2048'
+            'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
         ]);
 
         if($request->file('image')){

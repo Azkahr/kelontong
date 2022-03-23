@@ -80,52 +80,59 @@
             </div>
         </div>
 
-        <div v-show="modalUser" class="register">
+        <div class="register">
             <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
-                <form action="{{ route('userPost') }}" method="post">
+                <form action="{{ route('sellerPost') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                    <p style="font-size:32pt; font-family:Spartan; font-weight:500">HAYUU JAJAN</p>
+                    <p style="font-size:32pt; font-family:Spartan; font-weight:500">HAYUU JUALAN</p>
                     <div>
-                        <label for="name">Nama :</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autofocus id="name" size="50">
-                        @error('name')
+                        <label for="nama_toko">Nama Toko :</label>
+                        <input type="text" id="nama_toko" name="nama_toko" class="form-control @error('nama_toko') is-invalid @enderror" value="{{ old('nama_toko') }}" autofocus  size="50">
+                        @error('nama_toko')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div>
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" autofocus id="email" size="50">
-                        @error('email')
+                        <label for="kota">Kota :</label>
+                        <input type="text" id="kota" name="kota" class="form-control @error('kota') is-invalid @enderror" value="{{ old('kota') }}" size="50">
+                        @error('kota')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div>
-                        <label for="password">Password :</label>
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" size="50">
-                        @error('password')
+                        <label for="alamat">Alamat :</label>
+                        <input type="text" id="alamat" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" size="50">
+                        @error('alamat')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div>
-                        <label for="cpassword">Confirm Password :</label>
-                        <input type="password" name="cpassword" class="form-control @error('cpassword') is-invalid @enderror" id="cpassword" size="50">
-                        @error('cpassword')
+                        <label for="nohp">No Handphone :</label>
+                        <input type="tel" id="noHp" name="noHp" class="form-control @error('noHp') is-invalid @enderror" value="{{ old('noHp') }}" size="50">
+                        @error('noHp')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    <input type="hidden" name="role" value="user">
+                    <div>
+                        <label for="image">Foto Profile Toko:</label>
+                        <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" size="50">
+                        @error('image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div class="d-flex justify-content-center" style="margin-top:15px;">
-                        <button style="width: 100%;" class="btn btn-primary" type="submit">Daftar</button>
+                        <button style="width: 100%;" class="btn btn-primary" type="submit">Buka Toko</button>
                     </div>
-                    <a style="color: #0D6EFD" href="{{ route('login') }}">Login</a>
                 </form>
             </div>
         </div>

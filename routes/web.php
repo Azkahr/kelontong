@@ -54,19 +54,12 @@ Route::prefix('auth')->middleware('guest')->group(function(){
     Route::post('/login', [LoginController::class, 'authenticate'])->name('loginPost')->middleware('throttle:5,5,login');    
     
     Route::get('/register', [RegisterController::class, 'index'])->name('register');    
-    Route::post('/register', [RegisterController::class, 'store'])->name('registerPost');
-    
-    Route::post('/daftar', [RegisterController::class, 'buat']);
+    Route::post('/register', [RegisterController::class, 'store'])->name('userPost');
+});
 
-    Route::get('/register-user', function(){
-        Session::put('role-register', 'user');
-        return redirect()->route('register');
-    })->name('registerUser');
-    
-    Route::get('/register-seller', function(){
-        Session::put('role-register', 'seller');
-        return redirect()->route('register');
-    })->name('registerSeller');
+Route::prefix('auth')->middleware('auth')->group(function(){
+    Route::get('/register-seller', [RegisterController::class, 'seller'])->name('registerSeller');    
+    Route::post('/register-seller', [RegisterController::class, 'buat'])->name('sellerPost');
 });
 
 Route::post('/logout', [LoginController::class, 'logout']);

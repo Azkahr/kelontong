@@ -9,9 +9,15 @@ use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         return view('auth.register', [
             "title" => 'Register',
+        ]);
+    }
+
+    public function seller(){
+        return view('auth.register-seller', [
+            "title" => 'Register Seller',
         ]);
     }
 
@@ -42,28 +48,40 @@ class RegisterController extends Controller
 
     public function buat(Request $request){
         $validatedData = $request->validate([
-            "name" => "required|min:3|max:255",
-            "email" => "required|email:dns|unique:users,email",
-            "role" => "required",
-            'nama_toko' => "required|min:5",
-            "password" => "required|min:5|max:255",
-            "cpassword" => "required|same:password"
-        ],[
-            'cpassword.same' => 'The confirm password must match'
+            'nama_toko' => 'required|min:5;',
+            'alamat' => 'required',
+            'noHp' => ['required', 'numeric', 'digits:12', 'regex:/^0/'],
+            'kota' => 'required',
+            'image' => 'required',
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        dd($validatedData);
 
-        $user = User::create($validatedData);
-
-        event(new Registered($user));
-
-        if(Auth::attempt($request->only('email', 'password'))){
-            notify()->success('Register Sukses', 'Berhasil');
-            return redirect('/dashboard')->with('success', 'Registration successfully');
-        } else {
-            notify()->error('Register Gagal', 'Gagal');
-            return redirect('/register')->with('error', 'Registration failed');
-        }
+        /* $validatedData['password'] = bcrypt($validatedData['password']);
+        $user = User::where('email', $validatedData['email'])->first();
+        if($user->exists()){
+            $user->nama_toko = $validatedData['nama_toko'];
+            $user->role = $validatedData['role'];
+            $user->update();
+            if(Auth::attempt($validatedData)){
+                notify()->success('Register Sukses', 'Berhasil');
+                return redirect('/dashboard')->with('success', 'Registration successfully');
+            } else {
+                notify()->error('Register Gagal', 'Gagal');
+                return redirect('/register')->with('error', 'Registration failed');
+            }
+        }else{
+            $userReg = User::create($validatedData);
+            event(new Registered($userReg));
+            if(Auth::attempt($validatedData)){
+                notify()->success('Register Sukses', 'Berhasil');
+                return redirect('/dashboard')->with('success', 'Registration successfully');
+            } else {
+                notify()->error('Register Gagal', 'Gagal');
+                return redirect('/register')->with('error', 'Registration failed');
+            }
+        } */
     }
 }
