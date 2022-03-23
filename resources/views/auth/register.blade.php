@@ -104,6 +104,15 @@
                         @enderror
                     </div>
                     <div>
+                        <label for="handphone_number">No Handphone :</label>
+                        <input type="text" name="handphone_number" class="form-control @error('handphone_number') is-invalid @enderror" autofocus id="handphone_number" size="50">
+                        @error('handphone_number')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div>
                         <label for="password">Password :</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" size="50">
                         @error('password')

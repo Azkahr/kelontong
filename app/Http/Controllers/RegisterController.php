@@ -26,23 +26,24 @@ class RegisterController extends Controller
             "name" => "required|min:3|max:255",
             "email" => "required|email:dns|unique:users,email",
             "role" => "required",
+            'handphone_number' => ['required', 'numeric', 'digits:12', 'regex:/^0/'],
             "password" => "required|min:5|max:255",
             "cpassword" => "required|same:password"
         ],[
-            'cpassword.same' => 'The confirm password must match'
+            'cpassword.same' => 'The Confirmation Password Must Match'
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         $user = User::create($validatedData);
 
-        event(new Registered($user));
-
-        if(Auth::attempt($request->only('email', 'password'))){
+        if($user){
+            Auth::login($validatedData);
+            event(new Registered($user));
             return redirect('/verify-email');
-        } else {
+        }else{
             notify()->error('Register Gagal', 'Gagal');
-            return redirect('/register')->with('error', 'Registration failed');
+            return back()->with('error', 'Registration failed');
         }
     }
 
@@ -50,9 +51,7 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'nama_toko' => 'required|min:5;',
             'alamat' => 'required',
-            'noHp' => ['required', 'numeric', 'digits:12', 'regex:/^0/'],
             'kota' => 'required',
-            'image' => 'required',
             'image' => 'required',
             'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
         ]);

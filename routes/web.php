@@ -29,7 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended('/dashboard')
+                    ? redirect('/')
                     : view('auth.verify', [
                         "title" => "Verify"
                     ]);
@@ -37,7 +37,7 @@ Route::get('/verify-email', function(Request $request){
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/login');
+    return redirect('/');
 })->name('verification.verify')->middleware('signed');
 
 Route::get('/verify-email/resend', function(Request $request){
