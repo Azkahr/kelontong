@@ -12,7 +12,7 @@ class Product extends Model
     
     protected $guarded = [];
 
-    protected $with = ['user', 'category'];
+    protected $with = ['user', 'category', 'toko'];
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
@@ -28,12 +28,12 @@ class Product extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class);
     }
 
-    /* public function toko(){
+    public function toko(){
         return $this->belongsToThrough(Toko::class, User::class);
-    } */
+    }
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');

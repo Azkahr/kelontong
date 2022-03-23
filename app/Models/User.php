@@ -20,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
      */
     protected $guarded = ['id'];
 
+    protected $with = ['toko'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -39,9 +41,9 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'email_verified_at' => 'datetime',
     ];
 
-    /* public function toko(){
+    public function toko(){
         return $this->belongsTo(Toko::class);
-    } */
+    }
 
     public function products(){
         return $this->hasMany(Product::class);

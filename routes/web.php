@@ -110,14 +110,7 @@ Route::middleware('auth', 'verified')->group(function(){
 
 });
 
-
 Route::get('/search', [HomeController::class, 'search']);
-
-
-Route::get('/toko', function(){
-    $p = User::first();
-    dd($p->products->product_name);
-});
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
 
