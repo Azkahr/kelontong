@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('head')
+@section('headS')
     <script src="https://unpkg.com/vue@3"></script>
 @endsection
 <style>
@@ -132,7 +132,7 @@
                         <form>
                             <div class="d-flex justify-content-between" style="margin-top:15px;">
                                 <button style="color: #0D6EFD" v-on:click.prevent="showSeller()">Daftar Sebagai Seller</button>
-                                <a style="color: #0D6EFD" href="/login">Login</a>
+                                <a style="color: #0D6EFD" href="{{ route('login') }}">Login</a>
                             </div>
                         </form>
                     </form>
@@ -196,7 +196,7 @@
                         <form>
                             <div class="d-flex justify-content-between" style="margin-top:15px;">
                                 <button style="color: #0D6EFD" v-on:click.prevent="showUser()">Daftar Sebagai User</button>
-                                <a style="color: #0D6EFD" href="/login">Login</a>
+                                <a style="color: #0D6EFD" href="{{ route('login') }}">Login</a>
                             </div>
                         </form>
                     </form>

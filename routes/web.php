@@ -60,12 +60,12 @@ Route::prefix('auth')->middleware('guest')->group(function(){
 
     Route::get('/register-user', function(){
         Session::put('role-register', 'user');
-        return redirect('/register');
+        return redirect()->route('register');
     })->name('registerUser');
     
     Route::get('/register-seller', function(){
         Session::put('role-register', 'seller');
-        return redirect('/register');
+        return redirect()->route('register');
     })->name('registerSeller');
 });
 
@@ -119,6 +119,6 @@ Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
 
-Route::fallback(function () {
+/* Route::fallback(function () {
     return redirect('/');
-});
+}); */

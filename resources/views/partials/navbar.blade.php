@@ -88,7 +88,7 @@
             <div style="display:inline-block; font-size:18px; margin-right:30px; margin-bottom:10px; font-family:spartan; font-weight:800">
                 <a class="login" href="{{ route('login') }}">Masuk</a>
                 <div style="position:relative; top:8px; display:inline-block; height: 30px; border-left:3px solid white; margin:0px 10px 0px 10px"></div>
-                <a class="register" href="{{ route('register') }}">Daftar</a>
+                <a class="register" href="{{ route('registerUser') }}">Daftar</a>
             </div>
         @endauth
     </div>
