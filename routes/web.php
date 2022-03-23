@@ -112,6 +112,6 @@ Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
 
-/* Route::fallback(function () {
+Route::fallback(function () {
     return redirect('/');
-}); */
+});

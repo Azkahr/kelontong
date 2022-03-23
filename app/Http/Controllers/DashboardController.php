@@ -18,7 +18,6 @@ class DashboardController extends Controller
             'category_s' => Product::select(['category_id'])->where('users_id', auth()->user()->id)->distinct()->get(),
             "allpost" => Product::all()->where('users_id', auth()->user()->id)->count(),
             "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('stok'),
-            
         ]);
     }
 

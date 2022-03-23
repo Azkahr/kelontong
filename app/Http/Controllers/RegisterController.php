@@ -64,7 +64,7 @@ class RegisterController extends Controller
         $user->update();
 
         $toko = Toko::create([
-            'users_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'nama_toko' => $validatedData['nama_toko'],
             'kota' => $validatedData['kota'],
             'alamat' => $validatedData['alamat'],

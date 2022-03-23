@@ -9,11 +9,11 @@ class Toko extends Model
 {
     use HasFactory;
 
+    protected $table = 'toko';
+
     protected $guarded = ['id'];
 
-    protected $with=['toko'];
-
-    protected $table = 'toko';
+    protected $with = ['user'];
 
     public function user(){
         return $this->belongsTo(User::class);

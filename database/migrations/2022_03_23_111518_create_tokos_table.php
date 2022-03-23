@@ -15,7 +15,7 @@ class CreateTokosTable extends Migration
     {
         Schema::create('toko', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('nama_toko');
             $table->string('kota');
             $table->string('alamat');
