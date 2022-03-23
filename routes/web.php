@@ -51,10 +51,10 @@ Route::get('/verify-email/resend', function(Request $request){
 
 Route::prefix('auth')->middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'authenticate'])->middleware('throttle:5,5,login');    
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('loginPost')->middleware('throttle:5,5,login');    
     
     Route::get('/register', [RegisterController::class, 'index'])->name('register');    
-    Route::post('/register', [RegisterController::class, 'store']);
+    Route::post('/register', [RegisterController::class, 'store'])->name('registerPost');
     
     Route::post('/daftar', [RegisterController::class, 'buat']);
 
