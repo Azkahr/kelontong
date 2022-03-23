@@ -47,7 +47,7 @@ Route::get('/verify-email/resend', function(Request $request){
         $request->user()->sendEmailVerificationNotification();
         return back()->with('success', 'Verifikasi Terkirim');
     } 
-})->name('verification.resend')->middleware('throttle:5,5,verify-email');
+})->name('verification.resend')->middleware('throttle:1,5,verify-email');
 
 Route::prefix('auth')->middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');

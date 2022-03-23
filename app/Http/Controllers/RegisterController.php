@@ -27,7 +27,7 @@ class RegisterController extends Controller
             "email" => "required|email:dns|unique:users,email",
             "role" => "required",
             'handphone_number' => ['required', 'numeric', 'digits:12', 'regex:/^0/'],
-            "password" => "required|min:5|max:255",
+            "password" => "required|min:8|max:255",
             "cpassword" => "required|same:password"
         ],[
             'cpassword.same' => 'The Confirmation Password Must Match'
@@ -36,9 +36,10 @@ class RegisterController extends Controller
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         $user = User::create($validatedData);
+        
 
         if($user){
-            Auth::login($validatedData);
+            Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']]);
             event(new Registered($user));
             return redirect('/verify-email');
         }else{
