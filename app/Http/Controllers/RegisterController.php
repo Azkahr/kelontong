@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Toko;
 use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
@@ -56,32 +57,20 @@ class RegisterController extends Controller
             'image' => 'required',
             'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
         ]);
+        $image = $validatedData['image']->store('photo-profile-toko');
 
-        dd($validatedData);
+        $user = User::where('id', Auth::id())->first();
+        $user->role = 'seller';
+        $user->update();
 
-        /* $validatedData['password'] = bcrypt($validatedData['password']);
-        $user = User::where('email', $validatedData['email'])->first();
-        if($user->exists()){
-            $user->nama_toko = $validatedData['nama_toko'];
-            $user->role = $validatedData['role'];
-            $user->update();
-            if(Auth::attempt($validatedData)){
-                notify()->success('Register Sukses', 'Berhasil');
-                return redirect('/dashboard')->with('success', 'Registration successfully');
-            } else {
-                notify()->error('Register Gagal', 'Gagal');
-                return redirect('/register')->with('error', 'Registration failed');
-            }
-        }else{
-            $userReg = User::create($validatedData);
-            event(new Registered($userReg));
-            if(Auth::attempt($validatedData)){
-                notify()->success('Register Sukses', 'Berhasil');
-                return redirect('/dashboard')->with('success', 'Registration successfully');
-            } else {
-                notify()->error('Register Gagal', 'Gagal');
-                return redirect('/register')->with('error', 'Registration failed');
-            }
-        } */
+        Toko::create([
+            'users_id' => Auth::id(),
+            'nama_toko' => $validatedData['nama_toko'],
+            'kota' => $validatedData['kota'],
+            'alamat' => $validatedData['alamat'],
+            'image' => $image,
+        ]);
+
+        redirect()->intended('/dahsboard');
     }
 }

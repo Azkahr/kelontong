@@ -40,7 +40,7 @@ class LoginController extends Controller
             }
         } else {
             notify()->error('Email / Password Salah', 'Login Gagal');
-            return redirect('/login');
+            return redirect()->route('login');
         }
 }
 

@@ -113,15 +113,6 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="nohp">No Handphone :</label>
-                        <input type="tel" id="noHp" name="noHp" class="form-control @error('noHp') is-invalid @enderror" value="{{ old('noHp') }}" size="50">
-                        @error('noHp')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div>
                         <label for="image">Foto Profile Toko:</label>
                         <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" size="50">
                         @error('image')

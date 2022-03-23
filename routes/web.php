@@ -29,7 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
-                    ? redirect('/')
+                    ? redirect()->intended('/')
                     : view('auth.verify', [
                         "title" => "Verify"
                     ]);
