@@ -63,7 +63,7 @@ class RegisterController extends Controller
         $user->role = 'seller';
         $user->update();
 
-        Toko::create([
+        $toko = Toko::create([
             'users_id' => Auth::id(),
             'nama_toko' => $validatedData['nama_toko'],
             'kota' => $validatedData['kota'],
@@ -71,6 +71,11 @@ class RegisterController extends Controller
             'image' => $image,
         ]);
 
-        redirect()->intended('/dahsboard');
+        if($toko){
+            return redirect()->intended('/dahsboard');
+        }else{
+            return back()->with('Gagal', 'Registrasi Jadi Seller Gagal');
+        }
+        
     }
 }
