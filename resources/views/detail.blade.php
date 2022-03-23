@@ -20,7 +20,7 @@
         }
 
         .detail-top {
-            padding-left: 430px;
+            padding-left: 60px;
         }
 
         .detail-mid p {
@@ -33,17 +33,98 @@
         }
         
         .detail-bot {
-            padding-left: 430px;
             margin-bottom: 30px;
         }
         
         .detail-bot img {
-            float: left;
             margin-right: 10px;
         }
+
+        /* #modalBtn {
+            position: absolute;
+            left: 1005px;
+            top: 305px;
+        } */
+
+        /* rating */
+        .rating-css div {
+            color: #ffe400;
+            font-size: 30px;
+            font-family: sans-serif;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 20px 0;
+        }
+        .rating-css input {
+            display: none;
+        }
+        .rating-css input + label {
+            font-size: 60px;
+            text-shadow: 1px 1px 0 #8f8420;
+            cursor: pointer;
+        }
+        .rating-css input:checked + label ~ label {
+            color: #b4afaf;
+        }
+        .rating-css label:active {
+            transform: scale(0.8);
+            transition: 0.3s ease;
+        }
+
+        .checked {
+            color: #ffe400
+        }
+        /* End of Star Rating */
     </style>
     <div class="container">
-        
+        @include('notify::components.notify')
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('addRating') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="products_id" value="{{ $product->id }}">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Rate this product</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="rating-css">
+                                <div class="star-icon">
+                                    @if ($user_rating)
+                                        @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
+                                            <input type="radio" value="{{ $i }}" name="product_rating" checked id="rating{{ $i }}">
+                                            <label for="rating{{ $i }}" class="fa fa-star"></label>
+                                        @endfor
+                                        @for ($j = $user_rating->stars_rated+1; $j <= 5; $j++)
+                                            <input type="radio" value="{{ $j }}" name="product_rating" id="rating{{ $j }}">
+                                            <label for="rating{{ $j }}" class="fa fa-star"></label>
+                                        @endfor
+                                    @else
+                                        <input type="radio" value="1" name="product_rating" checked id="rating1">
+                                        <label for="rating1" class="fa fa-star"></label>
+                                        <input type="radio" value="2" name="product_rating" id="rating2">
+                                        <label for="rating2" class="fa fa-star"></label>
+                                        <input type="radio" value="3" name="product_rating" id="rating3">
+                                        <label for="rating3" class="fa fa-star"></label>
+                                        <input type="radio" value="4" name="product_rating" id="rating4">
+                                        <label for="rating4" class="fa fa-star"></label>
+                                        <input type="radio" value="5" name="product_rating" id="rating5">
+                                        <label for="rating5" class="fa fa-star"></label>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <a href="/" style="float: right; text-decoration: none" class="text-muted">Kembali?</a>
         <div class="image">
             @php
@@ -66,6 +147,22 @@
             <h5 style="font-weight: bold; font-size: 166%">{{ $product->product_name }}</h5>
             <p class="text-muted" style="float: left; margin-right: 3px;">{{ $product->category->name }} |</p>
             <p class="text-muted">Stok tersedia : {{ $totalqty }}</p>
+            @php $rate = number_format($rating_value) @endphp
+            <div class="rating">
+                @for ($i = 1; $i <= $rate; $i++)
+                    <i class="fa fa-star checked"></i>
+                @endfor
+                @for ($j = $rate+1; $j <= 5; $j++)
+                    <i class="fa fa-star"></i>
+                @endfor
+                <span>
+                    @if ($ratings->count() > 0)
+                        Dari {{ $ratings->count() }} Ratings
+                    @else
+                        Tidak ada rating
+                    @endif
+                </span>
+            </div>
             @if ($product->stok > 0)
                 <label class="badge bg-success">In Stock</label>
                 <button class="btn btn-block btn-primary" id="addToCartBtn" style="float: right"><i class="fa fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
@@ -75,13 +172,19 @@
             <h3 class="mb-3" style="font-weight: bold; font-size: 234%">RP {{ number_format($product->harga, 0,",",".") }}</h3>
         </div>
         <hr>
-        <div class="detail-bot mt-2">
-            @if ($product->user->image)
-            <img src="{{ asset('storage/' . $product->user->image) }}" class="rounded-circle d-block" style="width: 50px; height: 45px">
-            @else
-            <img class="rounded-circle d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 50px; height: 45px">
-            @endif
-            <h6 style="font-weight: bold; font-size: 134%">{{ $product->user->nama_toko }}</h6>
+        <div class="detail-bot mt-2 d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+                @if ($product->user->image)
+                <img src="{{ asset('storage/' . $product->user->image) }}" class="rounded-circle d-block" style="width: 50px; height: 45px">
+                @else
+                <img class="rounded-circle d-block" src="{{ URL::asset('assets/img/user.png') }}" style="width: 50px; height: 45px">
+                @endif
+                <h6 style="font-weight: bold; font-size: 134%">{{ $product->user->nama_toko }}</h6>
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Beri rating untuk product ini
+            </button>
         </div>
         <hr>
         <div class="detail-mid">

@@ -79,15 +79,22 @@
                                 <div class="mt-5">
                                     <label style="display:block" for="">Order status</label>
                                     @if($orders->status == "pending")
-                                        <button id="terimabtn" class="erima btn btn-success mt-3">Terima</button>
+                                        <button id="terimabtn" class="terima btn btn-success mt-3">Terima</button>
                                         <button id="tolakbtn" class="btn btn-danger mt-3">Tolak</button>
                                     @elseif($orders->status == "proses")
                                         <button style="" id="kirimbtn" class="btn btn-info mt-3">Dikirim</button>
+                                    @elseif($orders->status == "kirim")
+                                        <button style="" id="beresbtn" class="btn btn-info mt-3">Beres</button>
                                     @endif
                                     <form id="formKirim" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="kirim">
+                                    </form>
+                                    <form id="formBeres" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="beres">
                                     </form>
                                     <form id="formTerima" action="/dashboard/update-order/{{ $orders->id }}" method="POST">
                                         @csrf
@@ -128,6 +135,12 @@
         e.preventDefault();
         
         $('#formKirim').submit();
+    });
+
+    $('#beresbtn').click(function (e) { 
+        e.preventDefault();
+        
+        $('#formBeres').submit();
     });
 
     // var slideIndex = 0;
