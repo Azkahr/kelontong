@@ -20,8 +20,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
      */
     protected $guarded = ['id'];
 
-    protected $with = ['toko'];
-
     /**
      * The attributes that should be hidden for serialization.
      *

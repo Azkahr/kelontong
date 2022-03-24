@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    use \Znck\Eloquent\Traits\BelongsToThrough;
     
     protected $guarded = [];
 
@@ -32,7 +31,7 @@ class Product extends Model
     }
 
     public function toko(){
-        return $this->belongsToThrough(Toko::class, User::class);
+        return $this->belongsTo(Toko::class);
     }
 
     public function category(){

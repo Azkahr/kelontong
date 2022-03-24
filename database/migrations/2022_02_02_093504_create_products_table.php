@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('toko_id')->constrained('toko');
             $table->string('product_name');
             $table->unsignedInteger('harga');
             $table->unsignedInteger('stok');

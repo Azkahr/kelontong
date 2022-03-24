@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('handphone_number')->unique();
             $table->string('role');
-            $table->foreignId('toko_id')->nullable();
             $table->string('password');
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
