@@ -46,7 +46,7 @@
                                     {{ $orders->negara }}
                                 </div>
                                 <label for="">Pin code</label>
-                                <div class="border p-2">{{ $orders->pincode }}</div>
+                                <div class="border p-2">{{ $orders->kode_pos }}</div>
                             </div>
                             <div class="col-md-6">
                                 <h6>Order Details</h6>
