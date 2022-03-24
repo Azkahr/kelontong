@@ -43,6 +43,8 @@ class HomeController extends Controller
         $ratings = Rating::where('products_id', $product->id)->get();
         $total_ratings = Rating::where('products_id', $product->id)->sum('stars_rated');
         $user_rating = Rating::where('products_id', $product->id)->where('users_id', Auth::id())->first();
+        $reviews = Rating::where('products_id', $product->id)->get();
+        $review = Rating::where('products_id', $product->id)->where('users_id', Auth::id())->first();
         
         if($ratings->count() > 0){
             $rating_value = $total_ratings / $ratings->count();
@@ -58,6 +60,8 @@ class HomeController extends Controller
             "ratings" => $ratings,
             "rating_value" => $rating_value,
             "user_rating" => $user_rating,
+            "reviews" => $reviews,
+            "review" => $review,
         ]);
     }
 }

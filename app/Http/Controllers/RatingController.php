@@ -14,6 +14,7 @@ class RatingController extends Controller
         
         $stars = $request->input('product_rating');
         $products_id = $request->input('products_id');
+        $user_review = $request->input('user_review');
 
         $product = Product::where('id', $products_id)->first();
         $order = Order::where('users_id', Auth::id())->where('status', 'beres')
@@ -32,13 +33,15 @@ class RatingController extends Controller
                     
                     if($rating){
                         $rating->stars_rated = $stars;
+                        $rating->user_review = $user_review;
                         $rating->update();
                         
                     } else {
                         Rating::create([
                             'users_id' => Auth::id(),
                             'products_id' => $products_id,
-                            'stars_rated' => $stars
+                            'stars_rated' => $stars,
+                            'user_review' => $user_review
                         ]);
                     }
                     

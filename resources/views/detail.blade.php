@@ -81,7 +81,7 @@
         @include('notify::components.notify')
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <form action="{{ route('addRating') }}" method="POST">
                         @csrf
@@ -91,6 +91,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <h4 class="h4 text-center">Beri review untuk product ini</h4>
                             <div class="rating-css">
                                 <div class="star-icon">
                                     @if ($user_rating)
@@ -116,6 +117,13 @@
                                     @endif
                                 </div>
                             </div>
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            @if ($review)
+                                ulasan anda sebelumnya
+                                <textarea class="form-control" name="user_review" rows="5" placeholder="{{ $review->user_review }}">{{ $review->user_review }}</textarea>
+                            @else
+                                <textarea class="form-control" name="user_review" rows="5" placeholder="Tulis ulasan..."></textarea>
+                            @endif
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -191,6 +199,22 @@
             <h5 class="mb-2 mt-2" style="font-weight: bold; font-size: 20px">Detail</h5>
             <p class="mb-2">{!! $product->desc !!}</p>
         </div>
+    </div>
+    <hr>
+    <div class="user-review text-center">
+        <h3 class="h3">Ulasan</h3>
+        @foreach ($reviews as $review)
+            <label for="">{{ $review->user->name }}</label>
+            <br>
+            @for ($i = 1; $i <= $rate; $i++)
+                <i class="fa fa-star checked"></i>
+            @endfor
+            @for ($j = $rate+1; $j <= 5; $j++)
+                <i class="fa fa-star"></i>
+            @endfor
+            <small>Diulas pada {{ $review->created_at->format('d M Y') }}</small>
+            <p>{{ $review->user_review }}</p>
+        @endforeach
     </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->foreignId('users_id');
             $table->foreignId('products_id');
             $table->foreignId('stars_rated');
+            $table->longText('user_review');
             $table->timestamps();
         });
     }
