@@ -80,6 +80,14 @@
                                     </tbody>
                                 </table>
                                 <h4>Total : <span class="float-end">Rp.{{ number_format($orders->total_harga, 0,",",".") }}</span></h4>
+
+                                @if ($orders->status == "tolak")
+                                    <div class="mt-5 text-danger">
+                                        <h4 class="h4 m-0">Alasan ditolak : </h4>
+                                        <br>
+                                        <h6 class="h6 m-0">{{ $orders->message }}</h6>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

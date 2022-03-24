@@ -20,7 +20,7 @@ class isSellerMiddleware
         if(Auth::check() && Auth::user()->role == "seller"){
             return $next($request);
         } else {
-            return redirect('/login');
+            return redirect()->route('registerSeller');
         }
     }
 }

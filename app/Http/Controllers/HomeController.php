@@ -10,12 +10,25 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index(){
-        return view('home', [
-            'title' => 'Home',
-            'products' => Product::latest()->take(30)->get(),
-            'productsBest' => Product::latest()->take(12)->get(),
-            'carts' => Cart::where('users_id', Auth::id())->get(),
-        ]);
+        if(Auth::check()){
+            if(auth()->user()->hasVerifiedEmail()){
+                return view('home', [
+                    'title' => 'Home',
+                    'products' => Product::latest()->take(30)->get(),
+                    'productsBest' => Product::latest()->take(12)->get(),
+                    'carts' => Cart::where('users_id', Auth::id())->get(),
+                ]);
+            }else{
+                return redirect('/verify-email');
+            }
+        }else{
+            return view('home', [
+                'title' => 'Home',
+                'products' => Product::latest()->take(30)->get(),
+                'productsBest' => Product::latest()->take(12)->get(),
+                'carts' => Cart::where('users_id', Auth::id())->get(),
+            ]);
+        }
     }
 
     public function search(){

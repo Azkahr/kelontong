@@ -77,7 +77,7 @@
             <div class="login">
                 <div style="width:100%; height:100%; display:flex; align-items:center; margin-left:70px; color:black">
                     @include('notify::components.notify')
-                    <form action="/login" method="post">
+                    <form action="{{ route('loginPost') }}" method="post">
                     @csrf
                         <p style="font-size:32pt; font-family:Spartan; font-weight:500">HAYUU LOGIN</p>
                         <div>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="d-flex justify-content-between" style="margin-top:15px;">
                             <a style="text-decoration:none" href="{{ route('password.request') }}">Forgot Password</a>
-                            <a style="text-decoration:none" href="/register">Register</a>
+                            <a style="text-decoration:none" href="{{ route('register') }}">Register</a>
                         </div>
                     </form>
                 </div>

@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Toko;
 use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         return view('auth.register', [
             "title" => 'Register',
+        ]);
+    }
+
+    public function seller(){
+        return view('auth.register-seller', [
+            "title" => 'Register Seller',
         ]);
     }
 
@@ -20,50 +27,55 @@ class RegisterController extends Controller
             "name" => "required|min:3|max:255",
             "email" => "required|email:dns|unique:users,email",
             "role" => "required",
-            "password" => "required|min:5|max:255",
+            'handphone_number' => ['required', 'numeric', 'digits:12', 'regex:/^0/'],
+            "password" => "required|min:8|max:255",
             "cpassword" => "required|same:password"
         ],[
-            'cpassword.same' => 'The confirm password must match'
+            'cpassword.same' => 'The Confirmation Password Must Match'
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         $user = User::create($validatedData);
+        
 
-        event(new Registered($user));
-
-        if(Auth::attempt($request->only('email', 'password'))){
+        if($user){
+            Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']]);
+            event(new Registered($user));
             return redirect('/verify-email');
-        } else {
+        }else{
             notify()->error('Register Gagal', 'Gagal');
-            return redirect('/register')->with('error', 'Registration failed');
+            return back()->with('error', 'Registration failed');
         }
     }
 
     public function buat(Request $request){
         $validatedData = $request->validate([
-            "name" => "required|min:3|max:255",
-            "email" => "required|email:dns|unique:users,email",
-            "role" => "required",
-            'nama_toko' => "required|min:5",
-            "password" => "required|min:5|max:255",
-            "cpassword" => "required|same:password"
-        ],[
-            'cpassword.same' => 'The confirm password must match'
+            'nama_toko' => 'required|min:5;',
+            'alamat' => 'required',
+            'kota' => 'required',
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
+        ]);
+        $image = $validatedData['image']->store('photo-profile-toko');
+
+        $user = User::where('id', Auth::id())->first();
+        $user->role = 'seller';
+        $user->update();
+
+        $toko = Toko::create([
+            'user_id' => Auth::id(),
+            'nama_toko' => $validatedData['nama_toko'],
+            'kota' => $validatedData['kota'],
+            'alamat' => $validatedData['alamat'],
+            'image' => $image,
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
-
-        $user = User::create($validatedData);
-
-        event(new Registered($user));
-
-        if(Auth::attempt($request->only('email', 'password'))){
-            notify()->success('Register Sukses', 'Berhasil');
-            return redirect('/dashboard')->with('success', 'Registration successfully');
-        } else {
-            notify()->error('Register Gagal', 'Gagal');
-            return redirect('/register')->with('error', 'Registration failed');
+        if($toko){
+            return redirect()->intended('/dahsboard');
+        }else{
+            return back()->with('Gagal', 'Registrasi Jadi Seller Gagal');
         }
+        
     }
 }

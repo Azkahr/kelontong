@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        User::create([
+        /* User::create([
             'name' => 'Azka',
             'email' => 'azkahar@gmail.com',
             'role' => 'seller',
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
             'email_verified_at' => now(),
             'password' => bcrypt('12345')
-        ]);
+        ]); */
 
         Category::create([
             'name' => 'Makanan',

@@ -93,22 +93,42 @@
     <div class="card-container">
         <div class="slider-best">
             @foreach ($productsBest as $pb)
-            <a href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lBest">
-                <div class="cardB cb{{ $loop->iteration }}">
-                    <div class="cImg">
-                        @php
-                            $fotoMain = explode(',', $pb->image);
-                        @endphp
-                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                @if ($pb->stok === 0)
+                    <div class="cardB cb{{ $loop->iteration }}">
+                        <div class="cImg">
+                            <div class="img-overlay">
+                                <p class="img-overlay-text">Stok Habis</p>
+                            </div>
+                            @php
+                                $fotoMain = explode(',', $pb->image);
+                            @endphp
+                            <img class="cImg-content" style="opacity:27%;" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                        </div>
+                        <div class="cContent">
+                            <p class="text-card">{{ $pb->product_name}}</p>
+                            <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                            <p class="text-card3">Rating</p>
+                            <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
+                        </div>
                     </div>
-                    <div class="cContent">
-                        <p class="text-card">{{ $pb->product_name}}</p>
-                        <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                        <p class="text-card3">Rating</p>
-                        <p class="text-card4">{{ $pb->user->nama_toko }}</p>
-                    </div>
-                </div>
-            </a>
+                @else
+                    <a style="color: inherit" href="/{{ $pb->toko->nama_toko}}/{{ $pb->product_name }}" class="lBest">
+                        <div class="cardB cb{{ $loop->iteration }}">
+                            <div class="cImg">
+                                @php
+                                    $fotoMain = explode(',', $pb->image);
+                                @endphp
+                                <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                            </div>
+                            <div class="cContent">
+                                <p class="text-card">{{ $pb->product_name}}</p>
+                                <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                                <p class="text-card3">Rating</p>
+                                <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
+                            </div>
+                        </div>
+                    </a>
+                @endif
             @endforeach
         </div>
         <span class="prevA2" data-feather="arrow-left"></span>
@@ -122,22 +142,42 @@
     <div class="card-container2">
         <div class="slider-dis">
             @foreach ($productsBest as $pb)
-            <a href="/{{ $pb->user->nama_toko }}/{{ $pb->product_name }}" class="lDis">
-                <div class="cardB cb{{ $loop->iteration }}">
-                    <div class="cImg">
-                        @php
-                            $fotoMain = explode(',', $pb->image);
-                        @endphp
-                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+            @if ($pb->stok === 0)
+                    <div class="cardB cb{{ $loop->iteration }}">
+                        <div class="cImg">
+                            <div class="img-overlay">
+                                <p class="img-overlay-text">Stok Habis</p>
+                            </div>
+                            @php
+                                $fotoMain = explode(',', $pb->image);
+                            @endphp
+                            <img class="cImg-content" style="opacity:27%;" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                        </div>
+                        <div class="cContent">
+                            <p class="text-card">{{ $pb->product_name}}</p>
+                            <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                            <p class="text-card3">Rating</p>
+                            <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
+                        </div>
                     </div>
-                    <div class="cContent">
-                        <p class="text-card">{{ $pb->product_name}}</p>
-                        <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                        <p class="text-card3">Rating</p>
-                        <p class="text-card4">{{ $pb->user->nama_toko }}</p>
-                    </div>
-                </div>
-            </a>
+                @else
+                    <a style="color: inherit" href="/{{ $pb->toko->nama_toko }}/{{ $pb->product_name }}" class="lBest">
+                        <div class="cardB cb{{ $loop->iteration }}">
+                            <div class="cImg">
+                                @php
+                                    $fotoMain = explode(',', $pb->image);
+                                @endphp
+                                <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                            </div>
+                            <div class="cContent">
+                                <p class="text-card">{{ $pb->product_name}}</p>
+                                <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                                <p class="text-card3">Rating</p>
+                                <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
+                            </div>
+                        </div>
+                    </a>
+                @endif
             @endforeach
         </div>
         <span class="prevA3" data-feather="arrow-left"></span>
@@ -153,22 +193,42 @@
 
 <div class="preview">
     @foreach ($products as $product)
-        <a href="/{{ $product->user->nama_toko }}/{{ $product->product_name}}">
-            <div style="transform: scale(0.95)" class="cardB cp{{ $loop->iteration }}">
+        @if ($product->stok === 0)
+            <div class="cardB cb{{ $loop->iteration }}">
                 <div class="cImg">
+                    <div class="img-overlay">
+                        <p class="img-overlay-text">Stok Habis</p>
+                    </div>
                     @php
                         $fotoMain = explode(',', $product->image);
                     @endphp
-                    <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                    <img class="cImg-content" style="opacity:27%;" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
                 </div>
                 <div class="cContent">
-                    <p class="text-card">{{ $pb->product_name}}</p>
-                    <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
+                    <p class="text-card">{{ $product->product_name}}</p>
+                    <p class="text-card2">RP {{ number_format($product->harga, 0,",",".") }}</p>
                     <p class="text-card3">Rating</p>
-                    <p class="text-card4">{{ $pb->user->nama_toko }}</p>
+                    <p class="text-card4">{{ $product->toko->nama_toko }}</p>
                 </div>
             </div>
-        </a>
+        @else
+            <a style="color: inherit" href="/{{ $product->toko->nama_toko }}/{{ $product->product_name }}" class="lBest">
+                <div class="cardB cb{{ $loop->iteration }}">
+                    <div class="cImg">
+                        @php
+                            $fotoMain = explode(',', $product->image);
+                        @endphp
+                        <img class="cImg-content" src="{{ asset('storage/'.$fotoMain[0]) }}" alt="product image">
+                    </div>
+                    <div class="cContent">
+                        <p class="text-card">{{ $product->product_name}}</p>
+                        <p class="text-card2">RP {{ number_format($product->harga, 0,",",".") }}</p>
+                        <p class="text-card3">Rating</p>
+                        <p class="text-card4">{{ $product->toko->nama_toko }}</p>
+                    </div>
+                </div>
+            </a>
+        @endif
     @endforeach
     <div style="margin:auto; width:90%; text-align:end">
         <a style="color:#0A58CA" href="#">Lebih Banyak</a>

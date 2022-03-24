@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
     
     protected $guarded = [];
 
-    protected $with=['user', 'category'];
+    protected $with = ['user', 'category', 'toko'];
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
@@ -27,7 +28,11 @@ class Product extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function toko(){
+        return $this->belongsToThrough(Toko::class, User::class);
     }
 
     public function category(){

@@ -13,6 +13,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\Product;
+use App\Models\Toko;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -30,7 +33,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/verify-email', function(Request $request){
         return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended('/dashboard')
+                    ? redirect()->intended('/')
                     : view('auth.verify', [
                         "title" => "Verify"
                     ]);
@@ -38,7 +41,7 @@ Route::get('/verify-email', function(Request $request){
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/login');
+    return redirect('/');
 })->name('verification.verify')->middleware('signed');
 
 Route::get('/verify-email/resend', function(Request $request){
@@ -48,28 +51,19 @@ Route::get('/verify-email/resend', function(Request $request){
         $request->user()->sendEmailVerificationNotification();
         return back()->with('success', 'Verifikasi Terkirim');
     } 
-})->name('verification.resend')->middleware('throttle:5,5,verify-email');
+})->name('verification.resend')->middleware('throttle:1,5,verify-email');
 
 Route::prefix('auth')->middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'authenticate'])->middleware('throttle:5,5,login');    
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('loginPost')->middleware('throttle:5,5,login');    
     
     Route::get('/register', [RegisterController::class, 'index'])->name('register');    
-    Route::post('/register', [RegisterController::class, 'store']);
-    
-    Route::post('/daftar', [RegisterController::class, 'buat']);
+    Route::post('/register', [RegisterController::class, 'store'])->name('userPost');
+});
 
-    Route::get('/register-user', function(){
-        Session::put('role-register', 'user');
-        return redirect('/register');
-    });
-    Route::get('/register-seller', function(){
-        Session::put('role-register', 'seller');
-        return redirect('/register');
-    });
-
-    Route::get('/google', [OAuthController::class, 'googleRedirect']);
-    Route::get('/google/callback', [OAuthController::class, 'googleCallback']);
+Route::prefix('auth')->middleware('auth')->group(function(){
+    Route::get('/register-seller', [RegisterController::class, 'seller'])->name('registerSeller');    
+    Route::post('/register-seller', [RegisterController::class, 'buat'])->name('sellerPost');
 });
 
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -83,6 +77,11 @@ Route::middleware('auth', 'verified', 'isSeller')->group(function(){
 
     Route::get('/dashboard/update/{product:id}', [DashboardController::class, 'edit']);
     Route::put('/dashboard/update/{id}', [DashboardController::class, 'update']);
+
+    Route::get('/dashboard/orders', [DashboardController::class, 'orders'])->name('orders');
+    Route::get('/dashboard/view-order/{id}', [DashboardController::class, 'view'])->name('viewOrder');
+    Route::put('/dashboard/update-order/{id}', [DashboardController::class, 'updateOrder']);
+    Route::get('/dashboard/order-history', [DashboardController::class, 'orderHistory'])->name('history');
 });
 
 Route::get('/password/forgot', [PasswordController::class, 'index'])->name('password.request');
@@ -110,7 +109,6 @@ Route::middleware('auth', 'verified')->group(function(){
     Route::get('view-order/{id}', [OrderController::class, 'show']);
 
 });
-
 
 Route::get('/search', [HomeController::class, 'search']);
 

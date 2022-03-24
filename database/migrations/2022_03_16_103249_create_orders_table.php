@@ -25,8 +25,8 @@ class CreateOrdersTable extends Migration
             $table->string('provinsi');
             $table->string('pincode');
             $table->string('total_harga');
-            $table->tinyInteger('status')->default(0);
-            $table->string('message')->nullable();
+            $table->string('status')->default("pending");
+            $table->longText('message')->nullable();
             $table->string('no_resi');
             $table->timestamps();
         });

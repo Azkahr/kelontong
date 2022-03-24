@@ -28,6 +28,7 @@
                             <div class="mb-3 d-flex justify-content-center flex-row qty-container">
                                 <input type="hidden" class="products_id" value="{{ $cart->products_id }}">
                                 <input type="hidden" class="harga_product" value="{{ $cart->products->harga }}">
+                                <input type="hidden" class="stok_product" value="{{ $cart->products->stok }}">
                                 <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                 <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white; width:70px">
                                 <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
@@ -56,14 +57,10 @@
             </form>
         @auth
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
-                @if (auth()->check())
-                    @if ($carts)
-                        <button class="cartBtn">
-                            <span style="color: white">{{ count($carts) }}</span>
-                            <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
-                        </button>
-                    @endif
-                @endif
+                <button class="cartBtn">
+                    <span style="color: white">{{ count($carts) }}</span>
+                    <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                </button>
                 <div class="dropdown">
                     <button class="dropbtn">
                         <p style="margin-left:7px; display: inline; font-size:20px; font-family:spartan; font-weight:700; color:white">
@@ -72,7 +69,10 @@
                     </button>
                     <div class="dropdown-content">
                         @if (auth()->user()->role == 'seller')
-                                <a href="/dashboard">Dashboard</a>
+                            <a href="/dashboard">Dashboard</a>
+                        @endif
+                        @if (auth()->user()->role === 'user')
+                            <a href="{{ route('registerSeller') }}">Buka Toko</a>
                         @endif
                         <a href="{{ route('myOrder') }}">My order</a>
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
@@ -85,9 +85,9 @@
             </div>
         @else
             <div style="display:inline-block; font-size:18px; margin-right:30px; margin-bottom:10px; font-family:spartan; font-weight:800">
-                <a class="login" href="/login">Masuk</a>
+                <a class="login" href="{{ route('login') }}">Masuk</a>
                 <div style="position:relative; top:8px; display:inline-block; height: 30px; border-left:3px solid white; margin:0px 10px 0px 10px"></div>
-                <a class="register" href="/register-user">Daftar</a>
+                <a class="register" href="{{ route('register') }}">Daftar</a>
             </div>
         @endauth
     </div>
@@ -152,11 +152,14 @@
             let inc_value = $(e.target).siblings('.qty-input').val();
             let products_id = parseInt($(e.target).siblings('.products_id').val());
             let harga = parseFloat($(e.target).siblings('.harga_product').val());
-            inc_value++
-            $(e.target).siblings('.qty-input').val(inc_value);
-            ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
-            window.totalHarga += harga;
-            $('.total-harga').html(nDots(totalHarga));
+            let qty = parseInt($(e.target).siblings('.stok_product').val());
+            if (inc_value < qty) {
+                inc_value++
+                $(e.target).siblings('.qty-input').val(inc_value);
+                ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
+                window.totalHarga += harga;
+                $('.total-harga').html(nDots(totalHarga));
+            }
         });
 
         $('#card-body').on('click', '.decrement-btn', function(e) {
@@ -164,7 +167,6 @@
             let dec_value = $(e.target).siblings('.qty-input').val();
             let products_id = parseInt($(e.target).siblings('.products_id').val());
             let harga = parseFloat($(e.target).siblings('.harga_product').val());
-            console.log(dec_value, products_id, harga);
             if(dec_value > 1){
                 dec_value--
                 $(e.target).siblings('.qty-input').val(dec_value);
