@@ -25,8 +25,8 @@
                 </div>
                 
             <div class="mb-3">
-                <label for="harga" class="form-label">Harga Produk</label>
-                <input type="number" name="harga" id="harga" class="form-control  @error('harga') is-invalid @enderror" value={{ old('harga') }}>
+                <label for="harga" class="form-label">Harga Produk (Rupiah)</label>
+                <input type="text" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value={{ old('harga') }}>
                 @error('harga')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -77,19 +77,31 @@
         </form>
     </div>
 </div>
-<script>
-    function cancelImage(){
-        $('#image_preview').empty();
-        $('#image').val('');
-        document.getElementById('btnC').style.display="none";
-    }
 
-    function previewImage(){
-        const imageL = document.querySelector('#image').files.length;
-        for(i = 0; i < imageL; i++){
-            $('#image_preview').append("<img style='height:250px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+@endsection
+@section('script')
+    <script>
+        function cancelImage(){
+            $('#image_preview').empty();
+            $('#image').val('');
+            document.getElementById('btnC').style.display="none";
         }
-        document.getElementById('btnC').style.display="block";
-    }
-</script>
+
+        function previewImage(){
+            const imageL = document.querySelector('#image').files.length;
+            for(i = 0; i < imageL; i++){
+                $('#image_preview').append("<img style='height:250px' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+            }
+            document.getElementById('btnC').style.display="block";
+        }
+
+        function nDots(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        $('#harga').change(function (e) {
+            let awal = $('#harga').val();
+            $('#harga').val(nDots(awal));
+        });
+    </script>
 @endsection

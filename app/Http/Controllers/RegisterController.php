@@ -27,7 +27,7 @@ class RegisterController extends Controller
             "name" => "required|min:3|max:255",
             "email" => "required|email:dns|unique:users,email",
             "role" => "required",
-            'handphone_number' => ['required', 'numeric', 'digits:12', 'regex:/^0/'],
+            'handphone_number' => ['required', 'numeric', 'digits:12', 'regex:/^0/', 'unique:users,handphone_number'],
             "password" => "required|min:8|max:255",
             "cpassword" => "required|same:password"
         ],[
@@ -80,6 +80,5 @@ class RegisterController extends Controller
         }else{
             return back()->with('Gagal', 'Registrasi Jadi Seller Gagal');
         }
-        
     }
 }

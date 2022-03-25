@@ -95,7 +95,11 @@ class DashboardController extends Controller
             $validatedData['image'] = $arrImg;
         }
         
+        $harga = str_replace(array('.'), '', $validatedData['harga']);
+        $validatedData['harga'] = (int)$harga;
+
         $validatedData['toko_id'] = auth()->user()->toko->id;
+        
         
         Product::create($validatedData);
 
@@ -106,7 +110,7 @@ class DashboardController extends Controller
 
     public function show(Product $product)
     {
-        if($product->users_id !== auth()->user()->id){
+        if($product->user->id !== auth()->user()->id){
             abort(403);
         }
 
@@ -163,6 +167,9 @@ class DashboardController extends Controller
             $validatedData['image'] = $request->oldImage;
         }
 
+        $harga = str_replace(array('.'), '', $validatedData['harga']);
+        $validatedData['harga'] = (int)$harga;
+        
         $validatedData['toko_id'] = auth()->user()->toko->id;
 
         Product::where('id', $request->id)->update([

@@ -26,8 +26,8 @@
                     </div>
                     
                 <div class="mb-3">
-                    <label for="harga" class="form-label">Harga Produk</label>
-                    <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ $product->harga }}">
+                    <label for="harga" class="form-label">Harga Produk (Rupiah)</label>
+                    <input type="text" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value={{ $product->harga }}>
                     @error('harga')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -84,7 +84,15 @@
             
         </div>
     </div>
+@endsection
+@section('script')
     <script>
+        $('#harga').val(nDots($('#harga').val()));
+
+        function nDots(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
         function cancelImage(){
             $('#image_preview').empty();
             $('#image').val('');
@@ -101,5 +109,9 @@
             document.getElementById('labelFoto').innerHTML="Foto Produk";
         }
         
+        $('#harga').change(function (e) {
+            let awal = $('#harga').val();
+            $('#harga').val(nDots(awal));
+        });
     </script>
 @endsection
