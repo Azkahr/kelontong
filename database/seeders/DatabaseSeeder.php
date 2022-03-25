@@ -46,8 +46,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Jajanan',
-            'slug' => 'jajanan'
+            'name' => 'Snack',
+            'slug' => 'snack'
         ]);
 
         Category::create([

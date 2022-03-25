@@ -41,6 +41,7 @@
                                     <form method="POST" action="/dashboard/delete/{{ $product->id }}" class="d-inline" title='Delete'>
                                         @method('delete')
                                         @csrf
+                                        <input type="hidden" name="user_id" value="{{ $product->user->id }}">
                                         <button type="submit" class="badge badge-danger bg-danger border-0 show_confirm"><img src="{{ asset('assets\img\trash-2.svg') }}" alt="eye"></span></button>
                                     </form>
                                 </div>
@@ -54,7 +55,6 @@
     @else
         <div class="d-flex justify-content-center" style="margin-top:100px; opacity:65%"><h2 class="">Belum Ada Produk Yang Diposting</h2></div>
     @endif
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>

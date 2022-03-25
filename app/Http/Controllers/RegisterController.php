@@ -40,7 +40,7 @@ class RegisterController extends Controller
         
 
         if($user){
-            Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']]);
+            Auth::login($user);
             event(new Registered($user));
             return redirect('/verify-email');
         }else{
@@ -54,14 +54,13 @@ class RegisterController extends Controller
             'nama_toko' => 'required|min:5;',
             'alamat' => 'required',
             'kota' => 'required',
-            'image' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
+            'image' => 'max:2048',
+            'image' => ['required', 'max:2048'],
+            'image.*' => 'mimes:jpeg,jpg,png,JPG',
+        ],[
+            'image.*.mimes' => 'Image File Not Supported'
         ]);
         $image = $validatedData['image']->store('photo-profile-toko');
-
-        $user = User::where('id', Auth::id())->first();
-        $user->role = 'seller';
-        $user->update();
 
         $toko = Toko::create([
             'user_id' => Auth::id(),
@@ -71,8 +70,13 @@ class RegisterController extends Controller
             'image' => $image,
         ]);
 
+        $user = User::where('id', Auth::id())->first();
+        $user->role = 'seller';
+        $user->toko_id = $toko['id'];
+        $user->update();
+
         if($toko){
-            return redirect()->intended('/dahsboard');
+            return redirect()->route('dashboard');
         }else{
             return back()->with('Gagal', 'Registrasi Jadi Seller Gagal');
         }

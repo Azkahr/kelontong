@@ -17,8 +17,8 @@ class Products extends Component
 
 
     public function mount(){
-        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'product_name', 'harga']);
-        $this->stok = Product::latest()->where('users_id', auth()->user()->id)->pluck('stok');
+        $this->products = Product::latest()->where('toko_id', auth()->user()->toko->id)->get(['id', 'product_name', 'harga', 'toko_id']);
+        $this->stok = Product::latest()->where('toko_id', auth()->user()->toko->id)->pluck('stok');
     }
 
     public function render()
@@ -28,8 +28,8 @@ class Products extends Component
 
     public function refresh()
     {
-        $this->products = Product::latest()->where('users_id', auth()->user()->id)->get(['id', 'product_name', 'harga']);
-        $this->stok = Product::latest()->where('users_id', auth()->user()->id)->pluck('stok');
+        $this->products = Product::latest()->where('toko_id', auth()->user()->toko->id)->get(['id', 'product_name', 'harga', 'toko_id']);
+        $this->stok = Product::latest()->where('toko_id', auth()->user()->toko->id)->pluck('stok');
     }
 
     public function plus(Product $product, $index){
@@ -53,7 +53,7 @@ class Products extends Component
     public function selectAll()
     {
         if($this->selectAll === true){
-            $this->check = Product::latest()->where('users_id', auth()->user()->id)->pluck('id');
+            $this->check = Product::latest()->where('toko_id', auth()->user()->toko->id)->pluck('id');
         }else{
             $this->check = [];
         }

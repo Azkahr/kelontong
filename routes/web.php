@@ -112,6 +112,11 @@ Route::middleware('auth', 'verified')->group(function(){
 
 Route::get('/search', [HomeController::class, 'search']);
 
+Route::get('/dd', function(){
+    $p = Product::first();
+    dd($p->user->id);
+});
+
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
 
 Route::fallback(function () {

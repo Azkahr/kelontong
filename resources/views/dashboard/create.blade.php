@@ -26,7 +26,7 @@
                 
             <div class="mb-3">
                 <label for="harga" class="form-label">Harga Produk</label>
-                <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value={{ old('harga') }}>
+                <input type="number" name="harga" id="harga" class="form-control  @error('harga') is-invalid @enderror" value={{ old('harga') }}>
                 @error('harga')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -51,8 +51,13 @@
                 <label for="image" class="form-label">Foto Produk</label>
                 <div style="overflow:auto; display: flex; gap: 5px; margin-bottom:10px" id="image_preview"></div>
                 <div><a id="btnC" class="btn btn-danger" style="display:none; cursor: pointer;" onclick="cancelImage()">Batalkan Foto</a></div>
-                <input style="margin:0" type="file" id="image" name="image[]" class="form-control @error('image') is-invalid @enderror" multiple onchange="previewImage()">
+                <input style="margin:0" type="file" id="image" name="image[]" class="form-control @error('image.*') is-invalid @enderror @error('image') is-invalid @enderror" multiple onchange="previewImage()">
                 @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+                @error('image.*')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

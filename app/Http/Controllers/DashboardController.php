@@ -15,9 +15,9 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard',[
             "title" => "Dashboard",
-            'category_s' => Product::select(['category_id'])->where('users_id', auth()->user()->id)->distinct()->get(),
-            "allpost" => Product::all()->where('users_id', auth()->user()->id)->count(),
-            "totalqty" => Product::all()->where('users_id', auth()->user()->id)->sum('stok'),
+            'category_s' => Product::select(['category_id'])->where('toko_id', auth()->user()->toko->id)->distinct()->get(),
+            "allpost" => Product::all()->where('toko_id', auth()->user()->toko->id)->count(),
+            "totalqty" => Product::all()->where('toko_id', auth()->user()->toko->id)->sum('stok'),
         ]);
     }
 
@@ -79,8 +79,10 @@ class DashboardController extends Controller
             'harga' => 'required|digits_between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
-            'image' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,png,JPG|max:2048'
+            'image' => ['required', 'max:2048'],
+            'image.*' => 'mimes:jpeg,jpg,png,JPG'
+        ],[
+            'image.*.mimes' => 'Image File Not Supported'
         ]);
 
         if($request->file('image')){
@@ -93,7 +95,7 @@ class DashboardController extends Controller
             $validatedData['image'] = $arrImg;
         }
         
-        $validatedData['users_id'] = auth()->user()->id;
+        $validatedData['toko_id'] = auth()->user()->toko->id;
         
         Product::create($validatedData);
 
@@ -117,7 +119,7 @@ class DashboardController extends Controller
 
     public function edit(Product $product)
     {
-        if($product->users_id !== auth()->user()->id){
+        if($product->user->id !== auth()->user()->id){
             abort(403);
         }
         
@@ -137,7 +139,10 @@ class DashboardController extends Controller
             'harga' => 'required|digits_between:1,9999999',
             'desc' => 'required',
             'category_id' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf|max:2048'
+            'image' => 'max:2048',
+            'image.*' => 'mimes:jpeg,jpg,png,JPG',
+        ],[
+            'image.*.mimes' => 'Image File Not Supported'
         ]);
 
         if($request->file('image')){
@@ -158,9 +163,12 @@ class DashboardController extends Controller
             $validatedData['image'] = $request->oldImage;
         }
 
+        $validatedData['toko_id'] = auth()->user()->toko->id;
+
         Product::where('id', $request->id)->update([
             'product_name' => $validatedData['product_name'],
             'harga' => $validatedData['harga'],
+            'toko_id' => $validatedData['toko_id'],
             'stok' => $validatedData['stok'],
             'desc' => $validatedData['desc'],
             'category_id' => $validatedData['category_id'],
@@ -174,6 +182,10 @@ class DashboardController extends Controller
 
     public function destroy(Request $request)
     {
+        if(!$request->user_id == auth()->user()->id){
+            abort(403);
+        }
+
         $user = Product::find($request->id);
         for($i=0; $i < sizeof(explode(',', $user->image)); $i++){
             $arrimg = explode(',', $user->image);

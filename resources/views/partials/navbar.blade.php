@@ -74,7 +74,7 @@
                         @if (auth()->user()->role === 'user')
                             <a href="{{ route('registerSeller') }}">Buka Toko</a>
                         @endif
-                        <a href="{{ route('myOrder') }}">My order</a>
+                        <a href="{{ route('myOrder') }}">Transaksi</a>
                         <a href="/profile/update/{{ auth()->user()->id }}">Setting</a>
                         <form action="/logout" method="post">
                             @csrf

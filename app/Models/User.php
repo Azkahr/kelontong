@@ -30,6 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'remember_token',
     ];
 
+    protected $with = ['toko'];
+
     /**
      * The attributes that should be cast.
      *
@@ -44,6 +46,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     }
 
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasManyThrough(Product::class, Toko::class);
     }
 }
