@@ -55,8 +55,9 @@
     @else
         <div class="d-flex justify-content-center" style="margin-top:100px; opacity:65%"><h2 class="">Belum Ada Produk Yang Diposting</h2></div>
     @endif
+</div>
+@section('script')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
         $('.show_confirm').click(function(event) {
             var form =  $(this).closest("form");
@@ -82,4 +83,4 @@
             })
         });
     </script>
-</div>
+@endsection
