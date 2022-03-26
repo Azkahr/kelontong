@@ -20,10 +20,20 @@
             <div class="content-header">
                 <p class="h2">{{ $product->product_name }}</p>
                 <p class="h3">RP {{ number_format($product->harga, 0,",",".") }}</p>
-                <div class="d-flex align-items-center mb-2">
-                    <span class="me-3">Terjual 80</span> 
-                    <img class="me-1" width="20px" src="{{ asset('assets/img/star.png') }}" alt="bintang">
-                    <span>5.0</span>
+                <div class="d-flex align-items-center mb-3 justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <span class="me-3">Terjual 80</span> 
+                        <img class="me-1" width="20px" src="{{ asset('assets/img/star.png') }}" alt="bintang">
+                        <span>5.0</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        @if ($product->toko->image)
+                            <img class="foto-toko" src="{{ asset('storage/'.$product->toko->image) }}" alt="image-profile">
+                        @else
+                            <img class="foto-toko" src="{{ asset('storage/'.$product->toko->image) }}" alt="image-profile">
+                        @endif
+                        <a href="#" class="ms-2"><p>{{ $product->toko->nama_toko }}</p></a>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between border-top border-bottom py-2 px-1">
                     Category: {{ $product->category->name }} | Stok: {{ $product->stok }}
