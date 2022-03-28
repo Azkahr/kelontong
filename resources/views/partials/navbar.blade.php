@@ -30,7 +30,7 @@
                                 <input type="hidden" class="harga_product" value="{{ $cart->products->harga }}">
                                 <input type="hidden" class="stok_product" value="{{ $cart->products->stok }}">
                                 <button class="btn btn-primary decrement-btn rounded-0">-</button>
-                                <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white; width:70px">
+                                <input type="number" min="1" name="stok" class="text-center form-control qty-input rounded-0" value="{{ $cart->qty }}" style="width: 50px; background-color: white; width:70px">
                                 <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
                             </div>
                         </div>
@@ -159,6 +159,14 @@
                 ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
                 window.totalHarga += harga;
                 $('.total-harga').html(nDots(totalHarga));
+            }
+        });
+
+        $('#card-body').on('input', '.qty-input', function(e) {
+            e.preventDefault();
+            let text = $(e.target).val();
+            if (text.includes("-")) {
+                console.log("nopal");
             }
         });
 

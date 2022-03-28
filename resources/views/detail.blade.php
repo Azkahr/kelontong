@@ -132,7 +132,7 @@ $(document).ready(function () {
                                         <input type="hidden" class="harga_product" value="`+ harga +`">
                                         <input type="hidden" class="stok_product" value="`+ stok +`">
                                         <button class="btn btn-primary decrement-btn rounded-0">-</button>
-                                        <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
+                                        <input type="number" min="1" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
                                         <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
                                     </div>
                                 </div>
