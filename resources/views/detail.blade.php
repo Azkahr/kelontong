@@ -6,6 +6,10 @@
 @section('container')
 @include('partials/navbar')
 <div class="product-master-container">
+    @php
+        $image = explode(',',$product->image)[0];
+    @endphp
+    <input id="image-source" type="hidden" value="{{ asset('storage/'.$image) }}">
     <div class="product-container">
         <div class="product-image">
             <div class="slider">
@@ -30,7 +34,7 @@
                         @if ($product->toko->image)
                             <img class="foto-toko" src="{{ asset('storage/'.$product->toko->image) }}" alt="image-profile">
                         @else
-                            <img class="foto-toko" src="{{ asset('storage/'.$product->toko->image) }}" alt="image-profile">
+                            <img class="foto-toko" src="{{ asset('assets/img/user.png') }}" alt="image-profile">
                         @endif
                         <a href="#" class="ms-2"><p>{{ $product->toko->nama_toko }}</p></a>
                     </div>
@@ -56,13 +60,15 @@
                 <option value="varian3">Varian 3</option>
             </select>
         </div>
-        <input id="catatan" class="form-control mt-2" type="text" placeholder="Catatan Untuk Penjual">
-        <hr class="mt-3 opacity-100 w-75 bg-light mx-auto">
-        <button class="btn w-100 mt-3" style="background-color:white">Tambah Ke Keranjang</button>
-        <div>
-            <p>Chat</p>
-
+        <div class="w-100 d-flex mt-2 justify-content-between bg-dark">
+            <button class="btn btn-light decrement-btn2 rounded-0">-</button>
+            <input  type="text" name="stok" value="1" class="w-100 bg-light text-center form-control qty-input2 rounded-0 border" placeholder="Jumlah" disabled>
+            <button class="btn btn-light increment-btn2 rounded-0">+</button>
         </div>
+        <input id="catatan" class="form-control mt-2" type="text" placeholder="Catatan Untuk Penjual">
+        <hr class="mt-3 opacity-100 bg-light mx-auto" style="width: 90%">
+        <button id="addToCartBtn" class="btn w-100 mt-2" style="background-color:white; color:#536AEC; font-size:15px; font-family:'Spartan'; font-weight:600">Keranjang+</button>
+        <button class="btn w-100 mt-2" style="border: 2px solid white; color:white; font-family:'Spartan'; font-weight:600">Beli</button>
     </div>
     <div class="product-comment">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente, labore, totam modi doloribus cupiditate repellat quia explicabo, sed corrupti impedit illum tenetur? Ipsum quisquam impedit dignissimos officia sequi laboriosam ex ratione cum mollitia. Ipsum animi sapiente autem quasi culpa dolore quod nisi, facere sint quam omnis nobis qui, eaque asperiores odio nam minima velit soluta voluptas aut id laborum modi? Officiis laboriosam totam quibusdam reprehenderit beatae, harum commodi numquam aliquid exercitationem ea dolorum corporis, dolores quae inventore necessitatibus, voluptate dicta fugit? Quo nam rem amet explicabo, voluptates deleniti illo ea accusamus fugit natus, maiores consequatur sunt labore dignissimos provident dolor neque suscipit exercitationem porro consequuntur alias consectetur sapiente doloremque minus! Earum sint sit quae quos magnam, libero tenetur blanditiis ratione, a harum maiores. Quibusdam officia, suscipit necessitatibus quae blanditiis veritatis doloremque quia quidem aspernatur id est sint? Iusto tempora officiis ut rem, animi necessitatibus quasi placeat labore nulla saepe quaerat deleniti, neque nostrum, culpa aspernatur nobis itaque in voluptate! Reiciendis repellendus labore hic a nihil sapiente iusto soluta ea enim nostrum incidunt veniam porro, necessitatibus expedita consequatur saepe ullam accusantium aspernatur odio quibusdam! Suscipit nesciunt, iste aut neque esse, quis ipsa commodi necessitatibus doloremque exercitationem aspernatur excepturi ducimus unde facere? Error beatae magni perspiciatis molestiae sed dicta, incidunt ab inventore quam illo non laborum nesciunt facere, veritatis eligendi? Tempora reprehenderit, officia veritatis optio aspernatur corrupti aliquid tenetur. Velit, vitae expedita necessitatibus atque minus totam nisi hic maxime voluptatibus amet. Cum a incidunt eveniet dolore vitae. Eligendi possimus ut ullam sunt fuga consequatur incidunt molestias unde iure, eius magni inventore blanditiis voluptatibus illo accusantium iste soluta velit asperiores vitae corporis magnam quasi suscipit tempore? Nisi recusandae laboriosam repudiandae accusamus. Voluptatum, praesentium quod. Veniam cum nostrum modi quo quidem temporibus corporis ut blanditiis eaque veritatis amet sequi praesentium pariatur eum voluptatibus, nemo consectetur maiores officia, illum asperiores quia tempora dolor doloremque! Repellat, aliquid repudiandae perferendis eius aut soluta officia quod assumenda debitis modi beatae labore laborum magnam. Dolorem officiis, ipsam ex suscipit, hic aliquam dolor similique a laborum tenetur magnam corrupti! Quia fugit a corporis, nihil aspernatur sed distinctio consequatur. Sed laboriosam nobis, a voluptates expedita dolores perspiciatis magnam similique enim exercitationem ex qui? Dolores quibusdam repellat dolorem ipsum tempore magni, veritatis illum nobis porro natus, deleniti illo doloribus delectus obcaecati, nostrum quasi velit suscipit! Et laboriosam repellat voluptas consequuntur libero? Veritatis vero sint, debitis eius tenetur ea eveniet consequuntur unde reprehenderit quam quis nostrum nulla laborum assumenda accusantium! Esse, aliquam, iste reprehenderit provident cum voluptates cupiditate nemo soluta voluptate cumque quod nihil adipisci praesentium maxime? Laborum cum fugit aspernatur nam quaerat ea natus amet itaque saepe iure in laboriosam unde, perferendis aut libero minus eum delectus explicabo ipsum fuga? Facere ullam, consectetur numquam nihil veritatis explicabo, distinctio blanditiis iure accusamus earum sed odio ratione. Debitis reprehenderit eos modi, eaque ratione dicta nisi voluptatum deleniti vel? Eligendi laudantium ipsam quod unde, quia corrupti excepturi quam optio veniam tempora delectus, fuga eveniet ipsum, reprehenderit officia quaerat voluptatem minima! Consequatur nihil quos itaque sed.
@@ -77,11 +83,12 @@ $(document).ready(function () {
         prevArrow: '.arrowPrev',
         nextArrow: '.arrowNext',
     });
+
     $('#addToCartBtn').click(function (e) { 
         let products_qty = $('.qty-input2').val();
         let image = $('#image-source').val();
         let name = '{{ $product->product_name }}';
-        let harga = '{{ $product->harga }}';
+        let harga = parseInt('{{ $product->harga }}');
         let id = '{{ $product->id }}';
 
         function nDots(x) {
@@ -98,7 +105,7 @@ $(document).ready(function () {
             method: "POST",
             url: "/add-to-cart",
             data: {
-                'products_id' : '{{ $product->id }}',
+                'products_id' : id,
                 'products_qty' : products_qty,
             },
             dataType: "json",
@@ -122,12 +129,15 @@ $(document).ready(function () {
                                     <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
                                         <input type="hidden" class="products_id" value="`+ id +`">
                                         <input type="hidden" class="harga_product" value="`+ harga +`">
-                                        <input type="hidden" class="stok_product" value="`+ qty +`">
+                                        <input type="hidden" class="stok_product" value="`+ products_qty +`">
                                         <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                         <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
                                         <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
                             </div>
                         </div>
                         `
