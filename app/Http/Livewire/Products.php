@@ -17,7 +17,7 @@ class Products extends Component
 
 
     public function mount(){
-        $this->products = Product::latest()->where('toko_id', auth()->user()->toko->id)->get(['id', 'product_name', 'harga', 'toko_id']);
+        $this->products = Product::latest()->where('toko_id', auth()->user()->toko->id)->get(['id', 'product_name', 'harga', 'user_id']);
         $this->stok = Product::latest()->where('toko_id', auth()->user()->toko->id)->pluck('stok');
     }
 
@@ -28,7 +28,7 @@ class Products extends Component
 
     public function refresh()
     {
-        $this->products = Product::latest()->where('toko_id', auth()->user()->toko->id)->get(['id', 'product_name', 'harga', 'toko_id']);
+        $this->products = Product::latest()->where('toko_id', auth()->user()->toko->id)->get(['id', 'product_name', 'harga', 'user_id']);
         $this->stok = Product::latest()->where('toko_id', auth()->user()->toko->id)->pluck('stok');
     }
 

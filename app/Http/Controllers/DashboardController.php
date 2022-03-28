@@ -99,6 +99,7 @@ class DashboardController extends Controller
         $validatedData['harga'] = (int)$harga;
 
         $validatedData['toko_id'] = auth()->user()->toko->id;
+        $validatedData['user_id'] = auth()->user()->id;
         
         
         Product::create($validatedData);
@@ -110,7 +111,7 @@ class DashboardController extends Controller
 
     public function show(Product $product)
     {
-        if($product->user->id !== auth()->user()->id){
+        if($product->user_id !== auth()->user()->id){
             abort(403);
         }
 
@@ -123,7 +124,7 @@ class DashboardController extends Controller
 
     public function edit(Product $product)
     {
-        if($product->user->id !== auth()->user()->id){
+        if($product->user_id !== auth()->user()->id){
             abort(403);
         }
         
@@ -171,6 +172,7 @@ class DashboardController extends Controller
         $validatedData['harga'] = (int)$harga;
         
         $validatedData['toko_id'] = auth()->user()->toko->id;
+        $validatedData['user_id'] = auth()->user()->id;
 
         Product::where('id', $request->id)->update([
             'product_name' => $validatedData['product_name'],
