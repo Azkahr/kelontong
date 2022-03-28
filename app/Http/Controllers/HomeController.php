@@ -48,7 +48,7 @@ class HomeController extends Controller
         $namaP = $request->produk;
         $toko = $request->toko;
 
-        $product = Product::whereHas('user', function($q) use ($toko){
+        $product = Product::whereHas('toko', function($q) use ($toko){
             $q->where('nama_toko', '=' , $toko);
         })->where('product_name', $namaP)->first();
 
