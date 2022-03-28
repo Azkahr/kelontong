@@ -13,8 +13,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
-        "mckenziearts/laravel-notify": "^2.2",
-        "staudenmeir/belongs-to-through": "^2.5"
+        "mckenziearts/laravel-notify": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
