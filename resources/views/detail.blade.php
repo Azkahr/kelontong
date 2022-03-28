@@ -89,6 +89,7 @@ $(document).ready(function () {
         let image = $('#image-source').val();
         let name = '{{ $product->product_name }}';
         let harga = parseInt('{{ $product->harga }}');
+        let stok = '{{ $product->stok }}';
         let id = '{{ $product->id }}';
 
         function nDots(x) {
@@ -129,7 +130,7 @@ $(document).ready(function () {
                                     <div class="mb-3 d-flex justify-content-center flex-row" id="qty">
                                         <input type="hidden" class="products_id" value="`+ id +`">
                                         <input type="hidden" class="harga_product" value="`+ harga +`">
-                                        <input type="hidden" class="stok_product" value="`+ products_qty +`">
+                                        <input type="hidden" class="stok_product" value="`+ stok +`">
                                         <button class="btn btn-primary decrement-btn rounded-0">-</button>
                                         <input type="text" name="stok" class="text-center form-control qty-input rounded-0" value="`+ products_qty +`" style="width: 50px; background-color: white; width:70px">
                                         <button class="btn btn-primary increment-btn rounded-0 me-3">+</button>
