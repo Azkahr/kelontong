@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        /* User::create([
+        User::create([
             'name' => 'Azka',
             'email' => 'azkahar@gmail.com',
-            'role' => 'seller',
-            'nama_toko' => 'Azka Shop',
+            'role' => 'user',
             'email_verified_at' => now(),
+            'handphone_number' => '121110987654321',
             'password' => bcrypt('password')
         ]);
 
@@ -31,9 +31,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Naufal',
             'email' => 'kurabersayap002@gmail.com',
             'role' => 'user',
+            'handphone_number' => '123456789111213',
             'email_verified_at' => now(),
-            'password' => bcrypt('12345')
-        ]); */
+            'password' => bcrypt('12345678')
+        ]);
 
         Category::create([
             'name' => 'Makanan',

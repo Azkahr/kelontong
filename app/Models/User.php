@@ -46,6 +46,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     }
 
     public function products(){
-        return $this->hasManyThrough(Product::class, Toko::class);
+        return $this->hasMany(Product::class);
     }
 }

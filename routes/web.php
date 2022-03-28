@@ -10,13 +10,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\Product;
 use App\Models\Toko;
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +109,11 @@ Route::middleware('auth', 'verified')->group(function(){
 });
 
 Route::get('/search', [HomeController::class, 'search']);
+
+Route::get('/dd', function(){
+    $p = Product::first();
+    dd($p->user->id);
+});
 
 Route::get('/{toko}/{produk}', [HomeController::class, 'detail'])->name('detail');
 
