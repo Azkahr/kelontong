@@ -10,6 +10,7 @@
         <div class="modal-content">
             <form action="{{ route('addRating') }}" method="POST">
                 @csrf
+                <input type="hidden" name="orderItems_id" id="orderItems_id">
                 <input type="hidden" name="products_id" id="products_id">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Rate this product</h5>
@@ -101,13 +102,14 @@
                                                 @endif
                                                 @if ($orderI->order->status == "beres")
                                                     <td>
-                                                        <input type="hidden" name="orderItems_id" id="orderItems_id">
+                                                        <input type="hidden" value="{{ $orderI->id }}" id="orderitemV">
                                                         <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             Beri Rating
                                                         </button>
                                                     </td>
                                                 @endif
                                             </tr>
+                                            
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -126,8 +128,9 @@
     $('#transaksi-container').on('click', '.ratingBtn', function (e) { 
         e.preventDefault();
         let product_id = $(e.target).val();
+        let orderItemsV = $(e.target).siblings('#orderitemV').val();
         $('#products_id').val(product_id);
-        $('#orderItems_id').val(product_id);
+        $('#orderItems_id').val(orderItemsV);
     });
 </script>
 @endsection
