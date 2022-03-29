@@ -224,7 +224,10 @@ form .btn{
             @include('notify::components.notify')
             <div class="col-md-3">
                 <div href=# class="d-inline">
-                    @if ($user->image)
+                    @if (auth()->user()->role == "seller" && $toko->image)
+                        <img src="{{ asset('storage/' . $toko->image) }}" class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
+                        <h6 h6 style="opacity: 70%; margin-left: 60px">Profile picture</h6>
+                    @elseif(auth()->user()->role == "user" && $user->image)
                         <img src="{{ asset('storage/' . $user->image) }}" class="img-preview rounded-circle img-fluid mb-3 col-sm-5 d-block" style="width: 300px; height: 210px">
                         <h6 h6 style="opacity: 70%; margin-left: 60px">Profile picture</h6>
                     @else

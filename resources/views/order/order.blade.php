@@ -33,12 +33,12 @@
                                         @if ($order->status == "kirim")
                                             <td>Sedang dikirim</td>
                                         @elseif($order->status == "tolak")
-                                            <td style="color: red; font-weight: bolder">Tolak</td>
+                                            <td style="color: red; font-weight: bolder">Ditolak lihat alasannya di detail order</td>
                                         @else
                                             <td>{{ $order->status }}</td>
                                         @endif
                                         <td>
-                                            <a href="{{ url('view-order', $order->id) }}" class="btn btn-primary">View</a>
+                                            <a href="{{ url('view-order', $order->id) }}" class="btn btn-primary">Order detail</a>
                                         </td>
                                     </tr>
                                 @endforeach

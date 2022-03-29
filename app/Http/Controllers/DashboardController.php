@@ -56,6 +56,7 @@ class DashboardController extends Controller
             ]);
             $orders->status = $request->input('status');
             $orders->message = $validatedData['message'];
+            $orders->update();
             
         } else {
             

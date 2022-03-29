@@ -134,8 +134,13 @@
         </div>
         <input id="catatan" class="form-control mt-2" type="text" placeholder="Catatan Untuk Penjual">
         <hr class="mt-3 opacity-100 bg-light mx-auto" style="width: 90%">
-        <button id="addToCartBtn" class="btn w-100 mt-2" style="background-color:white; color:#536AEC; font-size:15px; font-family:'Spartan'; font-weight:600">Keranjang+</button>
-        <button class="btn w-100 mt-2" style="border: 2px solid white; color:white; font-family:'Spartan'; font-weight:600">Beli</button>
+        @if ($product->stok > 0)
+            <button id="addToCartBtn" class="btn w-100 mt-2" style="background-color:white; color:#536AEC; font-size:15px; font-family:'Spartan'; font-weight:600">Keranjang+</button>
+            <button class="btn w-100 mt-2" style="border: 2px solid white; color:white; font-family:'Spartan'; font-weight:600">Beli</button>
+        @else
+            <button id="addToCartBtn" class="btn w-100 mt-2" style="background-color:white; color:#536AEC; font-size:15px; font-family:'Spartan'; font-weight:600" disabled>Stok abis</button>
+            <button class="btn w-100 mt-2" style="border: 2px solid white; color:white; font-family:'Spartan'; font-weight:600" disabled>Beli</button>
+        @endif
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Beri rating untuk product ini
