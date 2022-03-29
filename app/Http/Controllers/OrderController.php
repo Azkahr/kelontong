@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index(Order $order){
+    public function index(Order $order, OrderItem $orderItems){
 
         $orders = Order::where('users_id', auth()->user()->id)->get();
 
         $carts = Cart::where('users_id', Auth::id())->get();
-        $user_rating = Rating::where('products_id', $order->orderItems->products_id)->where('users_id', Auth::id())->first();
-        $review = Rating::where('products_id', $order->orderItems->products_id)->where('users_id', Auth::id())->first();
+        $user_rating = Rating::where('products_id', $orderItems->products_id)->where('users_id', Auth::id())->first();
+        $review = Rating::where('products_id', $orderItems->products_id)->where('users_id', Auth::id())->first();
 
         return view('order.order', [
             "title" => "Order",
