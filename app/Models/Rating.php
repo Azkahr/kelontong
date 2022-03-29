@@ -14,4 +14,8 @@ class Rating extends Model
     public function user(){
         return $this->belongsTo(User::class, 'users_id');
     }
+
+    public function orderItems(){
+        return $this->belongsTo(OrderItem::class, 'orderItems_id');
+    }
 }

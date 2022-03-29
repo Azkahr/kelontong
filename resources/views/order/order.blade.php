@@ -20,7 +20,7 @@
                     <h4 class="h4 text-center">Beri review untuk product ini</h4>
                     <div class="rating-css">
                         <div class="star-icon">
-                            @if ($user_rating)
+                            {{-- @if ($user_rating)
                                 @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
                                     <input type="radio" value="{{ $i }}" name="product_rating" checked id="rating{{ $i }}">
                                     <label for="rating{{ $i }}" class="fa fa-star"></label>
@@ -29,7 +29,7 @@
                                     <input type="radio" value="{{ $j }}" name="product_rating" id="rating{{ $j }}">
                                     <label for="rating{{ $j }}" class="fa fa-star"></label>
                                 @endfor
-                            @else
+                            @else --}}
                                 <input type="radio" value="1" name="product_rating" checked id="rating1">
                                 <label for="rating1" class="fa fa-star"></label>
                                 <input type="radio" value="2" name="product_rating" id="rating2">
@@ -40,15 +40,15 @@
                                 <label for="rating4" class="fa fa-star"></label>
                                 <input type="radio" value="5" name="product_rating" id="rating5">
                                 <label for="rating5" class="fa fa-star"></label>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                     </div>
-                    @if ($review)
+                    {{-- @if ($review)
                         ulasan anda sebelumnya
                         <textarea class="form-control" name="user_review" rows="5" placeholder="{{ $review->user_review }}">{{ $review->user_review }}</textarea>
-                    @else
+                    @else --}}
                         <textarea class="form-control" name="user_review" rows="5" placeholder="Tulis ulasan..."></textarea>
-                    @endif
+                   {{--  @endif --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
