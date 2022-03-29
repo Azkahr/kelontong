@@ -6,6 +6,60 @@
 @section('container')
 @include('partials/navbar')
 <div class="product-master-container">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{ route('addRating') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="products_id" value="{{ $product->id }}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Rate this product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="h4 text-center">Beri review untuk product ini</h4>
+                        <div class="rating-css">
+                            <div class="star-icon">
+                                @if ($user_rating)
+                                    @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
+                                        <input type="radio" value="{{ $i }}" name="product_rating" checked id="rating{{ $i }}">
+                                        <label for="rating{{ $i }}" class="fa fa-star"></label>
+                                    @endfor
+                                    @for ($j = $user_rating->stars_rated+1; $j <= 5; $j++)
+                                        <input type="radio" value="{{ $j }}" name="product_rating" id="rating{{ $j }}">
+                                        <label for="rating{{ $j }}" class="fa fa-star"></label>
+                                    @endfor
+                                @else
+                                    <input type="radio" value="1" name="product_rating" checked id="rating1">
+                                    <label for="rating1" class="fa fa-star"></label>
+                                    <input type="radio" value="2" name="product_rating" id="rating2">
+                                    <label for="rating2" class="fa fa-star"></label>
+                                    <input type="radio" value="3" name="product_rating" id="rating3">
+                                    <label for="rating3" class="fa fa-star"></label>
+                                    <input type="radio" value="4" name="product_rating" id="rating4">
+                                    <label for="rating4" class="fa fa-star"></label>
+                                    <input type="radio" value="5" name="product_rating" id="rating5">
+                                    <label for="rating5" class="fa fa-star"></label>
+                                @endif
+                            </div>
+                        </div>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        @if ($review)
+                            ulasan anda sebelumnya
+                            <textarea class="form-control" name="user_review" rows="5" placeholder="{{ $review->user_review }}">{{ $review->user_review }}</textarea>
+                        @else
+                            <textarea class="form-control" name="user_review" rows="5" placeholder="Tulis ulasan..."></textarea>
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     @php
         $image = explode(',',$product->image)[0];
     @endphp
@@ -26,9 +80,22 @@
                 <p class="h3">RP {{ number_format($product->harga, 0,",",".") }}</p>
                 <div class="d-flex align-items-center mb-3 justify-content-between">
                     <div class="d-flex align-items-center">
-                        <span class="me-3">Terjual 80</span> 
-                        <img class="me-1" width="20px" src="{{ asset('assets/img/star.png') }}" alt="bintang">
-                        <span>5.0</span>
+                        @php $rate = number_format($rating_value) @endphp
+                        <div class="rating">
+                            @for ($i = 1; $i <= $rate; $i++)
+                                <i class="fa fa-star checked"></i>
+                            @endfor
+                            @for ($j = $rate+1; $j <= 5; $j++)
+                                <i class="fa fa-star"></i>
+                            @endfor
+                            <span>
+                                @if ($ratings->count() > 0)
+                                    Dari {{ $ratings->count() }} Ratings
+                                @else
+                                    Tidak ada rating
+                                @endif
+                            </span>
+                        </div>
                     </div>
                     <div class="d-flex align-items-center">
                         @if ($product->toko->image)
@@ -69,11 +136,30 @@
         <hr class="mt-3 opacity-100 bg-light mx-auto" style="width: 90%">
         <button id="addToCartBtn" class="btn w-100 mt-2" style="background-color:white; color:#536AEC; font-size:15px; font-family:'Spartan'; font-weight:600">Keranjang+</button>
         <button class="btn w-100 mt-2" style="border: 2px solid white; color:white; font-family:'Spartan'; font-weight:600">Beli</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Beri rating untuk product ini
+        </button>
     </div>
     <div class="product-comment">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente, labore, totam modi doloribus cupiditate repellat quia explicabo, sed corrupti impedit illum tenetur? Ipsum quisquam impedit dignissimos officia sequi laboriosam ex ratione cum mollitia. Ipsum animi sapiente autem quasi culpa dolore quod nisi, facere sint quam omnis nobis qui, eaque asperiores odio nam minima velit soluta voluptas aut id laborum modi? Officiis laboriosam totam quibusdam reprehenderit beatae, harum commodi numquam aliquid exercitationem ea dolorum corporis, dolores quae inventore necessitatibus, voluptate dicta fugit? Quo nam rem amet explicabo, voluptates deleniti illo ea accusamus fugit natus, maiores consequatur sunt labore dignissimos provident dolor neque suscipit exercitationem porro consequuntur alias consectetur sapiente doloremque minus! Earum sint sit quae quos magnam, libero tenetur blanditiis ratione, a harum maiores. Quibusdam officia, suscipit necessitatibus quae blanditiis veritatis doloremque quia quidem aspernatur id est sint? Iusto tempora officiis ut rem, animi necessitatibus quasi placeat labore nulla saepe quaerat deleniti, neque nostrum, culpa aspernatur nobis itaque in voluptate! Reiciendis repellendus labore hic a nihil sapiente iusto soluta ea enim nostrum incidunt veniam porro, necessitatibus expedita consequatur saepe ullam accusantium aspernatur odio quibusdam! Suscipit nesciunt, iste aut neque esse, quis ipsa commodi necessitatibus doloremque exercitationem aspernatur excepturi ducimus unde facere? Error beatae magni perspiciatis molestiae sed dicta, incidunt ab inventore quam illo non laborum nesciunt facere, veritatis eligendi? Tempora reprehenderit, officia veritatis optio aspernatur corrupti aliquid tenetur. Velit, vitae expedita necessitatibus atque minus totam nisi hic maxime voluptatibus amet. Cum a incidunt eveniet dolore vitae. Eligendi possimus ut ullam sunt fuga consequatur incidunt molestias unde iure, eius magni inventore blanditiis voluptatibus illo accusantium iste soluta velit asperiores vitae corporis magnam quasi suscipit tempore? Nisi recusandae laboriosam repudiandae accusamus. Voluptatum, praesentium quod. Veniam cum nostrum modi quo quidem temporibus corporis ut blanditiis eaque veritatis amet sequi praesentium pariatur eum voluptatibus, nemo consectetur maiores officia, illum asperiores quia tempora dolor doloremque! Repellat, aliquid repudiandae perferendis eius aut soluta officia quod assumenda debitis modi beatae labore laborum magnam. Dolorem officiis, ipsam ex suscipit, hic aliquam dolor similique a laborum tenetur magnam corrupti! Quia fugit a corporis, nihil aspernatur sed distinctio consequatur. Sed laboriosam nobis, a voluptates expedita dolores perspiciatis magnam similique enim exercitationem ex qui? Dolores quibusdam repellat dolorem ipsum tempore magni, veritatis illum nobis porro natus, deleniti illo doloribus delectus obcaecati, nostrum quasi velit suscipit! Et laboriosam repellat voluptas consequuntur libero? Veritatis vero sint, debitis eius tenetur ea eveniet consequuntur unde reprehenderit quam quis nostrum nulla laborum assumenda accusantium! Esse, aliquam, iste reprehenderit provident cum voluptates cupiditate nemo soluta voluptate cumque quod nihil adipisci praesentium maxime? Laborum cum fugit aspernatur nam quaerat ea natus amet itaque saepe iure in laboriosam unde, perferendis aut libero minus eum delectus explicabo ipsum fuga? Facere ullam, consectetur numquam nihil veritatis explicabo, distinctio blanditiis iure accusamus earum sed odio ratione. Debitis reprehenderit eos modi, eaque ratione dicta nisi voluptatum deleniti vel? Eligendi laudantium ipsam quod unde, quia corrupti excepturi quam optio veniam tempora delectus, fuga eveniet ipsum, reprehenderit officia quaerat voluptatem minima! Consequatur nihil quos itaque sed.
+        <div class="user-review text-center">
+            <h3 class="h3">Ulasan</h3>
+            @foreach ($reviews as $review)
+                <label for="">{{ $review->user->name }}</label>
+                <br>
+                @for ($i = 1; $i <= $rate; $i++)
+                    <i class="fa fa-star checked"></i>
+                @endfor
+                @for ($j = $rate+1; $j <= 5; $j++)
+                    <i class="fa fa-star"></i>
+                @endfor
+                <small>Diulas pada {{ $review->created_at->format('d M Y') }}</small>
+                <p>{{ $review->user_review }}</p>
+            @endforeach
+        </div>
     </div>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 @section('script')
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

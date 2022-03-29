@@ -42,7 +42,7 @@ class CheckoutController extends Controller
             'alamat' => 'required|min:3',
             'kota' => 'required|min:3',
             'provinsi' => 'required|min:3',
-            'pincode' => 'required|min:3',
+            'kode_pos' => 'required|min:3',
         ],[
             'fname.required' => 'The first name field is required.',
             'lname.required' => 'The last name field is required.',
