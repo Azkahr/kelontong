@@ -13,34 +13,13 @@
                 <input type="hidden" name="orderItems_id" id="orderItems_id">
                 <input type="hidden" name="products_id" id="products_id">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Rate this product</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h4 class="h4 text-center">Beri review untuk product ini</h4>
                     <div class="rating-css">
-                        <div class="star-icon">
-                            {{-- @if ($user_rating)
-                                @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
-                                    <input type="radio" value="{{ $i }}" name="product_rating" checked id="rating{{ $i }}">
-                                    <label for="rating{{ $i }}" class="fa fa-star"></label>
-                                @endfor
-                                @for ($j = $user_rating->stars_rated+1; $j <= 5; $j++)
-                                    <input type="radio" value="{{ $j }}" name="product_rating" id="rating{{ $j }}">
-                                    <label for="rating{{ $j }}" class="fa fa-star"></label>
-                                @endfor
-                            @else --}}
-                                <input type="radio" value="1" name="product_rating" checked id="rating1">
-                                <label for="rating1" class="fa fa-star"></label>
-                                <input type="radio" value="2" name="product_rating" id="rating2">
-                                <label for="rating2" class="fa fa-star"></label>
-                                <input type="radio" value="3" name="product_rating" id="rating3">
-                                <label for="rating3" class="fa fa-star"></label>
-                                <input type="radio" value="4" name="product_rating" id="rating4">
-                                <label for="rating4" class="fa fa-star"></label>
-                                <input type="radio" value="5" name="product_rating" id="rating5">
-                                <label for="rating5" class="fa fa-star"></label>
-                            {{-- @endif --}}
+                        <div class="star-icon" id="star-icon">
                         </div>
                     </div>
                     {{-- @if ($review)
@@ -103,13 +82,12 @@
                                                 @if ($orderI->order->status == "beres")
                                                     <td>
                                                         <input type="hidden" value="{{ $orderI->id }}" id="orderitemV">
-                                                        <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-name="{{ $orderI->products->product_name }}" @if ($orderI->rating == null) data-rating=null @else data-rating="{{$orderI->rating->stars_rated}}" @endif data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             Beri Rating
                                                         </button>
                                                     </td>
                                                 @endif
                                             </tr>
-                                            
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -125,12 +103,61 @@
 @endsection
 @section('script')
 <script>
+$(function () {
+    $('#exampleModal').modal({backdrop: 'static', keyboard: false})  
     $('#transaksi-container').on('click', '.ratingBtn', function (e) { 
         e.preventDefault();
+
         let product_id = $(e.target).val();
         let orderItemsV = $(e.target).siblings('#orderitemV').val();
+        let stars_rated = $(e.target).data('rating');
         $('#products_id').val(product_id);
         $('#orderItems_id').val(orderItemsV);
+        $('#exampleModalLabel').text($(e.target).data('name'));
+
+        if (stars_rated == null || stars_rated == undefined) {
+            $('#star-icon').append(
+                `
+                <input type="radio" value="1" name="product_rating" checked id="rating1">
+                <label for="rating1" class="fa fa-star"></label>
+                <input type="radio" value="2" name="product_rating" id="rating2">
+                <label for="rating2" class="fa fa-star"></label>
+                <input type="radio" value="3" name="product_rating" id="rating3">
+                <label for="rating3" class="fa fa-star"></label>
+                <input type="radio" value="4" name="product_rating" id="rating4">
+                <label for="rating4" class="fa fa-star"></label>
+                <input type="radio" value="5" name="product_rating" id="rating5">
+                <label for="rating5" class="fa fa-star"></label>
+                `
+            );
+        } else {
+            for (let index = 0; index <= 5; index++) {
+                if (stars_rated === index) {
+                    $('#star-icon').append(
+                        `
+                        <input type="radio" value="`+ index +`" name="product_rating" checked id="rating`+ index +`">
+                        <label for="rating`+ index +`" class="fa fa-star"></label>
+                        `
+                    );
+                }else{
+                    $('#star-icon').append(
+                        `
+                            <input type="radio" value="`+ index +`" name="product_rating" id="rating`+ index +`">
+                            <label for="rating`+ index +`" class="fa fa-star"></label>
+                        `
+                    );
+                }
+                
+            }
+        }
     });
+
+    $('.btn-close').click(function (e) { 
+        e.preventDefault();
+        setTimeout(() => {
+            $('#star-icon').empty();
+        }, 100);
+    });
+});
 </script>
 @endsection
