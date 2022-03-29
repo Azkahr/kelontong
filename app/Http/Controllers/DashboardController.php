@@ -47,15 +47,22 @@ class DashboardController extends Controller
     
     public function updateOrder(Request $request, $id){
 
-        $validatedData = $request->validate([
-            'message' => 'required'
-        ]);
-
         $orders = Order::find($id);
-        $orders->status = $request->input('status');
-        $orders->message = $validatedData['message'];
         
-        $orders->update();
+        if($request->input('status') == "tolak"){
+            
+            $validatedData = $request->validate([
+                'message' => 'required'
+            ]);
+            $orders->status = $request->input('status');
+            $orders->message = $validatedData['message'];
+            $orders->update();
+                
+        } else {
+            
+            $orders->status = $request->input('status');
+            $orders->update();
+        }
 
         smilify('success', 'Status order diupdate');
 

@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('alamat');
             $table->string('kota');
             $table->string('provinsi');
-            $table->string('pincode');
+            $table->string('kode_pos');
             $table->string('total_harga');
             $table->string('status')->default("pending");
             $table->longText('message')->nullable();
