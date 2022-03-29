@@ -19,19 +19,35 @@
                     <h4 class="h4 text-center">Beri review untuk product ini</h4>
                     <div class="rating-css">
                         <div class="star-icon">
-                            <input type="radio" value="1" name="product_rating" checked id="rating1">
-                            <label for="rating1" class="fa fa-star"></label>
-                            <input type="radio" value="2" name="product_rating" id="rating2">
-                            <label for="rating2" class="fa fa-star"></label>
-                            <input type="radio" value="3" name="product_rating" id="rating3">
-                            <label for="rating3" class="fa fa-star"></label>
-                            <input type="radio" value="4" name="product_rating" id="rating4">
-                            <label for="rating4" class="fa fa-star"></label>
-                            <input type="radio" value="5" name="product_rating" id="rating5">
-                            <label for="rating5" class="fa fa-star"></label>
+                            @if ($user_rating)
+                                @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
+                                    <input type="radio" value="{{ $i }}" name="product_rating" checked id="rating{{ $i }}">
+                                    <label for="rating{{ $i }}" class="fa fa-star"></label>
+                                @endfor
+                                @for ($j = $user_rating->stars_rated+1; $j <= 5; $j++)
+                                    <input type="radio" value="{{ $j }}" name="product_rating" id="rating{{ $j }}">
+                                    <label for="rating{{ $j }}" class="fa fa-star"></label>
+                                @endfor
+                            @else
+                                <input type="radio" value="1" name="product_rating" checked id="rating1">
+                                <label for="rating1" class="fa fa-star"></label>
+                                <input type="radio" value="2" name="product_rating" id="rating2">
+                                <label for="rating2" class="fa fa-star"></label>
+                                <input type="radio" value="3" name="product_rating" id="rating3">
+                                <label for="rating3" class="fa fa-star"></label>
+                                <input type="radio" value="4" name="product_rating" id="rating4">
+                                <label for="rating4" class="fa fa-star"></label>
+                                <input type="radio" value="5" name="product_rating" id="rating5">
+                                <label for="rating5" class="fa fa-star"></label>
+                            @endif
                         </div>
                     </div>
-                    <textarea class="form-control" name="user_review" rows="5" placeholder="Tulis ulasan..."></textarea>
+                    @if ($review)
+                        ulasan anda sebelumnya
+                        <textarea class="form-control" name="user_review" rows="5" placeholder="{{ $review->user_review }}">{{ $review->user_review }}</textarea>
+                    @else
+                        <textarea class="form-control" name="user_review" rows="5" placeholder="Tulis ulasan..."></textarea>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -79,7 +95,7 @@
                                                 @if ($orderI->order->status == "kirim")
                                                     <td>Sedang dikirim</td>
                                                 @elseif($orderI->order->status == "tolak")
-                                                    <td style="color: red; font-weight: bolder">Tolak</td>
+                                                    <td style="color: red; font-weight: bolder">Ditolak lihat alasannya di detail order</td>
                                                 @else
                                                     <td>{{ $orderI->order->status }}</td>
                                                 @endif
