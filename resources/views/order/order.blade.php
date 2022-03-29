@@ -85,14 +85,11 @@
                                                 @endif
                                                 @if ($orderI->order->status == "beres")
                                                     <td>
-                                                        <button class="btn btn-primary">Rating</button>
+                                                        <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Beri Rating
+                                                        </button>
                                                     </td>
                                                 @endif
-                                                <td>
-                                                    <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        Beri Rating
-                                                    </button>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -113,8 +110,6 @@
         e.preventDefault();
         let product_id = $(e.target).val();
         $('#products_id').val(product_id);
-
-        console.log($('#products_id').val());
     });
 </script>
 @endsection

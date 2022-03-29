@@ -23,7 +23,7 @@
         <div class="product-content">
             <div class="content-header">
                 <p class="h2">{{ $product->product_name }}</p>
-                <p class="h3">RP {{ number_format($product->harga, 0,",",".") }}</p>
+                <p class="h3">Rp.{{ number_format($product->harga, 0,",",".") }}</p>
                 <div class="d-flex align-items-center mb-3 justify-content-between">
                     <div class="d-flex align-items-center">
                         @php $rate = number_format($rating_value) @endphp
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between border-top border-bottom py-2 px-1">
-                    Category: {{ $product->category->name }} | Stok: {{ $product->stok }}
+                    Category : {{ $product->category->name }} | Stok : {{ $product->stok }}
                     @if ($product->stok < 1)
                         <span class="badge badge-danger bg-danger">Stok Habis</span>
                     @else
