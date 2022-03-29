@@ -131,19 +131,21 @@ $(function () {
                 `
             );
         } else {
-            for (let index = 0; index <= 5; index++) {
+            for (let index = 1; index <= 5; index++) {
                 if (stars_rated === index) {
+                    let valueI = parseInt(index);
                     $('#star-icon').append(
                         `
-                        <input type="radio" value="`+ index +`" name="product_rating" checked id="rating`+ index +`">
-                        <label for="rating`+ index +`" class="fa fa-star"></label>
+                        <input type="radio" value="`+ valueI +`" name="product_rating" checked id="rating`+ valueI +`">
+                        <label for="rating`+ valueI +`" class="fa fa-star"></label>
                         `
                     );
                 }else{
+                    let valueI = parseInt(index);
                     $('#star-icon').append(
                         `
-                            <input type="radio" value="`+ index +`" name="product_rating" id="rating`+ index +`">
-                            <label for="rating`+ index +`" class="fa fa-star"></label>
+                            <input type="radio" value="`+ valueI +`" name="product_rating" id="rating`+ valueI +`">
+                            <label for="rating`+ valueI +`" class="fa fa-star"></label>
                         `
                     );
                 }
