@@ -14,6 +14,7 @@ class RatingController extends Controller
         
         $stars = $request->input('product_rating');
         $products_id = $request->input('products_id');
+        $orderItems_id = $request->input('orderItems_id');
         $user_review = $request->input('user_review');
 
         $product = Product::where('id', $products_id)->first();
@@ -40,6 +41,7 @@ class RatingController extends Controller
                         Rating::create([
                             'users_id' => Auth::id(),
                             'products_id' => $products_id,
+                            'orderItems_id' =>  $orderItems_id,
                             'stars_rated' => $stars,
                             'user_review' => $user_review
                         ]);

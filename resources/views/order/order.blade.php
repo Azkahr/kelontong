@@ -127,9 +127,7 @@
         e.preventDefault();
         let product_id = $(e.target).val();
         $('#products_id').val(product_id);
-
-        let orderItems_id = $(e.target).val();
-        $('#orderItems_id').val(orderItems_id);
+        $('#orderItems_id').val(product_id);
     });
 </script>
 @endsection
