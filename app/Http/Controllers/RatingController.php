@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Rating;
 use App\Models\Product;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,7 @@ class RatingController extends Controller
         
         $stars = $request->input('product_rating');
         $products_id = $request->input('products_id');
+        $orderItems_id = $request->input('orderItems_id');
         $user_review = $request->input('user_review');
 
         $product = Product::where('id', $products_id)->first();
@@ -37,12 +39,16 @@ class RatingController extends Controller
                         $rating->update();
                         
                     } else {
-                        Rating::create([
+                        $rating = Rating::create([
                             'users_id' => Auth::id(),
                             'products_id' => $products_id,
+                            'orderItems_id' =>  $orderItems_id,
                             'stars_rated' => $stars,
                             'user_review' => $user_review
                         ]);
+                        $orderItem = OrderItem::where('id', $rating->orderItems_id)->first();
+                        $orderItem->rating_id = $rating->id;
+                        $orderItem->update();
                     }
                     
                     smilify('success', 'Terima kasih sudah memberi rating untuk product ini');

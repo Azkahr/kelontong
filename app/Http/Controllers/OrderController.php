@@ -9,16 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index(Order $order){
+    public function index(){
 
-        $orders = Order::where('users_id', Auth::id())->get();
+        $orders = Order::where('users_id', auth()->user()->id)->get();
         $carts = Cart::where('users_id', Auth::id())->get();
-
         return view('order.order', [
             "title" => "Order",
             "carts" => $carts,
             "orders" => $orders,
-            "order" => $order
         ]);
     }
 

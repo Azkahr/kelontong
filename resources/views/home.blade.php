@@ -107,7 +107,7 @@
                         <div class="cContent">
                             <p class="text-card">{{ $pb->product_name}}</p>
                             <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                            <p class="text-card3">Rating</p>
+                            <p class="text-card3">Rating <i class="fa fa-star checked"></i></p>
                             <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                             <div class="cContent">
                                 <p class="text-card">{{ $pb->product_name}}</p>
                                 <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                                <p class="text-card3">Rating</p>
+                                <p class="text-card3">Rating <i class="fa fa-star checked"></i></p>
                                 <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                         <div class="cContent">
                             <p class="text-card">{{ $pb->product_name}}</p>
                             <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                            <p class="text-card3">Rating</p>
+                            <p class="text-card3">Rating <i class="fa fa-star checked"></i></p>
                             <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                             <div class="cContent">
                                 <p class="text-card">{{ $pb->product_name}}</p>
                                 <p class="text-card2">RP {{ number_format($pb->harga, 0,",",".") }}</p>
-                                <p class="text-card3">Rating</p>
+                                <p class="text-card3">Rating <i class="fa fa-star checked"></i></p>
                                 <p class="text-card4">{{ $pb->toko->nama_toko }}</p>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                 <div class="cContent">
                     <p class="text-card">{{ $product->product_name}}</p>
                     <p class="text-card2">RP {{ number_format($product->harga, 0,",",".") }}</p>
-                    <p class="text-card3">Rating</p>
+                    <p class="text-card3">Rating <i class="fa fa-star checked"></i></p>
                     <p class="text-card4">{{ $product->toko->nama_toko }}</p>
                 </div>
             </div>
@@ -223,7 +223,7 @@
                     <div class="cContent">
                         <p class="text-card">{{ $product->product_name}}</p>
                         <p class="text-card2">RP {{ number_format($product->harga, 0,",",".") }}</p>
-                        <p class="text-card3">Rating</p>
+                        <p class="text-card3">Rating <i class="fa fa-star checked"></i></p>
                         <p class="text-card4">{{ $product->toko->nama_toko }}</p>
                     </div>
                 </div>

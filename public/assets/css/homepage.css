@@ -386,3 +386,7 @@
         row-gap: 30px;
     }
 }
+
+.checked {
+    color: #ffe400
+}
