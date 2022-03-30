@@ -77,7 +77,7 @@
                                                 @if ($orderI->order->status == "beres")
                                                     <td>
                                                         <input type="hidden" value="{{ $orderI->id }}" id="orderitemV">
-                                                        <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-name="{{ $orderI->products->product_name }}" @if ($orderI->rating == null) data-rating=null @else data-rating="{{$orderI->rating->stars_rated}}" data-review={{ $orderI->rating->user_review }} @endif data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-name="{{ $orderI->products->product_name }}" @if ($orderI->rating == null) data-rating=null data-review=null @else data-rating="{{$orderI->rating->stars_rated}}" data-review="{{ $orderI->rating->user_review }}" @endif data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             Beri Rating
                                                         </button>
                                                     </td>
@@ -107,7 +107,6 @@ $(function () {
         let orderItemsV = $(e.target).siblings('#orderitemV').val();
         let stars_rated = $(e.target).data('rating');
         let review = $(e.target).data('review');
-        console.log(review);
         $('#products_id').val(product_id);
         $('#orderItems_id').val(orderItemsV);
         $('#textArea').val(review);
