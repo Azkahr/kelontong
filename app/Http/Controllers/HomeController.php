@@ -54,27 +54,14 @@ class HomeController extends Controller
         })->where('product_name', $namaP)->first();
 
         $ratings = Rating::where('products_id', $product->id)->get();
-        $total_ratings = Rating::where('products_id', $product->id)->sum('stars_rated');
-        $user_rating = Rating::where('products_id', $product->id)->where('users_id', Auth::id())->first();
         $reviews = Rating::where('products_id', $product->id)->get();
-        $review = Rating::where('products_id', $product->id)->where('users_id', Auth::id())->first();
-        
-        if($ratings->count() > 0){
-            $rating_value = $total_ratings / $ratings->count();
-        } else {
-            $rating_value = 0;
-        }
         
         return view('detail', [
             'title' => $product->product_name,
             'carts' => Cart::where('users_id', Auth::id())->get(),
-            "totalqty" => Product::where('id', $product->id)->sum('stok'),
             'product' => $product,
             "ratings" => $ratings,
-            "rating_value" => $rating_value,
-            "user_rating" => $user_rating,
             "reviews" => $reviews,
-            "review" => $review,
         ]);
     }
 }
