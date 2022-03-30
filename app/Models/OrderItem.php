@@ -18,4 +18,8 @@ class OrderItem extends Model
     public function products(){
         return $this->belongsTo(Product::class, 'products_id');
     }
+
+    public function rating(){
+        return $this->belongsTo(Rating::class, 'rating_id');
+    }
 }
