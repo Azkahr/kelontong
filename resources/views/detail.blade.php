@@ -85,10 +85,11 @@
     </div>
     <div class="product-comment">
         <div class="user-review text-center">
-            <h3 class="h3">Ulasan</h3>
+            <div class="ulasan">
+                <h3 class="h3">Ulasan</h3>
+            </div>
             @foreach ($reviews as $review)
-                <label for="">{{ $review->user->name }}</label>
-                <br>
+                <p>{{ $review->user->name }}</p>
                 @for ($i = 1; $i <= $rate; $i++)
                     <i class="fa fa-star checked"></i>
                 @endfor
