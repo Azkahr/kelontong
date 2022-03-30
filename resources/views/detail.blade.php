@@ -90,10 +90,10 @@
             </div>
             @foreach ($reviews as $review)
                 <p>{{ $review->user->name }}</p>
-                @for ($i = 1; $i <= $rate; $i++)
+                @for ($i = 1; $i <= $review->stars_rated; $i++)
                     <i class="fa fa-star checked"></i>
                 @endfor
-                @for ($j = $rate+1; $j <= 5; $j++)
+                @for ($j = $review->stars_rated+1; $j <= 5; $j++)
                     <i class="fa fa-star"></i>
                 @endfor
                 <small>Diulas pada {{ $review->created_at->format('d M Y') }}</small>
