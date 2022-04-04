@@ -51,7 +51,7 @@
                 <label for="image" class="form-label">Foto Produk</label>
                 <div style="overflow:auto; display: flex; gap: 5px; margin-bottom:10px" id="image_preview"></div>
                 <div><a id="btnC" class="btn btn-danger" style="display:none; cursor: pointer;" onclick="cancelImage()">Batalkan Foto</a></div>
-                <input style="margin:0" type="file" id="image" name="image[]" class="form-control @error('image.*') is-invalid @enderror @error('image') is-invalid @enderror" multiple onchange="previewImage()">
+                <input style="margin:0" type="file" id="image" name="image[]" class="form-control @error('image.*') is-invalid @enderror @error('image') is-invalid @enderror" multiple>
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -98,6 +98,16 @@
         function nDots(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         }
+
+        $('#image').change(function (event) { 
+            event.preventDefault();
+            if($('#image_preview').children().length > 0){
+                $('#image_preview').empty();
+                previewImage();
+            }else{
+                previewImage();
+            }
+        });
 
         $('#harga').change(function (e) {
             let awal = $('#harga').val();
