@@ -116,6 +116,7 @@
     $('.cartPage').hide();
 
     $(function(){
+        let timer;
 
         window.totalHarga = parseFloat('{{ $total }}');
 
@@ -156,9 +157,13 @@
             if (inc_value < qty) {
                 inc_value++
                 $(e.target).siblings('.qty-input').val(inc_value);
-                ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
                 window.totalHarga += harga;
-                $('.total-harga').html(nDots(totalHarga));
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(function () { 
+                    ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
+                    
+                    $('.total-harga').html(nDots(totalHarga));
+                }, 300);
             }
         });
 
@@ -170,9 +175,12 @@
             if(dec_value > 1){
                 dec_value--
                 $(e.target).siblings('.qty-input').val(dec_value);
-                ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(dec_value)});
                 window.totalHarga -= harga;
-                $('.total-harga').html(nDots(totalHarga));
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(function () { 
+                    ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(dec_value)});
+                    $('.total-harga').html(nDots(totalHarga));
+                }, 300);
             }
         });
 
