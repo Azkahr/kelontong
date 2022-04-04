@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 my-auto">
-                        <button class="btn btn-danger delete-cart-item mt-2"><i class="fa fa-trash"></i> Delete</button>
+                        <button class="btn btn-danger delete-cart-item mt-2"><em class="fa fa-trash"></em> Delete</button>
                     </div>
                 </div>
             @endforeach
@@ -59,7 +59,7 @@
             <div style="display: flex; align-items:center; margin-right:75px; height:50px">
                 <button class="cartBtn">
                     <span style="color: white">{{ count($carts) }}</span>
-                    <img class="cartImg" style="" src="{{ asset('assets/img/cart.png') }}" alt="cart">
+                    <img class="cartImg" src="{{ asset('assets/img/cart.png') }}" alt="cart">
                 </button>
                 <div class="dropdown">
                     <button class="dropbtn">
