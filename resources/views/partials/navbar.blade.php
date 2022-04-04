@@ -161,7 +161,6 @@
                 if (timer) clearTimeout(timer);
                 timer = setTimeout(function () { 
                     ngaJax('PUT', '/update-cart', {'products_id': products_id, 'qty': parseInt(inc_value)});
-                    
                     $('.total-harga').html(nDots(totalHarga));
                 }, 300);
             }
