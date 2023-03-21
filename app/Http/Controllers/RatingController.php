@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class RatingController extends Controller
 {
     public function add(Request $request){
-        
+        /* dd($request->all()); */
         $stars = $request->input('product_rating');
         $products_id = $request->input('products_id');
         $orderItems_id = $request->input('orderItems_id');
@@ -31,7 +31,7 @@ class RatingController extends Controller
                 
                 if($verified){
                     
-                    $rating = Rating::where('users_id', Auth::id())->where('products_id', $products_id)->first();
+                    $rating = Rating::where('users_id', Auth::id())->where('id', $orderItems_id)->first();
                     
                     if($rating){
                         $rating->stars_rated = $stars;
