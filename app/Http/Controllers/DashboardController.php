@@ -66,7 +66,7 @@ class DashboardController extends Controller
 
         smilify('success', 'Status order diupdate');
 
-        return redirect()->route('orders');
+        return redirect()->back();
     }
 
     public function create()

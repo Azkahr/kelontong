@@ -56,10 +56,7 @@
                                             <th>Kategori</th>
                                             <th>Harga</th>
                                             <th>Status</th>
-                                            @if ($order->status == "beres")
-                                                <th>Action</th>
-                                            @endif
-                                            
+                                            <th>Aksi</th>
                                         </tr>
                                         <tr>
                                             @foreach ($order->orderItems as $orderI)
@@ -74,12 +71,24 @@
                                                     @else
                                                         <td>{{ $orderI->order->status }}</td>
                                                     @endif
-                                                    @if ($orderI->order->status == "beres")
+                                                    @if ($orderI->order->status == "beres" && empty($orderI->rating_id))
                                                         <td>
                                                             <input type="hidden" value="{{ $orderI->id }}" id="orderitemV">
                                                             <button type="button" value="{{ $orderI->products->id }}" class="ratingBtn btn btn-primary" data-name="{{ $orderI->products->product_name }}" @if ($orderI->rating == null) data-rating=null data-review=null @else data-rating="{{$orderI->rating->stars_rated}}" data-review="{{ $orderI->rating->user_review }}" @endif data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                                 Beri Rating
                                                             </button>
+                                                        </td>
+                                                    @endif
+                                                    @if ($orderI->order->status == "kirim")
+                                                        <td>
+                                                            <form id="formBeres" action="/dashboard/update-order/{{ $order->id }}" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="status" value="beres">
+                                                                <button type="submit" class="receiveBtn btn btn-primary">
+                                                                    Barang Diterima
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     @endif
                                                 </tr>
