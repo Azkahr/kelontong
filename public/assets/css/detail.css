@@ -79,8 +79,8 @@
 }
 
 .product-comment {
+    margin-top: 30px;
     grid-area: comment;
-    background-color: blue;
 }
 
 /* rating */
@@ -110,6 +110,6 @@
 }
 
 .checked {
-    color: #ffe400
+    color: #ffe400;
 }
 /* End of Star Rating */

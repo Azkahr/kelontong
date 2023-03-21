@@ -26,7 +26,7 @@
                 <p class="h3">Rp.{{ number_format($product->harga, 0,",",".") }}</p>
                 <div class="d-flex align-items-center mb-3 justify-content-between">
                     <div class="d-flex align-items-center">
-                        @php $rate = number_format($ratings->sum('stars_rated') / $ratings->count()) @endphp
+                        @php $rate = $ratings->sum('stars_rated') > 0 ? number_format($ratings->sum('stars_rated') / $ratings->count()) : 0 @endphp
                         <div class="rating">
                             @for ($i = 1; $i <= $rate; $i++)
                                 <i class="fa fa-star checked"></i>
