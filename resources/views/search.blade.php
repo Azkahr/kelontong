@@ -50,47 +50,44 @@
     }
 </style>
 <div class="container">
-    <div class="row">
-        @if (request('search'))
-            <p style="margin-top: 150px">Produk</p>
-            <hr>
-            <p class="text">Menampilkan hasil pencarian "{{ request('search') }}"</p>
-                @foreach ($products as $product)
-                <div class="card" style="width: 18rem; margin-right: 20px; margin-bottom: 20px">
+    @if (request('search'))
+        <p style="margin-top: 150px;">Produk</p>
+        <hr>
+        <p class="text">Menampilkan hasil pencarian "{{ request('search') }}"</p>
+        <div style="background-color: white; display:flex; position:relative; margin-top:30px; row-gap:10px">
+            @foreach ($products as $product)
+                <div style="width:250px;">
                     <div class="slider">
-                        @foreach (explode(',', $product->image) as $item)
-                            <img src="{{ asset('storage/' . $item) }}" alt="product-image">
-                        @endforeach
+                        {{-- @foreach (explode(',', $product->image) as $item) --}}
+                            <img src="{{ asset('storage/' . explode(',', $product->image)[0]) }}" alt="product-image">
+                        {{-- @endforeach --}}
                     </div>
-                    <div class="arrowPrev" data-feather="arrow-left"></div>
-                    <div class="arrowNext" data-feather="arrow-right"></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $product->product_name }}</h5>
+                        <h6>RP {{ number_format($product->harga, 0,",",".") }}</h6>
+                        <p class="card-text text-muted">{{ $product->category->name }}</p>
+                        <a href="/{{ $product->toko->nama_toko}}/{{ $product->product_name }}" class="btn btn-primary">Detail product</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ $product->product_name }}</h5>
-                    <h6>RP {{ number_format($product->harga, 0,",",".") }}</h6>
-                    <p class="card-text text-muted">{{ $product->category->name }}</p>
-                    <a href="/{{ $product->toko->nama_toko}}/{{ $product->product_name }}" class="btn btn-primary">Detail product</a>
-                </div>
-            </div>
             @endforeach
-        @else
-            <h1 style="padding-top: 150px; font-size: 2em; font-weight: bolder; text-align: center;">Anda tidak mengetikkan apapun di kolom pencarian</h1>
-        @endif
-    </div>
+        </div>
+    @else
+        <h1 style="padding-top: 150px; font-size: 2em; font-weight: bolder; text-align: center;">Barang Tidak Ditemukan</h1>
+    @endif
 </div>
-<a href="/" class="btn btn-primary link-bawah">Home</a>
 @endsection
 @section('script')
 <script>
     feather.replace()
 </script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+{{-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
 $(document).ready(function () {
     $('.slider').slick({
+        autoplay:true,
         prevArrow: '.arrowPrev',
         nextArrow: '.arrowNext',
     });
 });
-</script>
+</script> --}}
 @endsection
